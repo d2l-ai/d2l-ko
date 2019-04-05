@@ -9,7 +9,7 @@ the transcription of his command.  It also recognized that we were
 asking for directions and launched the Maps application to fulfill our request.  Once launched, the Maps app identified a number of routes. Next to each route, the phone displayed a predicted transit time. While we fabricated this story for pedagogical convenience, it demonstrates that in the span of just a few seconds, our everyday interactions with a smartphone can engage several machine learning
 models.
 
-저자들은 이 책을 쓰기 전에 카페인이 필요했습니다. 우리는 차에 올라타서 운전을 하기 시작했습니다. 아이폰을 사용하는 Alex는 핸드폰의 음성 인식 시스템을 부르기 위해서 'Hey Siri'라고 외쳤습니다. 그리고는 Mu는 '블루 보틀 커피샵으로 가는길을 알려줘'라고 명령을 했습니다. 핸드폰은 그의 명령을 글로 바꿔서 화면에 빠르게 보여줍니다. 우리가 길을 묻는 것을 알아채고는 우리의 요청에 응하기 위해서 지도 앱을 띄웁니다. 지도 앱이 실행되자 마자 여러 경로를 찾아냅니다. 각 경로 옆에는 예상 소요 시간이 함께 표시됩니다. 설명하기 위해서 이야기를 지어낸 것이지만, 몇 초 동안에도 스마트폰을 사용하면서 여러 머신러닝 모델을 사용하는 것을 보여주고 있습니다.
+저자들은 이 책을 쓰기 전에, 많은 노동력이 필요한 일처럼, 많은 카페인이 필요했습니다. 상상해 봅시다, 우리는 차에 올라타서 운전을 하기 시작했습니다. 아이폰을 사용하는 Alex는 핸드폰의 음성 인식 시스템을 부르기 위해서 'Hey Siri'라고 외쳤습니다. 그리고는 Mu는 '블루 보틀 커피샵으로 가는길을 알려줘'라고 명령을 했습니다. 핸드폰은 그의 명령을 글로 바꿔서 화면에 빠르게 보여줍니다. 우리가 길을 묻는 것을 알아채고는 우리의 요청에 응하기 위해서 지도 앱을 띄웁니다. 지도 앱이 실행되자 마자 여러 경로를 찾아냅니다. 각 경로 옆에는 예상 소요 시간이 함께 표시됩니다. 설명하기 위해서 이야기를 지어낸 것이지만, 이 몇 초 동안에도 스마트폰을 사용하면서 여러 머신러닝 모델을 사용하는 것을 보여주고 있습니다.
 
 If you've never worked with machine learning before, you might be
 wondering what we're talking about.  You might ask, 'isn't that just
