@@ -185,19 +185,20 @@ $$-\log P(Y|X) = \sum_{i=1}^n \frac{1}{2} \log(2 \pi \sigma^2) + \frac{1}{2 \sig
 
 ## 문제
 
-1. Assume that we have some data $x_1, \ldots x_n \in \mathbb{R}​$. Our goal is to find a constant $b​$ such that $\sum_i (x_i - b)^2​$ is minimized.
-    * Find the optimal closed form solution.
-    * What does this mean in terms of the Normal distribution?
+1. 데이터 $x_1, \ldots x_n \in \mathbb{R}$ 가 있다고 가정합니다. 우리의 목표는  $\sum_i (x_i - b)^2$ 를 최소화시키는 상수 $b$ 를 찾는 것입니다.
+    * 최적의 닫힌 형식의 해(closed form solution)을 찾아보세요.
+    * 표준 분포의 용어로 이것은 무엇을 의미하나요?
 1. Assume that we want to solve the optimization problem for linear regression with quadratic loss explicitly in closed form. To keep things simple, you can omit the bias $b$ from the problem.
-    * Rewrite the problem in matrix and vector notation (hint - treat all the data as a single matrix).
-    * Compute the gradient of the optimization problem with respect to $w$.
-    * Find the closed form solution by solving a matrix equation.
-    * When might this be better than using stochastic gradient descent (i.e. the incremental optimization approach that we discussed above)? When will this break (hint - what happens for high-dimensional $x$, what if many observations are very similar)?.
-1. Assume that the noise model governing the additive noise $\epsilon$ is the exponential distribution. That is, $p(\epsilon) = \frac{1}{2} \exp(-|\epsilon|)$.
-    * Write out the negative log-likelihood of the data under the model $-\log p(Y|X)$.
-    * Can you find a closed form solution?
-    * Suggest a stochastic gradient descent algorithm to solve this problem. What could possibly go wrong (hint - what happens near the stationary point as we keep on updating the parameters). Can you fix this?
-1. Compare the runtime of the two methods of adding two vectors using other packages (such as NumPy) or other programming languages (such as MATLAB).
+1. Quadratic loss를 사용한 선형 회귀의 최적화 문제를 닫힌 형식으로 풀기를 원한다고 가정합니다. 간단하게 하기 위해서, 문제에서 편향(bias) $b$ 는 생략해도 됩니다.
+    * 문제를 행렬과 벡터 표기를 사용해서 다시 기술해보세요. (힌트 - 모든 데이터를 하나의 행렬로 취급합니다.)
+    * 최적화 문제를 $w$ 에 대한 경사(gradient)를 계산하세요.
+    * 행렬 방적식을 풀어서 닫힌 형식의 해(closed form solution)를 구하세요.
+    * 언제 이 방법이 확률적 경사 하강법(stochastic gradient descen) (즉, 위에서 우리가 논의한 점진적 최적화 접근법)보다 좋을까요? 언제 이 방법이 틀릴까요? (힌트 - $x$가 고차원이면 어떻게 될까요? 만약 많은 관찰들이 아주 작으면 어떻게될까요? )
+1. 부가 노이즈  $\epsilon$ 을 결정하는 노이즈 모델이 지수 분포라고 가정합니다. 즉, $p(\epsilon) = \frac{1}{2} \exp(-|\epsilon|)$.
+    * 모델 $-\log p(Y|X)$ 의 데이터에 대한 네가티브 로그-가능도(log-likelihood)를 적어보세요.
+    * 닫힌 형식의 해를 찾을 수 있나요?
+    * 이 문제를 푸는 확률적 경사 하강법(stochastic gradient descent) 알고리즘을 제안하세요. 무엇이 잘못될 가능성이 있나요? (힌트 - 파라미터를 업데이트할 때, 정류점(stationary point) 근처에서 어떤 일이 일어날까요?)
+1. NumPy와 같은 다른 패키지들이나 MATLAB과 같은 다른 프로그램 언어를 사용해서 두 벡터를 더할 때의 실행시간들을 비교해보세요.
 
 ## Scan the QR Code to [Discuss](https://discuss.mxnet.io/t/2331)
 
