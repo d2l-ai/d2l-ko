@@ -13,7 +13,7 @@ $$
 
 만약 레이블(label)들이 대략적인 선형 함수로 입력 데이터와 연관을 지을 수 있다면, 이 방법은 적절할 수 있습니다. 하지만, 이 선형성은 *너무 강한 가정*입니다. 선형성은 각 입력에 대해서, 입력값을 증가하면 다른 입력값과는 상관없이 결과값이 커지거나 작아지는 것을 의미합니다. 
 
-## 하나에서 여러 개로
+## 하나에서 여러개로
 
 검정색이나 희색 이미지을 이용해서 강아지나 고양이를 분류하는 캐이스를 생각해봅시다. 각 픽셀의 값을 증가시키면 강아지라고 판별할 확률값을 높이거나 내려가는 경우를 생각해봅시다. 이는 합당하지 않습니다. 왜냐하면, 이렇게 된다면 결국 강아지는 모두 검정색이고 고양이는 모두 흰색이거나 그 반대라는 것을 의미하기 때문입니다.
 
@@ -62,11 +62,11 @@ $$
 \end{aligned}
 $$
 
-위 MLP는 구현을 쉽게 할 수 있고, 최적화도 쉽게 할 수 있습니다. 표기법을 조금 남용해서, 비선형(nonlinearlity)  $\sigma$ 를 정의하고, 이를 행 단위로 입력에 적용하겠습니다. 즉, 한번에 하나의 관찰 또는 한번에 한 좌표씩 적용합니다. 실제 대부분 activation 함수는 이렇게 적용합니다.  ([batch normalization](../chapter_convolutional-neural-networks/batch-norm.md) 은 이 규칙에 대한 예외 중에 하나입니다.)
+위 MLP는 구현을 쉽게 할 수 있고, 최적화도 쉽게 할 수 있습니다. 표기법을 조금 남용해서, 비선형(nonlinearlity)  $\sigma$ 를 정의하고, 이를 행 단위로 입력에 적용하겠습니다. 즉, 한번에 하나의 관찰 또는 한번에 한 좌표씩 적용합니다. 실제 대부분 활성화 함수는 이렇게 적용합니다.  ([batch normalization](../chapter_convolutional-neural-networks/batch-norm.md) 은 이 규칙에 대한 예외 중에 하나입니다.)
 
-## Activation 함수
+## 활성화 함수(activation function)
 
-activation 함수의 예를 더 알아보겠습니다. 결국 딥 네트워트를 동작시키는 것은 선형(linear) 항목과 비선형(nonlinear) 항목들을 서로 교차시키는 것입니다. 구현하기 간단하고 좋은 효과로 유명한 ReLU 함수가 있습니다. 
+활성화 함수(activation function)의 예를 더 알아보겠습니다. 결국 딥 네트워트를 동작시키는 것은 선형(linear) 항목과 비선형(nonlinear) 항목들을 서로 교차시키는 것입니다. 구현하기 간단하고 좋은 효과로 유명한 ReLU 함수가 있습니다. 
 
 ## ReLU 함수
 
@@ -91,7 +91,7 @@ def xyplot(x_vals, y_vals, name):
     d2l.plt.ylabel(name + '(x)')
 ```
 
-그리고, 이를 사용해서 ReLU 함수를 NDArray에서 제공하는 `relu` 함수를 이용해서 도식화합니다. 보이는 것처럼 activation function은 두 개의 선형 함수로 보입니다.
+그리고, 이를 사용해서 ReLU 함수를 NDArray에서 제공하는 `relu` 함수를 이용해서 도식화합니다. 보이는 것처럼 활성화 함수( activation function)은 두 개의 선형 함수로 보입니다.
 
 ```{.python .input  n=2}
 x = nd.arange(-8.0, 8.0, 0.1)
@@ -168,12 +168,12 @@ xyplot(x, x.grad, 'grad of tanh')
 
 ## 요약
 
-* 다층 퍼셉트론은 입력과 출력층에 한 개 이상의 완전 연결 은닉층(hidden layer)를 추가하고, 각 은닉층(hidden layer)의 결과에 activation 함수를 적용하는 것입니다.
-* 일반적으로 사용되는 activation 함수는 ReLU 함수, Sigmoid 함수,  Tanh 함수가 있습니다.
+* 다층 퍼셉트론은 입력과 출력층에 한 개 이상의 완전 연결 은닉층(hidden layer)를 추가하고, 각 은닉층(hidden layer)의 결과에 활성화 함수(activation function)를 적용하는 것입니다.
+* 일반적으로 사용되는 활성화 함수(activation function)는 ReLU 함수, Sigmoid 함수,  Tanh 함수가 있습니다.
 
 ## 문제
 
-1. Tanh,  pReLU activation 함수의 미분을 구하시오.
+1. Tanh,  pReLU 활성화 함수(activation function)의 미분을 구하시오.
 1. ReLU (또는 pReLU) 만을 사용해서 만든 multlayer perceptron은 연속된 piecewise linear function임을 증명하세요.
 1. $\mathrm{tanh}(x) + 1 = 2 \mathrm{sigmoid}(2x)$ 임을 증명하세요.
 1. 층들 사이에 비선형없이 만든 다층 퍼셉트론이 있다고 가정합니다.  $d$  입력 차원,  $d$ 출력 차원, 그리고 다른 layer는  $d/2$ 차원을 찾는다고 했을 때, 이 네트워크는 단층 퍼셉트론(single layer perceptron) 보다 강하지 않다는 것을 증명하세요.
