@@ -7,7 +7,6 @@ stage("Build and Publish") {
       sh "build/utils/clean_build.sh"
       sh "conda env update -f build/env.yml"
       sh "build/utils/build_html.sh ko"
-      % sh "build/utils/build_pdf.sh ko"
       sh "build/utils/build_pkg.sh ko"
       if (env.BRANCH_NAME == 'master') {
         sh "build/utils/publish_website.sh ko"
