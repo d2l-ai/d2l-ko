@@ -101,7 +101,17 @@ language = 'en'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'mx-theme', '**.ipynb_checkpoints']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'mx-theme',
+                    '**.ipynb_checkpoints',
+                    'chapter_deep-learning-computation',
+                    'chapter_convolutional-neural-networks',
+                    'chapter_recurrent-neural-networks',
+                    'chapter_optimization',
+                    'chapter_computational-performance',
+                    'chapter_computer-vision',
+                    'chapter_natural-language-processing',
+                    'chapter_appendix'
+]
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -142,12 +152,10 @@ html_theme_options = {
     'primary_color': 'blue',
     'accent_color': 'deep_orange',
     'header_links' : [
-        ('Berkeley Course 2019', 'https://courses.d2l.ai/berkeley-stat-157/index.html', True, 'fas fa-user-graduate'),
-        ('PDF', 'https://en.d2l.ai/d2l-en.pdf', True, 'fas fa-file-pdf'),
-        ('Jupyter Notebooks', 'https://en.d2l.ai/d2l-en.zip', True, 'fas fa-download'),
-        ('Discuss', 'https://discuss.mxnet.io', True, 'fab fa-discourse'),
-		('GitHub', 'https://github.com/d2l-ai/d2l-en', True, 'fab fa-github'),
-        ('中文版', 'https://zh.d2l.ai', True, 'fas fa-external-link-alt'),
+        # ('PDF', 'https://d2l.ai/d2l-ko.pdf', True, 'fas fa-file-pdf'),
+        ('Jupyter Notebooks', 'https://ko.d2l.ai/d2l-ko.zip', True, 'fas fa-download'),
+	('GitHub', 'https://github.com/d2l-ai/d2l-ko', True, 'fab fa-github'),
+        ('English Version', 'https://d2l.ai', True, 'fas fa-external-link-alt'),
     ],
     'show_footer': False
 }
@@ -293,7 +301,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'd2l-en.tex', 'Dive into Deep Learning',
+    (master_doc, 'd2l-ko.tex', 'Dive into Deep Learning',
      author, 'manual'),
 ]
 
