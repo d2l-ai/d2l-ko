@@ -90,7 +90,7 @@ release = ''
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = 'en'
+language = 'ko'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -101,18 +101,7 @@ language = 'en'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'mx-theme',
-                    '**.ipynb_checkpoints',
-                    'chapter_deep-learning-computation',
-                    'chapter_convolutional-neural-networks',
-                    'chapter_recurrent-neural-networks',
-                    'chapter_optimization',
-                    'chapter_computational-performance',
-                    'chapter_computer-vision',
-                    'chapter_natural-language-processing',
-                    'chapter_appendix'
-]
-
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'mx-theme', '**.ipynb_checkpoints',]
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
 #default_role = None
@@ -240,7 +229,7 @@ html_static_path = ['_static']
 # Sphinx supports the following languages:
 #   'da', 'de', 'en', 'es', 'fi', 'fr', 'h', 'it', 'ja'
 #   'nl', 'no', 'pt', 'ro', 'r', 'sv', 'tr', 'zh'
-html_search_language = 'en'
+html_search_language = 'ko'
 
 # A dictionary with options for the search language support, empty by default.
 # 'ja' uses this config value.
