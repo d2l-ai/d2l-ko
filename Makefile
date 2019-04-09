@@ -37,8 +37,6 @@ build/%: %
 html: $(DEPS) $(FRONTPAGE_DEP) $(OBJ)
 	make -C build html
 	# python build/utils/post_html.py
-	# Enable horitontal scrollbar for wide code blocks
-	sed -i s/white-space\:pre-wrap\;//g build/_build/html/_static/sphinx_materialdesign_theme.css
 	cp -r img/frontpage/ build/_build/html/_images/
 
 TEX=build/_build/latex/d2l-ko.tex
