@@ -58,7 +58,7 @@ import d2l
 from mxnet import autograd, gluon, init, nd
 from mxnet.gluon import loss as gloss, nn
 
-def 드롭아웃(dropout)(X, drop_prob):
+def dropout(dropout)(X, drop_prob):
     assert 0 <= drop_prob <= 1
     # In this case, all elements are dropped out
     if drop_prob == 1:
