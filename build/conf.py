@@ -251,6 +251,13 @@ latex_elements = {
     'inputenc'  : '',
     'babel'     : r'''\usepackage[english]{babel}''',
     'preamble' : r'''
+\usepackage{ctex}
+\setmainfont{Source Serif Pro}
+\setsansfont{Source Sans Pro}
+\setmonofont{Source Code Pro}
+\setCJKmainfont[BoldFont=Source Han Serif K SemiBold]{Source Han Serif K}
+\setCJKsansfont[BoldFont=Source Han Sans K Medium]{Source Han Sans K Normal}
+\setCJKmonofont{Source Han Sans K Normal}
 
 \usepackage{setspace}
 \singlespacing
