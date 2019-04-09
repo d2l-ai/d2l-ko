@@ -105,14 +105,14 @@ drop_prob1, drop_prob2 = 0.2, 0.5
 def net(X):
     X = X.reshape((-1, num_inputs))
     H1 = (nd.dot(X, W1) + b1).relu()
-    # Use 드롭아웃(dropout) only when training the model
+    # Use dropout only when training the model
     if autograd.is_training():
-        # Add a 드롭아웃(dropout) layer after the first fully connected layer
-        H1 = 드롭아웃(dropout)(H1, drop_prob1)
+        # Add a dropout layer after the first fully connected layer
+        H1 = dropout(H1, drop_prob1)
     H2 = (nd.dot(H1, W2) + b2).relu()
     if autograd.is_training():
-        # Add a 드롭아웃(dropout) layer after the second fully connected layer
-        H2 = 드롭아웃(dropout)(H2, drop_prob2)
+        # Add a dropout layer after the second fully connected layer
+        H2 = dropout(H2, drop_prob2)
     return nd.dot(H2, W3) + b3
 ```
 
@@ -135,11 +135,11 @@ Gluon을 이용하면, 완전 연결층(fully connected layer) 다음에 드롭�
 ```{.python .input}
 net = nn.Sequential()
 net.add(nn.Dense(256, activation="relu"),
-        # Add a 드롭아웃(dropout) layer after the first fully connected layer
-        nn.드롭아웃(dropout)(drop_prob1),
+        # Add a dropout layer after the first fully connected layer
+        nn.dropout(drop_prob1),
         nn.Dense(256, activation="relu"),
-        # Add a 드롭아웃(dropout) layer after the second fully connected layer
-        nn.드롭아웃(dropout)(drop_prob2),
+        # Add a dropout layer after the second fully connected layer
+        nn.dropout(drop_prob2),
         nn.Dense(10))
 net.initialize(init.Normal(sigma=0.01))
 ```
