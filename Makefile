@@ -49,6 +49,7 @@ TEX=build/_build/latex/d2l-ko.tex
 
 #PDFIMG = $(patsubst img/%.svg, build/_build/latex/%.pdf, $(SVG))
 
+# Note: we don't use xelatex to make kotex work using its own font
 pdf: $(DEPS) $(OBJ)
 	make -C build latex
 	sed -i s/\\.svg/.pdf/g ${TEX}
@@ -72,8 +73,7 @@ pdf: $(DEPS) $(OBJ)
 
 	cd build/_build/latex && \
 	bash ../../utils/convert_output_svg.sh && \
-	buf_size=10000000 xelatex d2l-ko.tex && \
-	buf_size=10000000 xelatex d2l-ko.tex
+	pdflatex d2l-ko.tex
 
 clean:
 	rm -rf build/chapter* build/_build build/img build/data build/environment.yml build/README.md $(PKG)
