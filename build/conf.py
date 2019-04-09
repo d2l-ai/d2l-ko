@@ -141,7 +141,7 @@ html_theme_options = {
     'primary_color': 'blue',
     'accent_color': 'deep_orange',
     'header_links' : [
-        ('PDF', 'https://d2l.ai/d2l-ko.pdf', True, 'fas fa-file-pdf'),
+        ('PDF', 'https://ko.d2l.ai/d2l-ko.pdf', True, 'fas fa-file-pdf'),
         ('Jupyter Notebooks', 'https://ko.d2l.ai/d2l-ko.zip', True, 'fas fa-download'),
 	('GitHub', 'https://github.com/d2l-ai/d2l-ko', True, 'fab fa-github'),
         ('English Version', 'https://d2l.ai', True, 'fas fa-external-link-alt'),
