@@ -136,10 +136,10 @@ Gluon을 이용하면, 완전 연결층(fully connected layer) 다음에 드롭�
 net = nn.Sequential()
 net.add(nn.Dense(256, activation="relu"),
         # Add a dropout layer after the first fully connected layer
-        nn.dropout(drop_prob1),
+        nn.Dropout(drop_prob1),
         nn.Dense(256, activation="relu"),
         # Add a dropout layer after the second fully connected layer
-        nn.dropout(drop_prob2),
+        nn.Dropout(drop_prob2),
         nn.Dense(10))
 net.initialize(init.Normal(sigma=0.01))
 ```
