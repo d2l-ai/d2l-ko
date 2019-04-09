@@ -10,7 +10,7 @@
 
 기여자여러분, 여러분의 GitHub ID, 이름, 이메일 주소를 d2lbook.en@gmail.com로 보내주세요.
 
-감사합니다
+감사합니다.
 
 [English version](https://github.com/d2l-ai/d2l-en) |[Chinese version](https://github.com/d2l-ai/d2l-zh) | [Discuss and report issues](https://discuss.mxnet.io/)
 
