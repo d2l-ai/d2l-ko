@@ -12,6 +12,6 @@
 
 감사합니다.
 
-[English version](https://github.com/d2l-ai/d2l-en) |[Chinese version](https://github.com/d2l-ai/d2l-zh) | [Discuss and report issues](https://discuss.mxnet.io/)
+[English version](https://github.com/d2l-ai/d2l-en) | [Chinese version](https://github.com/d2l-ai/d2l-zh) | [Discuss and report issues](https://discuss.mxnet.io/)
 
 
