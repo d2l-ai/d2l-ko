@@ -58,7 +58,7 @@ import d2l
 from mxnet import autograd, gluon, init, nd
 from mxnet.gluon import loss as gloss, nn
 
-def dropout(dropout)(X, drop_prob):
+def dropout(X, drop_prob):
     assert 0 <= drop_prob <= 1
     # In this case, all elements are dropped out
     if drop_prob == 1:
@@ -71,9 +71,9 @@ def dropout(dropout)(X, drop_prob):
 
 ```{.python .input}
 X = nd.arange(16).reshape((2, 8))
-print(드롭아웃(dropout)(X, 0))
-print(드롭아웃(dropout)(X, 0.5))
-print(드롭아웃(dropout)(X, 1))
+print(dropout(X, 0))
+print(dropout(X, 0.5))
+print(dropout(X, 1))
 ```
 
 ## 모델 파라미터 정의하기
