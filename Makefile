@@ -73,7 +73,9 @@ pdf: $(DEPS) $(OBJ)
 
 	cd build/_build/latex && \
 	bash ../../utils/convert_output_svg.sh && \
+	pdflatex d2l-ko.tex && \
 	pdflatex d2l-ko.tex
+
 
 clean:
 	rm -rf build/chapter* build/_build build/img build/data build/environment.yml build/README.md $(PKG)
