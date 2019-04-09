@@ -175,4 +175,4 @@ d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, batch_size, None,
 
 ## Scan the QR Code to [Discuss](https://discuss.mxnet.io/t/2343)
 
-![](../img/qr_드롭아웃(dropout).svg)
+![](../img/qr_dropout.svg)
