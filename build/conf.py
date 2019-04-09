@@ -259,9 +259,6 @@ latex_elements = {
 \setCJKsansfont[BoldFont=Source Han Sans K Medium]{Source Han Sans K Normal}
 \setCJKmonofont{Source Han Sans K Normal}
 
-\usepackage{setspace}
-\singlespacing
-
 \addto\captionsenglish{\renewcommand{\chaptername}{}}
 \addto\captionsenglish{\renewcommand{\contentsname}{Contents}}
 
