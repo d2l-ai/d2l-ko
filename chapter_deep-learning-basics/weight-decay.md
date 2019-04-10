@@ -83,7 +83,7 @@ def l2_penalty(w):
 
 ### 학습 및 테스트 정의하기
 
-아래 코드는 학습 데이터셋과 테스트 데이터셋을 이용해서 모델을 학습시키고 테스트하는 함수를 정의합니다. 이전 절의 예와는 다르게, 여기서는  $\ell_2$ 놈 패널티(norm penalty)를 최종 손실 함수(loss function)를 계산할 때 더합니다. 선형 네트워크와 제곱 손실(squred loss)은 이전과 같기 때문에, `d2l.linreg` 와 `d2l.squared_loss` 를 import 해서 사용하겠습니다.
+아래 코드는 학습 데이터셋과 테스트 데이터셋을 이용해서 모델을 학습시키고 테스트하는 함수를 정의합니다. 이전 절의 예와는 다르게, 여기서는  $\ell_2$ 놈 패널티(norm penalty)를 최종 손실 함수(loss function)를 계산할 때 더합니다. 선형 네트워크와 제곱 손실(squared loss)은 이전과 같기 때문에, `d2l.linreg` 와 `d2l.squared_loss` 를 import 해서 사용하겠습니다.
 
 ```{.python .input  n=7}
 batch_size, num_epochs, lr = 1, 100, 0.003
@@ -128,9 +128,9 @@ fit_and_plot(lambd=3)
 
 ## 간결한 구현
 
-Gluon에는 최적화 알고리즘에 가중치 감쇠(weight decay)가 통합되어 있어 더 편하게 적용할 수 있습니다. 그 이유는 옵티마이져(optimzier)가 모든 파라미터를 직접 다루기 때문에, 옵티마이져(optimzier)가 가중치 감쇠(weight decay)를 직접 관리하고, 관련된 것을 최적화 알고리즘에서 다루는 것이 실행 속도면에서 더 빠르기 때문입니다.
+Gluon에는 최적화 알고리즘에 가중치 감쇠(weight decay)가 통합되어 있어 더 편하게 적용할 수 있습니다. 그 이유는 옵티마이져(optimizer)가 모든 파라미터를 직접 다루기 때문에, 옵티마이져(optimizer)가 가중치 감쇠(weight decay)를 직접 관리하고, 관련된 것을 최적화 알고리즘에서 다루는 것이 실행 속도면에서 더 빠르기 때문입니다.
 
-아래 예제에서는 `Trainer`  인스턴스를 생성할 때, `wd` 파타메터를 통해서 가중치 감쇠(weight decay) 하이퍼파라미터(hyperparamer)를 직접 지정합니다. Gluon의 기본 설정은 가중치와 편향(bias)를 모두 감쇠(decay) 시킵니다. 다른 종류의 파라미터에 대해서 다른 옵티마이져(ptimizer)를 사용할 수 있습니다. 예를 들면,  $\mathbf{w}$ 에는 가중치 감쇠(weight decay) 적용하는 `Trainer` 를 하나 만들고,  $b$  에는 가중치 감쇠(weight decay)를 적용하지 않은 다른 `Trainer` 를 각각 만들 수 있습니다.
+아래 예제에서는 `Trainer`  인스턴스를 생성할 때, `wd` 파타메터를 통해서 가중치 감쇠(weight decay) 하이퍼파라미터(hyperparameter)를 직접 지정합니다. Gluon의 기본 설정은 가중치와 편향(bias)를 모두 감쇠(decay) 시킵니다. 다른 종류의 파라미터에 대해서 다른 옵티마이져(optimizer)를 사용할 수 있습니다. 예를 들면,  $\mathbf{w}$ 에는 가중치 감쇠(weight decay) 적용하는 `Trainer` 를 하나 만들고,  $b$  에는 가중치 감쇠(weight decay)를 적용하지 않은 다른 `Trainer` 를 각각 만들 수 있습니다.
 
 ```{.python .input}
 def fit_and_plot_gluon(wd):
@@ -179,7 +179,7 @@ fit_and_plot_gluon(3)
 
 * 정규화(regularization)은 오버피팅(overfitting)을 다루는 일반적인 방법입니다. 학습된 모델의 복잡도를 줄이기 위해서 학습 데이터에 대한 손실 함수(loss function)의 값에 패널티 항목을 더합니다.
 * 모델을 간단하게 유지하는 방법으로  $\ell_2$ 놈 패널티(norm penalty)를 사용하는 가중치 감쇠(weight decay)를 선택했습니다. 이를 통해서, 학습 알고리즘의 업데이트 단계에서 가중치 감쇠(weight decay)가 적용됩니다.
-* Gluon은 옵티마이저(optimizer)에 하이퍼파라미터(hyperparamer) `wd` 를 설정하는 것으로 가중치 감쇠(weight decay) 기능을 자동으로 추가할 수 있습니다.
+* Gluon은 옵티마이저(optimizer)에 하이퍼파라미터(hyperparameter) `wd` 를 설정하는 것으로 가중치 감쇠(weight decay) 기능을 자동으로 추가할 수 있습니다.
 * 같은 학습에서 파라메미마다 다른 옵티마이저(optimizer)를 적용할 수 있습니다.
 
 ## 문제
@@ -189,7 +189,7 @@ fit_and_plot_gluon(3)
 1. 패널티 항목으로 $\|\mathbf{w}\|^2$ 대신  $\sum_i |w_i|$ 를 사용하면 업데이트 공식이 어떻게 될까요? (이는  $\ell_1$ 정규화(regularzation)라고 합니다.)
 1. $\|\mathbf{w}\|^2 = \mathbf{w}^\top \mathbf{w}$ 입니다. 행렬에서 비슷한 공식을 찾아볼 수 있나요? (수학자들은 이를 [Frobenius norm](https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm) 이라고 합니다)
 1. 학습 오류와 일반화 오류의 관계를 복습해보세요. 가중치 감쇠(weight decay), 학습 데이터셋 늘리기, 적당한 복잡도를 갖는 모델 사용하기 외에, 오버피팅(overfitting)을 다를 수 있는 방법이 어떤 것들이 있을까요?
-1. 베이시안 통계에서,  prior 와  likelihood 곱을 이용해서 posteror를 구할 수 있습니다.  $p(w|x) \propto p(x|w) p(w)$.  $p(w)$ 가 정규화(regularization)와 어떻게 동일할까요?
+1. 베이시안 통계에서,  prior 와  likelihood 곱을 이용해서 posterior를 구할 수 있습니다.  $p(w|x) \propto p(x|w) p(w)$.  $p(w)$ 가 정규화(regularization)와 어떻게 동일할까요?
 
 ## Scan the QR Code to [Discuss](https://discuss.mxnet.io/t/2342)
 
