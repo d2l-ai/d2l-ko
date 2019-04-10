@@ -11,7 +11,7 @@ from mxnet import gluon, init
 from mxnet.gluon import loss as gloss, nn
 ```
 
-# 모델
+## 모델
 
 Softmax 회귀(regression)와 유일하게 다른 점은 은닉 층(hidden layer)으로 완전 연결층(fully connected layer)을 추가한다는 점입니다. 이 은닉층(hidden layer)은 256개의 은닉 유닛(hidden unit)을 갖고, 활성화 함수(activation function)로 ReLU를 사용합니다.
 

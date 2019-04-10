@@ -169,7 +169,7 @@ d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, batch_size, None,
 1. 활성화 결과가 아니라 가중치 행렬(weight matrix)의 각 가중치에 적용하면 어떻게 될까요?
 1. $[0, \gamma/2, \gamma]$ 에서 추출한 값을 갖도록 드롭아웃(dropout)을 바꿔보세요. 이진 드롭아웃(binary dropout) 함수보다 더 좋은 것을 만들어볼 수 있나요? 왜 그런 방법을 사용할 것인가요? 왜 아닌가요?
 
-## 참고문헌
+## 참고자료
 
 [1] Srivastava, N., Hinton, G., Krizhevsky, A., Sutskever, I., & Salakhutdinov, R. (2014).  JMLR
 
