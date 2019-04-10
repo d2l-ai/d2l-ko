@@ -1,0 +1,36 @@
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Noto Sans KR Thin'), local('NotoSansKR-Thin'), url(https://fonts.gstatic.com/s/notosanskr/v10/Pby6FmXiEBPT4ITbgNA5CgmOsk7vyJQ.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Noto Sans KR Light'), local('NotoSansKR-Light'), url(https://fonts.gstatic.com/s/notosanskr/v10/Pby7FmXiEBPT4ITbgNA5CgmOelz477IS.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Noto Sans KR Regular'), local('NotoSansKR-Regular'), url(https://fonts.gstatic.com/s/notosanskr/v10/PbykFmXiEBPT4ITbgNA5CgmG0X7u.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Noto Sans KR Medium'), local('NotoSansKR-Medium'), url(https://fonts.gstatic.com/s/notosanskr/v10/Pby7FmXiEBPT4ITbgNA5CgmOIl3477IS.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Noto Sans KR Bold'), local('NotoSansKR-Bold'), url(https://fonts.gstatic.com/s/notosanskr/v10/Pby7FmXiEBPT4ITbgNA5CgmOalv477IS.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Noto Sans KR Black'), local('NotoSansKR-Black'), url(https://fonts.gstatic.com/s/notosanskr/v10/Pby7FmXiEBPT4ITbgNA5CgmOUln477IS.otf) format('opentype');
+}

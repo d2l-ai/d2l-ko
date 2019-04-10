@@ -381,6 +381,7 @@ def setup(app):
     app.add_transform(AutoStructify)
     app.add_config_value('recommonmark_config', {
     }, True)
+    add.add_stylesheet('notosanskr.css')
     app.add_javascript('google_analytics.js')
     app.add_javascript('discuss.js')
     app.connect('source-read', image_caption)
