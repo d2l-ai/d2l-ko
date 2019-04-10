@@ -4,7 +4,7 @@
 
 [책 웹사이트](http://ko.d2l.ai/) | [STAT 157 Course at UC Berkeley, Spring 2019](http://courses.d2l.ai/berkeley-stat-157/index.html)
 
-## 기여하기 ([learn how](http://en.diveintodeeplearning.org/chapter_appendix/how-to-contribute.html))
+## 기여하기 ([learn how](http://ko.d2l.ai/chapter_appendix/how-to-contribute.html))
 
 이 오픈 소스 책은 커뮤니티 기여자의 교육학적인 제안, 오타 교정, 여러 개선을 도움을 받고 있습니다. 여러분의 도움은 모든 사람들을 위해서 더 좋은 책을 만드는데 가치가 있습니다. 저희는 각 기여자분들을 책에서 [감사](https://ko.d2l.ai/chapter_preface/preface.html#%EA%B0%90%EC%82%AC%EC%9D%98-%EA%B8%80)를 표시할 것입니다.
 
