@@ -39,7 +39,7 @@ rm d2l-en-1.0.zip
 
 설치는 다소 오래 걸리고, 라이센스 동의를 해야하기도 하고 여러 설치 스크립트를 사용해야합니다. 여러분의 OS나 하드웨어에 따라 설치 방법은 달라질 수 있습니다.
 
-위 과정을 마친 후,  `environment.yml` 의 환경 설명을 업데이트 합니다. `mxnet` 을 `mxnet-cu92` 또는 설치된 CUDA 버전에 맞도록 바꿉니다. 만약 CUDA 8.0 버전이 설치된 경우, `mxnet-cu92` 를 `mxnet-cu80` 으로 바꿔야 합니다. 이것은 꼭 conda 환경을 *만들기 전*에 해야합니다. 그렇지 않은 경우, 빌드를 다시 수행해야하기 때문입니다. 리눅스 사용자는 아래 명령으로 수정할 수 있습니다. (Windows 사용자는 Notepad 등을 사용해서 `environment.yml`를 직접 수정합니다.)
+위 과정을 마친 후,  `environment.yml` 의 환경 설정을 업데이트 합니다. `mxnet` 을 `mxnet-cu92` 또는 설치된 CUDA 버전에 맞도록 바꿉니다. 만약 CUDA 8.0 버전이 설치된 경우, `mxnet-cu92` 를 `mxnet-cu80` 으로 바꿔야 합니다. 이것은 꼭 conda 환경을 *만들기 전*에 해야합니다. 그렇지 않은 경우, 빌드를 다시 수행해야하기 때문입니다. 리눅스 사용자는 아래 명령으로 수정할 수 있습니다. (Windows 사용자는 Notepad 등을 사용해서 `environment.yml`를 직접 수정합니다.)
 
 ```shell
 cd d2l
@@ -67,11 +67,11 @@ jupyter notebook
 
 이후에 라이브러리들을 다시 활성화할 필요가 있다면, 첫번째 줄은 넘어가세요. 이는 여러분의 설정이 활성화되어 있음을 확인시켜줍니다. Jupyter Notebook(`jupyter notebook`)을 대신에, JupyterLab(`jupyter lab`)을 사용할 수 있음을 알아두세요. 활성화된 conda gluon 환경에서 `conda install jupyterlab` 을 실행해서 직접 설치할 수 있습니다.
 
-웹 브라우저 통합이 잘 작동한다면, Jupyter 를 실행하면 웹 브라우저의 새 창이 생성됩니다. 만약 그렇지 않다면, 직접 http://localhost:8888를 열어보세요. 어떤 노트북은 필요한 데이터와 사전-학습(pre-trained) 모델을 자동으로 다운로드하기도 합니다. `MXNET_GLUON_REPO` 변수를 수정해서 리파지토리 위치를 바꿀 수도 있습니다.
+웹 브라우저 통합이 잘 작동한다면, Jupyter 를 실행하면 웹 브라우저의 새 창이 생성됩니다. 만약 그렇지 않다면, 직접 http://localhost:8888를 열어보세요. 어떤 노트북은 필요한 데이터와 사전-학습(pre-trained) 모델을 자동으로 다운로드하기도 합니다. `MXNET_GLUON_REPO` 변수를 수정해서 레파지토리 위치를 바꿀 수도 있습니다.
 
 ### Linux와 MacOS
 
-리눅스에서도 비슷하게 합니다. 단지, anacond 명령 옵션이 약간 다릅니다.
+리눅스에서도 비슷하게 합니다. 단지, anaconda 명령 옵션이 약간 다릅니다.
 
 ```sh
 conda env create -f environment.yml
