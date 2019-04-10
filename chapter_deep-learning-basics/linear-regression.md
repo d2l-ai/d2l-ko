@@ -16,7 +16,7 @@ $$\mathrm{price} = w_{\mathrm{area}} \cdot \mathrm{area} + w_{\mathrm{age}} \cdo
 
 $$\hat{y} = w_1 \cdot x_1 + ... + w_d \cdot x_d + b$$
 
-데이터 포인트들을 $X$ 로, 타겟 변수는  $y$ 로 표현합니다. 각 데이터 포인트 $x_i$ 와 이에 대한 label 값인 $y_i$ 를 추정해서 연관시켜주는 $가중치(weight)$ 벡터 $w$ 와 $bias$ $b$ 를 찾아보는 것을 시도해봅니다. 이를 조금 전문적인 수학 기호로 표현하면, 위 긴 합은 $\hat{y} = \mathbf{w}^\top \mathbf{x} + b$ 이 됩니다. 마지막으로, 데이터 포인드들의 집합 $X$ 와 예측 값 $\hat{\mathbf{y}}$ 은 아래와 같은 행렬-벡터 곱의 공식이 됩니다.
+데이터 포인트들을 $X$ 로, 타겟 변수는  $y$ 로 표현합니다. 각 데이터 포인트 $x_i$ 와 이에 대한 label 값인 $y_i$ 를 추정해서 연관시켜주는 $가중치(weight)$ 벡터 $w$ 와 $bias$ $b$ 를 찾아보는 것을 시도해봅니다. 이를 조금 전문적인 수학 기호로 표현하면, 위 긴 합은 $\hat{y} = \mathbf{w}^\top \mathbf{x} + b$ 이 됩니다. 마지막으로, 데이터 포인트들의 집합 $X$ 와 예측 값 $\hat{\mathbf{y}}$ 은 아래와 같은 행렬-벡터 곱의 공식이 됩니다.
 
 $${\hat{\mathbf{y}}} = \mathbf{X} \mathbf{w} + b$$
 
