@@ -4,7 +4,7 @@
 
 [책 웹사이트](http://ko.d2l.ai/) | [STAT 157 Course at UC Berkeley, Spring 2019](http://courses.d2l.ai/berkeley-stat-157/index.html)
 
-## 기여하기 ([learn how](http://ko.d2l.ai/chapter_appendix/how-to-contribute.html))
+## 기여하기 ([방법 알아보기](http://ko.d2l.ai/chapter_appendix/how-to-contribute.html))
 
 이 오픈 소스 책은 커뮤니티 기여자의 교육학적인 제안, 오타 교정, 여러 개선을 도움을 받고 있습니다. 영어-한글 용어는 [용어표](https://github.com/d2l-ai/d2l-ko/blob/master/TERMINOLOGY.md)를 참고해주세요. 여러분의 도움은 모든 사람들을 위해서 더 좋은 책을 만드는데 가치가 있기에, 저희는 각 기여자분들을 책에서 [감사](https://ko.d2l.ai/chapter_preface/preface.html#%EA%B0%90%EC%82%AC%EC%9D%98-%EA%B8%80)를 표시할 것입니다.
 
@@ -14,9 +14,9 @@
 
 [English version](https://github.com/d2l-ai/d2l-en) | [Chinese version](https://github.com/d2l-ai/d2l-zh) | [Discuss and report issues](https://github.com/d2l-ai/d2l-ko/issues/)
 
-## Citing this book
+## 이 책 인용하기
 
-Please use the following bibtex entry to cite this book:
+이 책을 인용할 때, 다음 bibtex 항목을 이용해주세요:
 
 ```
 @book{zhang2019dive,
