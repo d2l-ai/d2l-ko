@@ -13,7 +13,7 @@
 
 1. [conda.io/en/latest/miniconda.html](https://conda.io/en/latest/miniconda.html) 를 방문해서 여러분의 OS에 맞는  [Miniconda](https://conda.io/en/latest/miniconda.html) 를 다운로드한 후 설치하세요.
 1. 리눅스인 경우  `source ~/.bashrc`, MacOS인 경우 `source ~/.bash_profile`를 수행해서 쉘을 업데이트 합니다. PATH 환경 변수에 Anaconda를 꼭 추가하세요.
-1. 이 책의 노트북들이 담긴 tarball 를 다운로드하세요. 이 파일은 [www.d2l.ai/d2l-en-1.0.zip](https://www.d2l.ai/d2l-en-1.0.zip) 에 있습니다. 또는 GitHub 레파지토리에서 최신 버전을 복사해도 됩니다.
+1. 이 책의 노트북들이 담긴 tarball 를 다운로드하세요. 이 파일은 [www.d2l.ai/d2l-en-1.0.zip](https://www.d2l.ai/d2l-en-1.0.zip) 에 있습니다. 또는 GitHub 리포지토리에서 최신 버전을 복사해도 됩니다.
 1. ZIP 파일의 압축을 풀어서 원하는 디렉토리에 옮겨 놓으세요.
 
 리눅스의 경우 아래 명령들을 명령행에서 수행하면 됩니다. MacOS를 사용하는 경우, 처음 두 줄에 있는 Linux를 MacOS로 바꾸면 됩니다. Windows 사용자는 위 가이드에 있는 링크들을 참고하세요.
@@ -67,7 +67,7 @@ jupyter notebook
 
 이후에 라이브러리들을 다시 활성화할 필요가 있다면, 첫번째 줄은 넘어가세요. 이는 여러분의 설정이 활성화되어 있음을 확인시켜줍니다. Jupyter Notebook(`jupyter notebook`)을 대신에, JupyterLab(`jupyter lab`)을 사용할 수 있음을 알아두세요. 활성화된 conda gluon 환경에서 `conda install jupyterlab` 을 실행해서 직접 설치할 수 있습니다.
 
-웹 브라우저 통합이 잘 작동한다면, Jupyter 를 실행하면 웹 브라우저의 새 창이 생성됩니다. 만약 그렇지 않다면, 직접 http://localhost:8888를 열어보세요. 어떤 노트북은 필요한 데이터와 사전-학습(pre-trained) 모델을 자동으로 다운로드하기도 합니다. `MXNET_GLUON_REPO` 변수를 수정해서 레파지토리 위치를 바꿀 수도 있습니다.
+웹 브라우저 통합이 잘 작동한다면, Jupyter 를 실행하면 웹 브라우저의 새 창이 생성됩니다. 만약 그렇지 않다면, 직접 http://localhost:8888를 열어보세요. 어떤 노트북은 필요한 데이터와 사전-학습(pre-trained) 모델을 자동으로 다운로드하기도 합니다. `MXNET_GLUON_REPO` 변수를 수정해서 리포지토리 위치를 바꿀 수도 있습니다.
 
 ### Linux와 MacOS
 
@@ -84,7 +84,7 @@ Windows와 다른 설치들의 주요 차이는 Windows에서는 `activate gluon
 
 ## Gluon 업데이트하기
 
-새로운 CUDA 버전이나 MXNet을 설치해서 리파지토리를 업데이트하고 싶다면, conda 명령으로 간단하게 할 수 있습니다. 아래 명령으로 패키지를 업데이트 합니다.
+새로운 CUDA 버전이나 MXNet을 설치해서 리포지토리를 업데이트하고 싶다면, conda 명령으로 간단하게 할 수 있습니다. 아래 명령으로 패키지를 업데이트 합니다.
 
 ```
 cd d2l-en
