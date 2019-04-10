@@ -36,7 +36,6 @@ build/%: %
 
 html: $(DEPS) $(FRONTPAGE_DEP) $(OBJ)
 	make -C build html
-	echo "@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);" >>build/_build/html/_static/fonts.css
 	sed -i s/SC\ Sliced/KR/g build/_build/html/_static/sphinx_materialdesign_theme.css
 	# python build/utils/post_html.py
 	cp -r img/frontpage/ build/_build/html/_images/
