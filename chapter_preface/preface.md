@@ -40,4 +40,4 @@
 
 ## 감사의 글
 
-우리는 영어와 중국 초안 모두에 대한 수백 명의 기여자에게 빚을지고 있습니다. 그들은 콘텐츠를 개선하는 데 도움이 귀중한 피드백을 제공했습니다. 특히, 우리는 모두를 위해 더 나은 버전을 만들기 위해 힘써준 영어 초안의 모든 기여자에게 감사드립니다. 그들의 Github ID와 이름 (제공된 경우)은 : bowen0701, ChaiBapChya (Chaitanya Prakash Bapat), kirk86, MLWhiz (Rahul Agarwal), mstewart141, muelleme (Mike Müller), sfermigier, sundeepteki, vishaalkapoor, YaYaB. 더해서, 아마존 웹서비시즈에 감사 드리며, 특히 Swami Sivasubramanian, Raju Gulabani, Charlie Bell, and Andrew Jassy에게 이 책을 쓰도록 충분히 지원해 주신  대해 감사드립니다. 사용 가능한 시간, 자원, 동료와의 토론, 지속적인 격려 덕분에 책이 만들어 질 수 있었습니다.
+우리는 영어와 중국 초안 모두에 대한 수백 명의 기여자에게 빚을 지고 있습니다. 그들은 콘텐츠를 개선하는 데 도움이 귀중한 피드백을 제공했습니다. 특히, 우리는 모두를 위해 더 나은 버전을 만들기 위해 힘써준 영어 초안의 모든 기여자에게 감사드립니다. 그들의 Github ID와 이름 (제공된 경우)은 : bowen0701, ChaiBapChya (Chaitanya Prakash Bapat), kirk86, MLWhiz (Rahul Agarwal), mstewart141, muelleme (Mike Müller), sfermigier, sundeepteki, vishaalkapoor, YaYaB. 더해서, 아마존 웹서비시즈에 감사 드리며, 특히 Swami Sivasubramanian, Raju Gulabani, Charlie Bell, and Andrew Jassy에게 이 책을 쓰도록 충분히 지원해 주신  대해 감사드립니다. 사용 가능한 시간, 자원, 동료와의 토론, 지속적인 격려 덕분에 책이 만들어 질 수 있었습니다.
