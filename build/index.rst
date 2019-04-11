@@ -24,3 +24,4 @@ Dive into Deep Learning
    chapter_crashcourse/index
    chapter_deep-learning-basics/index
    chapter_deep-learning-computation/index
+   chapter_appendix/index
