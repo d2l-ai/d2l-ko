@@ -76,7 +76,7 @@ RAM이 데이터의 증가와 보조를 맞추지 않은 것은 매우 분명합
 * 계산을 병렬화 하는 능력은, 시뮬레이션이 가능한 상황에서 강화학습(Reinforcement learning) 분야에 결정적인 기여를 하였습니다. 이것은 바둑, 아타리 게임, 스타크래프트, 그리고 물리 시뮬레이션(예를 들면 MuJoCo의 사용) 분야에서 컴퓨터가 인간능력에 다가서거나 넘어 설 수 있도록 하는데 필요한 중요한 발전을 이끌어 내었습니다. 실예로, Silver [18]는 AlphaGo가 어떻게 이것을 달성 했는지 설명하고 있습니다. 요컨대, 많은 양의 상태, 행동, 보상의 세가지 조합 데이터들을 사용할 수 있다면, 강화학습은 각각의 데이터들을 어떻게 연관시킬 수 있을 지, 매우 많은 양의 데이터로 시도해 볼수 있게 합니다. 시뮬레이션은 그런 방법을 제공합니다. 
 * 딥러닝 프레임워크는 아이디어를 널리 퍼트리는데 중요한 역할을 했습니다. 손쉬운 모델링을 위한 프레임워크의 첫 번째 세대는 [Caffe](https://github.com/BVLC/caffe), [Torch](https://github.com/torch), [Theano](https://github.com/Theano/Theano) 입니다. 많은 영향력 있는 논문들이 이 도구를 이용해 작성 되었습니다. 지금에 이르러 이들은 TensorFlow[TensorFlow](https://github.com/tensorflow/tensorflow)로 대체 되었습니다. 고수준 API 인 [Keras](https://github.com/keras-team/keras), [CNTK](https://github.com/Microsoft/CNTK), [Caffe 2](https://github.com/caffe2/caffe2) 및  [Apache MxNet](https://github.com/apache/incubator-mxnet)도 이를 사용합니다. 3 세대 툴, 즉 딥러닝을 위한 명령형 툴은 틀림없이, 모델을 기술하기 위해 파이썬 NumPy와 유사한 구문을 사용하는 [Chainer](https://github.com/chainer/chainer)에 의해 주도될 것입니다. 이 아이디어는 [PyTorch](https://github.com/pytorch/pytorch)와 MxNet의 [Gluon API](https://github.com/apache/incubator-mxnet)에도 채택 되었습니다. 이 책에서는 MxNet의 Gluon API을 사용하였습니다.
 
-학습을 위한 더 나은 도구를 만드는 시스템 연구자와 더 좋은 네트워크를 만드는 통계 모델러 사이의 노동 분할은 크게 일을 단순화했습니다. 예를 들어, 선형 물류 회귀 모델을 학습하는 것은 2014년에 카네기 멜론 대학에서 새로운 머신러닝 박사 과정 학생들에게 줄 중요한 숙제 문제로 사용 사용되었습니다. 하지만, 지금은 10줄 미만의 코드로 만들 수 있으며, 많은 프로그래머들은 이것을 이해할 수 있습니다.
+학습을 위해 더 나은 툴을 만드는 연구자와 더 나은 신경망을 만들기 위한 통계모델러 간, 작업 시스템 분리는 많은 것들을 단순화 하였습니다. 한 예로, 2014년 카네기멜론대학의 머신러닝 박사과정 학생에게 선형 회귀 분석 모델을 학습시키는 것은 매우 중요한 과제 였습니다. 지금은 이 작업은 10줄이 안되는 코드로 완료 가능하고, 프로그래머들이 확실히 이해할수 있게 만들었습니다.
 
 ## 성공 사례
 
