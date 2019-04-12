@@ -5,7 +5,7 @@
 | -------------------- | -------- | ----- | --- |
 | chapter_introduction | draft done | Kyoungsu | 9th Apr 2019 |
 | chapter_crashcourse | draft done | Muhyun | 9th Apr 2019 |
-| chapter_deep-learning-basics | draft done | Muhyun | 9th Apr 2019 |
+| chapter_deep-learning-basics | reflecting 0.6.0 | Muhyun | 12rd Apr 2019 |
 | chapter_deep-learning-computation | draft done | Muhyun | 9th Apr 2019 |
 | chapter_convolutional-neural-networks | draft in progress | Muhyun |9th Apr 2019|
 | chapter_recurrent-neural-networks | not yet started | TBD |9th Apr 2019|
