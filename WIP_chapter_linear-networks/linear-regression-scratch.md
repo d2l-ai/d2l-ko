@@ -190,16 +190,6 @@ print('Error in estimating b', true_b - b)
 
 ## 요약
 
-*이 절에서 NDArray와  `autograd`  만을 사용해서 레이어 정의나 멋진 옵티마이져(optimizer)를 위한 별도의 도구 없이도 딥 네트워크 구현 및 최적화를 어떻게 할 수 있는지 살펴봤습니다. 이 예제는 어떤 것들이 가능한지에 대한 기본만 다뤘고, 다음 절에서는 지금까지 배운 것들을 기반으로 다양한 딥 러닝 모델들을 살펴보고, 보다 간결하게 구현하는 방법에 대해서 살펴보겠습니다.*
-
-We saw how a deep network can be implemented 
-and optimized from scratch, using just NDArray and `autograd`, 
-without any need for defining layers, fancy optimizers, etc. 
-This only scratches the surface of what is possible. 
-In the following sections, we will describe additional models 
-based on the concepts that we have just introduced 
-and learn how to implement them more concisely.
-
 우리는 NDArray와 `autograd` 만을 사용하고, 층이나 멋진 옵티마이저 등을 정의한 필요 없이 딥 네트워크를 어떻게 구현하고, 최적화시킬 수 있는지를 봤습니다. 이것은 가능한 것들의 표면만 긁어본 것입니다. 다음 절들에서 우리는 우리가 막 소개한 개념들을 기반으로 한 추가적인 모델을 설명하고, 더 간결하게 구현하는 방법을 배워보겠 습니다.
 
 ## 연습문제
