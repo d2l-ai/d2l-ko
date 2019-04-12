@@ -44,14 +44,14 @@ for X, y in data_iter:
 
 선형 회귀 모델을 직접 구현했을 때는 모델 파라미터를 정의하고, 모델을 수행하는 매 단계를 직접 작성했는데, 더 복잡한 모델을 이렇게 만들어야 한다면 구현이 더 복잡해질 것입니다. Gluon은 이미 정의된 다양한 레이어를 제공하고 있어서, 레이어를 어떻게 구현하는지가 아니라, 레이어를 사용한 모델을 설계하는데 집중할 수 있도록 해줍니다.
 
-선형 모델을 구현하는 방법은, 우선 `nn` 모듈을 import하는 것으로 시작합니다. `nn`  은 neural network의 약자입니다. 이름이 의미하듯이 이 모듈을 많은 종류의 뉴럴 네트워크층들을 바로 사용할 수 있도록 제공합니다.  `Sequential` 인스턴스인  `net` 모델 변수를 정의합니다. Gluon에서  `Sequential` 인스턴스는 다양한 레이어를 순차적으로 담는 컨테이너로 사용됩니다.  모델을 정의할 때, 이 컨터이너에 층을 원하는 순서대로 추가합니다. 입력값이 주어지면, 컨테이너의 각 층 순서대로 계산이 이뤄지고, 각 층의 결과값은 다음 층의 입력으로 사용됩니다.
+선형 모델을 구현하는 방법은, 우선 `nn` 모듈을 import하는 것으로 시작합니다. `nn`  은 neural network의 약자입니다. 이름이 의미하듯이 이 모듈은 많은 종류의 뉴럴 네트워크층들을 바로 사용할 수 있도록 제공합니다.  `Sequential` 인스턴스인  `net` 모델 변수를 정의합니다. Gluon에서  `Sequential` 인스턴스는 다양한 레이어를 순차적으로 담는 컨테이너로 사용됩니다.  모델을 정의할 때, 이 컨터이너에 층을 원하는 순서대로 추가합니다. 입력값이 주어지면, 컨테이너의 각 층 순서대로 계산이 이뤄지고, 각 층의 결과값은 다음 층의 입력으로 사용됩니다.
 
 ```{.python .input  n=5}
 from mxnet.gluon import nn
 net = nn.Sequential()
 ```
 
-단일층 네트워크를 다시 생각해봅시다. 층은 모든 입력들과 모든 출력들을 연결하는 완전 연결(fully connected)로 구성되어 있고,  이는 행렬-벡터 곱으로 표현했습니다. Gluon의   `Dense` 인스턴스는 완전 연결층(fully connected layer)를 의미합니다. 한개의 스칼라 출력을 생성해야하기 때문에 갯수를 1로 정의합니다.
+단일층 네트워크를 다시 생각해봅시다. 층은 모든 입력들과 모든 출력들을 연결하는 완전 연결(fully connected)로 구성되어 있고,  이는 행렬-벡터 곱으로 표현했습니다. Gluon의   `Dense` 인스턴스는 완전 연결층(fully connected layer)를 의미합니다. 한 개의 스칼라 출력을 생성해야하기 때문에 갯수를 1로 정의합니다.
 
 ![Linear regression is a single-layer neural network. ](../img/singleneuron.svg)
 
@@ -74,7 +74,7 @@ net.initialize(init.Normal(sigma=0.01))
 
 ##  손실 함수(loss function) 정의하기
 
-Gluon의 `loss` 모듈은 다양한 손실 함수(loss function)를 정의하고 있습니다. `loss` 모듈을 import 할 때 이름을 `gloss` 바꾸고, 제곱 손실(squared loss)를 모델의 손실 함수(loss function)로 사용하도록 합니다.
+Gluon의 `loss` 모듈은 다양한 손실 함수(loss function)를 정의하고 있습니다. `loss` 모듈을 import 할 때 이름을 `gloss` 바꾸고, 제곱 손실(squared loss)을 모델의 손실 함수(loss function)로 사용하도록 합니다.
 
 ```{.python .input  n=8}
 from mxnet.gluon import loss as gloss
@@ -83,7 +83,7 @@ loss = gloss.L2Loss()  # The squared loss is also known as the L2 norm loss
 
 ## 최적화 알고리즘 정의하기
 
-마찬가지로 미니 배치에 대한 확률적 경사 하강법(stocahstic gradient descent)을 직접 구현할 필요가 없습니다. Gluon을 import 한 후, `Trainer` 인스턴스를 만들면서, 학습 속도(learning rate)가 0.03를 갖는 미니 배치 확률적 경사 하강법(stocahstic gradient descent)을 최적화(optimization) 알고리즘으로 설정하면 됩니다. 이 최적화 알고리즘은 `add` 함수를 이용해서 `net` 인스턴스에 추가된 레이어들의 모든 파라미터들에 적용할 것인데, 이 파라미터들은 `collect_params` 함수를 통해서 얻습니다.
+마찬가지로 미니 배치에 대한 확률적 경사 하강법(stochastic gradient descent)을 직접 구현할 필요가 없습니다. Gluon을 import 한 후, `Trainer` 인스턴스를 만들면서, 학습 속도(learning rate)가 0.03를 갖는 미니 배치 확률적 경사 하강법(stochastic gradient descent)을 최적화(optimization) 알고리즘으로 설정하면 됩니다. 이 최적화 알고리즘은 `add` 함수를 이용해서 `net` 인스턴스에 추가된 레이어들의 모든 파라미터들에 적용할 것인데, 이 파라미터들은 `collect_params` 함수를 통해서 얻습니다.
 
 ```{.python .input  n=9}
 from mxnet import gluon
@@ -92,7 +92,7 @@ trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': 0.03})
 
 ## 학습
 
-Gluon을 이용해서 모델을 표현하는 것이 보다 간결하다는 것을 눈치챘을 것입니다. 예를 들면, 파라미터들을 일일이 선언하지 않았고, 손실 함수(loss function)를 직접 정의하지 않았고, 확률적 경사 하강법(stocahstic gradient descent)을 직접 구현할 필요가 없습니다. 더욱 복잡한 형태의 모델을 다루기 시작하면, Gluon의 추상화를 사용하는 것이 얼마나 많은 이득이 되는지 알게 될 것입니다. 기본적인 것들이 모두 설정된 후에는 학습 loop은 앞에서 직접 구현한 것과 비슷합니다.
+Gluon을 이용해서 모델을 표현하는 것이 보다 간결하다는 것을 눈치챘을 것입니다. 예를 들면, 파라미터들을 일일이 선언하지 않았고, 손실 함수(loss function)를 직접 정의하지 않았고, 확률적 경사 하강법(stochastic gradient descent)을 직접 구현할 필요가 없습니다. 더욱 복잡한 형태의 모델을 다루기 시작하면, Gluon의 추상화를 사용하는 것이 얼마나 많은 이득이 되는지 알게 될 것입니다. 기본적인 것들이 모두 설정된 후에는 학습 loop은 앞에서 직접 구현한 것과 비슷합니다.
 
 앞서 구현했던 모델 학습 단계를 다시 짚어보면, 전체 학습 데이터(train_data)를 정해진 에포크(epoch)만큼 반복해서 학습을 수행합니다. 하나의 에포크(epoch)는 다시 미니 배치로 나눠지는데 미니 배치는 입력과 입력에 해당하는 진실 값(ground-truth label)들로 구성됩니다. 각 미니 배치에서는 다음 단계들이 수행됩니다.
 
