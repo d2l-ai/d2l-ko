@@ -80,6 +80,7 @@
 | label                                            | 레이블                        |
 | layer                                            | 층                            |
 | learning rate                                    | 학습 속도                     |
+| least mean squares loss                          | 최소 평균 제곱 손실           |
 | linear model                                     |                               |
 | linear regression                                |                               |
 | local minimum                                    |                               |
@@ -98,6 +99,7 @@
 | multilayer perceptron                            | 다층 퍼셉트론                 |
 | negative sampling                                |                               |
 | neural network                                   | 뉴럴 네트워크                 |
+| neuron                                           | 뉴런                          |
 | non-convex optimization                          |                               |
 | normalization                                    |                               |
 | numerical method                                 |                               |
