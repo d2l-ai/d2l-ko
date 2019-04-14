@@ -10,6 +10,8 @@
 
 **[d2l-ko 기여자](https://github.com/d2l-ai/d2l-ko/graphs/contributors) 여러분, 이름, GitHub ID, 그리고 배송이 가능한 주소를 d2lbook.ko@gmail.com으로 보내주세요.**
 
+>  본 GitHub 리포지토리 d2l-ko는 d2l-en(Dive into Deep Learning 온라인 버전)의 공식 한글 번역 프로젝트입니다. 
+>
 >  한글 버전은 [영문책 버전 0.5.0](https://github.com/d2l-ai/d2l-en/releases/tag/v0.5.0)을 기반으로 번역을 하고 있고, 새로운 버전이 나오면 반영할 예정입니다. 현재 한글 버전은 1,2,3,4장이 공개되었고, 다른 장들도 번역을 진행 중에 있습니다.
 
 감사합니다.
