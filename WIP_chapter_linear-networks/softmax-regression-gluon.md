@@ -1,4 +1,4 @@
-# Softmax 회귀(regression)의 간결한 구현
+# Softmax 회귀의 간결한 구현
 
 우리는 이미 [선형 회귀 구현](linear-regression-gluon.md)에서 Gluon을 이용하는 것이 아주 편리하다는 것을 확인했습니다. 이제 Gluon이 분류에 어떻게 적용되는지 보도록 하겠습니다. 역시 몇 가지 패키지와 모듈을 import하는 것으로 시작합니다.
 
@@ -77,6 +77,6 @@ d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, batch_size, None,
 1. 배치 크기(batch size), 에포크(epoch), 학습 속도(learning rate)와 같은 하이퍼파라미터(hyper-parameter)를 변경하면서 어떤 결과가 나오는지 보세요.
 1. 학습이 진행될 때 어느 정도 지나면 테스트 정확도가 감소할까요? 어떻게 고칠 수 있나요?
 
-## Scan the QR Code to [Discuss](https://discuss.mxnet.io/t/2337)
+## QR 코드를 스캔해서 [논의하기](https://discuss.mxnet.io/t/2337)
 
 ![](../img/qr_softmax-regression-gluon.svg)

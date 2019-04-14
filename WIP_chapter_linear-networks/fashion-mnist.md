@@ -132,6 +132,6 @@ for X, y in train_iter:
 1. `mxnet.gluon.data.vision` 에서 어떤 데이터셋들이 제공되는지 MXNet 문서를 통해서 확인해보세요.
 1. `mxnet.gluon.data.vision.transforms` 에서 어떤 변환들이 제공되는지 MXNet 문서를 통해서 확인해보세요.
 
-## Scan the QR Code to [Discuss](https://discuss.mxnet.io/t/2335)
+## QR 코드를 스캔해서 [논의하기](https://discuss.mxnet.io/t/2335)
 
 ![](../img/qr_fashion-mnist.svg)

@@ -42,7 +42,7 @@ $\mathbf{x}$ 와 $y$ 를 관련시키는 가장 좋은 모델이 선형이라고
 
 일반적으로 데이터셋의 샘플 개수를 $n$ 으로 표기합니다. 샘플들은 $i$ 로 인덱스 하며, 각 입력 데이터 포인트를  $x^{(i)} = [x_1^{(i)}, x_2^{(i)}]$ 로 표시하고 그에 대한 레이블은 $y^{(i)}$로 적습니다.
 
-## Loss 함수
+## 손실 함수(loss function)
 
 모델 학습을 위해서는 모델이 예측된 가격과 실제 가격의 오차를 측정해야 합니다. 보통 오차는 0 또는 양수값을 선택하고, 값이 작을 수록, 오차가 적음을 의미합니다. 일반적으로 제곱 함수를 사용합니다. 파라이터들 $\mathbf{w}$ 와 $b$ 가 주어졌을 때, 어떤 샘플에 대한 추측의 오류는 다음과 같이 표현할 수 있습니다.
 
@@ -54,7 +54,7 @@ $$l^{(i)}(\mathbf{w}, b) = \frac{1}{2} \left(\hat{y}^{(i)} - y^{(i)}\right)^2,$$
 
 조금 더 구체적으로 살펴보기 위해서, 집값이 집 크기에만 의존한다는 모델을 가정해서 일차원 문제로 회귀 문제를 도식화한 것을 예로 들어보겠습니다. 
 
-![Linear regression is a single-layer neural network. ](../img/linearregression.svg)
+![선형 회귀는 단일층 뉴럴 네트워크입니다.](../img/linearregression.svg)
 
 위 그래프에서 보이는 것처럼, 이차 의존성 (quadratic dependence)으로 인해서 예측값  $\hat{y}^{(i)}$ 과 실제값 $y^{(i)}$ 의 큰 차이는 loss 에서는 더 크게 반영됩니다. 전체 데이터셋에 대해서 모델의 품질을 측정하기 위해서 학습셋에 대한 loss의 평균값을 사용할 수 있습니다.
 
@@ -78,56 +78,23 @@ $$\mathbf{w}^* = (X^T X)^{-1}X^T y​$$
 
 ### 그래디언트 하강(gradient descent)
 
-Even in cases where we cannot solve the models analytically,
-and even when the loss surfaces are high-dimensional and nonconvex,
-it turns out that we can still make progress.
-Moreover, when those difficult-to-optimize models are sufficiently superior for the task at hand, figuring out how to train them is well worth the trouble.
-
 모델을 해석적으로 풀지 못하는 경우나, 손실 표면(surface)가 고차원이고 볼록하지 않은 경우에도 우리는 여전히 진보를 만들 수 있다는 것이 발혀졌습니다. 더군이 최적화하기 어려운 모델들이 당면한 과제에 대해 상당히 우수한 경우, 이를 어떻게 학습시키는 것을 알아내는 것은 충분히 가치가 있습니다.
-
-The key trick behind nearly all of deep learning 
-and that we will repeatedly throughout this book
-is to reduce the error gradually by iteratively updating the parameters,
-each step moving the parameters in the direction 
-that incrementally lowers the loss function.
-This algorithm is called gradient descent.
-On convex loss surfaces it will eventually converge to a global minimum,
-and while the same can't be said for nonconvex surfaces, 
-it will at least lead towards a (hopefully good) local minimum.
 
 거의 모든 딥러닝에 적용된 주요 기법이자 이 책을 통해서 반복적으로 사용되는 방법은 파라미터들을 반복적으로 업데이트하면서 오류를 점진적으로 줄이는 것입니다. 즉, 이 방법은 매 단계에서 파라미터를 손실 함수를 점진적으로 낮추는 방향으로 파라미터를 업데이트하는 것입니다. 이 알고리즘은 그래디언트 하강(gradient descent)이라고 합니다. 불록 손실 표면(convex loss surface)에서 이 방법은 결국에는 글로벌 최소값으로 수렴할 것이며, 볼록하지 않은 표면에 대해서 동일하지는 않지만, 적어도 (좋은 경우에는) 로컬 최소값을 찾아줄 것입니다.
 
-The most naive application of gradient descent consists of taking the derivative of the true loss, which is an average of the losses computed on every single example in the dataset. In practice, this can be extremely slow. We must pass over the entire dataset before making a single update. 
-Thus, we'll often settle for sampling a random mini-batch
-of examples every time we need to computer the update, 
-a variant called *stochastic gradient descent*.
-
 그래디언트 하강의 가장 단순한(naive) 응용은 데이터셋의 모든 예제들에 대한 손실값들의 평균으로 계산된 진짜 손실(true loss)의 미분으로 구성됩니다. 실제로 이 방법은 너무 느립니다. 한 번 업데이트를 하기 위해서 전체 데이터셋을 사용해야 합니다. 따라서, 업데이트를 할 때 마다 임의로 미니 배치를 샘플링하는 방법을 종종 사용합니다. 이 방법을 *확률적 경사 하강법(stochastic gradient descednt)*라고 합니다.
-
-In each iteration, we first randomly and uniformly sample a mini-batch $\mathcal{B}$ consisting of a fixed number of training data examples. 
-We then compute the derivative (gradient) of the average loss on the mini batch with regard to the model parameters. 
-Finally, the product of this result and a predetermined step size $\eta > 0$ are used to update the parameters in the direction that lowers the loss. 
 
 매 반복마다 우리는 고정된 수의 학습 데이터 예제들로 구성된 미니 배치 $\mathcal{B}$ 를 임의로 그리고 균일하게 선택합니다. 그리고, 미니 배치의 평균 손실을 모델 파라미터들에 대해서 미분(gradient)을 계산합니다. 마지막으로 이 결과와 사전에 정의된 스탭 크기  $\eta > 0$ 를 곱해서 값을 손실을 낮추는 방향으로 파라미터를 업데이트에 사용합니다.
 
-We can express the update mathematically as follows ($\partial​$ denotes the partial derivative):
+업데이트를 수학적인 표현하면 아래와 같습니다. ($\partial$ 는 편미분을 의미합니다.)
 
-업데이트를 수학적인 표현하면 아래와 같습니다. ($\partial​$ 는 편미분을 의미합니다.)
-
-$$(\mathbf{w},b) \leftarrow (\mathbf{w},b) - \frac{\eta}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \partial_{(\mathbf{w},b)} l^{(i)}(\mathbf{w},b)​$$
-
-To summarize, steps of the algorithm are the following: 
-(i) we initialize the values of the model parameters, typically at random;
-(ii) we iterate over the data many times, 
-updating the parameters in each by moving the parameters in the direction of the negative gradient, as calculated on a random minibatch of data. 
+$$(\mathbf{w},b) \leftarrow (\mathbf{w},b) - \frac{\eta}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \partial_{(\mathbf{w},b)} l^{(i)}(\mathbf{w},b)$$
 
 요약하면, 이 알고리즘의 단계들은 다음과 같습니다:
 
 (i) 모델 파라미터들의 값을 초기화 합니다. 일반적으로는 난수를 사용합니다;
 
 (ii) 데이터를 여러번 반복해서 파라미터를 업데이트합니다. 이는 임의로 선택한 데이터의 미니 배치에 대해서 계산한 그래디언트의 음의 방향으로 파라미터를 움직이는 것입니다.
-
-For quadratic losses and linear functions we can write this out explicitly as follows. Note that $\mathbf{w}​$ and $\mathbf{x}​$ are vectors. Here the more elegant vector notation makes the math much more readable than expressing things in terms of coefficients, say $w_1, w_2, \ldots w_d​$.
 
 이차함수의 손실 함수와 선형 함수에 대해서, 이것을 다음과 같이 명시적으로 표현할 수 있습니다.  $\mathbf{w}$ 와 $\mathbf{x}$ 가 벡터임을 유의 하세요. 더 멋진 벡터 표기법을 사용하는 것이 $w_1, w_2, \ldots w_d$ 와 같은 계수를 사용해서 표현하는 것보다 수식을 더 읽기 좋게 만들어 줍니다.
 $$
@@ -143,32 +110,13 @@ $$
 
 ## 모델을 이용한 예측
 
-After completing the training process, we record the estimated model parameters, denoted $\hat{\mathbf{w}}, \hat{b}$ 
-(in general the "hat" symbol denotes estimates).
-Note that the parameters that we learn via gradient descent 
-are not exactly equal to the true minimizers of the loss on the training set,
-that's be cause gradient descent converges slowly to a local minimum but does not achieve it exactly. 
-Moreover if the problem has multiple local minimum, we may not necessarily achieve the lowest minimum. 
-Fortunately, for deep neural networks, finding parameters that minimize the loss *on training data* is seldom a significant problem. The more formidable task is to find parameters that will achieve low loss on data that we have not seen before, a challenge called *generalization*. We return to these topics throughout the book.
-
 학습 과정이 완료되면 추정된 모델 파라미터들($\hat{\mathbf{w}}, \hat{b}$ )을 저장합니다. (일반적으로 "hat" 기호는 추정값을 의미합니다) 우리가 그래디언트 하강법을 통해서 학습한 파라미터들은 학습 데이터셋에 대한 손실에 대해서 진짜로 최소화하는 값들과는 다릅니다. 그 이유는 그래디언트 하강법은 로컬 최소값으로 천천히 수렵하지만, 정확히 수렴하지는 않습니다. 더군다나 만약 문제가 여러개의 로컬 최소를 갖는다면, 가장 낮은 최쇠값에 도달한다는 보장도 없습니다. 운이 좋게도 딥 뉴널 네트워크에서는 주어진 *학습 데이터*에 대한 손실을 최소화하는 파라미터를 찾는 것이 거의 중요한 문제가 아닙니다. 더 어려운 문제는 우리가 보지 않은 데이터에 대해서 낮은 손실을 주는 파라미터들을 찾는 것입니다. 이를 *일반화(generalization)* 이라고 합니다. 이 책 전체에 걸쳐서 이 주제들에 대해서 다루겠습니다.
 
-Given the learned learned linear regression model $\hat{\mathbf{w}}^\top x + \hat{b}$, we can now estimate the price of any house outside the training data set with area (square feet) as $x_1$ and house age (year) as $x_2$. Here, estimation also referred to as ‘model prediction’ or ‘model inference’.
-
 학습된 선형 회귀 모델 $\hat{\mathbf{w}}^\top x + \hat{b}$ 이 주어지면, 우리는 넓이 (제곱 스퀘어) $x_1$ 와 집의 나이 (년) $x_2$ 로 주어진 학습 데이터 이외의 집에 대한 가격을 예측할 수 있습니다. 여기서 추정은 '모델 예측(model prediction)' 또는 '모델 추론(model inference)'라고 불립니다.
-
-Note that calling this step 'inference' is a misnomer, 
-but has become standard jargon in deep learning. 
-In statistics, 'inference' means estimating parameters 
-and outcomes based on other data. 
-This misuse of terminology in deep learning 
-can be a source of confusion when talking to statisticians.
 
 '추론(inference)'이라는 용어는 실제로는 잘못 선택된 용어지만, 딥러닝에서는 많이 사용하는 용어로 자리잡았습니다. 통계에서 추론은 파라미터와 다른 데이터를 기반으로 결과를 예측하는 것을 의미합니다. 딥러닝에서 이 용어에 대한 잘못된 사용은 통계학자들과 이야기를 할 때 혼동을 주는 요인이 되기도 합니다.
 
 ## 선형 회귀에서 딥 네트워크로
-
-So far we only talked about linear functions. While neural networks cover a much richer family of models, we can begin thinking of the linear model as a neural network by expressing it the language of neural networks. To begin, let's start by rewriting things in a 'layer' notation.
 
 지금까지는 선형 함수에 대해서만 이야기했습니다. 뉴럴 네트워크는 훨씬 더 다양한 모델의 종류를 포함하지만, 우리는 우선 선형 모델을 뉴럴 네트워크 언어로 표현한 뉴럴 네트워크라고 생각하는 것으로 시작하겠습니다. 시작에 앞에서 '층(layer)' 표기로 다시 적어 봅시다.
 
@@ -176,19 +124,9 @@ So far we only talked about linear functions. While neural networks cover a much
 
 딥러닝에서는 모델의 구조를 뉴럴 네트워크 다이어그램으로 시각화할 수 있습니다. 뉴럴 네트워크 구조로 선형 회귀를 좀 더 명확하게 표현해보면, 그림 3.1에서와 같이 뉴럴 네트워크 다이어그램을 이용해서 이 절에서 사용하고 있는 선형 회귀 모델을 도식화 할 수 있습니다. 이 뉴럴 네트워크 다이어그램에서는 모델 파라미터인 가중치와 bias를 직접 표현하지 않습니다.
 
-Commonly, deep learning practitioners represent models visually using neural network diagrams. In Figure 3.1, we represent linear regression with a neural network diagram. The diagram shows the connectivity among the inputs and output, but does not depict the weights or biases (which are given implicitly).
-
 일반적으로 딥러닝을 사용하는 사람들은 뉴럴 네트워크 다이어그램을 사용해서 모델을 시각적으로 표현합니다. 그림 3.1은 선형 회귀를 뉴럴 네트워크 다이어그램으로 표현합니다. 이 다이어그램은 입력과 출력들의 사이의 연결을 보여줍니다. 하지만, 가중치와 편향은 표현하지 않았지만 함축적으로는 표현되어 있습니다.
 
-![Linear regression is a single-layer neural network. ](../img/singleneuron.svg)
-
-*위 뉴럴 네트워크에서 입력값은  $x_1, x_2, \ldots x_d$ 입니다. 때로는 입력값의 개수를 피처 차원(feature dimension)이라고 부르기도 합니다. 이 경우에는 입력값의 개수는 $d$ 이고, 출력값의 개수는 1 입니다. 출력값을 선형 회귀의 결과를 직접 결과로 사용한다는 것을 기억해두세요. 입력 레이어에는 어떤 비선형이나 어떤 계산이 적용되지 않기 때문에, 이 네트워크의 총 레이어의 개수는 1개입니다. 종종 이런 네트워크를 단일 뉴론이라고 부르기도 합니다. 모든 입력들이 모든 출력(이 경우는 한개의 출력)과 연결되어 있기 때문에, 이 레이어는 fully connected layer 또는 dense layer라고 불립니다.*
-
-In the above network, the inputs are $x_1, x_2, \ldots x_d​$. 
-Sometimes the number of inputs are referred to as the feature dimension. 
-For linear regression models, we act upon $d​$ inputs and output $1​$ value. 
-Because there is just a single computed neuron (node) in the graph,
-we can think of linear models as neural networks consisting of just a single neuron. Since all inputs are connected to all outputs (in this case it's just one), this layer can also be regarded as an instance of a *fully-connected layer*, also commonly called a *dense layer*.
+![선형 회귀는 단일층 뉴럴 네트워크입니다.](../img/singleneuron.svg)
 
 위 네트워크에서 입력은 $x_1, x_2, \ldots x_d$ 입니다. 때로는 입력의 개수가 특성 차원(feature dimension)이라고 불립니다. 선형 회귀 모델에서는 $d$  개의 입력과 $1$개의 출력값을 사용합니다. 그래프에서 단 한 개의 계산된 뉴런(neuron) 또는 노드(node)가 있기 때문에, 우리는 선형 모델을 한 개의 뉴런으로 구성된 뉴럴 네트워크라고 생각할 수 있습니다. 모든 입력이 모든 출력 (이 경우에는 한 개)과 연결되어 있기 때문에, 이 층을 *완전 연결층(fully-connected layer)* 으로 간주할 수 있습니다. 이 층은 *dense 층(dense layer)* 이라고도 합니다.
 
@@ -196,25 +134,11 @@ we can think of linear models as neural networks consisting of just a single neu
 
 뉴럴 네트워크라는 이름은 신경과학으로부터 나왔습니다. 얼마나 많은 네트워크 구조가 만들어졌는지 잘 이해하기 위해서, 우선 뉴론(neuron)의 기본적인 구조를 살펴볼 필요가 있습니다. 비유 하자면, 입력 단자인 수상돌기(dendrities), CPU인 핵(nucleu), 출력연결인 축삭(axon), 그리고, 시냅스를 통해서 다른 뉴런과 연결하는 축삭 단자(axon terminal)라고 하면 충분합니다.
 
-Neural networks derive their name from their inspirations in neuroscience. 
-Although linear regression predates computation neuroscience,
-many of the models we subsequently discuss truly owe to neural inspiration.
-To understand the neural inspiration for artificial neural networks 
-it is worth while considering the basic structure of a neuron. 
-For the purpose of the analogy it is sufficient to consider the *dendrites* 
-(input terminals), the *nucleus* (CPU), the *axon* (output wire), 
-and the *axon terminals* (output terminals) 
-which connect to other neurons via *synapses*.
-
 뉴럴 네트워크는 신경과학에서의 영감으로 이름이 붙여졌습니다. 선형 회귀는 계산신경과학(computation neuroscience)부다 먼저 생겼지만, 우리가 논의할 많은 모델들은 뉴럴에 대한 영감(neural inspiration)으로 부터 왔습니다. 인공 뉴럴 네트워크에 대한 뉴럴 영감을 이해하기 위해서는 뉴런의 기본 구조를 살펴볼 필요가 있습니다. 비유 하자면, 입력 단자인 수상돌기(dendrities), CPU인 핵(nucleu), 출력 연결인 축삭(axon), 그리고, 시냅스를 통해서 다른 뉴런과 연결하는 축삭 단자(axon terminal) 정도만 살펴보면 충분합니다.
 
-
-
-![The real neuron](../img/Neuron.svg)
+![실제 뉴런](../img/Neuron.svg)
 
 수상돌기는 다른 뉴런들로 부터 온 정보 $x_i$ 를 받습니다. 구체적으로는 그 정보는 시텝틱 가중치 $w_i$ 가 적용된 정보값입니다. 이 가중치는 입력에 얼마나 반응을 해야하는지 정의합니다. (즉, $x_i w_i$ 를 통해서 활성화 됨) 이 모든 값들은 핵에서 $y = \sum_i x_i w_i + b$,  로 통합되고, 이 정보는 축삭(axon)으로 보내져서 다른 프로세스를 거치는데, 일반적으로는 $\sigma(y)$ 를 통해서 비선형 처리가 됩니다. 이 후, 최종 목적지 (예를 들면 근육) 또는 수상돌기를 거쳐서 다른 뉴런으로 보내집니다.
-
-Brain *structures* vary significantly. Some look (to us) rather arbitrary whereas others have a regular structure. For example, the visual system of many insects is consistent across members of a species. The analysis of such structures has often inspired neuroscientists to propose new architectures, and in some cases, this has been successful. However, much research in artificial neural networks has little to do with any direct inspiration in neuroscience, just as although airplanes are *inspired* by birds, the study of orninthology hasn't been the primary driver of aeronautics innovaton in the last century. Equal amounts of inspiration these days comes from mathematics, statistics, and computer science.
 
 뇌의 구조는 아주 다양합니다. 우리에게 어떤 것들은 다소 임의적으로 보이지만, 어떤 것들은 아주 규칙적인 구조를 가지고 있습니다. 예를 들어 많은 곤충의 시각 시스템은 그 종에서 일관적입니다. 그 구조에 대한 연구는 신경과학자들이 새로운 아키텍처를 제안하는데 영감을 줘왔고, 어떤 경우에는 성공적이었습니다. 하지만, 인공 뉴럴 네트워크의 많은 연구는 신경과학의 영감과는 직접적인 관계가 적습니다. 이는 비행기가 새에 의해서 *영감*을 받았지만, 조류학에 관한 연구는 지난 세기의 항공 혁신의 주동력이 되지 않은 것과 비슷합니다. 오늘만 많은 영감은 수학, 통계학, 그리고 컴퓨터 과학으로부터 오고 있습니다.
 
@@ -321,6 +245,6 @@ $$-\log P(Y|X) = \sum_{i=1}^n \frac{1}{2} \log(2 \pi \sigma^2) + \frac{1}{2 \sig
     * 이 문제를 푸는 확률적 경사 하강법(stochastic gradient descent) 알고리즘을 제안하세요. 무엇이 잘못될 가능성이 있나요? (힌트 - 파라미터를 업데이트할 때, 정류점(stationary point) 근처에서 어떤 일이 일어날까요?)
 1. NumPy와 같은 다른 패키지들이나 MATLAB과 같은 다른 프로그램 언어를 사용해서 두 벡터를 더할 때의 실행시간들을 비교해보세요.
 
-## Scan the QR Code to [Discuss](https://discuss.mxnet.io/t/2331)
+## QR 코드를 스캔해서 [논의하기](https://discuss.mxnet.io/t/2331)
 
 ![](../img/qr_linear-regression.svg)

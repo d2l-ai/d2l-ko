@@ -1,4 +1,4 @@
-# Softmax 회귀(regression)를 처음부터 구현하기
+# Softmax 회귀 처음부터 구현하기
 
 선형 회귀를 직접 구현해본 것처럼, softmax 회귀(regression)도 직접 구현해보는 것이 도움이 될 것입니다. 이 후에, 같은 내용을 Gluon을 사용해서 구현하면서 비교를 해보겠습니다. 필요한 패키지와 모듈을 import 하는 것으로 시작합니다.
 
@@ -195,6 +195,6 @@ softmax 회귀(regression)을 이용해서 다중 카테고리 분류를 할 수
 1. 가장 유사한 레이블을 리턴하는 것이 항상 좋은 아이디어일까요? 예를 들면, 의료 진단에서 그렇게 하겠나요?
 1. 어떤 특성(feature)들을 기반으로 다음 단어를 예측하기 위해서 softmax 회귀(regression)을 사용하기를 원한다고 가정하겠습니다. 단어 수가 많은 경우 어떤 문제가 있을까요?
 
-## Scan the QR Code to [Discuss](https://discuss.mxnet.io/t/2336)
+## QR 코드를 스캔해서 [논의하기](https://discuss.mxnet.io/t/2336)
 
 ![](../img/qr_softmax-regression-scratch.svg)

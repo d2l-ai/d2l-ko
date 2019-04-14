@@ -59,7 +59,7 @@ net = nn.Sequential()
 
 단일층 네트워크를 다시 생각해봅시다. 층은 모든 입력들과 모든 출력들을 연결하는 완전 연결(fully connected)로 구성되어 있고,  이는 행렬-벡터 곱으로 표현했습니다. Gluon에서는 완전 연결층(fully connected layer)이 `Dense` 클래스로 정의됩니다. 한개의 스칼라 출력을 생성하기 때문에 갯수를 1로 정의합니다.
 
-![Linear regression is a single-layer neural network. ](../img/singleneuron.svg)
+![선형 회귀는 단일층 뉴럴 네트워크입니다.](../img/singleneuron.svg)
 
 ```{.python .input  n=6}
 net.add(nn.Dense(1))
@@ -147,6 +147,6 @@ print('Error in estimating b', true_b - b)
 
 ## 
 
-## Scan the QR Code to [Discuss](https://discuss.mxnet.io/t/2333)
+## QR 코드를 스캔해서 [논의하기](https://discuss.mxnet.io/t/2333)
 
 ![](../img/qr_linear-regression-gluon.svg)
