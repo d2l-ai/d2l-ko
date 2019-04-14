@@ -202,6 +202,6 @@ print('Error in estimating b', true_b - b)
 1. 다양한 학습 속도(learning rate)들을 사용해서 실험하고, 그 결과 손실 함수(loss function) 값이 얼마나 빠르게 감소하는지 알아보세요.
 1. 예제들의 개수가 배치 크기로 나누어 떨어지지 않을 경우에, `data_iter` 함수는 어떻게 동작할까요?
 
-## Scan the QR Code to [Discuss](https://discuss.mxnet.io/t/2332)
+## QR 코드를 스캔해서 [논의하기](https://discuss.mxnet.io/t/2332)
 
 ![](../img/qr_linear-regression-scratch.svg)

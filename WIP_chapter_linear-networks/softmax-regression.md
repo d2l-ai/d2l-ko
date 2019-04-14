@@ -1,4 +1,4 @@
-# Softmax 회귀(regression)
+# Softmax 회귀
 
 앞 두 절, [*from scratch*](linear-regression-scratch.ipynb) 와 [using Gluon](linear-regression-gluon.ipynb)을 통해서 선형 회귀 모델을 직접 구현해보기도 했고, Gluon을 이용해서 구현해보았습니다. Gluon을 이용하면 파라미터 정의나 초기화, 손실 함수(loss function) 정의, optimizer 구현과 같은 반복된 일을 자동화할 수 있었습니다.
 
@@ -36,7 +36,7 @@ $$
 
 아래 뉴럴 네트워크 다이어그램은 위 연산을 표현하고 있습니다. 선형 회귀처럼, softmax 회귀는 단일층의 뉴럴 네트워크로 구성됩니다. 출력 ($o1, o2, o3$) 는 모든 입력 ($x1, x2, x3, x4$) 값들과 연관되서 계산되기 때문에, softmax 회귀의 출력층은 완전 연결층입니다.
 
-![Softmax regression is a single-layer neural network.  ](../img/softmaxreg.svg)
+![Softmax 회귀는 단일층 뉴럴 네트워크입니다.](../img/softmaxreg.svg)
 
 ## Softmax 연산
 
@@ -164,6 +164,6 @@ $q$ 에 대해서  $D(p\|q)$ 를 최소화하는 것은 크로스-엔트로피 �
     * soft-min은 어떻게 생겼을까요?
     * 이를 두개 이상의 숫자들로 확장해보세요.
 
-## Scan the QR Code to [Discuss](https://discuss.mxnet.io/t/2334)
+## QR 코드를 스캔해서 [논의하기](https://discuss.mxnet.io/t/2334)
 
 ![](../img/qr_softmax-regression.svg)
