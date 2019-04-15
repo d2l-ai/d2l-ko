@@ -11,8 +11,8 @@
 | chapter_recurrent-neural-networks | not yet started | TBD |9th Apr 2019|
 | chapter_optimization |not yet started|TBD|9th Apr 2019|
 | chapter_computational-performance |not yet started|TBD|9th Apr 2019|
-| chapter_computer-vision |not yet started|TBD|9th Apr 2019|
-| chapter_natural-language-processing |not yet started|TBD|9th Apr 2019|
+| chapter_computer-vision |not yet started|Jiyang|15th Apr 2019|
+| chapter_natural-language-processing |not yet started|Jihye|15th Apr 2019|
 | chapter_appendix |not yet started|TBD|9th Apr 2019|
 
 # BUILD PDF
