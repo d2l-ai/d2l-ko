@@ -1,10 +1,10 @@
-# Softmax 회귀
+# Softmax 회귀(regression)
 
-앞 두 절, [*from scratch*](linear-regression-scratch.ipynb) 와 [using Gluon](linear-regression-gluon.ipynb)을 통해서 선형 회귀 모델을 직접 구현해보기도 했고, Gluon을 이용해서 구현해보았습니다. Gluon을 이용하면 파라미터 정의나 초기화, 손실 함수(loss function) 정의, optimizer 구현과 같은 반복된 일을 자동화할 수 있었습니다.
+앞 두 절, [*from scratch*](linear-regression-scratch.ipynb) 와 [using Gluon](linear-regression-gluon.ipynb)을 통해서 선형 회귀 모델을 [직접 구현](linear-regression-scratch.ipynb)해보기도 했고, 대부분의 반복적인 일을 자동화하기 위해서 [Gluon을 이용](linear-regression-gluon.ipynb)해서 다시 구현해보았습니다. 
 
 회귀(regression)는 몇 개인지, 얼마인지 등에 대한 답을 구할 때 사용하는 도구로, 예를 들면 집 가격이 얼마인지, 어떤 야구팀이 몇 번 승리를 할 것인지 등을 예측하는데 사용할 수 있는 방법입니다. 다른 예로는, 환자가 몇 일 만에 퇴원할 것인지 예측하는 것도 회귀(regression) 문제입니다. 
 
-하지만, 현실에서는 어떤 카테고리에 해당하는지를 예측하는 문제를 더 많이 접하게 됩니다.
+현실에서는 어떤 카테고리에 해당하는지를 예측하는 문제를 더 많이 접하게 됩니다.
 
 * 메일이 스팸인지 아닌지
 * 고객이 구독 서비스에 가입할지 아닐지
