@@ -1,6 +1,6 @@
-# 다층 페셉트론(multilayer perceptron)을 처음부터 구현하기
+# 다층 퍼셉트론(multilayer perceptron)을 처음부터 구현하기
 
-다층 페셉트론(multilayer perceptron, MLP)가 어떻게 작동하는지 이론적으로 배웠으니, 직접 구현해보겠습니다. 우선 관련 패키지와 모듈을 import 합니다.
+다층 퍼셉트론(multilayer perceptron, MLP)가 어떻게 작동하는지 이론적으로 배웠으니, 직접 구현해보겠습니다. 우선 관련 패키지와 모듈을 import 합니다.
 
 ```{.python .input  n=9}
 import sys
@@ -12,7 +12,7 @@ from mxnet import nd
 from mxnet.gluon import loss as gloss
 ```
 
-이 예제에서도 Fashion-MNIST 데이터셋을 사용해서, 이미지를 분류하는데 다층 페셉트론(multilayer perceptron)을 사용하겠습니다.
+이 예제에서도 Fashion-MNIST 데이터셋을 사용해서, 이미지를 분류하는데 다층 퍼셉트론(multilayer perceptron)을 사용하겠습니다.
 
 ```{.python .input  n=2}
 batch_size = 256
@@ -21,7 +21,7 @@ train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
 
 ## 모델 파라미터 초기화하기
 
-이 데이터셋은 10개의 클래스로 구분되어 있고, 각 이미지는  $28 \times 28 = 784$ 픽셀의 해상도를 가지고 있습니다. 따라서, 입력은 개수는 784개이고, 출력은 10개가 됩니다. 우리는 한 개의 은닉층(hidden layer)을 갖는 MLP를 만들어보겠는데, 이 은닉층(hidden layer)은 256개의 은닉 유닛(hidden unit)을 갖도록 하겠습니다. 만약 원한다면 하이퍼파라미터인 은닉 유닛(hidden unit) 개수를 다르게 설정할 수도 있습니다. 일반적으로, 유닛(unit) 의 개수는 메모리에 잘 배치될 수 있도록 2의 지수승의 숫자로 선택합니다.
+이 데이터셋은 10개의 클래스로 구분되어 있고, 각 이미지는  $28 \times 28 = 784$ 픽셀의 해상도를 가지고 있습니다. 따라서, 입력은 784개이고, 출력은 10개가 됩니다. 우리는 한 개의 은닉층(hidden layer)을 갖는 MLP를 만들어보겠는데, 이 은닉층(hidden layer)은 256개의 은닉 유닛(hidden unit)을 갖도록 하겠습니다. 만약 원한다면 하이퍼파라미터인 은닉 유닛(hidden unit) 개수를 다르게 설정할 수도 있습니다. 일반적으로, 유닛(unit) 의 개수는 메모리에 잘 배치될 수 있도록 2의 지수승의 숫자로 선택합니다.
 
 ```{.python .input  n=3}
 num_inputs, num_outputs, num_hiddens = 784, 10, 256
@@ -66,7 +66,7 @@ loss = gloss.SoftmaxCrossEntropyLoss()
 
 ## 학습
 
-다층 페셉트론(multilayer perceptron)을 학습시키는 단계는 softmax 회귀(regression) 학습과 같습니다. `g2l` 패키지에서 제공하는 `train_ch3` 함수를 직접 호출합니다. 이 함수의 구현은 [여기](softmax-regression-scratch.md) 를 참고하세요. 총 에포크(epoch) 수는 10으로 학습 속도(learning rate)는 0.5로 설정합니다.
+다층 퍼셉트론(multilayer perceptron)을 학습시키는 단계는 softmax 회귀(regression) 학습과 같습니다. `g2l` 패키지에서 제공하는 `train_ch3` 함수를 직접 호출합니다. 이 함수의 구현은 [여기](softmax-regression-scratch.md) 를 참고하세요. 총 에포크(epoch) 수는 10으로 학습 속도(learning rate)는 0.5로 설정합니다.
 
 ```{.python .input  n=7}
 num_epochs, lr = 10, 0.5
@@ -88,7 +88,7 @@ titles = [truelabel + '\n' + predlabel
 d2l.show_fashion_mnist(X[0:9], titles[0:9])
 ```
 
-이전보다 조금 성능이 좋아 보이는 것이, MLP를 사용하는 것이 좋은 것임을 알 수 있습니다.
+이전보다 조금 성능이 좋아 보이는 것으로 보아 MLP를 사용하는 것이 좋은 것임을 알 수 있습니다.
 
 ## 요약
 
@@ -99,7 +99,7 @@ d2l.show_fashion_mnist(X[0:9], titles[0:9])
 1. `num_hiddens` 하이퍼파라미터를 변경해서 결과가 어떻게 영향을 받는지 확인해보세요.
 1. 새로운 은닉층(hidden layer)를 추가해서 어떤 영향을 미치는지 확인해보세요.
 1. 학습 속도(learning rate)를 변경하면 결과가 어떻게 되나요?
-1. 모든 하이퍼파라미터(학습 속도(learing rate), 에포크(epoch) 회수, 은닉층(hidden layer) 개수, 각 층의 은닉 유닛(hidden unit) 개수)의 조합을 통해서 얻을 수 있는 가장 좋은 결과는 무엇인가요?
+1. 모든 하이퍼파라미터(학습 속도(learing rate), 에포크(epoch) 수, 은닉층(hidden layer) 개수, 각 층의 은닉 유닛(hidden unit) 개수)의 조합을 통해서 얻을 수 있는 가장 좋은 결과는 무엇인가요?
 
 ## Scan the QR Code to [Discuss](https://discuss.mxnet.io/t/2339)
 
