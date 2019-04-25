@@ -14,7 +14,7 @@ $$\mathbf{h}^{t+1} = f_t (\mathbf{h}^t) \text{ 이고, 따라서 } \mathbf{o} = 
 
 $$\partial_{\mathbf{W}_t} \mathbf{o} = \underbrace{\partial_{\mathbf{h}^{d-1}} \mathbf{h}^d}_{:= \mathbf{M}_d} \cdot \ldots \cdot \underbrace{\partial_{\mathbf{h}^{t}} \mathbf{h}^{t+1}}_{:= \mathbf{M}_t} \underbrace{\partial_{\mathbf{W}_t} \mathbf{h}^t}_{:= \mathbf{v}_t}.$$
 
-다르게 말하면, 위 공식은 $d-t$ 개의 행렬  $\mathbf{M}_d \cdot \ldots \cdot \mathbf{M}_t$ 과 그래디언트(gradient) 벡터  $\mathbf{v}_t$ 의 곱입니다. 너무 많은 확률을 곱할 때 산술적인 언더플로우(underflow)를 경험할 때와 비슷한 상황이 발생합니다. 이 문제를 로그 공간으로 전환시켜서, 즉 문제를 가수(mantissa)에서 수치 표현의 지수로 이동시켜서 완화할 수 있었습니다. 처음에 행렬들 $M_t$ 은 다양한 고유값(eigenvalue)들을 갖을 것입니다. 어떤 것들은 작을 수도, 어떤 것은 클 수도 있습니다. 특히 그것들의 곱이 아주 크거나 아주 작을 수도 있습니다. 이것은 수치적인 표현의 문제일 뿐만 아니라 최적화 알고리즘이 수렴되지 않을 수 있다는 것을 의미합니다. 아주 큰 그래디언트(gradient)가 되거나, 너무 조금씩 업데이트가 되기도 합니다. 앞의 경우에는, 파라미터가 너무 커질 것이고, 후자의 경우에는 그래디언트 소실(vanishing gradient)이 되 버려서 더 이상 의미 있는 진척을 만들어 내지 못하게 됩니다.
+다르게 말하면, 위 공식은 $d-t$ 개의 행렬  $\mathbf{M}_d \cdot \ldots \cdot \mathbf{M}_t$ 과 그래디언트(gradient) 벡터  $\mathbf{v}_t$ 의 곱입니다. 너무 많은 확률을 곱할 때 산술적인 언더플로우(underflow)를 경험할 때와 비슷한 상황이 발생합니다. 이 문제를 로그 공간으로 전환시켜서, 즉 문제를 가수(mantissa)에서 수치 표현의 지수로 이동시켜서 완화할 수 있었습니다. 처음에 행렬들 $M_t$ 은 다양한 고유값(eigenvalue)들을 갖을 것입니다. 어떤 것들은 작을 수도, 어떤 것은 클 수도 있습니다. 특히 그것들의 곱이 아주 크거나 아주 작을 수도 있습니다. 이것은 수치적인 표현의 문제일 뿐만 아니라 최적화 알고리즘이 수렴되지 않을 수 있다는 것을 의미합니다. 아주 큰 그래디언트(gradient)가 되거나, 너무 조금씩 업데이트가 되기도 합니다. 앞의 경우에는, 파라미터가 너무 커질 것이고, 후자의 경우에는 그래디언트 소실(vanishing gradient)이 되어버려서 더 이상 의미 있는 진척을 만들어 내지 못하게 됩니다.
 
 ### 그래디언트 폭발(exploding gradient)
 
@@ -52,11 +52,11 @@ plt.legend(['sigmoid', 'gradient'])
 plt.show()
 ```
 
-위 그림에서 보이는 것처럼 sigmoid의 그래디언트는 아주 큰 수나 아주 작은 수에서 소멸합니다. 채인룰(chain rule)로 인해서, 활성화(activation)들이 $[-4, 4]$ 범위에 들어가지 않지 않으면 전체 곱의 그래디언트(gradient)는 소멸될 수 있다는 것을 의미합니다. 층을 많이 사용하는 경우, 이 현상이 어떤 층에서 일어날 가능성이 높습니다.  ReLu $\max(0,x)$ 가 소개되기 전까지는 이 문제가 딥 네트워크 학습의 단점이었습니다. 그 결과 ReLu 가 활성화(activation)로 설계할 때 기본 선택이 되었습니다.
+위 그림에서 보이는 것처럼 sigmoid의 그래디언트는 아주 큰 수나 아주 작은 수에서 소멸합니다. 체인룰(chain rule)로 인해서, 활성화(activation)들이 $[-4, 4]$ 범위에 들어가지 않지 않으면 전체 곱의 그래디언트(gradient)는 소멸될 수 있다는 것을 의미합니다. 층을 많이 사용하는 경우, 이 현상이 어떤 층에서 일어날 가능성이 높습니다.  ReLU $\max(0,x)$ 가 소개되기 전까지는 이 문제가 딥 네트워크 학습의 단점이었습니다. 그 결과 ReLU 가 활성화(activation)로 설계할 때 기본 선택이 되었습니다.
 
 ### 대칭성
 
-딥 네트워크 디자인의 마지막 문제는 파라미터화에 내재된 대칭입니다. 두개의 은닉
+딥 네트워크 디자인의 마지막 문제는 파라미터화에 내재된 대칭입니다. 두 개의 은닉
 유닛(hidden unit), $h_1$ and $h_2$ 을 갖는 한 개의 은닉층(hidden layer)를 가지고
 있는 딥 네트워크를 가정하겠습니다. 이 경우, 첫번째 층의 가중치 $\mathbf{W}_1$ 를
 뒤집고, 두번째 층의 결과도 뒤집을 경우, 동일한 함수를 얻게 됩니다. 좀 더
@@ -92,7 +92,7 @@ $$
 \end{aligned}
 $$
 
-$n_\mathrm{in} \sigma^2 = 1$ 을 적용하면 분산을 고정시킬 수 있습니다. 이제 backpropagation을 고려해봅니다. 가장 상위층들로부터 전달되는 그래디언트(gradient) 와 함께 비슷한 문제를 만나게 됩니다. 즉,  $\mathbf{W} \mathbf{w}$ 대신에  $\mathbf{W}^\top \mathbf{g}$ 를 다뤄야합니다. 여기서 $\mathbf{g}$ 는 상위층으로부터 전달되는 그래디언트(gradient)를 의미합니다. 포워드 프로퍼게이션(forward propagation)에서와 같은 논리로,  $n_\mathrm{out} \sigma^2 = 1$ 이 아닐 경우에는 그래디언트(gradient)의 분산이 너무 커질 수 있습니다. 이 상황이 우리를 다음과 같은 딜리마에 빠지게 합니다. 즉, 우리는 두 조건을 동시에 만족시킬 수 없습니다. 대신, 다음은 조건은 쉽게 만족시킬 수 있습니다.
+$n_\mathrm{in} \sigma^2 = 1$ 을 적용하면 분산을 고정시킬 수 있습니다. 이제 back propagation을 고려해봅니다. 가장 상위층들로부터 전달되는 그래디언트(gradient) 와 함께 비슷한 문제를 만나게 됩니다. 즉,  $\mathbf{W} \mathbf{w}$ 대신에  $\mathbf{W}^\top \mathbf{g}$ 를 다뤄야합니다. 여기서 $\mathbf{g}$ 는 상위층으로부터 전달되는 그래디언트(gradient)를 의미합니다. 포워드 프로퍼게이션(forward propagation)에서와 같은 논리로,  $n_\mathrm{out} \sigma^2 = 1$ 이 아닐 경우에는 그래디언트(gradient)의 분산이 너무 커질 수 있습니다. 이 상황이 우리를 다음과 같은 딜레마에 빠지게 합니다. 즉, 우리는 두 조건을 동시에 만족시킬 수 없습니다. 대신, 다음은 조건은 쉽게 만족시킬 수 있습니다.
 $$
 \begin{aligned}
 \frac{1}{2} (n_\mathrm{in} + n_\mathrm{out}) \sigma^2 = 1 \text{ 또는 동일하게 }
