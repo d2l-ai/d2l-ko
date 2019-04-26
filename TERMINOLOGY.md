@@ -66,6 +66,7 @@
 | gradient descent in one-dimensional space        |                               |
 | Gram matrix                                      |                               |
 | ground truth                                     |                               |
+| hard assignment                                  | 하드 할당                     |
 | hidden layer                                     | 은닉층                        |
 | hidden variable                                  |                               |
 | hyperparameter                                   | 하이퍼파라미터                |
