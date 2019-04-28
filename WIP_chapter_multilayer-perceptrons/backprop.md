@@ -1,8 +1,14 @@
 # 순전파(forward propagation), 역전파(back propagation), 연산 그래프
 
-앞에서 우리는 모델을 학습 시키는 방법으로 미니 배치 확률적 경사 강하법(stochastic gradient descent) 최적화 알고리즘을 사용했습니다. 이를 구현할 때, 우리는 모델의 순전파(forward propagation)을 계산하면서 입력에 대한 모델의 결과만을 계산했습니다. 그리고, 자동으로 생성된 `backward` 함수를 호출함으로  `autograd` 을 이용해서 gradient를 계산합니다. 역전파(back-propagation)을 이용하는 경우 자동으로 그래디언트(gradient)를 계산하는 함수를 이용함으로 딥러닝 학습 알고리즘 구현이 굉장히 간단해졌습니다. 이 절에서는 순전파(forward propagation)와 역전파(back propagation)를 수학적이고 연산적인 그래프를 사용해서 설명하겠습니다. 더 정확하게는 한개의 은닉층(hidden layer)를 갖는 다층 퍼셉트론(multilayer perceptron)에 $\ell_2$ 놈 정규화(norm regularization)를 적용한 간단한 모델을 이용해서 순전파(forward propagation)와 역전파(back propagation)를 설명합니다. 이 절은 딥러닝을 수행할 때 어떤 일이 일어나고 있는지에 대해서 더 잘 이해할 수 있도록 해줄 것입니다.
+앞 절들에서 모델을 학습시키기 위해서 미니배치 확률적 경사 하강법을 사용했습니다. 우리가 알고리즘을 구현할 때, 모델을 따라 *순전파(forward propagation)* 에 포함된 계산들만 신경을 썼습니다. 즉, 우리는 모델이 주어진 입력에 대한 결과를 생성하는데 필요한 연산을 구현했지만, 각 파라미터들의 그래디언트를 계산할 때는 `backward` 함수를 이용하면서 `autograd` 모듈이 필요한 일을 해주는데 의존했습니다.
 
-## 순전파(forward propagation)
+그래디언트를 자동으로 계산하는 것은 딥러닝 알고리즘의 구현을 상당히 간단하게 해줍니다. 자동 미분이 없을 때는 복잡한 모델들에 아주 작은 변화가 생기면, 아주 많은 미분값을 손으로 직접 다시 계산해야했습니다. 심지어 학계 논문들도 종종 많은 페이지들을 업데이트 규칙을 유도하는데 할애했었습니다.
+
+우리는 `autograd` 를 계속 사용할 것이고, 그래디언트들이 어떻게 계산되는지를 논의하지 않은 채로 많은 설명을 진행 했었지만, 여러분이 만약 딥러닝의 깊이 이해하기를 원한다면 업데이트가 실제로 어떻게 계산되는지를 아는 것이 중요합니다.
+
+이 절에서 우리는 역전파(backward propagation)의 자세한 내용을 알아볼 예정입니다. (역전파는 종종 *backpropagation* 또는 *backpro* 이라고 불립니다.) 기법과 어떻게 구현되는지에 대한 통찰을 주기 위해서, 수학과 연산 그래프를 사용해서 뉴럴 네트워크 연산의 동작 원리를 설명하겠습니다. 우선은, 하나의 은닉층을 갖는 간단한 다층 퍼셉트론과  $\ell_2$ 놈 정규화를 대상으로 설명하겠습니다.
+
+## 순전파(Forward Propagation)
 
 순전파(forward propagation)은 뉴럴 네트워크 모델의 입력층부터 출력층까지 순서대로 변수들을 계산하고 저장하는 것을 의미합니다. 지금부터 한개의 은닉층(hidden layer)을 갖는 딥 네트워크를 예로 들어 단계별로 어떻게 계산되는지 설명하겠습니다. 다소 지루할 수 있지만, `backward` 를 호출했을 때, 어떤 일이 일어나는지 논의할 때 도움이 될 것입니다.
 
@@ -39,7 +45,7 @@ $J$ 를 주어진 데이터 샘플에 대한 목표 함수(objective function)�
 ![Compute Graph](../img/forward.svg)
 
 
-## 역전파(back propagation)
+## 역전파(Backpropagation)
 
 역전파(back propagation)는 뉴럴 네트워크의 파라미터들에 대한 그래디언트(gradient)를 계산하는 방법을 의미합니다. 일반적으로는 역전파(back propagation)은 뉴럴 네트워크의 각 층과 관련된 목적 함수(objective function)의 중간 변수들과 파라미터들의 그래디언트(gradient)를 출력층에서 입력층 순으로 계산하고 저장합니다. 이는 미적분의 '체인룰(chain rule)'을 따르기 때문입니다. 임의의 모양을 갖는 입력과 출력 텐서(tensor) $\mathsf{X}, \mathsf{Y}, \mathsf{Z}$ 들을 이용해서 함수 $\mathsf{Y}=f(\mathsf{X})$  와 $\mathsf{Z}=g(\mathsf{Y}) = g \circ f(\mathsf{X})$ 를 정의했다고 가정하고, 체인룰(chain rule)을 사용하면,  $\mathsf{X}$ 에 대한  $\mathsf{Z}$ 의 미분은 다음과 같이 정의됩니다.
 
@@ -72,7 +78,7 @@ $$
 = \frac{\partial J}{\partial \mathbf{o}} \mathbf{h}^\top + \lambda \mathbf{W}^{(2)}
 $$
 
- $\mathbf{W}^{(1)}$ 에 대한 그래디언트(gradient)를 계산하기 위해서, 출력층으로부터 은닉층까지 역전파(back propagation)를 계속 해야합니다. 은닉층(hidden layer) 변수에 대한 그래디언트(gradient) $\partial J/\partial \mathbf{h}\in \mathbb{R}^h$ 는 다음과 같습니다.
+ $\mathbf{W}^{(1)}$ 에 대한 그래디언트(gradient)를 계산하기 위해서, 출력층으로부터 은닉층까지 역전파(back propagation)를 계속 해야합니다. 은닉층의 결과에 대한 그래디언트 $\partial J/\partial \mathbf{h} \in \mathbb{R}^h$ 는 다음과 같습니다.
 $$
 \frac{\partial J}{\partial \mathbf{h}}
 = \text{prod}\left(\frac{\partial J}{\partial \mathbf{o}}, \frac{\partial \mathbf{o}}{\partial \mathbf{h}}\right)
@@ -104,7 +110,7 @@ $$
 * 딥러닝 모델을 학습시킬 때, 순전파(forward propagation)과 역전파(back propagation)는 상호 의존적입니다.
 * 학습은 상당히 많은 메모리와 저장 공간을 요구합니다.
 
-## 문제
+## 연습문제
 
 1. 입력  $\mathbf{x}$ 가 행렬이라고 가정하면, 그래디언트(gradient)의 차원이 어떻게 되나요?
 1. 이 절에서 설명한 모델의 은닉층(hidden layer)에 편향(bias)을 추가하고,
@@ -116,6 +122,6 @@ $$
     - 한개 이상의 GPU로 나눌 수 있나요?
     - 작은 미니배치로 학습을 할 경우 장점과 단점이 무엇인가요?
 
-## Scan the QR Code to [Discuss](https://discuss.mxnet.io/t/2344)
+## QR 코드를 스캔해서 [논의하기](https://discuss.mxnet.io/t/2344)
 
 ![](../img/qr_backprop.svg)
