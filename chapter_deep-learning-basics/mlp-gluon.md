@@ -1,6 +1,6 @@
-# 다층 페셉트론(multilayer perceptron)의 간결한 구현
+# 다층 퍼셉트론(multilayer perceptron)의 간결한 구현
 
-다층 페셉트론(multilayer perceptron, MLP)가 어떻게 작동하는지 이론적으로 배웠으니, 이제 직접 구현해보겠습니다. 우선 관련 패키지와 모듈을 import 합니다.
+다층 퍼셉트론(multilayer perceptron, MLP)가 어떻게 작동하는지 이론적으로 배웠으니, 이제 직접 구현해보겠습니다. 우선 관련 패키지와 모듈을 import 합니다.
 
 ```{.python .input}
 import sys
@@ -24,7 +24,7 @@ net.initialize(init.Normal(sigma=0.01))
 
 `net.add()` 를 호출할 때 세밀하게 살펴봐야 할 점이 있는데, 이 함수를 이용하면 한 개 이상의 층을 네트워크에 추가할 수 있다는 것입니다. 즉, 위 코드들로 정의된 뉴럴 네트워크는   `net.add(nn.Dense(256, activation='relu'), nn.Dense(10))` 코드 한 줄로 정의되어 네트워크와 동일합니다. 또한, Gluon은 명시되지 않은 파라미터들을 자동으로 알아냅니다. 예를 들면, 두번째 층은  $256 \times 10​$ 크기의 행렬이 필요한데, 이는 네트워크가 처음 실행될 때 자동으로 찾아내 집니다.
 
-Softmax 회귀(regssion) 학습과 거의 같은 절차로 데이터를 읽고 모델을 학습 시킵니다.
+Softmax 회귀(regression) 학습과 거의 같은 절차로 데이터를 읽고 모델을 학습 시킵니다.
 
 ```{.python .input  n=6}
 batch_size = 256
