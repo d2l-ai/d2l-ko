@@ -22,6 +22,7 @@
 | co-occurrence frequency                          |                               |
 | collaborative filtering                          |                               |
 | concatenate                                      | 연결                          |
+| confusion matrix                                 | 오차 행렬                     |
 | context                                          | 컨텍스트                      |
 | context variable                                 |                               |
 | context vector                                   |                               |
