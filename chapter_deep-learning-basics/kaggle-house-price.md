@@ -1,6 +1,6 @@
 # Kaggle의 주택 가격 예측하기
 
-앞 절들에서 딥 네트워크를 만들고 차원, 가중치 감쇠(weight decay) 그리고 드롭아웃(dropout)을 사용해서 용량을 제어하는 다양한 기본적인 도구들을 소개했습니다. 이제 배운 내용을 잘 활용해서 Kaggle 대회에 참여해보겠습니다. [집 가격 예측](https://www.kaggle.com/c/house-prices-advanced-regression-techniques) 문제는 상당히 일반적이고, 텍스트나 이미지 데이터처럼 규칙적인 구조도 없기 때문에 시작하기 좋은 문제입니다. 사용할 데이터는 1978년의 Harrison과 Rubinfeld의 [보스턴 집 데이터 세트](https://archive.ics.uci.edu/ml/machine-learning-databases/housing/housing.names)가 아니고, 더 크고 더 많은 특성(feature)를 지닌 데이터 세트로 2006년부터 2010년까지의 Ames, IA의 집 가격 데이터입니다. 이 데이터는 2011년에  [Bart de Cock](http://jse.amstat.org/v19n3/decock.pdf)이 수집한 것입니다. 더 크기 때문에 조금 더 흥미 있는 예측 문제를 다루게 됩니다.
+앞 절들에서 딥 네트워크를 만들고 차원과 가중치 감쇠(weight decay) 그리고 드롭아웃(dropout)을 사용해서 용량을 제어하는 다양한 기본적인 도구들을 소개했습니다. 이제 앞에서 배운 내용들을 잘 활용해서 Kaggle 대회에 참여해보겠습니다. [집 가격 예측](https://www.kaggle.com/c/house-prices-advanced-regression-techniques) 문제는 상당히 일반적이고, 텍스트나 이미지 데이터처럼 규칙적인 구조도 없기 때문에 시작하기 좋은 문제입니다. 사용할 데이터는 1978년의 Harrison과 Rubinfeld의 [보스턴 집 데이터 세트](https://archive.ics.uci.edu/ml/machine-learning-databases/housing/housing.names)가 아니고, 더 크고 더 많은 특성(feature)을 지닌 데이터 세트로 2006년부터 2010년까지의 Ames, IA의 집 가격 데이터입니다. 이 데이터는 2011년에  [Bart de Cock](http://jse.amstat.org/v19n3/decock.pdf)이 수집한 것입니다. 더 크기 때문에 조금 더 흥미 있는 예측 문제를 다루게 됩니다.
 
 이 절에서는 우리가 배운 것들을 적용해 볼 예정입니다. 특히, 데이터 전처리, 모델 설계, 하이퍼파라미터(hyperparameter) 선택과 튜닝에 대한 자세한 내용들을 살펴봅니다. 직접 수행하면서 용량 제어, 특성(feature) 추출 등의 영향이 어떻게 되는지 실제로 알아보게 되는데, 이 경험은 숙련된 데이터 사이언티스트가 되기 위해서는 꼭 필요한 것입니다.
 
@@ -16,9 +16,9 @@
 
 ![House Price Prediction](../img/house_pricing.png)
 
-## 데이터셋을 접근하고 읽기
+## 데이터셋에 접근하고 읽기
 
-대회 데이터는 학습셋과 테스트세으로 나눠져 있습니다. 각 레코드는 집에 대한 특징 값들과 도로 종류, 지어진 연도, 지붕 형태, 지하실 상태 등에 대한 속성이 포함되어 있습니다. 데이터는 다양한 데이터 형으로 구성되어 있습니다. 예를 들면, 지어진 연도는 정수, 지붕 형태는 이산 레이블(discrete label), 다른 속성들은 실수 등으로 되어 있습니다. 어떤 데이터는 누락된 경우가 있는데 이는 'na'로 표기되어 있습니다. 각 집의 가격 (즉, 레이블)은 학습 데이터 세트(경진 대회이기 때문에)에만 포함되어 있습니다. 'Competition' 탭의 'Data' 탭을 눌러보면 데이터를 다운로드할 수 있는 링크를 찾을 수 있습니다.
+대회 데이터는 학습셋과 테스트셋으로 나눠져 있습니다. 각 레코드는 집에 대한 특징 값들과 도로 종류, 지어진 연도, 지붕 형태, 지하실 상태 등에 대한 속성이 포함되어 있습니다. 데이터는 다양한 데이터 형으로 구성되어 있습니다. 예를 들면, 지어진 연도는 정수, 지붕 형태는 이산 레이블(discrete label), 다른 속성들은 실수 등으로 되어 있습니다. 어떤 데이터는 누락된 경우가 있는데 이는 'na'로 표기되어 있습니다. 각 집의 가격 (즉, 레이블)은 학습 데이터 세트(경진 대회이기 때문에)에만 포함되어 있습니다. 'Competition' 탭의 'Data' 탭을 눌러보면 데이터를 다운로드할 수 있는 링크를 찾을 수 있습니다.
 
 데이터를 읽고 처리하는 데 [효과적인 데이터 분석 툴킷](http://pandas.pydata.org/pandas-docs/stable/)인 `pandas` 를 이용하겠습니다. 이 절을 수행하기 위해서 `pandas` 를 우선 설치하세요.
 
@@ -69,7 +69,7 @@ all_features = pd.concat((train_data.iloc[:, 1:-1], test_data.iloc[:, 1:]))
 
 $$x \leftarrow \frac{x - \mu}{\sigma}$$
 
-이 변환이  $x$ 를 평균이 0이고 분산이 1인 데이터로 변환하는 방법은 $\mathbf{E}[(x-\mu)/\sigma] = (\mu - \mu)/\sigma = 0$ 간단히 계산해보면 됩니다. 분산을 확인하기 위해서,  $\mathbf{E}[(x-\mu)^2] = \sigma^2$ 을 사용하면, 변환된 분산이 1을 갖는 다는 것을 확인할 수 있습니다. 데이터를 표준화(normalizing)하는 이유는 모든 특성(feature) 값을 동일한 크기 정도로 변환 해주기 때문입니다. 결국에는 우리는 어떤 특성(feature)가 관련이 있는지에 대한 선험적 정보(*priori*)를 모릅니다. 따라서, 그 값들은 동일하게 다루는 것은 의미가 있습니다.
+이 변환이  $x$ 를 평균이 0이고 분산이 1인 데이터로 변환하는 방법은 $\mathbf{E}[(x-\mu)/\sigma] = (\mu - \mu)/\sigma = 0$ 간단히 계산해보면 됩니다. 분산을 확인하기 위해서,  $\mathbf{E}[(x-\mu)^2] = \sigma^2$ 을 사용하면, 변환된 분산이 1을 갖는다는 것을 확인할 수 있습니다. 데이터를 표준화(normalizing)하는 이유는 모든 특성(feature) 값을 동일한 크기 정도로 변환 해주기 때문입니다. 결국에는 우리는 어떤 특성(feature)이 관련이 있는지에 대한 선험적 정보(*priori*)를 모릅니다. 따라서, 그 값들은 동일하게 다루는 것은 의미가 있습니다.
 
 ```{.python .input  n=6}
 numeric_features = all_features.dtypes[all_features.dtypes != 'object'].index
@@ -80,7 +80,7 @@ all_features[numeric_features] = all_features[numeric_features].apply(
 all_features = all_features.fillna(0)
 ```
 
-다음으로는, 불연속된 값(discrete value)들을 다뤄보겠습니다. 이것은  'MSZoning'과 같은 변수들을 포함합니다. 멀티클래스 분류 데이터를 0과 1의 벡터로 변환한 것과 같은 방법으로 이 값들을 원-핫-인코딩(one-hot-encoding)을 이용해서 변환합니다. 예를 들면,  'MSZoning'에 대한 값이 'RL'과 'RM'을 갖을 수 있다고 하면, 이들은 각각 (1,0)과 (0,1) 벡터로 매핑하는 것을 의미합니다. Pandas는 이를 자동으로 해주는 기능을 제공합니다.
+다음으로는, 불연속된 값(discrete value)들을 다뤄보겠습니다. 이것은  'MSZoning'과 같은 변수들을 포함합니다. 멀티클래스 분류 데이터를 0과 1의 벡터로 변환한 것과 같은 방법으로 이 값들을 원-핫-인코딩(one-hot-encoding)을 이용해서 변환합니다. 예를 들면,  'MSZoning'에 대한 값이 'RL'과 'RM'을 가질 수 있다고 하면, 이들은 각각 (1,0)과 (0,1) 벡터로 매핑하는 것을 의미합니다. Pandas는 이를 자동으로 해주는 기능을 제공합니다.
 
 ```{.python .input  n=7}
 # Dummy_na=True refers to a missing value being a legal eigenvalue, and
@@ -100,7 +100,7 @@ train_labels = nd.array(train_data.SalePrice.values).reshape((-1, 1))
 
 ## 학습하기
 
-우선 제곱 손실(squared loss)을 사용해서 선형 모델을 학습시켜보겠습니다. 이 모델은 당연히 이 대회에서 우승을 할 정도로 좋은 모델이 될 수는 없지만, 데이터의 의미있는 정보가 있는지를 확인하는 점검하는데 도움을 줍니다. 또한, 이 모델은 더 멋진 모델이 얼마나 좋을 결과를 만들어내야 하는지에 대한 최소한의 기준점(baseline)을 주기도 합니다.
+우선 제곱 손실(squared loss)을 사용해서 선형 모델을 학습시켜보겠습니다. 이 모델은 당연히 이 대회에서 우승을 할 정도로 좋은 모델이 될 수는 없지만, 데이터에 의미있는 정보가 있는지를 점검하는데에 도움을 줍니다. 또한, 이 모델은 더 멋진 모델이 되기 위해 얼마나 좋을 결과를 만들어내야 하는지에 대한 최소한의 기준점(baseline)을 주기도 합니다.
 
 ```{.python .input  n=13}
 loss = gloss.L2Loss()
@@ -112,7 +112,7 @@ def get_net():
     return net
 ```
 
-주식과 같이 집 가격은 상대적입니다. 즉, 절대 오류 보다는 상대 오류 $\frac{y - \hat{y}}{y}$ 가 더 의미가 있을 것입니다. 예를 들면, 실제 집 가격이 125,000 달러인 Rural Ohio에서 가격을 100,000 달러만큼 틀리게 예측하는 것은 아주 나쁜 예측이 되지만, 평균 집 값이 4백만 달러가 넘는 캘리포니아 Los Altos Hills의 집 가격을 같은 오차로 예산했다면, 이 모델을 충분히 정확한 것으로 간주될 것습니다.
+집 가격은 주식과 같이 상대적입니다. 즉, 절대 오류 보다는 상대 오류 $\frac{y - \hat{y}}{y}$ 가 더 의미가 있을 것입니다. 예를 들면, 실제 집 가격이 125,000 달러인 Rural Ohio에서 가격을 100,000 달러만큼 틀리게 예측하는 것은 아주 나쁜 예측이 되지만, 평균 집 값이 4백만 달러가 넘는 캘리포니아 Los Altos Hills의 집 가격을 같은 오차로 예산했다면, 이 모델을 충분히 정확한 것으로 간주될 것입니다.
 
 이런 문제를 해결하는 방법 중에 하나는 예측된 가격에 로그(logarithm)를 취한 값의 차이로 측정하는 것입니다. 사실, 이 대회에서 품질을 측정하는 방법으로 사용되는 오류이기도 합니다. 결국,  $\log y - \log \hat{y}$ 의 작은 값 $\delta$ 는  $e^{-\delta} \leq \frac{\hat{y}}{y} \leq e^\delta$ 로 해석되고, 다음과 같은 loss 함수를 정의할 수 있습니다.
 
@@ -152,7 +152,7 @@ def train(net, train_features, train_labels, test_features, test_labels,
 
 ## $K$-겹 교차 검증($K​$-fold cross-validation)
 
-k-겹 교차 검증(k-fold cross-validation)은  [“모델 선택, 언터피팅(underfitting), 오버피팅(overfitting)"](underfit-overfit.md) 어떻게 다뤄야하는지를 설명하는 절에서 소개한 개념입니다. 우리는 이 방법은 모델 디자인을 선택하고, 하이퍼파라미터(hyperparameter)를 조정하는데 사용하겠습니다. 우선, k-겹 교차 검증(k-fold cross-validation) 절차에 사용될, i-번째 데이터 겹(fold)를 반환하는 함수가 필요합니다. 데이터를 다루는 가장 효과적인 구현이 아님을 명시해주세요. 이 후에 우리는 아주 많은 데이터를 더 똑똑하게 다루는 방법을 사용할 예정이지만, 함수의 구현 코드를 간결하게 하기 위해서 지금은 사용하기 않겠습니다.
+k-겹 교차 검증(k-fold cross-validation)은  [“모델 선택, 언더피팅(underfitting), 오버피팅(overfitting)"](underfit-overfit.md) 절에서 어떻게 다뤄야하는지를 소개한 개념입니다. 우리는 이 방법을 모델 디자인을 선택하고, 하이퍼파라미터(hyperparameter)를 조정하는데 사용하겠습니다. 우선, k-겹 교차 검증(k-fold cross-validation) 절차에 사용될, i-번째 데이터 겹(fold)을 반환하는 함수가 필요합니다. 데이터를 다루는 가장 효과적인 구현이 아님을 명시해주세요. 이 후에 우리는 아주 많은 데이터를 더 똑똑하게 다루는 방법을 사용할 예정이지만, 함수의 구현 코드를 간결하게 하기 위해서 지금은 사용하 않겠습니다.
 
 ```{.python .input}
 def get_k_fold_data(k, i, X, y):
@@ -196,7 +196,7 @@ def k_fold(k, X_train, y_train, num_epochs,
 
 ## 모델 선택하기
 
-아래 하이퍼파라미터(hyperparameter)는 튜닝되지 않은 값을 사용했으니, 여러분이 이 값을 변경해서 모델의 성능을 높여보기를 바랍니다. 몇개를 조정할 것인지에 따라 좋은 값들을 찾는데 상당히 많은 시간이 걸릴 수도 있습니다. k-겹 교차 검증(k-fold cross-validation) 방법은 테스트를 여러번 수행하는 것에도 영향을 받지 않기 때문입니다. 하지만, 너무 많은 오션들을 시도해볼려고 한다면, 실패할 수도 있습니다. 그 이유는 검증 데이터셋에 특정 하아퍼파라미터가 좋게 나오는 것이 있을 수 있기 때문입니다.
+아래 하이퍼파라미터(hyperparameter)는 튜닝되지 않은 값을 사용했으니, 여러분이 이 값을 변경해서 모델의 성능을 높여보기를 바랍니다. 몇 개를 조정할 것인지에 따라 좋은 값들을 찾는데 상당히 많은 시간이 걸릴 수도 있습니다. 왜냐하면 k-겹 교차 검증(k-fold cross-validation) 방법은 테스트를 여러번 수행하는 것에도 영향을 받지 않기 때문입니다. 하지만, 너무 많은 오션들을 시도해볼려고 한다면, 실패할 수도 있습니다. 그 이유는 검증 데이터셋에 특정 하이퍼파라미터가 좋게 나오는 것이 있을 수 있기 때문입니다.
 
 ```{.python .input  n=16}
 k, num_epochs, lr, weight_decay, batch_size = 5, 100, 5, 0, 64
@@ -206,7 +206,7 @@ print('%d-fold validation: avg train rmse: %f, avg valid rmse: %f'
       % (k, train_l, valid_l))
 ```
 
-어떤 하이퍼파라미터(hyperparameter) 세트들을 사용하면 학습 오류가 장상이 작게 나오나, $K$-겹 교차 검증($K$-fold cross-validation) 오류는 상당히 크게 나오는 현상을 발견하게 될 것 입니다. 이것은 대부분 오버피팅(overfitting)의 결과입니다. 따라서, 학습 오류를 줄일 때, $K$-겹 교차 검증($K$-fold cross-validation) 오류도 함께 감소하고 있는지를 확인하는 것이 필요합니다.
+어떤 하이퍼파라미터(hyperparameter) 세트들을 사용하면 학습 오류가 상당히 작게 나오나, $K$-겹 교차 검증($K$-fold cross-validation) 오류는 상당히 크게 나오는 현상을 발견하게 될 것 입니다. 이것은 대부분 오버피팅(overfitting)의 결과입니다. 따라서, 학습 오류를 줄일 때, $K$-겹 교차 검증($K$-fold cross-validation) 오류도 함께 감소하고 있는지를 확인하는 것이 필요합니다.
 
 ## 예측하고 제출하기
 
@@ -238,7 +238,7 @@ train_and_pred(train_features, test_features, train_labels, test_data,
 위 코드를 수행하면 `submission.csv` 파일이 생성됩니다. (CSV는 Kaggle에서 결과 파일로 받는 형식 중에 하나임) 그 다음, Kaggle에 예측 값을 제출해서 테스트 데이터셋에 대한 실제 집 가격과 비교해서 오류를 확인해보는 것입니다. 방법은 아주 간단합니다.
 
 * Kaggle 웹사이트에 로그인하고, 집 값 예측 대회 페이지를 방문합니다.
-* 오른 쪽의 "Submit Predictions" 또는 "Late Submission" 클릭합니다.
+* 오른 쪽의 "Submit Predictions" 또는 "Late Submission"을 클릭합니다.
 * 점선 박스 안의 "Upload Submission File" 버튼을 클릭하고, 업로드할 예측 파일을 선택합니다.
 * 페이지 아래에 있는 "Make Submission" 버튼을 클릭해서 여러분의 결과를 보세요.
 
@@ -247,7 +247,7 @@ train_and_pred(train_features, test_features, train_labels, test_data,
 ## 요약
 
 * 실제 데이터는 종종 다양한 데이터 타입의 값들을 갖고 있기 때문에, 전처리가 꼭 필요합니다.
-* 실수 값을 평균이 0이고 분산이 1로 변환을 기본 선택으로 하는 것은 좋은 방법이고, 누락된 값을 평균 값으로 채워 넣는 것도 그렇습니다.
+* 실수 값을 평균이 0이고 분산이 1로 변환을 기본으로 선택하는 것은 좋은 방법이고, 누락된 값을 평균 값으로 채워 넣는 것도 그렇습니다.
 * 카테고리 변수를 지표 변수(indicator variable)로 변환해서 이 값들을 벡터처럼 다룰 수 있습니다.
 * 모델을 선택하고 하이퍼파라미터(hyper-parameter)를 선택하기 위해서 $K$-겹 교차 검증($K$-fold cross-validation)을 사용할 수 있습니다.
 * 로그(Logarithm)는 상대적인 손실(loss)를 구하는데 유용합니다.
@@ -260,7 +260,7 @@ train_and_pred(train_features, test_features, train_labels, test_data,
 1. 누락된 값을 다루는 더 좋은 표현법을 찾아보세요. 힌트 - 지표 변수를 추가하면 어떻게 될까요?
 1. $K$-겹 교차 검증($K$-fold cross-validation)을 이용해서 하이퍼파라미터(hyper-parameter)를 튜닝하고 더 Kaggle에서 좋은 점수를 획득해보세요.
 1. 층 추가, 정규화 적용, 드롭아웃(dropout) 적용 등을 통해서 모델을 향상시켜서 점수를 높여보세요.
-1. 연속된 수치 특성(feature)를 이 절에서 한 것처럼  표준화하지 않은 경우 어떤일이 일어날까요?
+1. 연속된 수치 특성(feature) 이 절에서 한 것처럼 표준화하지 않은 경우 어떤일이 일어날까요?
 
 ## Scan the QR Code to [Discuss](https://discuss.mxnet.io/t/2346)
 
