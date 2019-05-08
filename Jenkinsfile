@@ -3,8 +3,7 @@ stage("Build and Publish") {
     ws('workspace/d2l-ko') {
       checkout scm
       sh "git submodule update --init"
-      sh "conda activate d2l-ko-build"
-      sh "pip uninstall mxnet-cu92"
+      sh "delete.sh ko"
       sh "build/utils/sanity_check.sh"
       sh "build/utils/clean_build.sh"
       sh "conda env update -f build/env.yml"
