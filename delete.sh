@@ -14,5 +14,5 @@ export CUDA_VISIBLE_DEVICES=$((EXECUTOR_NUMBER)),$((EXECUTOR_NUMBER+1))
 
 conda activate d2l-${D2L_LANG}-build
 pip list
-pip uninstall mxnet-cu92
+pip uninstall -y mxnet-cu92
 pip list
