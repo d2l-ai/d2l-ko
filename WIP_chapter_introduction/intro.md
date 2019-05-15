@@ -901,11 +901,19 @@ The same goes for an employee who gets a promotion on October 11.
 That promotion likely reflects a large number of well-chosen actions over the previous year.
 Getting more promotions in the future requires figuring out what actions along the way led to the promotion.
 
+체스게임의 예를 생각해보면,
+실제의 보상 신호는 게임이 끝났을 때나옵니다. 이기면 1의 보상을 , 지면 -1의 보상을 줄 수 있습니다.
+그래서 강화학습은 학습자는  *credit assignment problem*을 다루어야 합니다. 같은 방식으로 10월 11일에 승진한 직원이 있다면, 이 승진은
+이전 년도에 걸쳐 수많은 잘 선택된 행동(Action)이 반영된 것과 같습니다. 앞으로 더 많은 프로모션을 하기 위해선, 어떠한 행동들이 프로모션에 영향을 미치는지 알아 내야 합니다.
+
 Reinforcement learners may also have to deal with the problem of partial observability.
 That is, the current observation might not tell you everything about your current state.
 Say a cleaning robot found itself trapped in one of many identical closets in a house.
 Inferring the precise location (and thus state) of the robot
 might require considering its previous observations before entering the closet.
+
+강화학습 학습자는 또한 부분적인 관찰가능성의 문제를 다룰 수 있어야 합니다. 그것은, 현재 관찰된 사항이 현재 상태의 모든 정보를 말하고 있지 않을 수 있기 때문입니다.
+청소로봇이 집안의 옷장에 자주 갇히는 것으로 나타났습니다. 정확한 로봇의 위치를 추정하는 것은 옷장에 들어가기 전에 이전의 관찰 정보를 고려하도록 해야 할 수 있습니다.
 
 Finally, at any given point, reinforcement learners might know of one good policy,
 but there might be many other better policies that the agent has never tried.
@@ -913,6 +921,8 @@ The reinforcement learner must constantly choose
 whether to *exploit* the best currently-known strategy as a policy,
 or to *explore* the space of strategies,
 potentially giving up some short-run reward in exchange for knowledge.
+
+마지막으로, 어떠한 주어진 점수에 따라, 강화학습자는 하나의 좋은 정책(Policy)를 알게 됩니다. 그러나 에이전트(agent)가 시도해 보지 않은, 많은 더 좋은 정책들이 있을 수 있습니다. 강화학습 러너는 항상, 지금까지 알려진 최적의 전략에 따라 *탐험*을 할지, 이외의 전략 공간을 *모험*을 할지 선택해야 합니다.
 
 
 #### MDPs, bandits, and friends
