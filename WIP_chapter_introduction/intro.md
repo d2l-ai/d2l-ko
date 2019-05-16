@@ -17,6 +17,12 @@ of all historical transactions
 would map out in methodical details the appropriate action to take
 in every conceivable circumstance.
 
+최근까지 우리가 매일 사용하는 거의 모든 컴퓨터 프로그램들은 첫번째 원칙에 입각하여 소프트웨어 개발자에 의해 코드로 만들어졌습니다.
+E-커머스(e-commerce)플랫폼을 관리 하는 어플리케이션을 만들려고 한다면, 몇시간의 숙고와 화이트보딩을 통한 후에야, 해결 가능한 방법들을 폭넓게 시도할 생각을 하게 될 겁니다. 그것들은 아마도 다음과 슷할 겁니다.
+(i) 사용자는 웹브라우저나 모바일앱을 이용할 것이다.
+(ii) 우리의 어플리케이션은 각 유저의 상태, 모든 트랜잭션 기록을 위해 상용 데이터페이스 앤진을 사용할 것이다.
+(iii) 병렬로 많은 수의 서버를 통해 동작할 우리 어플리케이션의 핵심 *비즈니스로직*(business logic)은 생각할 수 있는 모든 상황에 대해 체계적으로 세부사항 까지 적절한 액션을 취할 것입니다.
+
 To build the *brains* of our application,
 we'd have to step through every possible corner case
 that we anticipate encountering, devising appropriate rules.
