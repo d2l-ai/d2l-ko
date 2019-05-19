@@ -21,7 +21,7 @@ in every conceivable circumstance.
 E-커머스(e-commerce)플랫폼을 관리 하는 어플리케이션을 만들려고 한다면, 몇시간의 숙고와 화이트보딩을 통한 후에야, 해결 가능한 방법들을 폭넓게 시도할 생각을 하게 될 겁니다. 그것들은 아마도 다음과 슷할 겁니다.
 (i) 사용자는 웹브라우저나 모바일앱을 이용할 것이다.
 (ii) 우리의 어플리케이션은 각 유저의 상태, 모든 트랜잭션 기록을 위해 상용 데이터페이스 앤진을 사용할 것이다.
-(iii) 병렬로 많은 수의 서버를 통해 동작할 우리 어플리케이션의 핵심 *비즈니스로직*(business logic)은 생각할 수 있는 모든 상황에 대해 체계적으로 세부사항 까지 적절한 액션을 취할 것입니다.
+(iii) 병렬로 많은 수의 서버를 통해 동작할 우리 어플리케이션의 핵심 *비즈니스로직*(business logic)은 생각할 수 있는 모든 상황에 대해 체계적으로 세부사항 까지 적절한 액션을 취할 것입니다. (여러분은 아마 *지능*(brain)이라고 부를지 모르겠다.)
 
 To build the *brains* of our application,
 we'd have to step through every possible corner case
@@ -38,6 +38,13 @@ that drive functioning products and systems,
 often in novel situations, is a remarkable cognitive feat.
 And when you're able to devise solutions that work $100\%$ of the time,
 *you should not be using machine learning*.
+
+이 어플리케이션의 *지능*(brains)를 만들기 위해, 발생할 수 있는 모든 사항을 대응 할수 있도록 적절한 규칙을 만들어야 합니다.
+고객이 매번 하나의 상품을 쇼핑 카트에 넣을 때마다, 우리는 쇼핑키트 데이터 테이블에, 고객의 사용자 ID와 상품ID를 연관시켜야 합니다.
+프로그래머들이 처음부터 완벽하게 만들지는 못할 것입니다.
+(몇몇의 문제를 풀기위해 몇개의 테스트를 만들어야 할 지도 모릅니다.) 대부분의 경우 *진짜 고객들이 보기 전에* 첫번째원칙에 따라 프로그램을 자신있게 만들수 있습니다. 제일 원칙에따라 자동화된 시스템을 설계할수 있는, 제품과 시스템의 기능을 운영하는 능력은, 종종 새로운 상황에서 주목할 만한 인지 능력 입니다. 
+그리고 당신이 $100\%$시간 동안 운영 가능한 솔루션을 고안해 낼수 있수 있다면, *당신은 머신러닝을 사용하지 말아야 합니다*.
+
 
 Fortunately—for the growing community of ML scientists—many
 problems in automation don't bend so easily to human ingenuity.
