@@ -1,6 +1,6 @@
 # 다층 페셉트론(multilayer perceptron)을 처음부터 구현하기
 
-다층 페셉트론(multilayer perceptron, MLP)가 어떻게 작동하는지 이론적으로 배웠으니, 직접 구현해보겠습니다. 우선 관련 패키지와 모듈을 import 합니다.
+다층 페셉트론(multilayer perceptron, MLP)가 이론적으로 어떻게 작동하는지 알게되었으니 직접 구현해보겠습니다. 우선 관련 패키지와 모듈을 import 합니다.
 
 ```{.python .input  n=9}
 import sys
@@ -12,7 +12,7 @@ from mxnet import nd
 from mxnet.gluon import loss as gloss
 ```
 
-이 예제에서도 Fashion-MNIST 데이터셋을 사용해서, 이미지를 분류하는데 다층 페셉트론(multilayer perceptron)을 사용하겠습니다.
+이전에 기본 softmax 회귀에서 얻은 결과와 비교하기 위해서 Fashion-MNIST 이미지 분류 데이터셋을 계속 사용합니다.
 
 ```{.python .input  n=2}
 batch_size = 256
@@ -21,7 +21,9 @@ train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
 
 ## 모델 파라미터 초기화하기
 
-이 데이터셋은 10개의 클래스로 구분되어 있고, 각 이미지는  $28 \times 28 = 784$ 픽셀의 해상도를 가지고 있습니다. 따라서, 입력은 개수는 784개이고, 출력은 10개가 됩니다. 우리는 한 개의 은닉층(hidden layer)을 갖는 MLP를 만들어보겠는데, 이 은닉층(hidden layer)은 256개의 은닉 유닛(hidden unit)을 갖도록 하겠습니다. 만약 원한다면 하이퍼파라미터인 은닉 유닛(hidden unit) 개수를 다르게 설정할 수도 있습니다. 일반적으로, 유닛(unit) 의 개수는 메모리에 잘 배치될 수 있도록 2의 지수승의 숫자로 선택합니다.
+이 데이터셋은 10개의 클래스들을 갖으며 각 이미지는  $28 \times 28 = 784$  픽셀 값의 그리드로 구성되어 있다는 것을 기억해봅니다. (지금은) 공간적인 구조를 무시할 것이기 때문에, 이것을 $784$ 개의 입력 특성들과 $10$ 개의 클래스로 구성된 분류 데이터셋으로 간주하겠습니다. 특히 우리는 $256$개의 은닉 유닛들을 갖는 한 개의 은닉층으로 구성된 MLP를 구현 할 것입니다. 이 선택들은 검증 데이터의 결과에 따라서 다시 설정될 수 있는 *하이퍼파라미터* 로 간주할 수 있습니다. 일반적으로 우리는 메모리에 아주 잘 정렬되도록 층의 폭을 2의 제곱 수로 선택합니다.
+
+다시 우리는 몇 개의 NDArray들을 할당해서 파라미터들을 표현합니다. 여기서 우리는 *층 별로* 한 개의 가중치 행렬과 한 개의 편향 벡터를 갖는다는 것을 주목하세요. 항상 그렇듯이 이들 파라미터들에 대한 그레이언트를 위한 메모리를 할당하기 위해서 `attach_grad` 를 호출해야 합니다.
 
 ```{.python .input  n=3}
 num_inputs, num_outputs, num_hiddens = 784, 10, 256
@@ -38,7 +40,7 @@ for param in params:
 
 ## 활성화 함수(activation function)
 
-여기서 `ReLU` 를 직접 호출하는 대신, ReLU를 `maximum` 함수를 이용해서 정의합니다.
+모든 것이 작동하는 것을 확인하기 위해서  `nd.relu` 를 직접 호출하는 대신 ReLU를 직접 구현하기 위해서 `maximum` 함수를 사용하겠습니다.
 
 ```{.python .input  n=4}
 def relu(X):
@@ -47,7 +49,7 @@ def relu(X):
 
 ## 모델
 
-Softmax 회귀(regression)에서 그랬던 것처럼, `reshape` 함수를 이용해서 원래 이미지를 `num_inputs` 크기의 벡터로 변환한 다음에 앞에서 설명한 대로 MLP를 구현합니다.
+Softmax 회귀에서 처럼, `reshape`를 호출해서 각 2차원 이미지를 `num_inputs` 길이의 평평한 벡터로 변환합니다. 마지막으로 우리는 단 몇 줄의 코드로 모델을 구현할 수 있습니다.
 
 ```{.python .input  n=5}
 def net(X):
@@ -58,7 +60,7 @@ def net(X):
 
 ## 손실 함수(loss function)
 
-더 나은 계산의 안정성을 위해서, softmax 계산과 크로스-엔트로피 손실(cross-entropy loss) 계산은 Gluon 함수를 이용하겠습니다. 왜 그런지는 [앞 절](mlp.md)에서 이 함수의 구현에 대한 복잡성을 이야기했으니 참고 바랍니다. Gluon 함수를 이용하면 코드를 안전하게 구현하기 위해서 신경을 써야하는 많은 세밀한 것들을 간단하게 피할 수 있습니다. (자세한 내용이 궁금하다면 소스 코드를 살펴보기 바랍니다. 소스 코드을 보면 다른 관련 함수를 구현하는데 유용한 것들을 배울 수도 있습니다.)
+더 나은 수치 안정성을 위해서 그리고 [softmax 회귀를 처음부터 구현하는 방법](../chapter_linear-networks/softmax-regression-scratch) 을 이미 알기 때문에, Gluon의 내장 함수를 사용해서 softmax와 cross-entropy 손실을 계산하겠습니다.  [이전 절](mlp.md) 에서 이 복잡한 것들 중 일부를 논의했던 것을 기억해보세요. 흥미있는 독자는  `mxnet.gluon.loss.nnSoftmaxCrossEntropyLoss` 의 소스 코드를 살펴보면 더 자세한 내용을 알 수 있읍니다.
 
 ```{.python .input  n=6}
 loss = gloss.SoftmaxCrossEntropyLoss()
@@ -66,7 +68,7 @@ loss = gloss.SoftmaxCrossEntropyLoss()
 
 ## 학습
 
-다층 페셉트론(multilayer perceptron)을 학습시키는 단계는 softmax 회귀(regression) 학습과 같습니다. `g2l` 패키지에서 제공하는 `train_ch3` 함수를 직접 호출합니다. 이 함수의 구현은 [여기](softmax-regression-scratch.md) 를 참고하세요. 총 에포크(epoch) 수는 10으로 학습 속도(learning rate)는 0.5로 설정합니다.
+MLP를 학습시키는 단계는 softmax 회귀(regression) 학습과 같습니다. `g2l` 패키지에서 제공하는 `train_ch3` 함수를 직접 호출합니다. 이 함수의 구현은 [여기](softmax-regression-scratch.md) 를 참고하세요. 총 에포크(epoch) 수는 $10$으로 학습 속도(learning rate)는 $0.5$로 설정합니다.
 
 ```{.python .input  n=7}
 num_epochs, lr = 10, 0.5
@@ -88,19 +90,19 @@ titles = [truelabel + '\n' + predlabel
 d2l.show_fashion_mnist(X[0:9], titles[0:9])
 ```
 
-이전보다 조금 성능이 좋아 보이는 것이, MLP를 사용하는 것이 좋은 것임을 알 수 있습니다.
+이것은 이전 결과보다는 조금 더 좋아 보이니, 우리가 올바른 방향으로 가고 있다는 좋은 신호입니다.
 
 ## 요약
 
-간단한 MLP는 직접 구현하는 것이 아주 쉽다는 것을 확인했습니다. 하지만, 많은 수의 층을 갖는 경우에는 굉장히 복잡해질 수 있습니다. (예를 들면 모델 파라미터 이름을 정하는 것 등)
+간단한 MLP를 직접 구현하는 것 조차도 쉽다는 것을 살펴봤습니다. 즉, 더 많은 층들을 사용하면, 이는 복잡해질 수 있습니다. (예를 들면, 모델 파라이터들의 이름을 정하는 것과 추적하는 것 등)
 
-## 문제
+## 연습문제
 
-1. `num_hiddens` 하이퍼파라미터를 변경해서 결과가 어떻게 영향을 받는지 확인해보세요.
+1. `num_hiddens` 하이퍼파라미터를 변경해서 하이퍼파라미터가 결과에 어떤 영향을 주는지 확인해보세요.
 1. 새로운 은닉층(hidden layer)를 추가해서 어떤 영향을 미치는지 확인해보세요.
 1. 학습 속도(learning rate)를 변경하면 결과가 어떻게 되나요?
 1. 모든 하이퍼파라미터(학습 속도(learing rate), 에포크(epoch) 회수, 은닉층(hidden layer) 개수, 각 층의 은닉 유닛(hidden unit) 개수)의 조합을 통해서 얻을 수 있는 가장 좋은 결과는 무엇인가요?
 
-## Scan the QR Code to [Discuss](https://discuss.mxnet.io/t/2339)
+## QR 코드를 스캔해서 [논의하기](https://discuss.mxnet.io/t/2339)
 
 ![](../img/qr_mlp-scratch.svg)
