@@ -60,6 +60,13 @@ information, satellite images, and a trailing window of past weather.
 * Write a program that presents users with products that they are likely to
   enjoy but unlikely, in the natural course of browsing, to encounter.
 
+다행스럽게도, 성장하는 머신러닝 과학자들의 공동체 덕에, 자동화 과정의 많은 문제들이 너무 쉽게 인간의 독창성에 무릎꿇지 않았습니다. 당신이 갖고 있는 가장 똑똑한 방법으로 화이트보드에 끄적이는 것을 상상해 봅시다, 다만 이번에는 다음과 같은 문제들을 다루고 있습니다.:
+
+* 지정학적 정보, 위성 이미지 그리고 과거 날씨 이력등을 이용하여 내일의 날씨를 예측하는 프로그램 작성
+* 자유 형식으로 작성된 질문을 받아, 올바르게 답을 하는 프로그램 작성.
+* 주어진 이미지에 포함된 모든 사람들을 식별하고, 각각의 아웃라인을 그리는 프로그램 작성.
+* 있을 것 같지는 않지만, 자연스러운 브라우징 중에 겪게될, 그들이 즐길것 같은 제품을 주는 프로그램 작성
+
 In each of these cases, even elite programmers
 are incapable of coding up solutions from scratch.
 The reasons for this can vary.
