@@ -94,6 +94,14 @@ a powerful set of techniques driving innovations
 in areas as diverse as computer vision, natural language processing,
 healthcare, and genomics.
 
+이러한 각각의 경우, 우수한 프로그래머 조차도 처음부터 솔루션을 만들수 없습니다.
+그 이유는 매우 다양합니다. 때때로 우리가 찾는 프로그램은 시간이 흐름에 따라 변하는 패턴을 찾아내고, 적응할 수 있어야 합니다. 
+다른 한편으로, 픽셀(pixel)과 추상 카테고리 사이의 관계는 너무 복잡하여, 이 관계를 추론하기엔 (우리의 눈이 별다른 노력없이 작업을 관리하더라도) 의식적인 이해를 초월하는, 수천 혹은 수백만의 연산을 필요로 합니다.
+기계학습(Machine Learning)은 *경험*으로 부터 *행동을 배울수* 있는 강력한 기술에 대한 연구 입니다.
+일반적으로 기계학습 알고리즘이 관찰데이터 혹은 환경과의 상호작용에 따른, 더 많은 경험의 축적을 통해 성능이 향상됩니다. 
+개발자가 스스로 *배우고*, 소프트웨어를 수정할 때까지, 얼마나 많은 경험이 쌓였는지와 상관 없이, 정해진대로 동일한 비즈니스 로직에 따라동작하는 우리의 e-커머스(E-Commerce) 플랫폼과 비교해 보세요. 
+이 책에서, 기계학습의 기초를 배우고, 특별히 자연어처리, 헬쓰케어(HealthCare), 유전체학 등과 같이 다양한 분야에서 강략한 도구인 컴퓨터비젼(Computer Vision)의 혁신을 주도하는 강략한 딥러닝(DeepLearning)에 중점을 둡니다.
+
 ## A Motivating Example
 
 Before we could begin writing, the authors of this book,
