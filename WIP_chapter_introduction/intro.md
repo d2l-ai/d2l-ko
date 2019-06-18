@@ -94,6 +94,14 @@ a powerful set of techniques driving innovations
 in areas as diverse as computer vision, natural language processing,
 healthcare, and genomics.
 
+이러한 각각의 경우, 우수한 프로그래머 조차도 처음부터 솔루션을 만들수 없습니다.
+그 이유는 매우 다양합니다. 때때로 우리가 찾는 프로그램은 시간이 흐름에 따라 변하는 패턴을 찾아내고, 적응할 수 있어야 합니다. 
+다른 한편으로, 픽셀(pixel)과 추상 카테고리 사이의 관계는 너무 복잡하여, 이 관계를 추론하기엔 (우리의 눈이 별다른 노력없이 작업을 관리하더라도) 의식적인 이해를 초월하는, 수천 혹은 수백만의 연산을 필요로 합니다.
+기계학습(Machine Learning)은 *경험*으로 부터 *행동을 배울수* 있는 강력한 기술에 대한 연구 입니다.
+일반적으로 기계학습 알고리즘이 관찰데이터 혹은 환경과의 상호작용에 따른, 더 많은 경험의 축적을 통해 성능이 향상됩니다. 
+개발자가 스스로 *배우고*, 소프트웨어를 수정할 때까지, 얼마나 많은 경험이 쌓였는지와 상관 없이, 정해진대로 동일한 비즈니스 로직에 따라동작하는 우리의 e-커머스(E-Commerce) 플랫폼과 비교해 보세요. 
+이 책에서, 기계학습의 기초를 배우고, 특별히 자연어처리, 헬쓰케어(HealthCare), 유전체학 등과 같이 다양한 분야에서 강략한 도구인 컴퓨터비젼(Computer Vision)의 혁신을 주도하는 강략한 딥러닝(DeepLearning)에 중점을 둡니다.
+
 ## A Motivating Example
 
 Before we could begin writing, the authors of this book,
@@ -112,6 +120,8 @@ it demonstrates that in the span of just a few seconds,
 our everyday interactions with a smartphone
 can engage several machine learning models.
 
+저자들은 이 책을 쓰기 전에, 많은 노동력이 필요한 일처럼, 많은 카페인이 필요했습니다.. 상상해 봅시다. 우리는 차에 올라타서 운전을 하기 시작했습니다. 아이폰을 사용자인 Alex는 핸드폰의 음성 인식 시스템을 부르기 위해서 'Hey Siri'라고 외쳤습니다. 그러자 Mu는 '블루 보틀 커피샵으로 가는길을 알려줘'라고 명령 했습니다. 핸드폰은 그의 명령을 글로 바꿔서 화면에 빠르게 보여줍니다. 우리가 길을 묻는 것을 알아채고는 우리의 요청에 응하기 위해서 지도 앱을 띄웁니다. 지도 앱이 실행되자 마자 여러 경로를 찾아냅니다. 각 경로 옆에는 예상 소요 시간이 함께 표시됩니다. 설명을 위해서 지어낸 이야기이긴 하지만, 이 짧은 시나리오는 스마트폰을 통해 다양한 머신 러닝 모델이 사용되는 것을 보여주고 있습니다.
+
 Imagine just writing a program to respond to a *wake word*
 like 'Alexa', 'Okay, Google' or 'Siri'.
 Try coding it up in a room by yourself
@@ -126,6 +136,8 @@ If you're stuck, don't worry.
 We don't know how to write such a program from scratch either.
 That's why we use ML.
 
+ 'Alexa', 'Okay, Google', 이나 'Siri' 같은 wake word 에 응답하는 프로그램을 작성한다고 생각해보세요. 컴퓨터와 코드 편집기만 사용해서 코드를 만들어 나간다고 했을때 제일 원칙을 이용해서 어떻게 그런 프로그램을 작성할 것인가요? 조금만 생각해 봐도 이 문제가 쉽지 않다는 것을 알 수 있습니다. 매 초마다 마이크는 대략 44,000개의 샘플을 수집합니다. 소리 조각으로 부터 그 소리 조각이 wake word를 포함하는지 신뢰있게 {yes, no} 로 예측하는 룰을 만들 수 있나요? 어떻게 할지를 모른다고 해도 걱정하지 마세요. 우리도 그런 프로그램을 처음부터 어떻게 작성해야하는지 모릅니다. 이것이 바로 우리가 머신 러닝을 사용하는 이유입니다.
+ 
 ![Identify an awake word.](../img/wake-word.svg)
 
 
