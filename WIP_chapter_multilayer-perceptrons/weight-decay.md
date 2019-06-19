@@ -107,7 +107,9 @@ that we will call the *regularization constant* and denote by $\lambda$:
 
 $$l(\mathbf{w}, b) + \frac{\lambda}{2} \|\boldsymbol{w}\|^2$$
 
-—> 여기부터 다시 !!
+ $\mathbf{x}^{(i)}$ 는 관측값, $y^{(i)}$ 는 레이블, 그리고  $(\mathbf{w}, b)$ 는 각각 가중치와 편향임을 기억하세요. 가중치 벡터의 크기에 대한 퍼널티를 주는 새로운 손실 함수를 갖기 위해서 우리는 $|| \mathbf{w} ||^2$ 를 더해야 했습니다. 하지만, 얼마나 더하는게 맞을까요? 이를 해결하는 방법으로 우리는 새로운 하이퍼파라미터를 추가합니다. 이는 *정규화 상수(regularization constant)* 라고 부르고 $\lambda$ 라고 표기합니다:
+
+$$l(\mathbf{w}, b) + \frac{\lambda}{2} \|\boldsymbol{w}\|^2$$
 
 *$\lambda \geq 0$  는 정규화(regularzation)의 정도를 조절합니다.  $\lambda = 0$ 인 경우, 원래의 손실 함수(loss function)가 되고,  $\lambda > 0$ 이면,  $\mathbf{w}$ 가 너무 커지지 않도록 강제합니다. 통찰력이 있는 분은 가중치 벡터(weight vector)를 왜 제곱을 하는지 의아해할 것입니다. 이는 두가지 이유 때문인데, 하나는 미분 계산이 쉬워지기 때문에 연산의 편의성을 위함이고, 다른 하나는 작은 가중치 벡터(weight vector)들 보다 큰 가중치 벡터(weight vector)에 더 많은 패널티를 부여하는 것으로 통계적인 성능 향상을 얻기 위하는 것입니다. 확률적 경사 하강법(Stochastic gradient descent) 업데이트는 다음과 같이 이뤄집니다.*
 
