@@ -160,6 +160,8 @@ the best possible set of parameters,
 those that improve the performance of our program
 with respect to some measure of performance on the task of interest.
 
+여기에 트릭이 있습니다. 컴퓨터에 명시적으로, 입력을 출력으로 맵핑하는 방법을 모르는 경우에도,  우리는 스스로 인지해서 이것을 해낼 수 있습니다. 즉, 당신이 'Alexa'라는 단어를 인식하도록 컴퓨터를 프로그래밍하는 방법을 모르지만, 당신은 'Alexa'라는 단어를 인식 할 수 있습니다. 이 기능을 탑제하여, 오디오 예제를 포함하는 거대한 데이터 세트를 수집하고, 웨이크 워드를 포함하지 않는 라벨을 표시 할 수 있습니다. ML 접근법에서 우리는 웨이크워드(wake word)를 인식하도록 시스템을 명시 적으로 설계하지 않습니다. 대신, 우리는 여러 가지 파라미터로 동작이 결정되는 유연한 프로그램을 정의합니다. 그런 다음 데이터 집합을 사용하여 가능한 파라미터 집합을 결정합니다. 파라미터 집합은 관심있는 작업의 성능 측정과 관련하여 프로그램 성능을 향상시킵니다.
+
 You can think of the parameters as knobs that we can turn,
 manipulating the behavior of the program.
 Fixing the parameters, we call the program a *model*.
