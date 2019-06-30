@@ -181,6 +181,10 @@ if all goes according to plan,
 will closely approximate whether (or not)
 the snippet contains the wake word.
 
+파라미터를 우리가 움직일 수있는 손잡이라고 생각하면 프로그램의 동작을 조작 할 수 있습니다. 파라미터를 수정한 프로그램을 모델이라고 부릅니다. 파라미터를 조작하여 생성 할 수있는 모든 고유 한 프로그램 세트 (입력 - 출력 매핑)를 모델 패밀리라고합니다. 또한 매개 변수를 선택하기 위해 데이터 집합을 사용하는 메타 프로그램을 학습 알고리즘이라고합니다.
+
+우리가 학습 알고리즘을 수행하기 전에 문제를 정확하게 정의하고 입력 및 출력의 정확한 특성을 고정하고 적절한 모델 군을 선택해야합니다. 이 경우 우리 모델은 오디오 스니펫(Snippet)을 입력으로 받고, 출력을 {예, 아니요} 하게 됩니다. 모두 계획대로 진행되면 스니펫에 웨이크 워드가 포함되어 있는지 (또는 설정되어 있지 않은지) 거의 맞출 수 있게 됩니다.
+
 If we choose the right family of models,
 then there should exist one setting of the knobs
 such that the model fires ``yes`` every time it hears the word 'Alexa'.
