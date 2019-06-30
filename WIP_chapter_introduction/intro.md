@@ -160,7 +160,7 @@ the best possible set of parameters,
 those that improve the performance of our program
 with respect to some measure of performance on the task of interest.
 
-여기에 트릭이 있습니다. 컴퓨터에 명시적으로, 입력을 출력으로 맵핑하는 방법을 모르는 경우에도,  우리는 스스로 인지해서 이것을 해낼 수 있습니다. 즉, 당신이 'Alexa'라는 단어를 인식하도록 컴퓨터를 프로그래밍하는 방법을 모르지만, 당신은 'Alexa'라는 단어를 인식 할 수 있습니다. 이 기능을 탑제하여, 오디오 예제를 포함하는 거대한 데이터 세트를 수집하고, 웨이크 워드를 포함하지 않는 라벨을 표시 할 수 있습니다. ML 접근법에서 우리는 웨이크워드(wake word)를 인식하도록 시스템을 명시 적으로 설계하지 않습니다. 대신, 우리는 여러 가지 파라미터로 동작이 결정되는 유연한 프로그램을 정의합니다. 그런 다음 데이터 집합을 사용하여 가능한 파라미터 집합을 결정합니다. 파라미터 집합은 관심있는 작업의 성능 측정과 관련하여 프로그램 성능을 향상시킵니다.
+여기에 트릭이 있습니다. 컴퓨터에 명시적으로, 입력을 출력으로 맵핑하는 방법을 모르는 경우에도,  우리는 스스로 인지해서 이것을 해낼 수 있습니다. 즉, 여러분이 'Alexa'라는 단어를 인식하도록 *컴퓨터를 프로그래밍하는 방법*을 모르지만, 여러분은 'Alexa'라는 단어를 인식 할 수 있습니다. 이 기능을 탑제하여, 오디오 예제를 포함하는 거대한 데이터 세트를 수집하고, 웨이크 워드를 포함하지 않는 라벨을 표시 할 수 있습니다. ML 접근법에서 우리는 웨이크워드(wake word)를 인식하도록 시스템을 명시 적으로 설계하지 않습니다. 대신, 우리는 여러 가지 파라미터로 동작이 결정되는 유연한 프로그램을 정의합니다. 그런 다음 데이터 집합을 사용하여 가능한 파라미터 집합을 결정합니다. 파라미터 집합은 관심있는 작업의 성능 측정과 관련하여 프로그램 성능을 향상시킵니다.
 
 You can think of the parameters as knobs that we can turn,
 manipulating the behavior of the program.
@@ -181,7 +181,7 @@ if all goes according to plan,
 will closely approximate whether (or not)
 the snippet contains the wake word.
 
-파라미터를 우리가 움직일 수있는 손잡이라고 생각하면 프로그램의 동작을 조작 할 수 있습니다. 파라미터를 수정한 프로그램을 모델이라고 부릅니다. 파라미터를 조작하여 생성 할 수있는 모든 고유 한 프로그램 세트 (입력 - 출력 매핑)를 모델 패밀리라고합니다. 또한 매개 변수를 선택하기 위해 데이터 집합을 사용하는 메타 프로그램을 학습 알고리즘이라고합니다.
+파라미터를 우리가 움직일 수있는 손잡이라고 생각하면, 프로그램의 동작을 조종할 수 있습니다. 파라미터를 수정한 프로그램을 모델이라고 부릅니다. 파라미터를 조작하여 생성 할 수있는 모든 고유 한 프로그램 세트 (입력 - 출력 매핑)를 모델 패밀리라고합니다. 또한 매개 변수를 선택하기 위해 데이터 집합을 사용하는 메타 프로그램을 학습 알고리즘이라고합니다.
 
 우리가 학습 알고리즘을 수행하기 전에 문제를 정확하게 정의하고 입력 및 출력의 정확한 특성을 고정하고 적절한 모델 군을 선택해야합니다. 이 경우 우리 모델은 오디오 스니펫(Snippet)을 입력으로 받고, 출력을 {예, 아니요} 하게 됩니다. 모두 계획대로 진행되면 스니펫에 웨이크 워드가 포함되어 있는지 (또는 설정되어 있지 않은지) 거의 맞출 수 있게 됩니다.
 
@@ -211,21 +211,16 @@ The training process usually looks like this:
 1. Tweak the knobs so the model sucks less with respect to those examples
 1. Repeat until the model is awesome.
 
-우리가 적합한 모델 군을 선택한다면,
-그 모델은 'Alexa'라는 말을들을 때마다 '예'라고 응답는 스위치(노브)가 하나 있어야 합니다. 
-웨이크 워드의 바뀔수 있기 때문에, 우리는 아마도 'Apricot'라는 단어에 대해 ``예``라고 응답하는 모델 군이 필요합니다. 우리는 'Alexa'인식과 'Apricot'인식에 동일한 모델이 적용되어야합니다. 비슷한 작업이기 때문입니다.
-어쨌든, 우리는 다른 모델 군이 필요합니다. 근본적으로 다른 입력과 아웃풋을 다루고 싶다면,
-예를 들어, 이미지를 캣션으로, 영어 문장을 중국어 문장으로 맵핑하고자 할때 그렇습니다.
+만약 여러분이 좋은 모델을 선택했다면, 'Alexa' 단어를 들을 때 마다 `yes` 를 출력하는 모델을 만드는 파라미터 세트 하나가 존재할 것입니다. 마찬가지로 'Apricot' 단어에 대해서 `yes` 를 출력하는 것이 다른 조합이 있을 수 있습니다. 우리는 이 두가지가 비슷하기 때문에, 동일한 모델이 'Alexa' 인식과 'Apricot' 인식에 적용되기를 기대합니다. 하지만 근본적으로 다른 입력 또는 출력을 다루기 위해서는 다른 모델이 필요할 수도 있습니다. 예를 들어, 이미지와 캡션을 매핑하는 머신과 영어 문장을 중국어 문장으로 매핑하는 모델은 서로 다른 것을 사용할 것입니다.
 
-짐작할 수 있듯이 모든 노브를 무작위로 설정하면,
-우리 모델이 'Alexa', 'Apricot', 또는 다른 영어 단어를 인식할 가능성이 없습니다.
-딥러닝(DeepLearning)에서 *러닝*은 우리 모델을 위해 원하는 행동을 하도록 필요한 올바른 스위치(노브)를 ㅊ자아내는 과정입니다.
+이미 예상했겠지만, 이 손잡이를 아무렇게나 설명할 경우, 아마도 그 모델은 'Alexa', 'Apricot'  또는 어떤 영어 단어도 인식하지 못할 것입니다. 일반적으로 딥러닝에서는 *학습(learning)* 은 여러 *학습 기간*에 걸쳐서 모델의 행동 (손잡이를 돌리면서)을 업데이트하는 것을 말합니다.
 
-학습 과정은 일반적으로 다음과 같습니다.
-1. 아무 것도 할 수없는 임의로 초기화 된 모델로 시작하십시오.
-1. 레이블이 지정된 일부 데이터 (예 : 오디오 스니펫과 이에 해당하는`{예, 아니오}`레이블)
-1. 모델이 예제에 관해 완벽하게 적응하지 않도록, 노브를 미세하게 조정하세요.
-1. 모델이 완벽해 질때까지 반복합니다.
+학습 과정은 보통 다음과 같습니다.
+
+1. 임의로 초기화되서 아무것도 유용한 것을 못하는 모델로 시작합니다.
+1. 레이블을 갖은 데이터를 수집합니다. (예, 오디오 조각과 그에 해당하는 `{yes,no}` 레이블들)
+1. 주어진 예제들에 모델이 조금 덜 이상하게 작동하도록 손잡이를 조정합니다.
+1. 모델이 좋아질 때까지 반복합니다.
 
 
 ![A typical training process. ](../img/ml-loop.svg)
@@ -239,7 +234,9 @@ as *programming with data*.
 We can "program" a cat detector by providing our machine learning system
 with many examples of cats and dogs, such as the images below:
 
-정리하면, 웨이크 워드를 인식 할 수있는 코드를 직접 작성하는 것보다, *만약 많은 레이블 데이터 인식 기능을 표현할 수 있다면*, 그 인식 기능을 학습하도록 코드를 작성해야합니다. 이것은 프로그램의 동작을 데이터 세트에서 결정하는, 즉 데이터로 프로그램을 작성하는 것과 같은 것이라고 생각할 수 있습니다. 우리는 다음과 같은 고양이와 개 이미지 샘플을 대량으로 모아 기계 학습을 이용하여, 고양이 인식기를 프로그램 을 만들 수 있습니다.
+요약하면, wake word를 인식하는 코드를 작성하는 것이 아니라, *아주 많은 레이블이 있는 데이터셋이 있을 경우에* wake word를 인식하는 것을 *배우는* 프로그램을 작성하는 것입니다. 데이터셋을 제공해서 프로그램의 행동을 결정하는 것을 *programming with data*라고 생각할 수 있습니다.
+
+우리는 아래 이미지들과 같은 아주 많은 고양이와 개 샘플들을 머신 러닝 시스템에 제공해서 고양이 탐지기 프로그램을 만들 수 있습니다.
 
 | ![cat1](../img/cat1.png) | ![cat2](../img/cat2.jpg) | ![dog1](../img/dog1.jpg) |![dog2](../img/dog2.jpg) |
 |:---------------:|:---------------:|:---------------:|:---------------:|
@@ -251,7 +248,7 @@ a very large negative number if it's a dog,
 and something closer to zero if it isn't sure,
 and this barely scratches the surface of what ML can do.
 
-이 경우, 인식기는 고양이이면 매우 큰 양수, 개이면 매우 큰 음수 값 중 하나, 모르는 경우 0에 가까운 값을 출력하도록 학습하는 것입니다. 그리고 이것은 간신히 ML이 하고있는 것을 흉내내는 것입니다.
+이런 방법으로 탐지기는 결국에 고양이를 입력으로 받으면 아주 큰 양수를 결과로 나오게, 그리고 개를 입력으로 받으면 아주 큰 음수를 결과로 나오게 학습될 것입니다. 이 모델은 잘 모르겠으면 0과 가까운 수를 결과로 출력할 것입니다. 이 예는 머신 러닝으로 할 수 있는 일의 일부에 불과합니다.
 
 Deep learning is just one among many
 popular frameworks for solving machine learning problems.
@@ -298,6 +295,13 @@ that will follow us around, no matter what kind of ML problem we take on:
 2. A **model** of how to transform the data
 3. A **loss** function that quantifies the *badness* of our model
 4. An **algorithm** to adjust the model's parameters to minimize the loss
+
+*wake word*를 인식하는 문제를 이야기할 때, 음성 조각과 레이블로 구성된 데이터셋을 언급했습니다. (추상적이긴 하지만) 음성 조각이 주어졌을 때 레이블을 예측하는 머신 러닝 모델을 어떻게 *학습*시킬 수 있는지 설명했습니다. 예제로부터 레이블을 예측하는 설정은 ML의 한 종류로 *지도학습(supervised learning)* 이라고 부릅니다. 딥러닝에서도 많은 접근법들이 있는데, 다른 절들에서 다루겠습니다. 머신 러닝을 진행하기 위해서는 다음 4가지가 필요합니다.
+
+1. 학습에 필요한 *데이터*
+2. 데이터를 어떻게 변환할지에 대한 *모델*
+3. 우리가 얼마나 잘하고 있는지를 측정하는 *loss* 함수
+4. loss 함수를 최소화하도록 모델 파라미터를 바꾸는 *알고리즘*
 
 
 ### Data
@@ -531,6 +535,8 @@ and the number of minutes (walking) to the center of town.
 Formally, we call one row in this dataset a *feature vector*,
 and the object (e.g. a house) it's associated with an *example*.
 
+아마도 여러분의 머리에 떠오르는 가장 간단한 지도학습은 회귀(regression)일 것입니다. 주택 판매 데이터베이스에서 추출된 데이터를 예로 들어보겠습니다. 각 행은 하나의 집을, 각 열은 관련된 속성(집의 면적, 침실 개수, 화장실 개수, 도심으로 부터의 도보 거리 등)을 갖는 테이블을 만듭니다. 우리는 이 데이터셋의 하나의 행을 *속성백터(feature vector)* 라고 부르고, 이와 연관된 객체는 *예제(example)* 이라고 부릅니다.
+
 If you live in New York or San Francisco, and you are not the CEO of Amazon, Google, Microsoft, or Facebook,
 the (sq. footage, no. of bedrooms, no. of bathrooms, walking distance) feature vector for your home
 might look something like: $[100, 0, .5, 60]$.
@@ -539,6 +545,8 @@ it might look more like $[3000, 4, 3, 10]$.
 Feature vectors like this are essential for all the classic machine learning problems.
 We'll typically denote the feature vector for any one example $\mathbf{x_i}$
 and the set of feature vectors for all our examples $X$.
+
+만약 여러분이 뉴욕이나 샌프란시스코에서 살고, 아마존, 구글, 마이크소프트, 페이스북의 CEO가 아니라면, 여러분 집의 속성 백터(집 면적, 침실수, 화장실수, 도심까지 도보 거리)는 아마도 $[100, 0, .5, 60]$ 가 될 것입니다. 하지만, 피츠버그에 산다면  $[3000, 4, 3, 10]$ 와 가까울 것입니다. 이런 속성 백터는 모든 전통적인 머신 러닝 문제에 필수적인 것입니다. 우리는 일반적으로 어떤 예제에 대한 속성 백터를 $\mathbf{x_i}$ 로 표기하고, 모든 예제에 대한 속성 백터의 집합은  $X$ 로 표기합니다.
 
 What makes a problem a *regression* is actually the outputs.
 Say that you're in the market for a new home,
@@ -555,6 +563,7 @@ We denote these predictions $\hat{y}_i$
 and if the notation seems unfamiliar, then just ignore it for now.
 We'll unpack it more thoroughly in the subsequent chapters.
 
+결과에 따라서 어떤 문제가 *회귀(regression)* 인지를 결정됩니다. 새 집을 사기 위해서 부동산을 돌아다니고 있다고 하면, 여러분은 주어진 속성에 대해서 합당한 집 가격을 추정하기를 원합니다. 타겟 값, 판매 가격,은 *실제 숫자(real number)* 가 됩니다. 샘플  $\mathbf{x_i}$에 대응하는 각 타겟은  $y_i$ 로 표시하고, 모든 예제 X 에 대한 모든 타겟들은  $\mathbf{y}$ 로 적습니다. 타겟이 어떤 범위에 속하는 임의의 실수값을 갖는 다면, 우리는 이를 회귀 문제라고 부릅니다. 우리의 모델의 목표는 실제 타겟 값을 근접하게 추정하는 예측 (이 경우에는 집가격 추측)을 생성하는 것입니다. 이 예측을 $\hat{y}_i$ 로 표기합니다. 만약 표기법이 익숙하지 않다면, 다음 장들에서 더 자세히 설명할 것이기 때문에 지금은 그냥 무시해도 됩니다.  
 
 Lots of practical problems are well-described regression problems.
 Predicting the rating that a user will assign to a movie is a regression problem,
@@ -565,6 +574,12 @@ A good rule of thumb is that any *How much?* or *How many?* problem should sugge
 
 * 'How many hours will this surgery take?' - *regression*
 * 'How many dogs are in this photo?' - *regression*.
+
+많은 실질적인 문제들이 잘 정의된 회귀 문제들입니다. 관객이 영화에 줄 평점을 예측하는 것은 회귀의 문제인데, 여러분이 2009년에 이를 잘 예측하는 대단한 알고리즘을 디자인했다면  [$1 million Netflix prize](https://en.wikipedia.org/wiki/Netflix_Prize) 를 받았을 것입니다. 환자가 입원일 수를 예측하는 것 또한 회귀 문제입니다. 문제가 회귀의 문제인지를 판단하는 좋은 경험의 법칙은 *얼마나 만큼*  또는 *얼마나 많이* 로 대답이되는지 보는 것입니다.
+
+* 이 수술은 몇 시간이 걸릴까요? - *회귀*
+* 이 사진에 개가 몇 마리 있나요? - *회귀*
+
 
 However, if you can easily pose your problem as 'Is this a _ ?',
 then it's likely, classification, a different fundamental problem type that we'll cover next.
@@ -584,6 +599,8 @@ you could already identify the contractor's pricing structure:
 \$100 per hour plus \$50 to show up at your house.
 If you followed that much then you already understand the high-level idea behind linear regression (and you just implicitly designed a linear model with bias).
 
+그런데 만약 주어진 문제에 대한 질문을 '이것은 ... 인가요?' 라고 쉽게 바꿀 수 있다면, 분류의 문제입니다. 이는 다른 기본적인 문제 유형입니다. 머신 러닝을 이전에 다뤄보지 않은 경우에도 비공식적으로는 회귀의 문제들을 다뤄왔습니다. 예를 들어, 여러분의 집의 배수구를 수리하고, 수리공이  $x_1=3$ 시간이 걸려서 하수관에서 덩어리를 제거했습니다. 이에 대해서 수리공은 $y_1 = \$350$ 청구를 합니다. 여러분의 친구가 같은 수리공을 공용해서 or $x_2 = 2$ 시간 걸려서 일하고,  $y_2 = \$250$ 를 청구했습니다. 어떤 사람이 하수관에서 덩어리를 제거하는 데 비용이 얼마가 될지를 물어보면, 여러분은 논리적인 추정 - 시간이 더 소요되면 더 비싸다 -을 할 것입니다. 기본 비용이 있고, 시간당 비용이 있을 것이라고까지 추정할 것입니다. 이 가정이 맞다면, 위 두 데이터 포인트를 활용해서 수리공의 가격 구조를 알아낼 수 있습니다: 시간당 100달러 및 기본 비용 50달러. 여러분이 여기까지 잘 따라왔다면 선형 회귀에 대한 고차원의 아이디어를 이미 이해한 것입니다. (선형모델을 bias를 사용해서 디자인했습니다.)
+
 In this case, we could produce the parameters that exactly matched the contractor's prices.
 Sometimes that's not possible, e.g., if some of the variance owes to some factors besides your two features.
 In these cases, we'll try to learn models that minimize the distance between our predictions and the observed values.
@@ -592,17 +609,25 @@ the
 [L1 loss](http://mxnet.incubator.apache.org/api/python/gluon/loss.html#mxnet.gluon.loss.L1Loss)
 where
 
+
+위 예에서는 수리공의 가격을 정확하게 계산하는 파라미터를 찾아낼 수 있었습니다. 때로는 불가능한데, 예를 들면 만약 어떤 차이가 이 두 피쳐 외에 작용하는 경우가 그렇습니다. 그런 경우에는 우리는 우리의 예측과 관찰된 값의 차이를 최소화하는 모델을 학습시키고자 노력합니다. 대부분 장들에서 우리는 아주 일반적인 loss 둘 중에 하나에 집중할 것입니다. 하나는 [L1 loss](http://mxnet.incubator.apache.org/api/python/gluon/loss.html#mxnet.gluon.loss.L1Loss) 로, 다음과 같고, 
+
 $$l(y,y') = \sum_i |y_i-y_i'|$$
 
 and the least mean squares loss, aka
 [L2 loss](http://mxnet.incubator.apache.org/api/python/gluon/loss.html#mxnet.gluon.loss.L2Loss)
 where
 
+다른 하나는 최소 평균 제곱 손실(least mean square loss), 즉 [L2 loss](http://mxnet.incubator.apache.org/api/python/gluon/loss.html#mxnet.gluon.loss.L2Loss) 입니다. 이는 다음과 같이 표기 됩니다.
+
 $$l(y,y') = \sum_i (y_i - y_i')^2.$$
 
 As we will see later, the $L_2$ loss corresponds to the assumption that our data was corrupted by Gaussian noise, whereas the $L_1$ loss corresponds to an assumption of noise from a Laplace distribution.
 
+나중에 보겠지만, $L_2$ loss는 우리의 데이터가 가우시안 노이즈에 영향을 받았다고 가정에 관련이 되고, $L_1$ loss는 라플라스 분포(Laplace distribution)의 노이즈를 가정합니다.
+
 #### Classification
+#### 분류(classification)
 
 While regression models are great for addressing *how many?* questions,
 lots of problems don't bend comfortably to this template. For example,
@@ -613,6 +638,8 @@ It would also need to understand hand-written text to be even more robust.
 This kind of system is referred to as optical character recognition (OCR),
 and the kind of problem it solves is called a classification.
 It's treated with a distinct set of algorithms than those that are used for regression.
+
+회귀 모델은 *얼마나 많이* 라는 질문에 답을 주는데는 훌륭하지만, 많은 문제들이 이 템플렛에 잘 들어맞지 않습니다. 예를 들면, 은행이 모바일앱에 수표 스캐닝 기능을 추가하고자 합니다. 이를 위해서 고객은 스마트폰의 카메라로 수표를 찍으면, 이미지에 있는 텍스트를 자동으로 이해하는 기능을 하는 머신 러닝 모델이 필요합니다. 손으로 쓴 글씨에 더 잘 동작을 해야할 필요가 있습니다. 이런 시스템은 문자인식(OCR, optical character recognition)이라고 하고, 이것이 풀려는 문제의 종류를 분류라고 합니다. 회귀 문제에 사용되는 알고리즘과는 아주 다른 알고리즘이 이용됩니다.
 
 In classification, we want to look at a feature vector, like the pixel values in an image,
 and then predict which category (formally called *classes*),
@@ -625,6 +652,8 @@ For example, our dataset $X$ could consist of images of animals
 and our *labels* $Y$ might be the classes $\mathrm{\{cat, dog\}}$.
 While in regression, we sought a *regressor* to output a real value $\hat{y}$,
 in classification, we seek a *classifier*, whose output $\hat{y}$ is the predicted class assignment.
+
+분류는 이미지의 픽셀값과 같은 속성 백터를 보고, 그 예제가 주어진 종류들 중에서 어떤 카테고리에 속하는지를 예측합니다. 손으로 쓴 숫자의 경우에는 숫자 0부터 9까지 10개의 클래스가 있습니다. 가장 간단한 분류의 형태는 단 두개의 클래스가 있는 경우로, 이를 이진 분류(binary classificatio)이라고 부릅니다. 예를 들어, 데이터셋 $X$ 가 동물들의 사진이고, 이에 대한 *레이블*  $Y$ 이 {고양이, 강아지}인 경우를 들 수 있습니다. 회귀에서는 결과가 실수 값 $\hat{y}$ 가 되지만, 분류에서는 결과가 예측된 클래스인 *분류기* 를 만들고자 합니다.
 
 For reasons that we'll get into as the book gets more technical, it's pretty hard to optimize a model that can only output a hard categorical assignment, e.g. either *cat* or *dog*.
 It's a lot easier instead to express the model in the language of probabilities.
@@ -640,15 +669,21 @@ We can interpret this number by saying that the classifier is 90% sure that the 
 The magnitude of the probability for the predicted class is one notion of confidence.
 It's not the only notion of confidence and we'll discuss different notions of uncertainty in more advanced chapters.
 
+이 책에서 더 기술적인 내용을 다룰 때, 고정된 카테고리 - 예를 들면 고양이 또는 개 -에 대한 결과만을 예측하는 모델을 최적화하는 것은 어려워질 것입니다. 대신 확률에 기반한 모델로 표현하는 것이 훨씬 더 쉽습니다. 즉, 예제 $x$ 가 주어졌을 때, 모델은 각 레이블 $k$ 에 확률  $\hat{y}_k$ 를 할당하는 것입니다. 결과가 확률값이기 때문에 모두 양수이고, 합은 1이됩니다. 이는 $K$ 개의 카테고리에 대한 확률을 구하기 위해서는 $K-1$ 개의 숫자만 필요하다는 것을 의미합니다. 이진 분류를 예로 들어보겠습니다. 공정하지 않은 동전을 던져서 앞면이 나올 확률이 0.6 (60%)라면, 뒷면이 나올 확률은 0.4 (40%)다 됩니다. 동물 분류의 예로 돌아가보면, 분류기는 이미지를 보고 이미지가 고양이일 확률 $\Pr(y=\mathrm{cat}| x) = 0.9$ 을 출력합니다. 우리는 이 숫자를 이미지가 고양이를 포할 것이라고 90% 정도 확신한다라고 해석할 수 있습니다. 예측된 클래스에 대한 확률의 정도는 신뢰에 대한 개념을 나타냅니다. 신뢰의 개념일 뿐만 아니라, 고급 내용을 다루는 장에서는 여러 비신뢰의 개념도 논의하겠습니다.
+
 When we have more than two possible classes, we call the problem *multiclass classification*.
 Common examples include hand-written character recognition `[0, 1, 2, 3 ... 9, a, b, c, ...]`.
 While we attacked regression problems by trying to minimize the L1 or L2 loss functions,
 the common loss function for classification problems is called cross-entropy.
 In MXNet Gluon, the corresponding loss function can be found [here](https://mxnet.incubator.apache.org/api/python/gluon/loss.html#mxnet.gluon.loss.SoftmaxCrossEntropyLoss).
 
+두 개보다 많은 클래스가 있을 경우에 우리는 이 문제를 *다중클래스 분류(multiclass classification)* 이라고 합니다. 흔한 예로는 손으로 쓴 글씨 -  `[0, 1, 2, 3 ... 9, a, b, c, ...]` - 를 인식하는 예제가 있습니다. 우리는 회귀 문제를 풀 때 L1 또는 L2 loss 함수를 최소화하는 시도를 했는데, 분류 문제에서 cross-entropy 함수가 흔히 사용되는 loss 함수는 입니다. MXNet Gluon에서는 관련된 loss 함수에 대한 내용을 [여기](https://mxnet.incubator.apache.org/api/python/gluon/loss.html#mxnet.gluon.loss.SoftmaxCrossEntropyLoss)에서 볼 수 있습니다.
+
 Note that the most likely class is not necessarily the one that you're going to use for your decision. Assume that you find this beautiful mushroom in your backyard:
 
-![Death cap - do not eat!](../img/death_cap.jpg)
+가장 그럴듯한 클래스가 결정을 위해서 사용하는 것이 꼭 아닐 수도 있습니다. 여러분의 뒷뜰에서 이 아름다운 버섯을 찾는다고 가정해보겠습니다.
+
+![알광대 버섯(Death cap) - !](../img/death_cap.jpg)
 :width:`400px`
 
 Now, assume that you built a classifier and trained it
@@ -660,9 +695,13 @@ That's because the certain benefit of a delicious dinner isn't worth a 20% risk 
 In other words, the effect of the *uncertain risk* by far outweighs the benefit.
 Let's look at this in math. Basically, we need to compute the expected risk that we incur, i.e. we need to multiply the probability of the outcome with the benefit (or harm) associated with it:
 
+자, 사진이 주어졌을 때 버섯이 독이 있는 것인지를 예측하는 분류기를 만들어서 학습했다고 가정합니다. 우리의 독버섯 탐기 분류기의 결과가 $\Pr(y=\mathrm{death cap}|\mathrm{image}) = 0.2$ 로 나왔습니다. 다르게 말하면, 이 분류기는 80% 확신을 갖고 이 버섯이 알광대버섯(death cap)이 *아니다*라고 말하고 있습니다. 하지만, 이것을 먹지는 않을 것입니다. 이 버섯으로 만들어질 멋진 저녁식사의 가치가 독버섯을 먹고 죽을 20%의 위험보다 가치가 없기 때문입니다. 이것을 수학적으로 살펴보겠습니다. 기본적으로 우리는 예상된 위험을 계산해야합니다. 즉, 결과에 대한 확률에 그 결과에 대한 이익 (또는 손해)를 곱합니다.
+
 $$L(\mathrm{action}| x) = \mathbf{E}_{y \sim p(y| x)}[\mathrm{loss}(\mathrm{action},y)]$$
 
 Hence, the loss $L$ incurred by eating the mushroom is $L(a=\mathrm{eat}| x) = 0.2 * \infty + 0.8 * 0 = \infty$, whereas the cost of discarding it is $L(a=\mathrm{discard}| x) = 0.2 * 0 + 0.8 * 1 = 0.8$.
+
+따라서 버섯을 먹을 경우 우리가 얻는 loss $L$ 은  $L(a=\mathrm{eat}| x) = 0.2 * \infty + 0.8 * 0 = \infty$ 인 반면에, 먹지 않을 경우 cost 또는 loss는  $L(a=\mathrm{discard}| x) = 0.2 * 0 + 0.8 * 1 = 0.8$ 이 됩니다.
 
 Our caution was justified: as any mycologist would tell us, the above mushroom actually *is* a death cap.
 Classification can get much more complicated than just binary, multiclass, or even multi-label classification.
@@ -673,6 +712,8 @@ Usually, this is referred to as *hierarchical classification*.
 One early example is due to [Linnaeus](https://en.wikipedia.org/wiki/Carl_Linnaeus),
 who organized the animals in a hierarchy.
 
+우리의 주의 깊음이 옳았습니다. 균학자들은 위 버섯이 실제로 독버섯인 알광대버섯이라고 알려줄 것이기 때문입니다. 분류 문제는 이진 분류보다 복잡해질 수 있습니다. 즉, 다중클래스 분류 문제이거나 더 나아가서는 다중 레이블 분류의 문제일 수 있습니다.  예를 들면, 계층을 푸는 분류의 종류들이 있습니다. 계층은 많은 클래스들 사이에 관계가 있는 것을 가정합니다. 따라서, 모든 오류가 동일하지 않습니다. 즉, 너무 다른 클래스로 예약하는 것보다는 관련된 클래스로 예측하는 것을 더 선호합니다. 이런 문제를 *계층적 분류(hierarchical classification)* 이라고 합니다. 계층적 분류의 오랜 예는 [Linnaeus](https://en.wikipedia.org/wiki/Carl_Linnaeus) 가 동물을 계층으로 분류한 것을 들수 있습니다.
+
 ![Classify sharks](../img/sharks.png)
 :width:`500px`
 
@@ -682,13 +723,19 @@ Which hierarchy is relevant might depend on how you plan to use the model.
 For example, rattle snakes and garter snakes might be close on the phylogenetic tree,
 but mistaking a rattler for a garter could be deadly.
 
-#### Tagging
+
+동물 분류의 경우 푸들을 슈나이저라고 실수로 분류하는 것이 그렇게 나쁘지 않을 수 있지만, 푸들을 공룡이라고 분류한다면 그 영향이 클 수도 있습니다. 어떤 계층이 적절할지는 여러분이 모델을 어떻게 사용할 것인지에 달려있습니다. 예를 들면, 딸랑이 뱀(rattle snake)와 가터스 뱀(garter snake)은 계통 트리에서는 가까울 수 있지만, 딸랑이 뱀을 가터스 뱀으로 잘못 분류한 결과는 치명적일 수 있기 때문입니다.
+
+
+#### 태깅(Tagging)
 
 Some classification problems don't fit neatly into the binary or multiclass classification setups.
 For example, we could train a normal binary classifier to distinguish cats from dogs.
 Given the current state of computer vision,
 we can do this easily, with off-the-shelf tools.
 Nonetheless, no matter how accurate our model gets, we might find ourselves in trouble when the classifier encounters an image of the Town Musicians of Bremen.
+
+어떤 분류의 문제는 이진 또는 다중 클래스 분류 형태로 딱 떨어지지 않습니다. 예를 들자면,  고양이와 강아지를 구분하는 정상적인 이진 분류기를 학습시킬 수 있습니다. 현재의 컴퓨터 비전의 상태를 고려하면, 이는 상용도구을 이용해서도 아주 쉽게 할 수 있습니다. 그럼에도 불구하고, 우리의 모델이 얼마나 정확하든지 상관없이 브레맨 음악대의 사진지 주어진다면 문제가 발생할 수도 있습니다.
 
 ![A cat, a roster, a dog and a donkey](../img/stackedanimals.jpg)
 :width:`500px`
@@ -700,6 +747,8 @@ treating this as a binary classification problem
 might not make a lot of sense.
 Instead, we might want to give the model the option
 of saying the image depicts a cat *and* a dog *and* a donkey *and* a rooster *and* a bird.
+
+사진에는 고양이, 수닭, 강아지, 당나귀 그리고 배경에는 나무들이 있습니다. 우리의 모델을 이용해서 주로 무엇을 할 것인지에 따라서, 이 문제를 이진 분류의 문제로 다룰 경우 소용이 없어질 수 있습니다. 대신, 우리는 모델이 이미지에 고양이, 강아지, 당나귀 그리고 수닭이 있는 것을 알려주도록 하고 싶을 것입니다.
 
 The problem of learning to predict classes
 that are *not mutually exclusive*
@@ -714,6 +763,8 @@ because these concepts are correlated.
 Posts about 'cloud computing' are likely to mention 'AWS'
 and posts about 'machine learning' could also deal with 'programming languages'.
 
+*서로 배타적이 아닌(not mutually exclusive)* 아닌 클래스들을 예측하는 문제를 멀티-레이블 분류라고 합니다. 자동 태깅 문제가 전형적인 멀티 레이블 분류 문제입니다. 태그의 예는 기술 문서에 붙이는 태그 - 즉, '머신 러닝', '기술', '가젯', '프로그램언어', '리눅스', 클라우드 컴퓨팅', 'AWS' - 를 생각해봅시다. 일반적으로 기사는 5-10개 태그를 갖는데, 그 이유는 태그들이 서로 관련이 있기 때문입니다. '클라우드 컴퓨팅'에 대한 글은 'AWS'를 언급할 가능성이 높고, '머신 러닝' 관련 글은 '프로그램 언어'와 관련된 것일 수 있습니다.
+
 We also have to deal with this kind of problem when dealing with the biomedical literature,
 where correctly tagging articles is important
 because it allows researchers to do exhaustive reviews of the literature.
@@ -726,12 +777,18 @@ until each article can have a proper manual review.
 Indeed, for several years, the BioASQ organization has [hosted a competition](http://bioasq.org/)
 to do precisely this.
 
+우리는 연구자들이 리뷰를 많이 할 수 있도록 하기 위해서 올바른 태그를 다는 것이 중요한 생물 의학 문헌을 다룰 때 이런 문제를 다뤄야합니다. 의학 국립 도서관에는 많은 전문 주석자들이 PubMed에 색인된 아티클들을 하나씩 보면서 MeSH (약 28,000개 태그의 집합) 중에 관련 된 태그를 연관시키는 일을 하고 있습니다. 이것은 시간이 많이 소모되는 일로서, 주석자들이 태그를 다는데는 보통 1년이 걸립니다. 머신 러닝을 사용해서 임시 태그를 달고, 이후에 매뉴얼 리뷰를 하는 것이 가능합니다. 실제로 몇 년 동안 [BioASQ](http://bioasq.org/) 에서는 이에 대한 대회를 열었었습니다.
 
-#### Search and ranking
+#### 검색(Search)과 랭킹(ranking)
 
 Sometimes we don't just want to assign each example to a bucket or to a real value. In the field of information retrieval, we want to impose a ranking on a set of items. Take web search for example, the goal is less to determine whether a particular page is relevant for a query, but rather, which one of the plethora of search results should be displayed for the user. We really care about the ordering of the relevant search results and our learning algorithm needs to produce ordered subsets of elements from a larger set. In other words, if we are asked to produce the first 5 letters from the alphabet, there is a difference between returning ``A B C D E`` and ``C A B E D``. Even if the result set is the same, the ordering within the set matters nonetheless.
 
+때로는 각 예제들에 대해서 어떤 클래스 또는 실제 값을 할당하는 것만을 원하지 않습니다. 정보 검색 분야의 경우에는 아이템 집합에 순위를 매기고 싶어합니다. 웹 검색을 예로 들어보면, 목표는 특정 페이지가 쿼리에 관련이 있는지 여부를 판단하는 것보다는 검색 결과들 중에 어떤 것이 사용자에게 먼저 보여줘야하는 것에 있습니다. 관련 검색 결과의 순서에 대해서 관심이 많고, 우리의 러닝 알고리즘은 큰 집합의 일부에 대한 순서를 매길 수 있어야합니다. 즉, 알파벳에서 처음 5개 글자가 무엇인지를 물어봤을 경우,  ``A B C D E`` 를 결과로 주는 것과  ``C A B E D`` 를 결과로 주는 것에는 차이가 있습니다. 결과 집합은 같은 경우라도,  집합안에서 순서도 중요합니다.
+
 One possible solution to this problem is to score every element in the set of possible sets along with a corresponding relevance score and then to retrieve the top-rated elements. [PageRank](https://en.wikipedia.org/wiki/PageRank) is an early example of such a relevance score. One of the peculiarities is that it didn't depend on the actual query. Instead, it simply helped to order the results that contained the query terms. Nowadays search engines use machine learning and behavioral models to obtain query-dependent relevance scores. There are entire conferences devoted to this subject.
+
+이 문제에 대한 가능한 해결방법은 가능한 집합의 원소들에 관련성 점수를 부여하고, 점수가 높은 항목들을 검색하는 것입니다. [PageRank](https://en.wikipedia.org/wiki/PageRank) 가 관련성 점수를 적용한 예로, 특성 중 하나는 이것은 실제 쿼리에 의존하지 않는다는 것입니다. 대신, 쿼리 단어들을 포함한 결과들을 순서를 부여하는 것을 합니다. 요즘의 검색 엔진은 머신 러닝과 행동 모델을 이용해서 쿼리와 관련된 관련성 점수를 얻습니다. 이 주제만 다루는 컨퍼런스가 있습니다.
+
 
 <!-- Add / clean up-->
 
