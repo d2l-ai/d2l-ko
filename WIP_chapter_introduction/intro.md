@@ -239,6 +239,8 @@ as *programming with data*.
 We can "program" a cat detector by providing our machine learning system
 with many examples of cats and dogs, such as the images below:
 
+정리하면, 웨이크 워드를 인식 할 수있는 코드를 직접 작성하는 것보다, *만약 많은 레이블 데이터 인식 기능을 표현할 수 있다면*, 그 인식 기능을 학습하도록 코드를 작성해야합니다. 이것은 프로그램의 동작을 데이터 세트에서 결정하는, 즉 데이터로 프로그램을 작성하는 것과 같은 것이라고 생각할 수 있습니다. 우리는 다음과 같은 고양이와 개 이미지 샘플을 대량으로 모아 기계 학습을 이용하여, 고양이 인식기를 프로그램 을 만들 수 있습니다.
+
 | ![cat1](../img/cat1.png) | ![cat2](../img/cat2.jpg) | ![dog1](../img/dog1.jpg) |![dog2](../img/dog2.jpg) |
 |:---------------:|:---------------:|:---------------:|:---------------:|
 |cat|cat|dog|dog|
@@ -248,6 +250,8 @@ a very large positive number if it's a cat,
 a very large negative number if it's a dog,
 and something closer to zero if it isn't sure,
 and this barely scratches the surface of what ML can do.
+
+이 경우, 인식기는 고양이이면 매우 큰 양수, 개이면 매우 큰 음수 값 중 하나, 모르는 경우 0에 가까운 값을 출력하도록 학습하는 것입니다. 그리고 이것은 간신히 ML이 하고있는 것을 흉내내는 것입니다.
 
 Deep learning is just one among many
 popular frameworks for solving machine learning problems.
