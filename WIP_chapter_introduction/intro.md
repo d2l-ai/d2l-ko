@@ -211,6 +211,23 @@ The training process usually looks like this:
 1. Tweak the knobs so the model sucks less with respect to those examples
 1. Repeat until the model is awesome.
 
+우리가 적합한 모델 군을 선택한다면,
+그 모델은 'Alexa'라는 말을들을 때마다 '예'라고 응답는 스위치(노브)가 하나 있어야 합니다. 
+웨이크 워드의 바뀔수 있기 때문에, 우리는 아마도 'Apricot'라는 단어에 대해 ``예``라고 응답하는 모델 군이 필요합니다. 우리는 'Alexa'인식과 'Apricot'인식에 동일한 모델이 적용되어야합니다. 비슷한 작업이기 때문입니다.
+어쨌든, 우리는 다른 모델 군이 필요합니다. 근본적으로 다른 입력과 아웃풋을 다루고 싶다면,
+예를 들어, 이미지를 캣션으로, 영어 문장을 중국어 문장으로 맵핑하고자 할때 그렇습니다.
+
+짐작할 수 있듯이 모든 노브를 무작위로 설정하면,
+우리 모델이 'Alexa', 'Apricot', 또는 다른 영어 단어를 인식할 가능성이 없습니다.
+딥러닝(DeepLearning)에서 *러닝*은 우리 모델을 위해 원하는 행동을 하도록 필요한 올바른 스위치(노브)를 ㅊ자아내는 과정입니다.
+
+학습 과정은 일반적으로 다음과 같습니다.
+1. 아무 것도 할 수없는 임의로 초기화 된 모델로 시작하십시오.
+1. 레이블이 지정된 일부 데이터 (예 : 오디오 스니펫과 이에 해당하는`{예, 아니오}`레이블)
+1. 모델이 예제에 관해 완벽하게 적응하지 않도록, 노브를 미세하게 조정하세요.
+1. 모델이 완벽해 질때까지 반복합니다.
+
+
 ![A typical training process. ](../img/ml-loop.svg)
 
 To summarize, rather than code up a wake word recognizer,
