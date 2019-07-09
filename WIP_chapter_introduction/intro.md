@@ -160,6 +160,8 @@ the best possible set of parameters,
 those that improve the performance of our program
 with respect to some measure of performance on the task of interest.
 
+여기에 트릭이 있습니다. 컴퓨터에 명시적으로, 입력을 출력으로 맵핑하는 방법을 모르는 경우에도,  우리는 스스로 인지해서 이것을 해낼 수 있습니다. 즉, 여러분이 'Alexa'라는 단어를 인식하도록 *컴퓨터를 프로그래밍하는 방법*을 모르지만, 여러분은 'Alexa'라는 단어를 인식 할 수 있습니다. 이 기능을 탑제하여, 오디오 예제를 포함하는 거대한 데이터 세트를 수집하고, 웨이크 워드를 포함하지 않는 라벨을 표시 할 수 있습니다. ML 접근법에서 우리는 웨이크워드(wake word)를 인식하도록 시스템을 명시 적으로 설계하지 않습니다. 대신, 우리는 여러 가지 파라미터로 동작이 결정되는 유연한 프로그램을 정의합니다. 그런 다음 데이터 집합을 사용하여 가능한 파라미터 집합을 결정합니다. 파라미터 집합은 관심있는 작업의 성능 측정과 관련하여 프로그램 성능을 향상시킵니다.
+
 You can think of the parameters as knobs that we can turn,
 manipulating the behavior of the program.
 Fixing the parameters, we call the program a *model*.
@@ -178,6 +180,10 @@ and it generates a selection among ``{yes, no}`` as *output*—which,
 if all goes according to plan,
 will closely approximate whether (or not)
 the snippet contains the wake word.
+
+파라미터를 우리가 움직일 수있는 손잡이라고 생각하면, 프로그램의 동작을 조종할 수 있습니다. 파라미터를 수정한 프로그램을 모델이라고 부릅니다. 파라미터를 조작하여 생성 할 수있는 모든 고유 한 프로그램 세트 (입력 - 출력 매핑)를 모델 패밀리라고합니다. 또한 매개 변수를 선택하기 위해 데이터 집합을 사용하는 메타 프로그램을 학습 알고리즘이라고합니다.
+
+우리가 학습 알고리즘을 수행하기 전에 문제를 정확하게 정의하고 입력 및 출력의 정확한 특성을 고정하고 적절한 모델 군을 선택해야합니다. 이 경우 우리 모델은 오디오 스니펫(Snippet)을 입력으로 받고, 출력을 {예, 아니요} 하게 됩니다. 모두 계획대로 진행되면 스니펫에 웨이크 워드가 포함되어 있는지 (또는 설정되어 있지 않은지) 거의 맞출 수 있게 됩니다.
 
 If we choose the right family of models,
 then there should exist one setting of the knobs
@@ -205,6 +211,18 @@ The training process usually looks like this:
 1. Tweak the knobs so the model sucks less with respect to those examples
 1. Repeat until the model is awesome.
 
+만약 여러분이 좋은 모델을 선택했다면, 'Alexa' 단어를 들을 때 마다 `yes` 를 출력하는 모델을 만드는 파라미터 세트 하나가 존재할 것입니다. 마찬가지로 'Apricot' 단어에 대해서 `yes` 를 출력하는 것이 다른 조합이 있을 수 있습니다. 우리는 이 두가지가 비슷하기 때문에, 동일한 모델이 'Alexa' 인식과 'Apricot' 인식에 적용되기를 기대합니다. 하지만 근본적으로 다른 입력 또는 출력을 다루기 위해서는 다른 모델이 필요할 수도 있습니다. 예를 들어, 이미지와 캡션을 매핑하는 머신과 영어 문장을 중국어 문장으로 매핑하는 모델은 서로 다른 것을 사용할 것입니다.
+
+이미 예상했겠지만, 이 손잡이를 아무렇게나 설명할 경우, 아마도 그 모델은 'Alexa', 'Apricot'  또는 어떤 영어 단어도 인식하지 못할 것입니다. 일반적으로 딥러닝에서는 *학습(learning)* 은 여러 *학습 기간*에 걸쳐서 모델의 행동 (손잡이를 돌리면서)을 업데이트하는 것을 말합니다.
+
+학습 과정은 보통 다음과 같습니다.
+
+1. 임의로 초기화되서 아무것도 유용한 것을 못하는 모델로 시작합니다.
+1. 레이블을 갖은 데이터를 수집합니다. (예, 오디오 조각과 그에 해당하는 `{yes,no}` 레이블들)
+1. 주어진 예제들에 모델이 조금 덜 이상하게 작동하도록 손잡이를 조정합니다.
+1. 모델이 좋아질 때까지 반복합니다.
+
+
 ![A typical training process. ](../img/ml-loop.svg)
 
 To summarize, rather than code up a wake word recognizer,
@@ -216,6 +234,10 @@ as *programming with data*.
 We can "program" a cat detector by providing our machine learning system
 with many examples of cats and dogs, such as the images below:
 
+요약하면, wake word를 인식하는 코드를 작성하는 것이 아니라, *아주 많은 레이블이 있는 데이터셋이 있을 경우에* wake word를 인식하는 것을 *배우는* 프로그램을 작성하는 것입니다. 데이터셋을 제공해서 프로그램의 행동을 결정하는 것을 *programming with data*라고 생각할 수 있습니다.
+
+우리는 아래 이미지들과 같은 아주 많은 고양이와 개 샘플들을 머신 러닝 시스템에 제공해서 고양이 탐지기 프로그램을 만들 수 있습니다.
+
 | ![cat1](../img/cat1.png) | ![cat2](../img/cat2.jpg) | ![dog1](../img/dog1.jpg) |![dog2](../img/dog2.jpg) |
 |:---------------:|:---------------:|:---------------:|:---------------:|
 |cat|cat|dog|dog|
@@ -225,6 +247,8 @@ a very large positive number if it's a cat,
 a very large negative number if it's a dog,
 and something closer to zero if it isn't sure,
 and this barely scratches the surface of what ML can do.
+
+이런 방법으로 탐지기는 결국에 고양이를 입력으로 받으면 아주 큰 양수를 결과로 나오게, 그리고 개를 입력으로 받으면 아주 큰 음수를 결과로 나오게 학습될 것입니다. 이 모델은 잘 모르겠으면 0과 가까운 수를 결과로 출력할 것입니다. 이 예는 머신 러닝으로 할 수 있는 일의 일부에 불과합니다.
 
 Deep learning is just one among many
 popular frameworks for solving machine learning problems.
@@ -271,6 +295,13 @@ that will follow us around, no matter what kind of ML problem we take on:
 2. A **model** of how to transform the data
 3. A **loss** function that quantifies the *badness* of our model
 4. An **algorithm** to adjust the model's parameters to minimize the loss
+
+*wake word*를 인식하는 문제를 이야기할 때, 음성 조각과 레이블로 구성된 데이터셋을 언급했습니다. (추상적이긴 하지만) 음성 조각이 주어졌을 때 레이블을 예측하는 머신 러닝 모델을 어떻게 *학습*시킬 수 있는지 설명했습니다. 예제로부터 레이블을 예측하는 설정은 ML의 한 종류로 *지도학습(supervised learning)* 이라고 부릅니다. 딥러닝에서도 많은 접근법들이 있는데, 다른 절들에서 다루겠습니다. 머신 러닝을 진행하기 위해서는 다음 4가지가 필요합니다.
+
+1. 학습에 필요한 *데이터*
+2. 데이터를 어떻게 변환할지에 대한 *모델*
+3. 우리가 얼마나 잘하고 있는지를 측정하는 *loss* 함수
+4. loss 함수를 최소화하도록 모델 파라미터를 바꾸는 *알고리즘*
 
 
 ### Data
@@ -443,12 +474,14 @@ They then update the parameter in the direction that reduces the loss.
 
 In the following sections, we will discuss a few types of machine learning in some more detail. We begin with a list of *objectives*, i.e. a list of things that machine learning can do. Note that the objectives are complemented with a set of techniques of *how* to accomplish them, i.e. training, types of data, etc. The list below is really only sufficient to whet the readers' appetite and to give us a common language when we talk about problems. We will introduce a larger number of such problems as we go along.
 
-### Supervised learning
+### 지도 학습(Supervised learning)
 
 Supervised learning addresses the task of predicting *targets* given input data.
 The targets, also commonly called *labels*, are generally denoted *y*.
 The input data points, also commonly called *examples* or *instances*, are typically denoted $\boldsymbol{x}$.
 The goal is to produce a model $f_\theta$ that maps an input $\boldsymbol{x}$ to a prediction $f_{\theta}(\boldsymbol{x})$
+
+지도학습(supervised learning)은 주어진 입력 데이터에 대한 *타켓(target)*을 예측하는 문제를 푸는 것입니다. 타겟은 종종 *레이블(label)* 이라고 불리고, 기호로는  *y* 로 표기합니다. 입력 데이터 포인트는 *샘플(sample)* 또는 *인스턴스(instance)* 라고 불리기도 하고,  $\boldsymbol{x}$ 로 표기됩니다. 입력  $\boldsymbol{x}$ 를 예측 on $f_{\theta}(\boldsymbol{x})$ 로 매핑하는 모델  $f_\theta$ 을 생성하는 것이 목표입니다.
 
 To ground this description in a concrete example,
 if we were working in healthcare,
@@ -457,7 +490,12 @@ This observation, *heart attack* or *no heart attack*,
 would be our label $y$.
 The input data $\boldsymbol{x}$ might be vital signs such as heart rate, diastolic and systolic blood pressure, etc.
 
+이해를 돕기 위해서 예를 들어보겠습니다. 여러분이 의료분야에서 일을 한다면, 어떤 환자에게 심장 마비가 일어날지 여부를 예측하기를 원할 것입니다. 이 관찰, *심장 마비* 또는 *정상*, 은 우리의 레이블 $y$ 가 됩니다. 입력 $x$ 는 심박동, 이완기 및 수축 혈압 등 바이탈 사인들이 될 것입니다.
+
 The supervision comes into play because for choosing the parameters $\theta$, we (the supervisors) provide the model with a collection of *labeled examples* ($\boldsymbol{x}_i, y_i$), where each example $\boldsymbol{x}_i$ is matched up against its correct label.
+
+파라미터 $\theta$ 를 선택하는데, 우리는(감독자) *레이블이 있는 예들* , ($\boldsymbol{x}_i, y_i$)을 모델에게 제공하기 때문에 감독이 작동합니다. 이 때,  $\boldsymbol{x}_i$ 는 정확한 레이블과 매치되어 있습니다.
+
 
 In probabilistic terms, we typically are interested in estimating
 the conditional probability $P(y|x)$.
@@ -470,12 +508,20 @@ can be described crisply as estimating the probability of some unknown given som
 * Predict the correct translation in French, given a sentence in English.
 * Predict the price of a stock next month based on this month's financial reporting data.
 
+확률 용어로는 조건부 확률  $P(y|x)$을 추정하는데 관심이 있습니다. 이것은 머신 러닝의 여러 접근 방법 중에 하나이지만, 지도학습은 실제로 사용되는 머신 러닝의 대부분을 설명합니다. 부분적으로, 많은 중요한 작업들이 몇 가지 이용 가능한 증거가 주어졌을 때 알 수 없는 것의 확률을 추정하는 것으로 설명될 수 있기 때문입니다 :
+
+* CT 이미지를 보고 암 여부를 예측하기
+* 영어 문장에 대한 정확한 프랑스어 번역을 예측하기
+* 이번달의 제정 보고 데이터를 기반으로 다음달 주식 가격을 예측하기
+
 Even with the simple description 'predict targets from inputs'
 supervised learning can take a great many forms and require a great many modeling decisions,
 depending on the type, size, and the number of inputs and outputs.
 For example, we use different models to process sequences (like strings of text or time series data)
 and for processing fixed-length vector representations.
 We'll visit many of these problems in depth throughout the first 9 parts of this book.
+
+'입력으로 부터 타겟을 예측한다'라고 간단하게 설명했지만, 지도학습은 입력과 출력의 타입, 크기 및 개수에 따라서 아주 다양한 형식이 있고 다양한 모델링 결정을 요구합니다. 예를 들면, 텍스트의 문자열 또는 시계열 데이터와 같은 시퀀스를 처리하는 것과 고정된 백처 표현을 처리하는데 다른 모델을 사용합니다. 이 책의 처음 9 파트에서 이런 문제들에 대해서 상세하게 다룹니다.
 
 Put plainly, the learning process looks something like this.
 Grab a big pile of example inputs, selecting them randomly.
@@ -488,11 +534,13 @@ and outputs another function, *the learned model*.
 Then, given a learned model,
 we can take a new previously unseen input, and predict the corresponding label.
 
+명백히 말하면, 학습 과정은 다음과 같습니다. 예제 입력을 많이 수집해서, 임의로 고릅니다. 각각에 대해서 ground truth를 얻습니다. 입력과 해당하는 레이블 (원하는 결과)을 합쳐서 학습 데이터를 구성합니다. 학습 데이터를 지도학습 알고리즘에 입력합니다. 여기서 *지도학습 알고리즘(supervised learning algorithm)* 은 데이터셋을 입력으로 받아서 어떤 함수(학습된 모델)를 결과로 내는 함수 입니다. 그렇게 얻어진 학습된 모델을 이용해서 이전에 보지 않은 새로운 입력에 대해서 해당하는 레이블을 예측합니다.
+
 ![Supervised learning.](../img/supervised-learning.svg)
 
 
 
-#### Regression
+#### 회귀(Regression)
 
 Perhaps the simplest supervised learning task to wrap your head around is Regression.
 Consider, for example a set of data harvested
@@ -504,6 +552,10 @@ and the number of minutes (walking) to the center of town.
 Formally, we call one row in this dataset a *feature vector*,
 and the object (e.g. a house) it's associated with an *example*.
 
+아마도 여러분의 머리에 떠오르는 가장 간단한 지도학습은 회귀(regression)일 것입니다. 
+주택 판매 데이터베이스에서 추출된 데이터를 예로 들어보겠습니다. 각 행은 하나의 집을, 
+각 열은 관련된 속성(집의 면적, 침실 개수, 화장실 개수, 도심으로 부터의 도보 거리 등)을 갖는 테이블을 만듭니다. 우리는 이 데이터셋의 하나의 행을 *속성백터(feature vector)* 라고 부르고, 이와 연관된 객체는 *예제(example)* 이라고 부릅니다.
+
 If you live in New York or San Francisco, and you are not the CEO of Amazon, Google, Microsoft, or Facebook,
 the (sq. footage, no. of bedrooms, no. of bathrooms, walking distance) feature vector for your home
 might look something like: $[100, 0, .5, 60]$.
@@ -512,6 +564,8 @@ it might look more like $[3000, 4, 3, 10]$.
 Feature vectors like this are essential for all the classic machine learning problems.
 We'll typically denote the feature vector for any one example $\mathbf{x_i}$
 and the set of feature vectors for all our examples $X$.
+
+만약 여러분이 뉴욕이나 샌프란시스코에서 살고, 아마존, 구글, 마이크소프트, 페이스북의 CEO가 아니라면, 여러분 집의 속성 백터(집 면적, 침실수, 화장실수, 도심까지 도보 거리)는 아마도 $[100, 0, .5, 60]$ 가 될 것입니다. 하지만, 피츠버그에 산다면  $[3000, 4, 3, 10]$ 와 가까울 것입니다. 이런 속성 백터는 모든 전통적인 머신 러닝 문제에 필수적인 것입니다. 우리는 일반적으로 어떤 예제에 대한 속성 백터를 $\mathbf{x_i}$ 로 표기하고, 모든 예제에 대한 속성 백터의 집합은  $X$ 로 표기합니다.
 
 What makes a problem a *regression* is actually the outputs.
 Say that you're in the market for a new home,
@@ -528,6 +582,7 @@ We denote these predictions $\hat{y}_i$
 and if the notation seems unfamiliar, then just ignore it for now.
 We'll unpack it more thoroughly in the subsequent chapters.
 
+결과에 따라서 어떤 문제가 *회귀(regression)* 인지를 결정됩니다. 새 집을 사기 위해서 부동산을 돌아다니고 있다고 하면, 여러분은 주어진 속성에 대해서 합당한 집 가격을 추정하기를 원합니다. 타겟 값, 판매 가격,은 *실제 숫자(real number)* 가 됩니다. 샘플  $\mathbf{x_i}$에 대응하는 각 타겟은  $y_i$ 로 표시하고, 모든 예제 X 에 대한 모든 타겟들은  $\mathbf{y}$ 로 적습니다. 타겟이 어떤 범위에 속하는 임의의 실수값을 갖는 다면, 우리는 이를 회귀 문제라고 부릅니다. 우리의 모델의 목표는 실제 타겟 값을 근접하게 추정하는 예측 (이 경우에는 집가격 추측)을 생성하는 것입니다. 이 예측을 $\hat{y}_i$ 로 표기합니다. 만약 표기법이 익숙하지 않다면, 다음 장들에서 더 자세히 설명할 것이기 때문에 지금은 그냥 무시해도 됩니다.  
 
 Lots of practical problems are well-described regression problems.
 Predicting the rating that a user will assign to a movie is a regression problem,
@@ -538,6 +593,12 @@ A good rule of thumb is that any *How much?* or *How many?* problem should sugge
 
 * 'How many hours will this surgery take?' - *regression*
 * 'How many dogs are in this photo?' - *regression*.
+
+많은 실질적인 문제들이 잘 정의된 회귀 문제들입니다. 관객이 영화에 줄 평점을 예측하는 것은 회귀의 문제인데, 여러분이 2009년에 이를 잘 예측하는 대단한 알고리즘을 디자인했다면  [$1 million Netflix prize](https://en.wikipedia.org/wiki/Netflix_Prize) 를 받았을 것입니다. 환자가 입원일 수를 예측하는 것 또한 회귀 문제입니다. 문제가 회귀의 문제인지를 판단하는 좋은 경험의 법칙은 *얼마나 만큼*  또는 *얼마나 많이* 로 대답이되는지 보는 것입니다.
+
+* 이 수술은 몇 시간이 걸릴까요? - *회귀*
+* 이 사진에 개가 몇 마리 있나요? - *회귀*
+
 
 However, if you can easily pose your problem as 'Is this a _ ?',
 then it's likely, classification, a different fundamental problem type that we'll cover next.
@@ -557,6 +618,8 @@ you could already identify the contractor's pricing structure:
 \$100 per hour plus \$50 to show up at your house.
 If you followed that much then you already understand the high-level idea behind linear regression (and you just implicitly designed a linear model with bias).
 
+그런데 만약 주어진 문제에 대한 질문을 '이것은 ... 인가요?' 라고 쉽게 바꿀 수 있다면, 분류의 문제입니다. 이는 다른 기본적인 문제 유형입니다. 머신 러닝을 이전에 다뤄보지 않은 경우에도 비공식적으로는 회귀의 문제들을 다뤄왔습니다. 예를 들어, 여러분의 집의 배수구를 수리하고, 수리공이  $x_1=3$ 시간이 걸려서 하수관에서 덩어리를 제거했습니다. 이에 대해서 수리공은 $y_1 = \$350$ 청구를 합니다. 여러분의 친구가 같은 수리공을 공용해서 or $x_2 = 2$ 시간 걸려서 일하고,  $y_2 = \$250$ 를 청구했습니다. 어떤 사람이 하수관에서 덩어리를 제거하는 데 비용이 얼마가 될지를 물어보면, 여러분은 논리적인 추정 - 시간이 더 소요되면 더 비싸다 -을 할 것입니다. 기본 비용이 있고, 시간당 비용이 있을 것이라고까지 추정할 것입니다. 이 가정이 맞다면, 위 두 데이터 포인트를 활용해서 수리공의 가격 구조를 알아낼 수 있습니다: 시간당 100달러 및 기본 비용 50달러. 여러분이 여기까지 잘 따라왔다면 선형 회귀에 대한 고차원의 아이디어를 이미 이해한 것입니다. (선형모델을 bias를 사용해서 디자인했습니다.)
+
 In this case, we could produce the parameters that exactly matched the contractor's prices.
 Sometimes that's not possible, e.g., if some of the variance owes to some factors besides your two features.
 In these cases, we'll try to learn models that minimize the distance between our predictions and the observed values.
@@ -565,17 +628,24 @@ the
 [L1 loss](http://mxnet.incubator.apache.org/api/python/gluon/loss.html#mxnet.gluon.loss.L1Loss)
 where
 
+
+위 예에서는 수리공의 가격을 정확하게 계산하는 파라미터를 찾아낼 수 있었습니다. 때로는 불가능한데, 예를 들면 만약 어떤 차이가 이 두 피쳐 외에 작용하는 경우가 그렇습니다. 그런 경우에는 우리는 우리의 예측과 관찰된 값의 차이를 최소화하는 모델을 학습시키고자 노력합니다. 대부분 장들에서 우리는 아주 일반적인 loss 둘 중에 하나에 집중할 것입니다. 하나는 [L1 loss](http://mxnet.incubator.apache.org/api/python/gluon/loss.html#mxnet.gluon.loss.L1Loss) 로, 다음과 같고, 
+
 $$l(y,y') = \sum_i |y_i-y_i'|$$
 
 and the least mean squares loss, aka
 [L2 loss](http://mxnet.incubator.apache.org/api/python/gluon/loss.html#mxnet.gluon.loss.L2Loss)
 where
 
+다른 하나는 최소 평균 제곱 손실(least mean square loss), 즉 [L2 loss](http://mxnet.incubator.apache.org/api/python/gluon/loss.html#mxnet.gluon.loss.L2Loss) 입니다. 이는 다음과 같이 표기 됩니다.
+
 $$l(y,y') = \sum_i (y_i - y_i')^2.$$
 
 As we will see later, the $L_2$ loss corresponds to the assumption that our data was corrupted by Gaussian noise, whereas the $L_1$ loss corresponds to an assumption of noise from a Laplace distribution.
 
-#### Classification
+나중에 보겠지만, $L_2$ loss는 우리의 데이터가 가우시안 노이즈에 영향을 받았다고 가정에 관련이 되고, $L_1$ loss는 라플라스 분포(Laplace distribution)의 노이즈를 가정합니다.
+
+#### 분류(classification)
 
 While regression models are great for addressing *how many?* questions,
 lots of problems don't bend comfortably to this template. For example,
@@ -586,6 +656,8 @@ It would also need to understand hand-written text to be even more robust.
 This kind of system is referred to as optical character recognition (OCR),
 and the kind of problem it solves is called a classification.
 It's treated with a distinct set of algorithms than those that are used for regression.
+
+회귀 모델은 *얼마나 많이* 라는 질문에 답을 주는데는 훌륭하지만, 많은 문제들이 이 템플렛에 잘 들어맞지 않습니다. 예를 들면, 은행이 모바일앱에 수표 스캐닝 기능을 추가하고자 합니다. 이를 위해서 고객은 스마트폰의 카메라로 수표를 찍으면, 이미지에 있는 텍스트를 자동으로 이해하는 기능을 하는 머신 러닝 모델이 필요합니다. 손으로 쓴 글씨에 더 잘 동작을 해야할 필요가 있습니다. 이런 시스템은 문자인식(OCR, optical character recognition)이라고 하고, 이것이 풀려는 문제의 종류를 분류라고 합니다. 회귀 문제에 사용되는 알고리즘과는 아주 다른 알고리즘이 이용됩니다.
 
 In classification, we want to look at a feature vector, like the pixel values in an image,
 and then predict which category (formally called *classes*),
@@ -598,6 +670,8 @@ For example, our dataset $X$ could consist of images of animals
 and our *labels* $Y$ might be the classes $\mathrm{\{cat, dog\}}$.
 While in regression, we sought a *regressor* to output a real value $\hat{y}$,
 in classification, we seek a *classifier*, whose output $\hat{y}$ is the predicted class assignment.
+
+분류는 이미지의 픽셀값과 같은 속성 백터를 보고, 그 예제가 주어진 종류들 중에서 어떤 카테고리에 속하는지를 예측합니다. 손으로 쓴 숫자의 경우에는 숫자 0부터 9까지 10개의 클래스가 있습니다. 가장 간단한 분류의 형태는 단 두개의 클래스가 있는 경우로, 이를 이진 분류(binary classificatio)이라고 부릅니다. 예를 들어, 데이터셋 $X$ 가 동물들의 사진이고, 이에 대한 *레이블*  $Y$ 이 {고양이, 강아지}인 경우를 들 수 있습니다. 회귀에서는 결과가 실수 값 $\hat{y}$ 가 되지만, 분류에서는 결과가 예측된 클래스인 *분류기* 를 만들고자 합니다.
 
 For reasons that we'll get into as the book gets more technical, it's pretty hard to optimize a model that can only output a hard categorical assignment, e.g. either *cat* or *dog*.
 It's a lot easier instead to express the model in the language of probabilities.
@@ -613,15 +687,21 @@ We can interpret this number by saying that the classifier is 90% sure that the 
 The magnitude of the probability for the predicted class is one notion of confidence.
 It's not the only notion of confidence and we'll discuss different notions of uncertainty in more advanced chapters.
 
+이 책에서 더 기술적인 내용을 다룰 때, 고정된 카테고리 - 예를 들면 고양이 또는 개 -에 대한 결과만을 예측하는 모델을 최적화하는 것은 어려워질 것입니다. 대신 확률에 기반한 모델로 표현하는 것이 훨씬 더 쉽습니다. 즉, 예제 $x$ 가 주어졌을 때, 모델은 각 레이블 $k$ 에 확률  $\hat{y}_k$ 를 할당하는 것입니다. 결과가 확률값이기 때문에 모두 양수이고, 합은 1이됩니다. 이는 $K$ 개의 카테고리에 대한 확률을 구하기 위해서는 $K-1$ 개의 숫자만 필요하다는 것을 의미합니다. 이진 분류를 예로 들어보겠습니다. 공정하지 않은 동전을 던져서 앞면이 나올 확률이 0.6 (60%)라면, 뒷면이 나올 확률은 0.4 (40%)다 됩니다. 동물 분류의 예로 돌아가보면, 분류기는 이미지를 보고 이미지가 고양이일 확률 $\Pr(y=\mathrm{cat}| x) = 0.9$ 을 출력합니다. 우리는 이 숫자를 이미지가 고양이를 포할 것이라고 90% 정도 확신한다라고 해석할 수 있습니다. 예측된 클래스에 대한 확률의 정도는 신뢰에 대한 개념을 나타냅니다. 신뢰의 개념일 뿐만 아니라, 고급 내용을 다루는 장에서는 여러 비신뢰의 개념도 논의하겠습니다.
+
 When we have more than two possible classes, we call the problem *multiclass classification*.
 Common examples include hand-written character recognition `[0, 1, 2, 3 ... 9, a, b, c, ...]`.
 While we attacked regression problems by trying to minimize the L1 or L2 loss functions,
 the common loss function for classification problems is called cross-entropy.
 In MXNet Gluon, the corresponding loss function can be found [here](https://mxnet.incubator.apache.org/api/python/gluon/loss.html#mxnet.gluon.loss.SoftmaxCrossEntropyLoss).
 
+두 개보다 많은 클래스가 있을 경우에 우리는 이 문제를 *다중클래스 분류(multiclass classification)* 이라고 합니다. 흔한 예로는 손으로 쓴 글씨 -  `[0, 1, 2, 3 ... 9, a, b, c, ...]` - 를 인식하는 예제가 있습니다. 우리는 회귀 문제를 풀 때 L1 또는 L2 loss 함수를 최소화하는 시도를 했는데, 분류 문제에서 cross-entropy 함수가 흔히 사용되는 loss 함수는 입니다. MXNet Gluon에서는 관련된 loss 함수에 대한 내용을 [여기](https://mxnet.incubator.apache.org/api/python/gluon/loss.html#mxnet.gluon.loss.SoftmaxCrossEntropyLoss)에서 볼 수 있습니다.
+
 Note that the most likely class is not necessarily the one that you're going to use for your decision. Assume that you find this beautiful mushroom in your backyard:
 
-![Death cap - do not eat!](../img/death_cap.jpg)
+가장 그럴듯한 클래스가 결정을 위해서 사용하는 것이 꼭 아닐 수도 있습니다. 여러분의 뒷뜰에서 이 아름다운 버섯을 찾는다고 가정해보겠습니다.
+
+![알광대 버섯(Death cap) - !](../img/death_cap.jpg)
 :width:`400px`
 
 Now, assume that you built a classifier and trained it
@@ -633,9 +713,13 @@ That's because the certain benefit of a delicious dinner isn't worth a 20% risk 
 In other words, the effect of the *uncertain risk* by far outweighs the benefit.
 Let's look at this in math. Basically, we need to compute the expected risk that we incur, i.e. we need to multiply the probability of the outcome with the benefit (or harm) associated with it:
 
+자, 사진이 주어졌을 때 버섯이 독이 있는 것인지를 예측하는 분류기를 만들어서 학습했다고 가정합니다. 우리의 독버섯 탐기 분류기의 결과가 $\Pr(y=\mathrm{death cap}|\mathrm{image}) = 0.2$ 로 나왔습니다. 다르게 말하면, 이 분류기는 80% 확신을 갖고 이 버섯이 알광대버섯(death cap)이 *아니다*라고 말하고 있습니다. 하지만, 이것을 먹지는 않을 것입니다. 이 버섯으로 만들어질 멋진 저녁식사의 가치가 독버섯을 먹고 죽을 20%의 위험보다 가치가 없기 때문입니다. 이것을 수학적으로 살펴보겠습니다. 기본적으로 우리는 예상된 위험을 계산해야합니다. 즉, 결과에 대한 확률에 그 결과에 대한 이익 (또는 손해)를 곱합니다.
+
 $$L(\mathrm{action}| x) = \mathbf{E}_{y \sim p(y| x)}[\mathrm{loss}(\mathrm{action},y)]$$
 
 Hence, the loss $L$ incurred by eating the mushroom is $L(a=\mathrm{eat}| x) = 0.2 * \infty + 0.8 * 0 = \infty$, whereas the cost of discarding it is $L(a=\mathrm{discard}| x) = 0.2 * 0 + 0.8 * 1 = 0.8$.
+
+따라서 버섯을 먹을 경우 우리가 얻는 loss $L$ 은  $L(a=\mathrm{eat}| x) = 0.2 * \infty + 0.8 * 0 = \infty$ 인 반면에, 먹지 않을 경우 cost 또는 loss는  $L(a=\mathrm{discard}| x) = 0.2 * 0 + 0.8 * 1 = 0.8$ 이 됩니다.
 
 Our caution was justified: as any mycologist would tell us, the above mushroom actually *is* a death cap.
 Classification can get much more complicated than just binary, multiclass, or even multi-label classification.
@@ -646,6 +730,8 @@ Usually, this is referred to as *hierarchical classification*.
 One early example is due to [Linnaeus](https://en.wikipedia.org/wiki/Carl_Linnaeus),
 who organized the animals in a hierarchy.
 
+우리의 주의 깊음이 옳았습니다. 균학자들은 위 버섯이 실제로 독버섯인 알광대버섯이라고 알려줄 것이기 때문입니다. 분류 문제는 이진 분류보다 복잡해질 수 있습니다. 즉, 다중클래스 분류 문제이거나 더 나아가서는 다중 레이블 분류의 문제일 수 있습니다.  예를 들면, 계층을 푸는 분류의 종류들이 있습니다. 계층은 많은 클래스들 사이에 관계가 있는 것을 가정합니다. 따라서, 모든 오류가 동일하지 않습니다. 즉, 너무 다른 클래스로 예약하는 것보다는 관련된 클래스로 예측하는 것을 더 선호합니다. 이런 문제를 *계층적 분류(hierarchical classification)* 이라고 합니다. 계층적 분류의 오랜 예는 [Linnaeus](https://en.wikipedia.org/wiki/Carl_Linnaeus) 가 동물을 계층으로 분류한 것을 들수 있습니다.
+
 ![Classify sharks](../img/sharks.png)
 :width:`500px`
 
@@ -655,13 +741,19 @@ Which hierarchy is relevant might depend on how you plan to use the model.
 For example, rattle snakes and garter snakes might be close on the phylogenetic tree,
 but mistaking a rattler for a garter could be deadly.
 
-#### Tagging
+
+동물 분류의 경우 푸들을 슈나이저라고 실수로 분류하는 것이 그렇게 나쁘지 않을 수 있지만, 푸들을 공룡이라고 분류한다면 그 영향이 클 수도 있습니다. 어떤 계층이 적절할지는 여러분이 모델을 어떻게 사용할 것인지에 달려있습니다. 예를 들면, 딸랑이 뱀(rattle snake)와 가터스 뱀(garter snake)은 계통 트리에서는 가까울 수 있지만, 딸랑이 뱀을 가터스 뱀으로 잘못 분류한 결과는 치명적일 수 있기 때문입니다.
+
+
+#### 태깅(Tagging)
 
 Some classification problems don't fit neatly into the binary or multiclass classification setups.
 For example, we could train a normal binary classifier to distinguish cats from dogs.
 Given the current state of computer vision,
 we can do this easily, with off-the-shelf tools.
 Nonetheless, no matter how accurate our model gets, we might find ourselves in trouble when the classifier encounters an image of the Town Musicians of Bremen.
+
+어떤 분류의 문제는 이진 또는 다중 클래스 분류 형태로 딱 떨어지지 않습니다. 예를 들자면,  고양이와 강아지를 구분하는 정상적인 이진 분류기를 학습시킬 수 있습니다. 현재의 컴퓨터 비전의 상태를 고려하면, 이는 상용도구을 이용해서도 아주 쉽게 할 수 있습니다. 그럼에도 불구하고, 우리의 모델이 얼마나 정확하든지 상관없이 브레맨 음악대의 사진지 주어진다면 문제가 발생할 수도 있습니다.
 
 ![A cat, a roster, a dog and a donkey](../img/stackedanimals.jpg)
 :width:`500px`
@@ -673,6 +765,8 @@ treating this as a binary classification problem
 might not make a lot of sense.
 Instead, we might want to give the model the option
 of saying the image depicts a cat *and* a dog *and* a donkey *and* a rooster *and* a bird.
+
+사진에는 고양이, 수닭, 강아지, 당나귀 그리고 배경에는 나무들이 있습니다. 우리의 모델을 이용해서 주로 무엇을 할 것인지에 따라서, 이 문제를 이진 분류의 문제로 다룰 경우 소용이 없어질 수 있습니다. 대신, 우리는 모델이 이미지에 고양이, 강아지, 당나귀 그리고 수닭이 있는 것을 알려주도록 하고 싶을 것입니다.
 
 The problem of learning to predict classes
 that are *not mutually exclusive*
@@ -687,6 +781,8 @@ because these concepts are correlated.
 Posts about 'cloud computing' are likely to mention 'AWS'
 and posts about 'machine learning' could also deal with 'programming languages'.
 
+*서로 배타적이 아닌(not mutually exclusive)* 아닌 클래스들을 예측하는 문제를 멀티-레이블 분류라고 합니다. 자동 태깅 문제가 전형적인 멀티 레이블 분류 문제입니다. 태그의 예는 기술 문서에 붙이는 태그 - 즉, '머신 러닝', '기술', '가젯', '프로그램언어', '리눅스', 클라우드 컴퓨팅', 'AWS' - 를 생각해봅시다. 일반적으로 기사는 5-10개 태그를 갖는데, 그 이유는 태그들이 서로 관련이 있기 때문입니다. '클라우드 컴퓨팅'에 대한 글은 'AWS'를 언급할 가능성이 높고, '머신 러닝' 관련 글은 '프로그램 언어'와 관련된 것일 수 있습니다.
+
 We also have to deal with this kind of problem when dealing with the biomedical literature,
 where correctly tagging articles is important
 because it allows researchers to do exhaustive reviews of the literature.
@@ -699,12 +795,18 @@ until each article can have a proper manual review.
 Indeed, for several years, the BioASQ organization has [hosted a competition](http://bioasq.org/)
 to do precisely this.
 
+우리는 연구자들이 리뷰를 많이 할 수 있도록 하기 위해서 올바른 태그를 다는 것이 중요한 생물 의학 문헌을 다룰 때 이런 문제를 다뤄야합니다. 의학 국립 도서관에는 많은 전문 주석자들이 PubMed에 색인된 아티클들을 하나씩 보면서 MeSH (약 28,000개 태그의 집합) 중에 관련 된 태그를 연관시키는 일을 하고 있습니다. 이것은 시간이 많이 소모되는 일로서, 주석자들이 태그를 다는데는 보통 1년이 걸립니다. 머신 러닝을 사용해서 임시 태그를 달고, 이후에 매뉴얼 리뷰를 하는 것이 가능합니다. 실제로 몇 년 동안 [BioASQ](http://bioasq.org/) 에서는 이에 대한 대회를 열었었습니다.
 
-#### Search and ranking
+#### 검색(Search)과 랭킹(ranking)
 
 Sometimes we don't just want to assign each example to a bucket or to a real value. In the field of information retrieval, we want to impose a ranking on a set of items. Take web search for example, the goal is less to determine whether a particular page is relevant for a query, but rather, which one of the plethora of search results should be displayed for the user. We really care about the ordering of the relevant search results and our learning algorithm needs to produce ordered subsets of elements from a larger set. In other words, if we are asked to produce the first 5 letters from the alphabet, there is a difference between returning ``A B C D E`` and ``C A B E D``. Even if the result set is the same, the ordering within the set matters nonetheless.
 
+때로는 각 예제들에 대해서 어떤 클래스 또는 실제 값을 할당하는 것만을 원하지 않습니다. 정보 검색 분야의 경우에는 아이템 집합에 순위를 매기고 싶어합니다. 웹 검색을 예로 들어보면, 목표는 특정 페이지가 쿼리에 관련이 있는지 여부를 판단하는 것보다는 검색 결과들 중에 어떤 것이 사용자에게 먼저 보여줘야하는 것에 있습니다. 관련 검색 결과의 순서에 대해서 관심이 많고, 우리의 러닝 알고리즘은 큰 집합의 일부에 대한 순서를 매길 수 있어야합니다. 즉, 알파벳에서 처음 5개 글자가 무엇인지를 물어봤을 경우,  ``A B C D E`` 를 결과로 주는 것과  ``C A B E D`` 를 결과로 주는 것에는 차이가 있습니다. 결과 집합은 같은 경우라도,  집합안에서 순서도 중요합니다.
+
 One possible solution to this problem is to score every element in the set of possible sets along with a corresponding relevance score and then to retrieve the top-rated elements. [PageRank](https://en.wikipedia.org/wiki/PageRank) is an early example of such a relevance score. One of the peculiarities is that it didn't depend on the actual query. Instead, it simply helped to order the results that contained the query terms. Nowadays search engines use machine learning and behavioral models to obtain query-dependent relevance scores. There are entire conferences devoted to this subject.
+
+이 문제에 대한 가능한 해결방법은 가능한 집합의 원소들에 관련성 점수를 부여하고, 점수가 높은 항목들을 검색하는 것입니다. [PageRank](https://en.wikipedia.org/wiki/PageRank) 가 관련성 점수를 적용한 예로, 특성 중 하나는 이것은 실제 쿼리에 의존하지 않는다는 것입니다. 대신, 쿼리 단어들을 포함한 결과들을 순서를 부여하는 것을 합니다. 요즘의 검색 엔진은 머신 러닝과 행동 모델을 이용해서 쿼리와 관련된 관련성 점수를 얻습니다. 이 주제만 다루는 컨퍼런스가 있습니다.
+
 
 <!-- Add / clean up-->
 
@@ -712,14 +814,21 @@ One possible solution to this problem is to score every element in the set of po
 
 Recommender systems are another problem setting that is related to search and ranking. The problems are  similar insofar as the goal is to display a set of relevant items to the user. The main difference is the emphasis on *personalization* to specific users in the context of recommender systems. For instance, for movie recommendations, the results page for a SciFi fan and the results page for a connoisseur of Woody Allen comedies might differ significantly.
 
+추천 시스템은 검색과 랭킹과 관련된 또다른 문제 세팅입니다. 사용자에게 관련된 상품을 보여주는 것이 목표이기에 문제는 비스합니다. 주요 차이점은 추천 시스템에서는 특정 사용자에 대한 *개인화(personalization)* 를 중점으로 한다는 것입니다. 예를 들어, 영화 추천의 경우에는 SciFi 에 대한 결과 페이지와 우디 엘런 코미디에 대한 결과 페이지가 아주 다르게 나옵니다.
+
 Such problems occur, e.g. for movie, product or music recommendation. In some cases, customers will provide explicit details about how much they liked the product (e.g. Amazon product reviews). In some other cases, they might simply provide feedback if they are dissatisfied with the result (skipping titles on a playlist). Generally, such systems strive to estimate some score $y_{ij}$, such as an estimated rating or probability of purchase, given a user $u_i$ and product $p_j$.
 
+
+이런 문제는 영화, 제품 또는 음악 추천에서 발생합니다. 어떤 경우에는 고객은 얼마나 그 제품을 좋아하는지를 직접 알려주기도 합니다 (예를 들면 아마존의 제품 리뷰). 어떤 경우에는 결과에 만족하지 못한 경우 피드백을 간단하게 주기도 합니다 (재생 목록의 타이틀을 건너뛰는 형식으로). 일반적으로는 이런 시스템은 어떤 점수 $y_{ij}$ 를 예측하고자 하는데, 이 예측은 사용자 $u_i$ 와 제품  $p_j$가 주어졌을 때 예상된 평점 또는 구매 확률이 될 수 있습니다.
+
 Given such a model, then for any given user, we could retrieve the set of objects with the largest scores $y_{ij}$, which are then used as a recommendation. Production systems are considerably more advanced and take detailed user activity and item characteristics into account when computing such scores. The following image is an example of deep learning books recommended by Amazon based on personalization algorithms tuned to the author's preferences.
+
+이런 모델은 어떤 사용자에 대해서 가장 큰 점수  $y_{ij}$ 를 갖는 객체들의 집합을 찾아주는데, 이것이 추천으로 사용됩니다. 운영 시스템은 매우 복잡하고, 점수를 계산할 때 자세한 사용자의 활동과 상품의 특징까지 고려합니다. 아래 이미지는 아마존이 저자들의 관심을 반영한 개인화 알고리즘을 기반으로 아마존이 추천한 딥러닝 책들의 예입니다.
 
 ![Deep learning books recommended by Amazon.](../img/deeplearning_amazon.png)
 
 
-#### Sequence Learning
+#### 시퀀스 러닝(Sequence Learning)
 
 So far we've looked at problems where we have some fixed number of inputs
 and produce a fixed number of outputs.
@@ -730,6 +839,8 @@ to the predicted probabilities that it belongs to each of a fixed number of clas
 or taking a user ID and a product ID, and predicting a star rating.
 In these cases, once we feed our fixed-length input into the model to generate an output,
 the model immediately forgets what it just saw.
+
+지금까지는 고정된 개수의 입력을 받아서 고정된 개수의 결과를 출력하는 문제를 봤습니다. 면적, 침실 개수, 욕실 개수, 다운타운까지 도보 거리와 같은 고정된 특성들로 부터 주택 가격을 예측하는 것을 고려하기 앞서서, (고정된 차원의) 이미지를 고정된 수의 클래스들에 속할 예측된 확률로 매핑하는 것, 사용자 ID와 제품 ID를 받아서 별점수를 예측하는 문제들도 논의햇습니다. 이 경우들은, 우리가 고정된 길이의 입력을 모델에 넣어서 결과를 얻으면, 모델은 무엇을 봤는지 바로 잊어버립니다.
 
 This might be fine if our inputs truly all have the same dimensions
 and if successive inputs truly have nothing to do with each other.
@@ -743,11 +854,15 @@ One popular deep learning problem is machine translation:
 the task of ingesting sentences in some source language
 and predicting their translation in another language.
 
+만약 입력이 정말로 모두 같은 차원을 갖거나, 연속된 입력들이 서로 관련이 아무런 관련이 없을 경우에는 문제가 없습니다. 하지만, 비디오 영상의 단편을 다뤄야 한다면 어떨까요? 이 경우에는 각 단편은 서로 다른 여러 프레임들로 구성되어 있을 거십니다. 각 프레임에서 무엇이 일어나고 있는지에 대한 추측은 이전 또는 이후 프레임을 고려할 경우에 더 확실할 것입니다. 언어도 마찬가지 입니다. 기계번역은 유명한 딥러닝 문제들 중에 하나입니다: 이는, 어떤 언어의 문장을 받아서, 다른 언어로 번역을 추측하는 것입니다.
+
 These problems also occur in medicine.
 We might want a model to monitor patients in the intensive care unit and to fire off alerts
 if their risk of death in the next 24 hours exceeds some threshold.
 We definitely wouldn't want this model to throw away everything it knows about the patient history each hour,
 and just make its predictions based on the most recent measurements.
+
+이와 같은 문제는 의학에서도 찾을 수 있습니다. 우리는 중환자실의 환자를 모니터링하면서, 24시간 안에 생명에 대한 위험은 어느 정도를 넘을 경우 경고를 발생하는 모델을 원할 수 있습니다. 당연히 이 모델이 사용했던 지난 몇 시간 동안의 기록을 버리고, 오직 가장 최근의 기록만을 사용해서 예측을 하는 것을 원하지는 않을 것입니다.
 
 These problems are among the most exciting applications of machine learning
 and they are instances of *sequence learning*.
@@ -759,9 +874,14 @@ Transcribing text from spoken speech is also a ``seq2seq`` problem.
 While it is impossible to consider all types of sequence transformations,
 a number of special cases are worth mentioning:
 
-##### Tagging and Parsing
+머신 러닝의 아주 흥미로운 응용들이 이런 문제들에 속합니다. 이런 문제들은 *시퀀스 러닝(sequence learning)*의 예들입니다. 입력 시퀀스들을 받거나, 출력 시퀀스를 생성하는 (또는 모두) 모델이 필요합니다. 종종 우리는 이런 문제들을 `seq2seq` 문제라고 합니다. 언어 번역은 `seq2seq` 문제입니다. 음성으로 부터 텍스트를 추출하는 것 또한 `seq2seq` 문제입니다. 시퀀스 변환(sequence transformation)의 모든 종류를 고려하기는 어렵지만, 특별한 몇 가지 사례는 여기서 언급할 가치가 있습니다.
+
+
+##### 태깅(Tagging)과 파싱(Parsing)
 
 This involves annotating a text sequence with attributes. In other words, the number of inputs and outputs is essentially the same. For instance, we might want to know where the verbs and subjects are. Alternatively, we might want to know which words are the named entities. In general, the goal is to decompose and annotate text based on structural and grammatical assumptions to get some annotation. This sounds more complex than it actually is. Below is a very simple example of annotating a sentence with tags indicating which words refer to named entities.
+
+이것은 텍스트 시퀀스에 속성들로 주석을 다는 것입니다. 이 때, 입력과 출력의 개수가 정확하게 같습니다. 예를 들면, 동사와 주어가 어디에 있는지를 알기를 원합니다. 또는, 어떤 단어가 이름을 갖는 개체인지를 알고자 할 수 있습니다. 일반적으로, 이런 예들에서는 구조나 문법적인 추정에 근거해서 분해(decompose)를 하고 주석을 다는 것이 목표입니다. 다음은 문장이 주어졌을 때 어떤 단어가 이름을 갖는 개체를 가르키는지를 태그로 주석을 다는 아주 간단한 예제입니다.
 
 ```text
 Tom has dinner in Washington with Sally.
@@ -769,7 +889,7 @@ Ent  -    -    -     Ent      -    Ent
 ```
 
 
-##### Automatic Speech Recognition
+##### 자동 음성 인식(Automatic Speech Recognition)
 
 With speech recognition, the input sequence $x$ is the sound of a speaker,
 and the output $y$ is the textual transcript of what the speaker said.
@@ -777,10 +897,12 @@ The challenge is that there are many more audio frames (sound is typically sampl
 since thousands of samples correspond to a single spoken word.
 These are ``seq2seq`` problems where the output is much shorter than the input.
 
+음성 인식에서는 입력 시퀀스 $x$ 는 화자의 음성이고, 출력 $y$ 는 화자가 말한 원문의 기록입니다. 텍스트보다 오디오 프레임의 수가 훨신 더 많다는 점이 챌린지입니다. 즉, 수천개의 오디오 샘플이 하나의 발화된 단어에 해당되기 때문에, 오디오와 텍스트의 1:1 대응이 없습니다.
+
 ![`-D-e-e-p- L-ea-r-ni-ng-`](../img/speech.png)
 :width:`700px`
 
-##### Text to Speech
+##### 텍스트를 음성으로 변환하기(Text to Speech)
 
 Text-to-Speech (TTS) is the inverse of speech recognition.
 In other words, the input $x$ is text
@@ -789,7 +911,9 @@ In this case, the output is *much longer* than the input.
 While it is easy for *humans* to recognize a bad audio file,
 this isn't quite so trivial for computers.
 
-##### Machine Translation
+Text-to-Speech(TTS)는 음성 인식과 정반대입니다. 즉, 입력 $x$는 텍스트이고, 출력 $y$는 오디오 파일입니다. 이 경우, 출력은 입력보다 *훨신 깁니다*. *사람*이 잘못된 음성 파일을 알아내는 것은 쉽지만, 컴퓨터에게는 쉬운일이 아닙니다.
+
+##### 기계 번역(Machine Translation)
 
 Unlike the case of speech recognition, where corresponding inputs and outputs occur in the same order (after alignment),
 in machine translation, order inversion can be vital.
@@ -798,13 +922,16 @@ neither the number of inputs and outputs
 nor the order of corresponding data points
 are assumed to be the same.
 Consider the following illustrative example of the obnoxious tendency of Germans
+
+대응하는 입력과 출력이 같은 순서인 음성 인식과는 다르게, 기계 번역의 경우 순서가 뒤바뀌는 것이 중요할 수 있습니다. 즉, 하나의 시퀀스를 다른 시퀀스로 바꾸는 일을 하지만, 입력과 출력의 개수나 대응하는 데이터 포인트들의 순서가 같다고 가정하지 않습니다. 동사를 문장의 맨 끝에 놓는 독일인의 경향에 대한 예제를 생각해보겠습니다.
+
 <!-- Alex writing here -->
 to place the verbs at the end of sentences.
 
 ```text
-German:           Haben Sie sich schon dieses grossartige Lehrwerk angeschaut?
-English:          Did you already check out this excellent tutorial?
-Wrong alignment:  Did you yourself already this excellent tutorial looked-at?
+독일어:           Haben Sie sich schon dieses grossartige Lehrwerk angeschaut?
+영어:          Did you already check out this excellent tutorial?
+잘못된 배치:  Did you yourself already this excellent tutorial looked-at?
 ```
 
 A number of related problems exist.
@@ -814,8 +941,9 @@ Likewise, for dialogue problems,
 we need to take world-knowledge and prior state into account.
 This is an active area of research.
 
+비슷한 문제는 아주 많이 존재합니다. 예를 들면, 사용자가 웹 페이지를 어떤 순서로 읽는지를 결정하는 것은 2차원적인 레이아웃 분석 문제입니다. 비슷하게 대화 문제에서는 세상에 대한 지식과 이전 상태를 고려해야 합니다. 이것들은 활발한 연구 영역입니다.
 
-### Unsupervised learning
+### 비지도 학습(Unsupervised learning)
 
 All the examples so far were related to *Supervised Learning*,
 i.e. situations where we feed the model
@@ -824,6 +952,9 @@ You could think of supervised learning as having an extremely specialized job an
 The boss stands over your shoulder and tells you exactly what to do in every situation until you learn to map from situations to actions.
 Working for such a boss sounds pretty lame.
 On the other hand, it's easy to please this boss. You just recognize the pattern as quickly as possible and imitate their actions.
+
+
+지금까지 모든 예제들은 *지도 학습(supervised learning)*과 관련된 것들 였습니다. 즉, 모델에 예제들과 *관련된 타겟 값들*을 입력하는 학습였습니다. 지도 학습을 굉장히 특화된 일과 매우 분석적인 상사를 갖는 것으로 생각할 수 있습니다. 상사는 여러분의 어깨 넘어에서 모든 상황마다 정확히 무엇을 해야하는지를 알려주며, 이는 여러분이 상황을 행동으로 연결하는 것을 배울 때까지 지속됩니다. 그런 상사와 일하는 것은 아주 귀찮은 것입니다. 다른 한편으로는 이런 상사를 기쁘게 만드는 것은 쉽습니다. 패턴을 가능한 빨리 인지해서 그들의 행동을 모방하면 됩니다.
 
 In a completely opposite way,
 it could be frustrating to work for a boss
@@ -836,14 +967,22 @@ and the type and number of questions we could ask
 is limited only by our creativity.
 We will address a number of unsupervised learning techniques in later chapters. To whet your appetite for now, we describe a few of the questions you might ask:
 
+이와는 완전히 반대인 경우, 즉 여러분이 무엇을 해야할지를 전혀 모르는 상사와 일하는 것이 실망스러울 수 있습니다. 하지만, 여러분이 데이터 과학자가 되기를 계획하고 있다면, 이에 익숙해져야 합니다. 여러분의 상사는 엄청나게 많은 데이터를 주면서, *이것으로 데이터 과학을 좀 해봐!*라고 할수도 있습니다. 이것은 모호하기 때문에, 모호하게 들립니다. 이런 문제 종류를 우리는 *비지도 학습(unsupervised learning)*이라고 하며, 우리가 물을 수 있는 질문의 종류와 수는 우리들의 창의성에 달려있습니다. 다음 장들에서 다양한 비지도 학습 기법에 대해서 알아볼 예정이나, 여러분의 궁금증을 달래주기 위해서, 여러분이 물을 몇가지 질문들에 대해서 설명하겠습니다.
+
 * Can we find a small number of prototypes that accurately summarize the data? Given a set of photos, can we group them into landscape photos, pictures of dogs, babies, cats, mountain peaks, etc.? Likewise, given a collection of users' browsing activity, can we group them into users with similar behavior? This problem is typically known as **clustering**.
 * Can we find a small number of parameters that accurately capture the relevant properties of the data? The trajectories of a ball are quite well described by velocity, diameter, and mass of the ball. Tailors have developed a small number of parameters that describe human body shape fairly accurately for the purpose of fitting clothes. These problems are referred to as **subspace estimation** problems. If the dependence is linear, it is called **principal component analysis**.
 * Is there a representation of (arbitrarily structured) objects in Euclidean space (i.e. the space of vectors in $\mathbb{R}^n$) such that symbolic properties can be well matched? This is called **representation learning** and it is used to describe entities and their relations, such as Rome - Italy + France = Paris.
 * Is there a description of the root causes of much of the data that we observe? For instance, if we have demographic data about house prices, pollution, crime, location, education, salaries, etc., can we discover how they are related simply based on empirical data? The field of **directed graphical models** and **causality** deals with this.
 * An important and exciting recent development is **generative adversarial networks**. They are basically a procedural way of synthesizing data. The underlying statistical mechanisms are tests to check whether real and fake data are the same. We will devote a few notebooks to them.
 
+* 데이터를 정확하게 요약하는 작은 개수의 프로토타입을 찾을 수 있을까요? 사진들이 주어졌을 때, 사진들을 풍경 사진, 강아지 사진, 아기들, 고양이들, 산정상 등으로 그룹을 나눌 수 있을까요? 비슷하게, 사용자의 브라우징 행동들에 대한 데이터가 주어졌을 때, 비슷한 행동을 하는 사용자들로 그룹을 나눌 수 있나요? 이런 문제는 일반적으로 **클러스터링(clustering)**이라고 합니다.
+* 데이터에 대해서 관련있는 특성을 정확하게 포착하는 몇 개의 파라미터들 찾을 수 있을까요? 공의 궤적은 공의 속도, 직경, 질량으로 아주 잘 설명됩니다. 재봉사는 옷을 맞출 목적에 따라서 사람 몸 모양을 꽤 정확하게 설명하는 몇 개의 파라미터를 만들었습니다. 이 문제들은 **부분공간 추정(subspace estimation)** 문제로 알려져 있습니다. 의존이 선형인 경우에는 우리는 이를 **주성분 분석(principal component analysis)**이라고 합니다.
+* 유클리디인 공간에서 (임의로 조직화된) 객체에 대해서 심볼릭 성질이 잘 일치하는 표현이 있나요? 이는 **표현 학습(representation learning)**이라고 불리며, 엔터티들과 그것들의 관계를 설명하는데 사용돕니다. 예를 들면, Rome - Italy + France = Paris.
+* 우리가 관찰한 많은 양의 데이터에 대한 주원인(root cause)에 대한 설명이 있나요? 예를 들면, 주택 가격, 공해, 범죄, 위치, 교육, 급여 등에 대한 인구 통계학 데이터가 있을 때, 단순히 경험적인 데이터를 기반으로 이것들이 어떻게 연관되어 있는지를 찾을 수 있나요? **방향성 그래프 모델(directed graphical model)**과 **인과 관계(causality)**가 이것을 다룹니다.
+* **Generative adversarial network**는 최근에 개발된 중요하고 흥미로운 네트워크입니다. 기본적으로는 이것은 데이터를 합성하는 단계적인 방법입니다. 근본적인 통계적 메카니즘은 실제 데이터와 가짜 데이터가 같은지를 점검하는 테스트들입니다. 나중에 몇 개의 노트북에 걸쳐서 살펴보도록 하겠습니다.
 
-### Interacting with an Environment
+
+### 환경과 상호 작용하기(Interacting with an Environment)
 
 So far, we haven't discussed where data actually comes from,
 or what actually *happens* when a machine learning model generates an output.
@@ -854,6 +993,8 @@ then do our pattern recognition without ever interacting with the environment ag
 Because all of the learning takes place after the algorithm is disconnected from the environment,
 this is called *offline learning*.
 For supervised learning, the process looks like this:
+
+지금까지는 데이터가 실제로 어디서 왔는지 또는 머신 러닝 모델이 결과를 만들 때 실제로 어떤 일이 *일어나는지*를 논의하지 않았습니다. 그 이유는 지도 학습과 비지도 학습은 이런 이슈를 아주 복잡한 방법으로 해결하지 않기 때문입니다. 둘 중 어떤 경우에도, 우리는 많은 양의 데이터를 받아서, 환경과 상호 작용을 하지 않고 패턴 인식을 수행합니다. 이런 모든 학습은 알고리즘이 환경와 분리된 상태에서 일어나기 때문에, 이를 *오프라인 학습(offline learning)*이라고 합니다. 지도 학습의 경우, 프로세스는 다음과 같습니다.
 
 ![Collect data for supervised learning from an environment.](../img/data-collection.svg)
 
@@ -871,6 +1012,8 @@ If we want to train an intelligent agent,
 we must account for the way its actions might
 impact the future observations of the agent.
 
+오프라인 학습의 간결함은 매력적입니다. 좋은 점은 다른 문제들을 고려할 필요없는 격리된 상태에서 패턴 인식을 하면 된다는 것이지만, 단점은 문제를 공식화(problem formulation)하는 것이 아주 제한적이라는 것입니다. 여러분이 더 의욕적이거나, Asimov's Robot Series를 읽으면서 자랐다면, 예측을 할 뿐만 아니라 세상에서 행동을 취할 수 있는 인공지능 봇을 떠올릴 수도 있습니다. 이는 단지 예측을 하는 것이 아니라 행동을 선택하는 것을 생각해봐야한다는 것을 뜻합니다. 나아가 예측과는 달리 행동은 실제로 환경에 영향을 미칩니다. 우리가 지능적인 에이전트를 학습시키기를 원한다면, 행동이 에이전트의 미래 관찰에 미치는 영향에 대해서도 설명해야합니다.
+
 
 Considering the interaction with an environment opens a whole set of new modeling questions. Does the environment:
 
@@ -880,6 +1023,14 @@ Considering the interaction with an environment opens a whole set of new modelin
 * not  care (as in most cases)?
 * have shifting dynamics (steady vs. shifting over time)?
 
+환경과의 상호 작용을 고려하는 것은 완전히 새로운 모델링에 대한 질문을 가져옵니다. 환경이,
+
+* 우리가 이전에 행한 것을 기억하나요?
+* 우리를 돕기를 원하나요? 즉, 사용자가 음성 인식기에 텍스트를 읽는 경우.
+* 우리를 이기기를 원하나요? 즉, 스팸 필터(스팸 발송자에 대항하는) 같은 적대적 설정 또는 (상대와) 게임을 플레이하는 것.
+* not  care (as in most cases)?
+* 변하는 역동성을 가지고 있나요(시간에 따라 그대로인지 변하는지)?
+
 This last question raises the problem of *covariate shift*,
 (when training and test data are different).
 It's a problem that most of us have experienced when taking exams written by a lecturer,
@@ -887,8 +1038,9 @@ while the homeworks were composed by his TAs.
 We'll briefly describe reinforcement learning and adversarial learning,
 two settings that explicitly consider interaction with an environment.
 
+마지막 질문은 공변량 변화(covariate shift) 문제를 일으킵니다.(학습 데이터와 테스트 데이터가 다를 때) 숙제는 TA가 제출하는 반면에, 시험은 강의를 하는 사람이 낸 문제를 풀 때 이런 것을 경험했을 것입니다. 환경과 상호 작용을 명시적으로 고려하는 강화 학습(reinforcement learning)와 적대적 학습(adversarial learning)에 대해서 간단히 살펴보겠습니다.
 
-### Reinforcement learning
+### 강화 학습(Reinforcement learning)
 
 If you're interested in using machine learning to develop an agent that interacts with an environment and takes actions, then you're probably going to wind up focusing on *reinforcement learning* (RL).
 This might include applications to robotics, to dialogue systems,
@@ -897,6 +1049,9 @@ and even to developing AI for video games.
 to RL problems, has surged in popularity.
 The breakthrough [deep Q-network that beat humans at Atari games using only the visual input](https://www.wired.com/2015/02/google-ai-plays-atari-like-pros/) ,
 and the [AlphaGo program that dethroned the world champion at the board game Go](https://www.wired.com/2017/05/googles-alphago-trounces-humans-also-gives-boost/) are two prominent examples.
+
+환경과 작용을 하면서 행동을 위하는 에이전트를 만드는 머신 러닝에 관심이 있다면, 여러분은 아맞도 *강화 학습(reinforcement learning, RL)*에 집중할 것입니다. 로보틱스, 분석 시스템 심지어는 비디오 게임에 대한 AI 개발에 적용될 수 있습니다. 딥 뉴럴 네트워크를 RL 문제에 적용한 *딥 강화 학습(deep reinforcement learning, DRL)*이 인기가 높습니다. [deep Q-network that beat humans at Atari games using only the visual input](https://www.wired.com/2015/02/google-ai-plays-atari-like-pros/)와 [AlphaGo program that dethroned the world champion at the board game Go](https://www.wired.com/2017/05/googles-alphago-trounces-humans-also-gives-boost/)이 유명한 두 예입니다.
+
 
 Reinforcement learning gives a very general statement of a problem,
 in which an agent interacts with an environment over a series of *time steps*.
@@ -908,6 +1063,8 @@ The behavior of an RL agent is governed by a *policy*.
 In short, a *policy* is just a function that maps from observations (of the environment) to actions.
 The goal of reinforcement learning is to produce a good policy.
 
+강화 학습은 에이전트가 일련의 *시간 단계(time steps)*에 걸쳐서 환경과 작용을 문제에 대한 일반적인 기술을 정의합니다. 각 시간 단계 $t$ 마다, 에이전트는 환경으로 부터 어떤 관찰 $o_t$ 를 받아서, 행동 $a_t$을 선택해야하고, 이 행동은 다시 환경으로 전달이 됩니다. 그리고 나면 에이전트는 환경으로 부터 보상 $r_t$를 받습니다. 그 후, 에이전트는 다음 관찰을 받아서, 다음 행동을 취하는 것을 반복합니다. RL 에이전트의 행동은 *정책(policy)*에 의해서 정의됩니다. 간단하게 말하면, *정책(policy)*은 (환경으로 부터 얻은) 관찰을 행동으로 매핑시키는 함수입니다. 강화 학습의 목표는 좋은 정책을 만드는 것입니다.
+
 ![The interaction between reinforcement learning and an environment.](../img/rl-environment.svg)
 
 It's hard to overstate the generality of the RL framework.
@@ -917,6 +1074,9 @@ We could create an RL agent with one *action* corresponding to each class.
 We could then create an environment which gave a reward
 that was exactly equal to the loss function from the original supervised problem.
 
+RL 프레임워크의 일반성을 과장하는 것은 어렵습니다. 예를 들어, 임의의 강화 학습 문제를 RL 문제로 바꿀 수 있습니다. 분류의 문제를 예로 들어보겠습니다. 우리는 한 *행동(action)*이 각 클래스 대응하는 에이전트를 만들 수 있습니다. 그리고는 원래의 지도 학습에서 사용하는 손실 함수(loss function)와 완전히 같은 보상을 주는 환경을 생성합니다.
+
+
 That being said, RL can also address many problems that supervised learning cannot.
 For example, in supervised learning we always expect
 that the training input comes associated with the correct label.
@@ -924,6 +1084,8 @@ But in RL, we don't assume that for each observation,
 the environment tells us the optimal action.
 In general, we just get some reward.
 Moreover, the environment may not even tell us which actions led to the reward.
+
+즉, RL은 지도 학습이 해결하지 못하는 많은 문제를 해결할 수 있습니다. 예를 들면, 지도 학습에서는 학습 입력에 대한 정확한 레이블이 있어야합니다. 하지만 RL의 경우에는 관찰에 대해서 환경은 최적의 행동을 알려준다고 가정하지 않습니다. 일반적으로 우리는 어떤 보상을 받을 뿐 입니다. 즉, 환경은 어떤 행동이 보상을 받을 수 있는지 조차 알려주지 않을 수도 있습니다.
 
 Consider for example the game of chess.
 The only real reward signal comes at the end of the game when we either win, which we might assign a reward of 1,
