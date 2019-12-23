@@ -1,4 +1,5 @@
 # Introduction
+# 소개
 :label:`chap_introduction`
 
 Until recently, nearly every computer program that we interact with daily
@@ -13,6 +14,14 @@ of historical transactions; and (iii) at the heart of our application,
 the *business logic* (you might say, the *brains*) of our application
 spells out in methodical detail the appropriate action
 that our program should take in every conceivable circumstance.
+
+최근까지는 우리가 매일 사용하는 거의 모든 컴퓨터 프로그램들은 제1원칙들에 따라 소프트웨어 개발자들이 코딩한 것들입니다.  전자상거래 플랫폼을 관리하는 어플리케이션을 작성하는 경우를 들어보겠습니다. 문제를 정의하기 위해서 몇 시간동안 화이트보딩을 한 후, 동작하는 솔루션에 대한 대략적인 계획을 세우게 되는데, 아마 아래와 같을 것입니다.
+
+(1) 사용자는 웹 브라우저나 모바이 어플리케이션의 인터페이스를 사용해서 어플리키에션을 사용합니다.
+
+(2) 어플리케이션은 각 사용자의 상태를 추적하고 거래 기록 레코드를 관리하기 위해서 상용 데이터베이스 엔진을 사용합니다.
+
+(3) 어플리케이션의 중심에는 우리의 어플리케이션의 *비즈니스 로직* (또는 두뇌들 이라고 할 수 있는)이 있는데, 이는 모든 가능한 상황에서 취해야 할 적당한 행동을 체계적으로 자세히 설명합니다.
 
 To build the *brains* of our application,
 we'd have to step through every possible corner case
@@ -30,11 +39,15 @@ is a remarkable cognitive feat.
 And when you are able to devise solutions that work $100\%$ of the time,
 *you should not be using machine learning*.
 
+이 어플리케이션의 *두뇌*를 만들기 위해서는 모든 가능한 특이한 케이스들을 정의하고, 발생할 수 있는 것들을 예상하고, 적당한 규칙들을 설계해야합니다. 고객이 쇼핑 카트에 물건을 추가하기 위해서 클릭을 할 때마다, 우리는 쇼핑 카트 데이터베이스 테이블에 항목을 추가하고, 이 항목은 사용자의 ID와 추가한 제품의 ID를 연결합니다. 이를 처음부터 완벽하게 구현할 수 있는 개발자는 드물겠지만 (꼬인 것을 고치기 위해서 여러 번 테스트를 수행해야할 것입니다.), 대부분의 경우 제1원칙들에 따라 이 프로그램을 구현하는 것이 가능하고, *실제 고객이 방문하기 전에* 확인을 갖고 프로그램을 출시할 수 있습니다. 제1원칙으로 부터 작동하는 제품들 및 시스템을 작동시키는 (때로는 새로운 상황에서도) 자동화된 시스템을 설계하는 우리의 능력은 놀라운 인지적 업적입니다. 여러분이 늘 $100\%$  작동하는 솔루션을 설계할 수 있다면, *머신러닝을 사용하지 않아야 합니다.*
+
 Fortunately for the growing community of ML scientists,
 many tasks that we would like to automate
 do not bend so easily to human ingenuity.
 Imagine huddling around the whiteboard with the smartest minds you know,
 but this time you are tackling one of the following problems:
+
+머신러닝 과학자 커뮤니티가 증가하는 상황에 다행하게도 자동화하고자 하는 많은 과제들이 사람의 독창성으로 쉽게 풀리지 않습니다. 가장 영리한 사람들과 함께 화이트보딩을 하면 다음 문제들 중 하나를 풀어보는 상상을 해보세요.
 
 * Write a program that predicts tomorrow's weather given geographic
 information, satellite images, and a trailing window of past weather.
@@ -44,6 +57,11 @@ information, satellite images, and a trailing window of past weather.
  drawing outlines around each.
 * Write a program that presents users with products that they are likely to
   enjoy but unlikely, in the natural course of browsing, to encounter.
+
+* 지리적인 정보, 인공위성 사진과 과거 날씨들에 대한 정보가 주어졌을 때 내일의 날씨를 예측하는 프로그램 작성하기
+* 자유로운 문장으로 표현된 질문을 받아서 그에 대한 정확한 답을 하는 프로그램 작성하기
+* 이미지가 주어졌을 때 이미지에 있는 모든 사람들을 찾아서 각 사람에 아웃라인을 그리는 프로그램 작성하기
+* 사용자가 좋아할 만하지만 그냥 브라우징을 할 경우 만나기 힘든 제품을 보여주는 프로그램 작성하기
 
 In each of these cases, even elite programmers
 are incapable of coding up solutions from scratch.
@@ -69,6 +87,8 @@ In this book, we will teach you the fundamentals of machine learning,
 and focus in particular on deep learning, a powerful set of techniques
 driving innovations in areas as diverse as computer vision,
 natural language processing, healthcare, and genomics.
+
+이 각각의 경우 천부적인 프로그래머조차도 솔루션을 처음부터 코딩할 수 없습니다. 이유는 다양합니다. 때로는 우리가 찾는 프로그램이 시간이 지나면서 변하는 패턴을 따라야하고, 우리의 프로그램은 이에 대해서 적응해야만 합니다. ...
 
 ## A Motivating Example
 
