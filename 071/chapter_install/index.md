@@ -1,7 +1,5 @@
 # Installation
-
 # 설치
-
 :label:`chap_installation`
 
 In order to get you up and running for hands-on learning experience,
@@ -151,7 +149,6 @@ Both this book and MXNet are keeping improving. Please check a new version from 
 
 ## GPU Support
 ## GPU 지원
-
 :label:`subsec_gpu`
 
 By default, MXNet is installed without GPU support
