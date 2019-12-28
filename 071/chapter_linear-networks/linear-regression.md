@@ -1,4 +1,5 @@
 # Linear Regression
+# 선형 회귀
 :label:`sec_linear_regression`
 
 Regression refers to a set of methods for modeling
@@ -10,6 +11,8 @@ the purpose of regression is most often to
 Machine learning, on the other hand,
 is most often concerned with *prediction*.
 
+회귀(regression)는 데이터 포인트 $\mathbf{x}$와 그에 대응하는 실수로 표현된 목표값 $y$의 관계를 모델일하는 방법들을 말합니다. 자연 과학이나 사회 과학에서의 회귀의 목적은 입력값과 결과값의 관계를 *특징*짓는데 주로 사용됩니다. 반면, 머신 러닝에서는 이 관계에 대한 *예측*에 더 관점을 두고 있습니다.
+
 Regression problems pop up whenever we want to predict a numerical value.
 Common examples include predicting prices (of homes, stocks, etc.),
 predicting length of stay (for patients in the hospital),
@@ -18,9 +21,10 @@ Not every prediction problem is a classic *regression* problem.
 In subsequent sections, we will introduce classification problems,
 where the goal is to predict membership among a set of categories.
 
-
+회귀 문제는 어떤 수를 예측하고자 하는 여러 곳에서 발견될 수 있는데, 일반적인 예로는 (주택 또는 주식 등의) 가격을 예측하기, 환자의 입원 일수 예측하기, 또는 소매 판매에 대한 수요를 예측하는 것 등이 있습니다. 하지만 모든 문제가 고전적인 *회귀* 문제는 아닙니다. 이 장에서는 또한 분류 문제(classification problem)도 다룰 예정입니다. 주어진 카테고리들 중에 어떤 것에 속하는지를 예측하는 것을 목표로 하는 것을 분류 문제라고 합니다.
 
 ## Basic Elements of Linear Regression
+## 선형 회귀의 기본 요소들
 
 *Linear regression* may be both the simplest
 and most popular among the standard tools to regression.
@@ -37,6 +41,8 @@ To motivate the approach, let's start with a running example.
 Suppose that we wish to estimate the prices of houses (in dollars)
 based on their area (in square feet) and age (in years).
 
+*선형 회귀*는 회귀에 대한 표준 도구들 중에서 가장 간단하고 가장 유명한 방법일 것입니다. 19세기 초반에 몇 가지 간단한 가정에서 선형 회귀가 만들어졌습니다. 첫째 가정은 *특성(feature)* $\mathbf{x}$과 타겟(target) $y$의 관계가 선형적이라는 것입니다. 즉, $y$는 입력 $\textbf{x}$의 가중합으로 표현된다는 것인데, 이는 관찰들에 노이즈를 더하가나 빼는 것입니다. 두번째 가정은 모든 노이즈는 가우시안 분포(Gaussian distribution)를 잘 따른다는 것입니다. 실제 예제를 통해서 어떤 접근 방법을 취하는 것인지 알아보겠습니다. (제곱 피트 단위의) 집의 면적과 (년수로 표현된) 집의 년차가 주어졌을 때 (달러로 표현된) 집 가격을 예측하고자 합니다.
+
 To actually fit a model for predicting house prices,
 we would need to get our hands on a dataset
 consisting of sales for which we know
@@ -51,19 +57,28 @@ The variables (here *age* and *area*)
 upon which the predictions are based
 are called *features* or *covariates*.
 
+집 가격을 예측하는 모델을 만들기 위해서는 가격, 면적, 연차가 알려진 각 주택 판매에 대한 데이터셋을 확보해야합니다. 머신 러닝의 용어로는 이 데이터셋을 *학습 데이터(training data)* 또는 *학습 세트(training set)*라고 하고, 하나의 판매에 대한 데이터인 각 행은 *인스턴스(instance)* 또는 *예제(example)*라고 합니다. (여기서는 주택 가격인) 예측하고자 하는 것을 *타겟(target)* 또는 *레이블(label)* 이라고 부릅니다. (년수와 면적과 같이) 예측에 사용되는 변수들은 *특성(feature)* 또는 *공변량(covariate)*라고 합니다.
+
 Typically, we will use $n$ to denote
 the number of examples in our dataset.
 We index the samples by $i$, denoting each input data point
 as $x^{(i)} = [x_1^{(i)}, x_2^{(i)}]$
 and the corresponding label as $y^{(i)}$.
 
+일반적으로 데이터셋의 예제의 수는 $n$로 표현합니다. 각 샘플들은 $i$로 색인을 하는데, 즉 각 입력 데이터 포인트를  $x^{(i)} = [x_1^{(i)}, x_2^{(i)}]$로 이 입력에 대한 레이블은 $y^{(i)}$로 표기합니다.
+
 
 ### Linear Model
+### 선형 모델
 
 The linearity assumption just says that the target (price)
 can be expressed as a weighted sum of the features (area and age):
 
+간단하게 말하자면, 선형성에서의 가정은 타겟(가격)이 특성들(면적과 연수)의 가중합으로 표현될 수 있다는 의미합니다.
+
 $$\mathrm{price} = w_{\mathrm{area}} \cdot \mathrm{area} + w_{\mathrm{age}} \cdot \mathrm{age} + b.$$
+
+$$\mathrm{가격} = w_{\mathrm{면적}} \cdot \mathrm{면적} + w_{\mathrm{연수}} \cdot \mathrm{연수} + b$$
 
 Here, $w_{\mathrm{area}}$ and $w_{\mathrm{age}}$
 are called *weights*, and $b$ is called a *bias*
@@ -77,10 +92,14 @@ or that are precisely zero years old,
 we still need the intercept or else we will
 limit the expressivity of our linear model.
 
+이 때, , $w_{\mathrm{area}}$와 $w_{\mathrm{age}}$는 *가중치(weight)*라고 하며, $b$는 *편향(bais)*라고 합니다. (편향은 *오프셋(offset)* 또는 *절편(intercept)* 라고도 합니다.) 가중치들은 각 특성(feature)이 예측에 미치는 영향 정도를 결정하고, 편향은 모든 특성이 $0$일 경우 예측된 가격이 얼마가 되어야 하는지를 말해줍니다. 사실 집의 면적이 $0$이거나 연수가 $0$인 경우는 없지만, 우리는 절편(intercept)이 여전히 필요합니다. 그렇지 않다면, 선형 모델이 표현할 수 있는 것들에 제약이 생기기 때문입니다.
+
 Given a dataset, our goal is to choose
 the weights $w$ and bias $b$ such that on average,
 the predictions made according our  model
 best fit the true prices observed in the data.
+
+우리의 목표는 모델이 주어진 데이터셋에 있는 관찰된 실제 가격을 평균적으로 가장 잘 예측할 수 있는 가중치 $w$와 편향 $b$를 선택하는 것입니다.
 
 In disciplines where it is common to focus
 on datasets with just a few features,
@@ -92,11 +111,19 @@ we express our prediction $\hat{y}$ as
 
 $$\hat{y} = w_1 \cdot x_1 + ... + w_d \cdot x_d + b.$$
 
+몇 가지 특성만 가진 데이터셋에 집중하는 것이 일반적인 분야에서는 모델을 다음과 같은 긴 수식으로 직접 표현하는 것이 일반적입니다. 머신 러닝에서는 주로 고 차원(high dimension)의 데이터셋을 다루기에, 선형 대수 표현을 사용하는 것이 보다 간편합니다. 만약 입력이 $d$ 개의 특성으로 구성되어 있다면, 예측 $\hat{y}$을 아래와 같이 표기합니다.
+
+$$\hat{y} = w_1 \cdot x_1 + ... + w_d \cdot x_d + b$$
+
 Collecting all features into a vector $\mathbf{x}$
 and all weights into a vector $\mathbf{w}$,
 we can express our model compactly using a dot product:
 
 $$\hat{y} = \mathbf{w}^T \mathbf{x} + b.$$
+
+모든 특성들을 벡터 $\mathbf{x}$로 모으로, 마찬가지로 모든 가중치를 벡터 $\mathbf{w}$로 모은 후에 내적(dot product)을 사용하면 모델을 간결하게 표현이 가능합니다.
+
+$$\hat{y} = \mathbf{w}^T \mathbf{x} + b$$
 
 Here, the vector $\mathbf{x}$ corresponds to a single data point.
 We will often find it convenient
@@ -104,11 +131,17 @@ to refer to our entire dataset via the *design matrix* $X$.
 Here, $X$ contains one row for every example
 and one column for every feature.
 
+이 때, 벡터 $\mathbf{x}$는 한 개의 데이터 포인트입니다. 또는, 모든 데이터셋을 *설계 행렬(design matrix)* $X$를 사용해서 표현하면 더 편리해집니다. 즉, $X$의 각 행은 각 샘플을 각 열은 각 특성(feature)를 갖습니다.
+
 For a collection of data points $\mathbf{X}$,
 the predictions $\hat{\mathbf{y}}$
 can be expressed via the matrix-vector product:
 
 $${\hat{\mathbf{y}}} = \mathbf X \mathbf{w} + b.$$
+
+예를 들여, 데이터 포인들의 집합이 $\mathbf{X}$이며, 예측들($\hat{\mathbf{y}})은 행렬-벡터의 곱으로 다음과 같이 표현됩니다.
+
+$${\hat{\mathbf{y}}} = \mathbf X \mathbf{w} + b$$
 
 Given a training dataset $X$
 and corresponding (known) targets $\mathbf{y}$,
