@@ -139,7 +139,7 @@ can be expressed via the matrix-vector product:
 
 $${\hat{\mathbf{y}}} = \mathbf X \mathbf{w} + b.$$
 
-예를 들여, 데이터 포인들의 집합이 $\mathbf{X}$이며, 예측들($\hat{\mathbf{y}})은 행렬-벡터의 곱으로 다음과 같이 표현됩니다.
+예를 들여, 데이터 포인들의 집합이 $\mathbf{X}$이며, 예측들($\hat{\mathbf{y}}$)은 행렬-벡터의 곱으로 다음과 같이 표현됩니다.
 
 $${\hat{\mathbf{y}}} = \mathbf X \mathbf{w} + b$$
 

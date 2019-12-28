@@ -58,6 +58,7 @@
 | feature                                          | 특성                          |
 | feature map                                      |                               |
 | filter                                           |                               |
+| fitness                                          | 적합성, 적합함                |
 | forward propagation                              | 순전파                        |
 | fully connected layer                            | 완전 연결층                   |
 | Gaussian distribution                            | 가우시안 분포                 |
