@@ -47,7 +47,7 @@
 | dimension                                        | 차원                          |
 | diverge                                          |                               |
 | dropout                                          | 드롭아웃                      |
-| eigenvalue                                       |                               |
+| eigenvalue                                       | 고윳값                        |
 | empirical risk minimization                      |                               |
 | encoder                                          |                               |
 | end-to-end                                       |                               |
@@ -85,15 +85,16 @@
 | layer                                            | 층                            |
 | learning rate                                    | 학습 속도                     |
 | least mean squares loss                          | 최소 평균 제곱 손실           |
+| likelihood                                       | 가능도                       |
 | linear model                                     |                               |
-| linear regression                                |                               |
+| linear regression                                | 선형 회귀                     |
 | local minimum                                    |                               |
-| log likelihhod                                   | 로그 가능도                   |
+| log likelihod                                    | 로그 가능도                   |
 | loss function                                    | 손실 함수                     |
 | machine learning                                 | 머신 러닝                     |
 | marginalization                                  | 주변화                        |
-| mean                                             |                               |
-| mean squared error                               |                               |
+| mean                                             | 평균                          |
+| mean squared error                               | 평균 제곱 오차                 |
 | metric                                           |                               |
 | mini-batch                                       |                               |
 | mini-batch gradient                              |                               |
@@ -105,7 +106,7 @@
 | neural network                                   | 뉴럴 네트워크                 |
 | neuron                                           | 뉴런                          |
 | non-convex optimization                          |                               |
-| normalization                                    |                               |
+| normalization                                    | 정규화                        |
 | numerical method                                 |                               |
 | object detection                                 |                               |
 | objective function                               | 목적 함수                     |
@@ -154,7 +155,7 @@
 | upsample                                         |                               |
 | validation dataset                               | 검증 데이터셋                 |
 | vanishing gradient                               | 그래디언트 소실               |
-| variance                                         |                               |
+| variance                                         | 분산                          |
 | vector                                           | 벡터                          |
 | weight                                           |                               |
 | word embedding                                   |                               |
