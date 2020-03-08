@@ -129,11 +129,11 @@ Please always execute `conda activate d2l` to activate the runtime environment
 before running the code of the book or updating MXNet or the `d2l` package.
 To exit the environment, run `conda deactivate`.
 
-이제 여러분의 웹 브라우에의 주소창에 http://localhost:8888 (보통은 자동으로 열립니다)를 입력해서 Jupyter 노트북을 열 수 있습니다. 이 노트북에서 이 책의 각 절에 포함된 코드들을 수행할 수 있습니다. 이 책의 코드를 수행하기 전에 그리고 MXNet 또는 `d2l` 패키지를 업데이트하기 전에 반드시  `conda activate d2l` 명령을 수행해서 실행 환경을 활성화하는 것을 기억하세요. 환경에서 나가는 명령은  `conda deactivate`입니다.
+이제 여러분의 웹 브라우저의 주소창에 http://localhost:8888 (보통은 자동으로 열립니다)를 입력해서 Jupyter 노트북을 열 수 있습니다. 이 노트북에서 이 책의 각 절에 포함된 코드들을 수행할 수 있습니다. 이 책의 코드를 수행하기 전에 그리고 MXNet 또는 `d2l` 패키지를 업데이트하기 전에 반드시  `conda activate d2l` 명령을 수행해서 실행 환경을 활성화하는 것을 기억하세요. 환경에서 나가는 명령은  `conda deactivate`입니다.
 
 
 ## Upgrading to a New Version
-## 새로운 버전으로 업그래이드하기
+## 새로운 버전으로 업그레이드하기
 Both this book and MXNet are keeping improving. Please check a new version from time to time.
 
 1. The URL https://d2l.ai/d2l-en.zip always points to the latest contents.
@@ -143,8 +143,8 @@ Both this book and MXNet are keeping improving. Please check a new version from 
 이 책과 MXNet 모두 지속적으로 향상되고 있으니, 자주 새로운 버전을 확인해주세요. 
 
 1. https://d2l.ai/d2l-en.zip 는 항상 최신의 내용을 담고 있습니다.
-2. `pip install d2l --upgrade` 명령으로 `d2l` 패키지를 업그래이드하세요.
-3. CPU 버전의 MXNet은  `pip install -U --pre mxnet`로 업그래이드합니다.
+2. `pip install d2l --upgrade` 명령으로 `d2l` 패키지를 업그레이드하세요.
+3. CPU 버전의 MXNet은  `pip install -U --pre mxnet`로 업그레이드합니다.
 
 
 ## GPU Support
@@ -171,7 +171,7 @@ Assume that you have installed CUDA 10.1,
 then you can install MXNet
 with the following command:
 
-그 다음으로 설치된 CUDA 버전을 확인하세요. CUDA 버전은 `nvcc --version` 또는  `cat /usr/local/cuda/version.txt` 명령으로 확인할 수 있습니다. 만약 여러분의 컴퓨터에서 설치된 CUDA 버전이 10.1이라고 가정한다묜, 아래와 같이 MXNet을 설치할 수 있습니다.
+그 다음으로 설치된 CUDA 버전을 확인하세요. CUDA 버전은 `nvcc --version` 또는  `cat /usr/local/cuda/version.txt` 명령으로 확인할 수 있습니다. 만약 여러분의 컴퓨터에서 설치된 CUDA 버전이 10.1이라고 가정한다면, 아래와 같이 MXNet을 설치할 수 있습니다.
 
 ```bash
 # For Windows users
@@ -187,7 +187,7 @@ You may change the last digits according to your CUDA version,
 e.g., `cu100` for CUDA 10.0 and `cu90` for CUDA 9.0.
 You can find all available MXNet versions via `pip search mxnet`.
 
-CPU 버전과 같이 GPU 지원 MXNet도 `pip install -U --pre mxnet-cu101`를 통해서 업그래이드를 할 수 있습니다. 마지막 숫자는 여러분의 CUDA 버전에 맞게 바꿔주세요. 예를 들어 CUDA 10.0인 경우에는 `cu100`을 CUDA 9.0인 경우에는 `cu90`로 바꾸면 됩니다.
+CPU 버전과 같이 GPU 지원 MXNet도 `pip install -U --pre mxnet-cu101`를 통해서 업그레이드를 할 수 있습니다. 마지막 숫자는 여러분의 CUDA 버전에 맞게 바꿔주세요. 예를 들어 CUDA 10.0인 경우에는 `cu100`을, CUDA 9.0인 경우에는 `cu90`로 바꾸면 됩니다.
 
 
 ## Exercises
