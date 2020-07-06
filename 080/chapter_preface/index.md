@@ -164,8 +164,6 @@ using such an integrated workflow.
 
 
 
-
-
 ### Learning by Doing
 
 ### 직접 하면서 배우기
@@ -177,6 +175,10 @@ on linear regression requires a non-trivial amount of work.
 While experts love this book precisely for its thoroughness,
 for beginners, this property limits its usefulness as an introductory text.
 
+교과서들은 대개 일련의 주제들을 차례로 상세하게 가르치는 방식으로 만들어져 있습니다. 예를 들어 Chris Bishop의 유명한 교과서 [Pattern Recognition and Machine Learning](https://www.amazon.com/Pattern-Recognition-Learning-Information-Statistics/dp/0387310738)는 각 주제를 철저히 가르쳐 주는 반면, 선형 회귀 분석 챕터까지 가기 위해 꽤 많은 분량을 소화해야만 합니다. 이 책의 방대한 설명을 좋아하는 전문가들도 있지만, 초보자에게 입문서로 사용하기에는 다소 적절하지 않습니다.
+
+
+
 In this book, we will teach most concepts *just in time*.
 In other words, you will learn concepts at the very moment
 that they are needed to accomplish some practical end.
@@ -184,6 +186,10 @@ While we take some time at the outset to teach
 fundamental preliminaries, like linear algebra and probability,
 we want you to taste the satisfaction of training your first model
 before worrying about more esoteric probability distributions.
+
+이 책에서는 대부분의 개념을 *필요한 시점(just in time)*에 가르칠 것입니다. 즉, 실제 목표를 달성하는데 필요한 바로 그 순간에 해당 개념을 배우게됩니다. 선형대수학이나 확률과 같은 기본적인 내용을 배우기 위해 처음에 약간의 시간이 걸리겠지만, 난해한 확률 분포를 걱정하기 전에 첫 번째 모델을 훈련시키는 만족감을 느끼기를 바랍니다.
+
+
 
 Aside from a few preliminary notebooks that provide a crash course
 in the basic mathematical background,
@@ -198,6 +204,10 @@ This makes it as easy as possible for you to
 start your own research projects by leveraging our code.
 Just copy a notebook and start modifying it.
 
+기본적인 수학적 배경에 대한 특별 과정을 제공하는 몇 가지 노트북을 제외하면, 이후의 각 챕터에서는 적절한 수의 새로운 개념을 소개하고 실제 데이터셋을 사용하는 1개의 작업 예제를 제공합니다. 이와 같은 접근 방법 때문에 책 구성이 쉽지 않았습니다. 어떤 모델은 논리적으로 하나의 노트북으로 그룹화될 수 있습니다. 한편 어떤 아이디어들은 여러 모델을 연속적으로 실행해서 가장 잘 배울 수 있습니다. 반면에, *작업 예제 1개, 노트북 1개*의 원칙을 지키면 큰 이점이 있습니다. 이렇게 하면 이 책의 코드를 활용해 자신만의 연구 프로젝트를 쉽게 시작할 수 있습니다. 노트북 하나를 복사하고 수정하기만 하면 됩니다.
+
+
+
 We will interleave the runnable code with background material as needed.
 In general, we will often err on the side of making tools
 available before explaining them fully (and we will follow up by
@@ -208,6 +218,10 @@ This helps to give practitioners the necessary
 ammunition to solve problems quickly,
 at the expense of requiring the reader
 to trust us with some curatorial decisions.
+
+실행 코드는 배경 설명과 필요에 따라 번갈아가며 배치됩니다. 우리는 종종 충분히 설명하기 전에 어떤 도구를 사용하는 (즉, 배경 설명은 나중에 하는) 실수를 하기도 할 것입니다. 예를 들어, 왜 유용한지 또는 왜 작동하는지 완전히 설명하기 전에 *확률적 경사 하강법(Stochastic Gradient Descent)* 을 사용하기도 합니다. 그 결과, 이 책의 독자는 문제를 풀기 위한 정보를 (저자들의 접근법을 믿어준다면) 빠르게 얻게 됩니다.
+
+
 
 This book will teach deep learning concepts from scratch.
 Sometimes, we want to delve into fine details about the models
@@ -224,11 +238,22 @@ where we write succinct code using Gluon.
 Once we have taught you how some component works,
 we can just use the Gluon version in subsequent tutorials.
 
+이 책은 딥러닝의 개념을 처음부터 가르칩니다. 때로는 딥러닝 프레임워크의 고급 추상화를 통해 일반적으로 사용자로부터 숨겨진 모델의 세부적인 부분까지 탐구하기도 합니다. 특히 특정 레이어나 옵티마이저에서 일어나는 모든 것을 이해해야 하는 기본 튜토리얼에서 접근하는 방식입니다. 이런 경우, 우리는 대개 두 가지 버전의 예제를 제시합니다. 하나는 NumPy 인터페이스와 자동 미분에만 의존해 모든 것을 처음부터 구현하는 예제이고, 다른 하나는 Gluon을 사용해 간결한 코드를 작성하는 현실적인 예제입니다. 일단 몇 가지 구성요소의 동작을 배운 다음에는, 이후의 튜토리얼에서는 Gluon 버전만을 사용하기도 합니다.
+
+
 
 ### Content and Structure
 
+###콘텐츠 및 구조
+
+
+
 The book can be roughly divided into three parts,
 which are presented by different colors in :numref:`fig_book_org`:
+
+이 책은 :numref:`fig_book_org`에 다른 색상으로 표시된 것처럼 대략 세 부분으로 나눌 수 있습니다.
+
+
 
 ![Book structure](../img/book-org.svg)
 :label:`fig_book_org`
@@ -244,6 +269,10 @@ from linear algebra, calculus, and probability.
 :numref:`chap_linear` and :numref:`chap_perceptrons`
 cover the most basic concepts and techniques of deep learning,
 such as linear regression, multilayer perceptrons and regularization.
+* 첫 번째 부분은 기본 사항과 예비 지식을 다룹니다. :numref: `chap_introduction`은 딥러닝에 대한 소개를 제공합니다. 그런 다음, :numref: `chap_preliminaries`에서는 데이터를 저장하고 조작하는 방법, 선형 대수, 미적분 및 확률의 기본 개념을 기반으로 다양한 수치 연산을 적용하는 방법 등, 딥러닝의 핸즈온에 필요한 기초 내용을 빠르게 설명합니다. :numref: `chap_linear`와 :numref: `chap_perceptrons'는 선형 회귀, 다계층 퍼셉트론, 정규화와 같은 딥러닝의 가장 기본적인 개념과 기술을 다룹니다.
+
+
+
 
 * The next five chapters focus on modern deep learning techniques.
 :numref:`chap_computation` describes the various key components of deep
@@ -261,6 +290,10 @@ that employ a technique called attention mechanisms
 and they have recently begun to displace RNNs in natural language processing.
 These sections will get you up to speed on the basic tools
 behind most modern applications of deep learning.
+* 그 다음 다섯 챕터에서는 최신 딥러닝 기술에 초점을 맞춥니다. :numref: `chap_computation`은 딥러닝 연산의 다양한 핵심 구성 요소를 설명하고, 이후에 더 복잡한 모델을 구현하기 위한 기반을 마련합니다. 다음으로 :numref: `chap_cnn`과 :numref: `chap_modern_cnn`에서는 최신 컴퓨터 비전 시스템의 근간이 되는 강력한 도구인 합성곱 신경망(CNN, Convolutional Neural Network)을 소개합니다. 이어서 :numref: `chap_rnn` 및 :numref: `chap_modern_rnn`에서는 데이터의 시간적/순차적 구조를 활용해 자연어 처리 및 시계열 예측에 흔히 사용되는 순환 신경망(RNN, Recurrent Neural Network)을 소개합니다. :numref: `chap_attention`에서는, 최근에 자연어 처리에서 RNN을 대체하기 시작한 어텐션(attention) 메커니즘이라는 기술을 사용하는 새로운 클래스의 모델을 소개합니다. 이 부분을 통해, 최신 딥러닝 애플리케이션에 사용된 기본 도구들에 대해 이해할 수 있을 것입니다.
+
+
+
 
 * Part three discusses scalability, efficiency, and applications.
 First, in :numref:`chap_optimization`,
@@ -274,10 +307,17 @@ major applications of deep learning in computer vision.
 In :numref:`chap_nlp_pretrain` and :numref:`chap_nlp_app`,
 we show how to pretrain language representation models and apply
 them to natural language processing tasks.
+* 세 번째 부분에서는 확장성, 효율성 및 애플리케이션에 대해 설명합니다. 첫째, :numref: `chap_optimization'에서는 딥러닝 모델의 훈련에 사용되는 몇 가지 일반적인 최적화 알고리즘에 대해 설명합니다. 다음 챕터인 :numref: `chap_performance'에서는 딥러닝 코드의 계산 성능에 영향을 미치는 몇 가지 핵심 요소를 살펴봅니다. :numref: `chap_cv`에서는 컴퓨터 비전 분야의 주요 딥 러닝 응용 프로그램을 예를 들어 설명합니다. :numref: `chap_nlp_pretrain` 및 :numref: `chap_nlp_app`에서는, 언어 표현 모델을 사전 학습하고 자연어 처리 작업에 적용하는 방법을 보입니다.
+
 
 
 ### Code
+
+###코드
+
 :label:`sec_code`
+
+
 
 Most sections of this book feature executable code because of our belief
 in the importance of an interactive learning experience in deep learning.
@@ -293,6 +333,8 @@ has only just recently kicked into high gear.
 We are hopeful that as the theory of deep learning progresses,
 future editions of this book will be able to provide insights
 in places the present edition cannot.
+
+
 
 At times, to avoid unnecessary repetition, we encapsulate
 the frequently-imported and referred-to functions, classes, etc.
