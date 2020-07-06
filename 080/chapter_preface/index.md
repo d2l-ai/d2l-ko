@@ -584,17 +584,11 @@ Amazon Web Services, 특히 Swami Sivasubramanian에게 감사드립니다. Raju
 
 ## 연습 문제
 
-1. Register an account on the discussion forum of this book [discuss.d2l.ai](https://discuss.d2l.ai/).
-1. Install Python on your computer.
-1. Follow the links at the bottom of the section to the forum, where you will be able to seek out help and discuss the book and find answers to your questions by engaging the authors and broader community.
+1. Register an account on the discussion forum of this book [discuss.d2l.ai](https://discuss.d2l.ai/). 이 책의 토론 게시판에 계정을 등록하세요: [Discussions](https://discuss.d2l.ai/).
 
+1. Install Python on your computer. 컴퓨터에 파이썬을 설치합니다.
 
-
-1. 이 책의 토론 게시판에 계정을 등록하세요: [Discussions](https://discuss.d2l.ai/).
-
-1. 컴퓨터에 파이썬을 설치합니다.
-
-1. 섹션 하단의 게시판 링크를 따라 가면 저자들과 커뮤니티를 통해 도움을 얻거나 책을 토론하고 질문에 대한 답변을 얻을 수 있습니다.
+1. Follow the links at the bottom of the section to the forum, where you will be able to seek out help and discuss the book and find answers to your questions by engaging the authors and broader community. 섹션 하단의 게시판 링크를 따라 가면 저자들과 커뮤니티를 통해 도움을 얻거나 책을 토론하고 질문에 대한 답변을 얻을 수 있습니다.
 
    
 
