@@ -1,5 +1,7 @@
 # Preface
 
+# 서문
+
 Just a few years ago, there were no legions of deep learning scientists
 developing intelligent products and services at major companies and startups.
 When the youngest among us (the authors) entered the field,
@@ -13,6 +15,10 @@ required so much domain knowledge that they were often regarded
 as separate areas entirely for which machine learning was one small component.
 Neural networks then, the antecedents of the deep learning models
 that we focus on in this book, were regarded as outmoded tools.
+
+불과 몇 년 전만 해도, 대부분의 기업에서는 지능형 제품과 서비스를 개발하는 지금처럼 많은 딥러닝 과학자들을 볼 수 없었습니다. 이 책의 저자들 중에서 가장 어린 막내가 입사했을 때도, 머신 러닝이 지금처럼 일간지의 헤드라인을 장식하는 일은 드물었습니다. 저희들의 부모님은 왜 우리가 의학이나 법학보다 머신 러닝을 좋아하는지는 커녕, 도대체 그게 뭔지도 전혀 알지 못하셨습니다. 머신 러닝은 실제 응용 분야가 좁은 미래지향적인 학문이었습니다. 또한 음성 인식, 컴퓨터 비전과 같은 응용 분야들은 많은 도메인 지식이 필요하기 때문에, 종종 머신 러닝이 작은 구성요소로 포함된 별도의 독립적인 영역으로 간주되었습니다. 이 책에서 우리가 중점적으로 다루는 딥 러닝 모델의 선구자격인 신경망은 낡은 도구로 간주되었습니다.
+
+
 
 
 In just the past five years, deep learning has taken the world by surprise,
@@ -30,14 +36,24 @@ Already, these tools exert ever-wider impacts on industry and society,
 changing the way movies are made, diseases are diagnosed,
 and playing a growing role in basic sciences---from astrophysics to biology.
 
+지난 5년간 딥러닝은 컴퓨터 비전, 자연어 처리, 음성 인식, 강화 학습, 통계적 모델링 등, 다양한 분야에서 빠르게 발전하며 세상을 놀라게 했습니다. 이러한 진보를 통해 우리는 이제 그 어느 때보다 더 자율적으로 운전하는 자동차 (어떤 회사들이 주장하는 것 만큼은 아니지만), 뻔한 이메일을 자동으로 답장해서 산처럼 쌓인 메일함에서 사람들을 구해내는 스마트 응답 시스템, 인간을 이기려면 수십년이 걸릴거라고 믿었던 바둑 같은 게임을 지배하는 소프트웨어 에이전트를 만들 수 있습니다. 이미 딥러닝은 영화 제작이나 질병 진단의 방식을 바꾸고 천체물리학에서 생물학에 이르는 기초 과학 분야에서도 점점 더 많은 역할을 하는 등, 우리 사회와 산업계에 넓은 영향을 미치고 있습니다.
+
 
 
 ## About This Book
 
+## 이 책에 대해
+
 This book represents our attempt to make deep learning approachable,
 teaching you the *concepts*, the *context*, and the *code*.
 
+이 책은 딥러닝의 *개념*, *문맥*과 *코드*를 동시에 설명하는 방법으로 쉽게 접근할 수 있게 하려는 저희의 노력의 결과물입니다.
+
+
+
 ### One Medium Combining Code, Math, and HTML
+
+### 코드, 수학, HTML이 통합된 책
 
 For any computing technology to reach its full impact,
 it must be well-understood, well-documented, and supported by
@@ -54,6 +70,9 @@ the potential of this technology to aid creative entrepreneurs
 has been realized to a far greater degree in the past ten years,
 owing in part to the development of powerful, well-documented frameworks.
 
+어떤 컴퓨팅 기술이 최대의 영향력을 발휘하려면 충분한 이해를 바탕으로 문서화 되어야 하며, 잘 유지되는 성숙된 도구들이 지원되어야 합니다. 핵심적인 아이디어가 명확하게 전달되면 신참자들이 최신 내용을 익히는데 걸리는 시간을 최소화할 수 있습니다. 반복 작업을 자동화할 수 있는 성숙된 라이브러리가 있어야 하고, 실무자들이 필요에 따라 수정, 적용, 확장할 수 있도록 대표적인 작업들의 예제 코드가 준비되어야 합니다. 동적 웹 애플리케이션을 예로 들어 보겠습니다. 아마존과 같은 많은 회사들이 1990년대에 데이터베이스 기반 웹 애플리케이션을 성공적으로 개발했음에도 불구하고, 창조적 기업가를 뒷받침할 수 있는 이 기술의 잠재력은 최근 10년에 와서야 실현되었습니다. 그 중 한 가지 이유는 강력하고 잘 문서화된 프레임워크가 개발되었기 때문입니다.
+
+
 
 Testing the potential of deep learning presents unique challenges
 because any single application brings together various disciplines.
@@ -69,6 +88,10 @@ the mathematics to solve them, and the software tools to implement those
 solutions all in one place presents formidable challenges.
 Our goal in this book is to present a unified resource
 to bring would-be practitioners up to speed.
+
+간단한 딥러닝 애플리케이션라도 다양한 학문을 알아야 하기 때문에, 딥러닝의 잠재력을 테스트하는 것은 상당히 어렵습니다. 딥러닝을 적용하기 위해서는 (i) 특정한 방식으로 문제를 정의하기 위한 동기, (ii) 모델링에 사용된 수학, (iii) 모델을 데이터에 맞추기 위한 최적화 알고리즘, (iv) 모델을 효율적으로 훈련하는데 필요한 엔지니어링을 한꺼번에 이해하면서 동시에 수치 연산의 함정을 피하고 하드웨어를 최대한 활용할 수 있어야 합니다. 문제를 공식화하는 데 필요한 비판적 사고 능력, 그것을 풀 수 있는 수학, 그리고 이러한 솔루션들을 구현하기 위한 소프트웨어 도구를 한꺼번에 가르치는 것은 매우 어려운 과제입니다. 이 책에서 우리의 목표는 독자들이 최대한 빠르게 실무자가 될 수 있도록 통합된 리소스를 제시하는 것입니다.
+
+
 
 At the time we started this book project,
 there were no resources that simultaneously
@@ -100,6 +123,10 @@ sometimes leaving readers clueless as to how to implement them.
 Moreover, too many resources are hidden behind the paywalls
 of commercial course providers.
 
+우리가 이 책 프로젝트를 시작했을 때에는 (1) 최신 내용이고 (2) 현대 머신러닝의 전체 범위를 상당한 기술적 깊이로 다루면서 (3) 동시에, 매력적인 교과서와 핸즈온 튜토리얼과 같은 실행가능한 깨끗한 코드가 섞여 있는 교재가 존재하지 않았습니다. 우리는 딥러닝과 관련된 프레임워크를 사용하는 방법(예: TensorFlow에서 행렬을 사용한 기본 수치 계산) 또는 특정 기술(예: LeNet, AlexNet, ResNet 등의 코드 일부들)을 구현하는 방법에 대한 많은 예제 코드들을 여러 블로그와 GitHub 저장소에서 발견했습니다. 그러나 이 예제들은 대부분, 주어진 접근 방식을 구현하는 *방법*에 초점을 맞추느라 *왜* 그런 특정 알고리즘이 선택되었는지에 대한 설명은 생략하고 있었습니다. 특정 주제에 대한 리소스가 산발적으로 (예를 들면 웹 사이트 [Distill](http://distill.pub/) 또는 개인 블로그들에서) 나타나기도 했지만, 딥러닝의 몇몇 주제만 다루거나 코드가 없는 경우가 종종 있었습니다. 한편, 딥 러닝의 개념을 포괄적으로 다루는 여러 교과서(특히 :cite:`Goodfellow.Bengio.Courville.2016`)가 등장했지만, 이런 책들은 설명과 (이론을 구현한) 코드를 결합하지 못해서 독자들이 직접 구현하기 어려운 경우가 있었습니다. 또한 유료 교육기관에 등록해야만 볼 수 있는 자료들도 많습니다.
+
+
+
 We set out to create a resource that could
 (i) be freely available for everyone;
 (ii) offer sufficient technical depth to provide a starting point on the path
@@ -109,6 +136,10 @@ to actually becoming an applied machine learning scientist;
 and also by the community at large;
 and (v) be complemented by a [forum](http://discuss.d2l.ai)
 for interactive discussion of technical details and to answer questions.
+
+우리는 (i) 누구나 무료로 사용할 수 있고 (ii) 머신러닝 과학자가 되고 싶은 사람이 출발점으로 삼을 수 있을 만큼 충분한 기술적 깊이를 제공하며 (iii) 실제로 문제를 푸는 *방법*을 보여주는, 실행가능한 코드를 포함하고  (iv) 저자들과 커뮤니티에 의해 빠르게 업데이트될 수 있으며 (v) 상세한 기술 내용에 대해 대화식 토론과 답변이 가능한 [게시판] (http://discuss.d2l.ai)으로 보완 가능한 자료를 만들기 시작했습니다. 
+
+
 
 These goals were often in conflict.
 Equations, theorems, and citations are best managed and laid out in LaTeX.
@@ -129,8 +160,15 @@ these choices provide a good compromise among the competing concerns.
 We believe that this might be the first book published
 using such an integrated workflow.
 
+이러한 목표는 종종 충돌했습니다. 수학식, 정리와 인용은 LaTeX에서 가장 잘 관리되고 레이아웃 될 수 있습니다. 코드는 파이썬으로 가장 잘 설명됩니다. 웹 페이지는 HTML과 자바 스크립트에서 기본입니다. 우리는 실행 가능한 코드, 실제 책, 다운로드 가능한 PDF, 인터넷 웹 사이트 모두에서 액세스 가능한 콘텐츠를 원했습니다. 현재는 이러한 요구조건을 완벽하게 지원하는 도구나 워크 플로우가 존재하지 않기 때문에, 이 책에서는 독자적인 방법을 만들어 사용했습니다. 이에 대해서는 :numref:`sec_how_to_contribute` 에서 자세히 설명하겠습니다. 소스를 공유하고 편집하기 위해서 Github를 사용했고, 코드, 수학식, 텍스트를 동시에 사용하기 위해 Jupyter 노트북을, 다양한 출력물을 생성하는 렌더링 엔진으로 Sphinx를, 게시판을 위해 Discourse를 사용했습니다. 우리의 시스템이 아직 완벽하지는 않지만, 이와 같은 선택의 결과로 적절한 타협점을 찾을 수 있었습니다. 아마도 이 책은 이와 같은 통합 워크플로를 사용해서 출판된 첫번째 책일지도 모릅니다.
+
+
+
+
 
 ### Learning by Doing
+
+### 직접 하면서 배우기
 
 Many textbooks teach a series of topics, each in exhaustive detail.
 For example, Chris Bishop's excellent textbook :cite:`Bishop.2006`,
@@ -426,6 +464,10 @@ abhinavsp0730, jonathanhrandall, ysraell, Nodar Okroshiashvili, UgurKap.
 
 We thank Amazon Web Services, especially Swami Sivasubramanian,
 Raju Gulabani, Charlie Bell, and Andrew Jassy for their generous support in writing this book. Without the available time, resources, discussions with colleagues, and continuous encouragement this book would not have happened.
+
+우리는 영어와 중국 초안 모두에 대한 수백 명의 기여자에게 빚을 지고 있습니다. 그들은 콘텐츠를 개선하는 데 도움이 귀중한 피드백을 제공했습니다. 특히, 우리는 모두를 위해 더 나은 버전을 만들기 위해 힘써준 영어 초안의 모든 기여자에게 감사드립니다. 그들의 Github ID와 이름 (제공된 경우)은 : bowen0701, ChaiBapChya (Chaitanya Prakash Bapat), kirk86, MLWhiz (Rahul Agarwal), mstewart141, muelleme (Mike Müller), sfermigier, sundeepteki, vishaalkapoor, YaYaB. 더해서, 아마존 웹서비시즈에 감사 드리며, 특히 Swami Sivasubramanian, Raju Gulabani, Charlie Bell, and Andrew Jassy에게 이 책을 쓰도록 충분히 지원해 주신 대해 감사드립니다. 사용 가능한 시간, 자원, 동료와의 토론, 지속적인 격려 덕분에 책이 만들어 질 수 있었습니다.
+
+
 
 
 ## Summary
