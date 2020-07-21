@@ -1,9 +1,0 @@
-[submodule "build/mx-theme"]
-	path = build/mx-theme
-	url = https://github.com/mli/mx-theme
-[submodule "build/utils"]
-	path = build/utils
-	url = https://github.com/d2l-ai/utils
-[submodule "data"]
-	path = data
-	url = https://github.com/d2l-ai/data
