@@ -1,0 +1,110 @@
+# 다층 퍼셉트론의 간결한 구현
+:label:`sec_mlp_concise`
+
+예상대로 상위 수준 API를 사용하여 MLP를 더욱 간결하게 구현할 수 있습니다.
+
+```{.python .input}
+from d2l import mxnet as d2l
+from mxnet import gluon, init, npx
+from mxnet.gluon import nn
+npx.set_np()
+```
+
+```{.python .input}
+#@tab pytorch
+from d2l import torch as d2l
+import torch
+from torch import nn
+```
+
+```{.python .input}
+#@tab tensorflow
+from d2l import tensorflow as d2l
+import tensorflow as tf
+```
+
+## 모델
+
+softmax 회귀 구현 (:numref:`sec_softmax_concise`) 의 간결한 구현과 비교할 때 유일한 차이점은
+*완전히 연결된 레이어 2개*
+(이전에는*one*을 추가했습니다).첫 번째는 숨겨진 계층으로 256 개의 숨겨진 단위를 포함하고 Relu 활성화 기능을 적용합니다.두 번째는 출력 레이어입니다.
+
+```{.python .input}
+net = nn.Sequential()
+net.add(nn.Dense(256, activation='relu'),
+        nn.Dense(10))
+net.initialize(init.Normal(sigma=0.01))
+```
+
+```{.python .input}
+#@tab pytorch
+net = nn.Sequential(nn.Flatten(),
+                    nn.Linear(784, 256),
+                    nn.ReLU(),
+                    nn.Linear(256, 10))
+
+def init_weights(m):
+    if type(m) == nn.Linear:
+        torch.nn.init.normal_(m.weight, std=0.01)
+
+net.apply(init_weights)
+```
+
+```{.python .input}
+#@tab tensorflow
+net = tf.keras.models.Sequential([
+    tf.keras.layers.Flatten(),
+    tf.keras.layers.Dense(256, activation='relu'),
+    tf.keras.layers.Dense(10)])
+```
+
+훈련 루프는 softmax 회귀 분석을 구현할 때와 정확히 동일합니다.이러한 모듈성을 통해 모델 아키텍처와 관련된 문제를 직교 고려 사항에서 분리 할 수 있습니다.
+
+```{.python .input}
+batch_size, lr, num_epochs = 256, 0.1, 10
+loss = gluon.loss.SoftmaxCrossEntropyLoss()
+trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate': lr})
+```
+
+```{.python .input}
+#@tab pytorch
+batch_size, lr, num_epochs = 256, 0.1, 10
+loss = nn.CrossEntropyLoss()
+trainer = torch.optim.SGD(net.parameters(), lr=lr)
+```
+
+```{.python .input}
+#@tab tensorflow
+batch_size, lr, num_epochs = 256, 0.1, 10
+loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+trainer = tf.keras.optimizers.SGD(learning_rate=lr)
+```
+
+```{.python .input}
+#@tab all
+train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
+d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)
+```
+
+## 요약
+
+* 높은 수준의 API를 사용하여 MLP를 훨씬 더 간결하게 구현할 수 있습니다.
+* 동일한 분류 문제의 경우 활성화 기능이있는 추가 숨겨진 레이어를 제외하고 MLP의 구현은 softmax 회귀 분석의 구현과 동일합니다.
+
+## 연습 문제
+
+1. 다른 수의 숨겨진 레이어를 추가해보십시오 (학습 속도를 수정할 수도 있음).어떤 설정이 가장 잘 작동합니까?
+1. 다른 활성화 기능을 사용해보십시오.어느 것이 가장 잘 작동합니까?
+1. 가중치를 초기화하기위한 다른 방법을 시도하십시오.어떤 방법이 가장 잘 작동합니까?
+
+:begin_tab:`mxnet`
+[Discussions](https://discuss.d2l.ai/t/94)
+:end_tab:
+
+:begin_tab:`pytorch`
+[Discussions](https://discuss.d2l.ai/t/95)
+:end_tab:
+
+:begin_tab:`tensorflow`
+[Discussions](https://discuss.d2l.ai/t/262)
+:end_tab:
