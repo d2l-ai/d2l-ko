@@ -48,7 +48,7 @@ d2l.use_svg_display()
 
 We can download and read the FashionMNIST dataset into memory via the the build-in functions in the framework.
 
-프래임워크가 제공하는 함수들을 이용해서 FashionMNIST 데이터셋을 다운로드해서 메모리로 읽을 수 있다.
+프래임워크가 제공하는 함수들을 이용해서 FashionMNIST 데이터셋을 다운로드해서 메모리로 읽을 수 있습니다.
 
 ```{.python .input}
 mnist_train = gluon.data.vision.FashionMNIST(train=True)
@@ -77,7 +77,7 @@ by 6000 images in the training set and by 1000 in the test set.
 Consequently the training set and the test set
 contain 60000 and 10000 images, respectively.
 
-FashionMNIST는 10개 카테고리들에 속하는 이미지들로 구성되어 있고, 각 카테고리는 6000개 학습 이미지, 1000개 테스트 이미지를 가지고 있다. 즉, 학습 셋은 60000개, 테스트 셋은 10000개 이미지으로 구성되어 있습니다.
+FashionMNIST는 10개 카테고리들에 속하는 이미지들로 구성되어 있고, 각 카테고리당 학습 데이터셋은 6000개 이미지, 테스트 데이터셋은 1000개 이미지가 있습니다. *테스트 데이터셋* (또는 *테스트 셋*)은 모델 성능을 평가하는데 사용되며, 학습에는 사용되지 않습니다. 결과적으로 학습 셋은 60000개, 테스트 셋은 10000개 이미지으로 구성되어 있습니다.
 
 ```{.python .input}
 #@tab mxnet, pytorch
@@ -97,7 +97,7 @@ we store the shape of any image with height $h$ width $w$ pixels as $h \times w$
 각 이미지의 높이와 폭는 모두 28 픽셀입니다. 데이터셋은 채널의 개수가 1인 회색 이미지로 구성되어 있습니다. 간결함을 위해서, 우리는 높이가 $h$이고 폭이 $w$ 픽셀인 이미지의 모양은 $h \times w$ 또는 ($h$, $w$)로 하겠습니다.
 
 ```{.python .input}
-#@tab mxnet, pytorch
+#@tab all
 mnist_train[0][0].shape
 ```
 
@@ -172,7 +172,7 @@ Recall that at each iteration, a load loader
 reads a minibatch of data with size `batch_size` each time.
 We also randomly shuffle the examples for the training data iterator.
 
-학습 데이터셋과 테스트 데이터셋을 읽는 것을 편하게 만들기 위해서, 직접 구현하지 않고 만들어진 데이터 반복자를 사용합니다. 매 반복마다, 데이터 로드는 매 번  `batch_size` 크기의 미니배치 데이터를 읽습니다. 또한 학습 데이터 반복자는 샘플들을 의의로 섞습니다.
+학습 데이터셋과 테스트 데이터셋을 읽는 것을 편하게 만들기 위해서, 직접 구현하지 않고 만들어진 데이터 반복자를 사용합니다. 매 반복마다, 데이터 로더는 매 번  `batch_size` 크기의 미니배치 데이터를 읽습니다. 또한 학습 데이터 반복자는 샘플들을 의의로 섞습니다.
 
 ```{.python .input}
 batch_size = 256

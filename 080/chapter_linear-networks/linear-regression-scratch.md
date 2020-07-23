@@ -48,7 +48,7 @@ import random
 
 To keep things simple, we will construct an artificial dataset
 according to a linear model with additive noise.
-Out task will be to recover this model's parameters
+Our task will be to recover this model's parameters
 using the finite set of examples contained in our dataset.
 We will keep the data low-dimensional so we can visualize it easily.
 In the following code snippet, we generate a dataset
@@ -80,52 +80,38 @@ The following code generates our synthetic dataset.
 $\epsilon$는 피처와 레이블의 잠재적인 오류로 생각할 수 있습니다. 여기에, 우리는 표준 가정을 따르고 $\epsilon$은 평균이 0인 정규 분포를 따른다고 가정합니다. 문제를 쉽게 만들기 위해서, 표준 편차를 0.01로 하겠습니다다. 합성 데이터셋을 만드는 코드는 다음과 같습니다.
 
 ```{.python .input}
+#@tab mxnet, pytorch
 def synthetic_data(w, b, num_examples):  #@save
     """Generate y = Xw + b + noise."""
-    X = np.random.normal(0, 1, (num_examples, len(w)))
-    y = np.dot(X, w) + b
-    y += np.random.normal(0, 0.01, y.shape)
-    return X, y
-
-true_w = np.array([2, -3.4])
-true_b = 4.2
-features, labels = synthetic_data(true_w, true_b, 1000)
-```
-
-```{.python .input}
-#@tab pytorch
-def synthetic_data(w, b, num_examples):  #@save
-    """Generate y = Xw + b + noise."""
-    X = torch.zeros(size=(num_examples, len(w))).normal_()
-    y = torch.matmul(X, w) + b
-    y += torch.zeros(size=y.shape).normal_(std=0.01)
-    return X, y
-
-true_w = torch.tensor([2, -3.4])
-true_b = 4.2
-features, labels = synthetic_data(true_w, true_b, 1000)
+    X = d2l.normal(0, 1, (num_examples, len(w)))
+    y = d2l.matmul(X, w) + b
+    y += d2l.normal(0, 0.01, y.shape)
+    return X, d2l.reshape(y, (-1, 1))
 ```
 
 ```{.python .input}
 #@tab tensorflow
 def synthetic_data(w, b, num_examples):  #@save
     """Generate y = Xw + b + noise."""
-    X = tf.zeros(shape=(num_examples, w.shape[0]))
+    X = d2l.zeros((num_examples, w.shape[0]))
     X += tf.random.normal(shape=X.shape)
-    y = tf.matmul(X, w) + b
+    y = d2l.matmul(X, tf.reshape(w, (-1, 1))) + b
     y += tf.random.normal(shape=y.shape, stddev=0.01)
-    y = tf.reshape(y, [num_examples])
+    y = d2l.reshape(y, (-1, 1))
     return X, y
+```
 
-true_w = tf.constant([2, -3.4], shape=(2, 1))
+```{.python .input}
+#@tab all
+true_w = d2l.tensor([2, -3.4])
 true_b = 4.2
 features, labels = synthetic_data(true_w, true_b, 1000)
 ```
 
-Note that each row in `features` consists of a 2-dimensional data instance
+Note that each row in `features` consists of a 2-dimensional data point
 and that each row in `labels` consists of a 1-dimensional label value (a scalar).
 
-`features` 의 각 행은 2차 데이터 인스턴스,  `labels`의 각 행은 1차 레이블 값(스칼라)로 구성된다는 것을 기억하세요.
+`features` 의 각 행은 2차 데이터 포인트,  `labels`의 각 행은 1차 레이블 값(스칼라)로 구성된다는 것을 기억하세요.
 
 ```{.python .input}
 #@tab all
@@ -168,27 +154,16 @@ Each minibatch consists of a tuple of features and labels.
 아래 코드에서 이 기능을 제공하는 한 가지 방법을 구현하는  `data_iter` 함수를 정의합니다. 이 함수는 배치 크기, 피처들의 행렬, 그리고 레이블 벡터를 입력으로 받아서, `batch_size` 크기의 미니배치를 리턴한다. 각 미니배치는 피처와 레이블의 튜플로 구성됩니다.
 
 ```{.python .input}
+#@tab mxnet, pytorch
 def data_iter(batch_size, features, labels):
     num_examples = len(features)
     indices = list(range(num_examples))
     # The examples are read at random, in no particular order
     random.shuffle(indices)
     for i in range(0, num_examples, batch_size):
-        batch_indices = np.array(
+        batch_indices = d2l.tensor(
             indices[i: min(i + batch_size, num_examples)])
         yield features[batch_indices], labels[batch_indices]
-```
-
-```{.python .input}
-#@tab pytorch
-def data_iter(batch_size, features, labels):
-    num_examples = len(features)
-    indices = list(range(num_examples))
-    # The examples are read at random, in no particular order
-    random.shuffle(indices)
-    for i in range(0, num_examples, batch_size):
-        j = torch.tensor(indices[i: min(i + batch_size, num_examples)])
-        yield features[j], labels[j]
 ```
 
 ```{.python .input}
@@ -268,7 +243,8 @@ b = torch.zeros(1, requires_grad=True)
 
 ```{.python .input}
 #@tab tensorflow
-w = tf.Variable(tf.random.normal(shape=(2, 1), mean=0, stddev=0.01), trainable=True)
+w = tf.Variable(tf.random.normal(shape=(2, 1), mean=0, stddev=0.01),
+                trainable=True)
 b = tf.Variable(tf.zeros(1), trainable=True)
 ```
 
@@ -306,20 +282,10 @@ the scalar is added to each component of the vector.
 다음으로 입력들과 파라미터들을 출력과 연관시키는 모델을 정의해야 합니다. 선형 모델의 출력을 얻기 위해서 입력 피처 행렬 $\mathbf{X}$과 모델 가중치 벡터 $\mathbf{w}$의 형렬-벡터 곱을 구한 후, 오프셋 $b$를 각 예제에 더한다는 것을 상기해 보세요. $\mathbf{Xw}$는 벡터이고, $b$는 스칼라 값이다. :numref:`subsec_broadcasting` 에서 설명한 브로드케스팅 메카니즘에 따라서, 벡터와 스칼라를 더할 때, 스칼라 값는 벡터의 각 컴포넌트에 더해집니다.
 
 ```{.python .input}
+#@tab all
 def linreg(X, w, b):  #@save
-    return np.dot(X, w) + b
-```
-
-```{.python .input}
-#@tab pytorch
-def linreg(X, w, b):  #@save
-    return torch.matmul(X, w) + b
-```
-
-```{.python .input}
-#@tab tensorflow
-def linreg(X, w, b):  #@save
-    return tf.matmul(X, w) + b
+    """The linear regression model."""
+    return d2l.matmul(X, w) + b
 ```
 
 ## Defining the Loss Function
@@ -340,6 +306,7 @@ will also have the same shape as `y_hat`.
 ```{.python .input}
 #@tab all
 def squared_loss(y_hat, y):  #@save
+    """Squared loss."""
     return (y_hat - d2l.reshape(y, y_hat.shape)) ** 2 / 2
 ```
 
@@ -372,6 +339,7 @@ does not depend heavily on our choice of the batch size.
 
 ```{.python .input}
 def sgd(params, lr, batch_size):  #@save
+    """Minibatch stochastic gradient descent."""
     for param in params:
         param[:] = param - lr * param.grad / batch_size
 ```
@@ -379,6 +347,7 @@ def sgd(params, lr, batch_size):  #@save
 ```{.python .input}
 #@tab pytorch
 def sgd(params, lr, batch_size):  #@save
+    """Minibatch stochastic gradient descent."""
     for param in params:
         param.data.sub_(lr*param.grad/batch_size)
         param.grad.data.zero_()
@@ -387,8 +356,10 @@ def sgd(params, lr, batch_size):  #@save
 ```{.python .input}
 #@tab tensorflow
 def sgd(params, grads, lr, batch_size):  #@save
+    """Minibatch stochastic gradient descent."""
     for param, grad in zip(params, grads):
         param.assign_sub(lr*grad/batch_size)
+```  param.assign_sub(lr*grad/batch_size)
 ```
 
 ## Training
@@ -441,11 +412,14 @@ later in
 매 *에폭(epoch)*마다, (`data_iter` 함수를 이용해서) 학습 데이터셋의 모든 예제를 한 번씩 사용(전체 예제들의 개수가 배치 크기의 배수라고 가정)해서 전체 데이터셋을 반복합니다. 에폭 수 `num_epochs`와 학습 속도  `lr`는 모두 하이퍼파라미터이며, 이들은 여기서 3과 0.03으로 각각 설정했습니다. 불행히도 하이퍼파라미터를 설정하는 것은 까다롭고, 시행 착오를 통한 조정이 필요합니다. 지금은 이것에 대한 자세한 설명은 하지 않고, :numref:`chap_optimization`에서 다루겠습니다.
 
 ```{.python .input}
+#@tab all
 lr = 0.03
 num_epochs = 3
 net = linreg
 loss = squared_loss
+```
 
+```{.python .input}
 for epoch in range(num_epochs):
     for X, y in data_iter(batch_size, features, labels):
         with autograd.record():
@@ -461,15 +435,11 @@ for epoch in range(num_epochs):
 
 ```{.python .input}
 #@tab pytorch
-lr = 0.03
-num_epochs = 3
-net = linreg
-loss = squared_loss
-
 for epoch in range(num_epochs):
     for X, y in data_iter(batch_size, features, labels):
         l = loss(net(X, w, b), y)  # Minibatch loss in `X` and `y`
-        l.sum().backward()  # Compute gradient on `l` with respect to [`w`, `b`]
+        # Compute gradient on `l` with respect to [`w`, `b`]
+        l.sum().backward()
         sgd([w, b], lr, batch_size)  # Update parameters using their gradient
     with torch.no_grad():
         train_l = loss(net(features, w, b), labels)
@@ -478,18 +448,14 @@ for epoch in range(num_epochs):
 
 ```{.python .input}
 #@tab tensorflow
-lr = 0.03
-num_epochs = 3
-net = linreg
-loss = squared_loss
-
 for epoch in range(num_epochs):
     for X, y in data_iter(batch_size, features, labels):
         with tf.GradientTape() as g:
             l = loss(net(X, w, b), y)  # Minibatch loss in `X` and `y`
         # Compute gradient on l with respect to [`w`, `b`]
         dw, db = g.gradient(l, [w, b])
-        sgd([w, b], [dw, db], lr, batch_size)  # Update parameters using their gradient
+        # Update parameters using their gradient
+        sgd([w, b], [dw, db], lr, batch_size)
     train_l = loss(net(features, w, b), labels)
     print(f'epoch {epoch + 1}, loss {float(tf.reduce_mean(train_l)):f}')
 ```
@@ -561,6 +527,6 @@ that lead to highly accurate prediction.
 [Discussions](https://discuss.d2l.ai/t/43)
 :end_tab:
 
-:begin_tab:`pytorch`
+:begin_tab:`tensorflow`
 [Discussions](https://discuss.d2l.ai/t/201)
 :end_tab:
