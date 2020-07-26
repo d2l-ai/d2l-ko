@@ -55,7 +55,7 @@ x
 
 ```{.python .input}
 #@tab tensorflow
-x = tf.constant(range(4), dtype=tf.float32)
+x = tf.range(4, dtype=tf.float32)
 x
 ```
 
@@ -72,8 +72,7 @@ with respect to a vector $\mathbf{x}$
 is itself vector-valued and has the same shape as $\mathbf{x}$.
 
 ```{.python .input}
-# We allocate memory for a tensor's gradient by invoking its `attach_grad`
-# method
+# We allocate memory for a tensor's gradient by invoking `attach_grad`
 x.attach_grad()
 # After we calculate a gradient taken with respect to `x`, we will be able to
 # access it via the `grad` attribute, whose values are initialized with 0s
@@ -82,7 +81,7 @@ x.grad
 
 ```{.python .input}
 #@tab pytorch
-x.requires_grad_(True)  # Equals to x = torch.arange(4.0, requires_grad=True)
+x.requires_grad_(True)  # Same as `x = torch.arange(4.0, requires_grad=True)`
 x.grad  # The default value is None
 ```
 
@@ -109,7 +108,7 @@ y
 
 ```{.python .input}
 #@tab tensorflow
-# Record all computations onto a tape. 
+# Record all computations onto a tape
 with tf.GradientTape() as t:
     y = 2 * tf.tensordot(x, x, axes=1)
 y
@@ -163,13 +162,13 @@ Now let us calculate another function of `x`.
 with autograd.record():
     y = x.sum()
 y.backward()
-x.grad  # Overwritten by the newly calculated gradient.
+x.grad  # Overwritten by the newly calculated gradient
 ```
 
 ```{.python .input}
 #@tab pytorch
 # PyTorch accumulates the gradient in default, we need to clear the previous 
-# values.
+# values
 x.grad.zero_() 
 y = x.sum()
 y.backward()
@@ -180,7 +179,7 @@ x.grad
 #@tab tensorflow
 with tf.GradientTape() as t:
     y = tf.reduce_sum(x)
-t.gradient(y, x)  # Overwritten by the newly calculated gradient.
+t.gradient(y, x)  # Overwritten by the newly calculated gradient
 ```
 
 ## Backward for Non-Scalar Variables
@@ -212,9 +211,14 @@ x.grad  # Equals to y = sum(x * x)
 
 ```{.python .input}
 #@tab pytorch
+# Invoking `backward` on a non-scalar requires passing in a `gradient` argument
+# which specifies the gradient of the differentiated function w.r.t `self`.
+# In our case, we simply want to sum the partial derivatives, so passing
+# in a gradient of ones is appropriate
 x.grad.zero_()
 y = x * x
-y.sum().backward()  # Backward only supports for scalars. 
+# y.backward(torch.ones(len(x))) equivalent to the below
+y.sum().backward()
 x.grad
 ```
 
@@ -222,7 +226,7 @@ x.grad
 #@tab tensorflow
 with tf.GradientTape() as t:
     y = x * x
-t.gradient(y, x)  # Equals to y = tf.reduce_sum(x * x)
+t.gradient(y, x)  # Same as `y = tf.reduce_sum(x * x)`
 ```
 
 ## Detaching Computation
@@ -267,7 +271,7 @@ x.grad == u
 
 ```{.python .input}
 #@tab tensorflow
-# Set the persistent=True to run t.gradient more than once.
+# Set `persistent=True` to run `t.gradient` more than once
 with tf.GradientTape(persistent=True) as t:
     y = x * x
     u = tf.stop_gradient(y)
@@ -325,9 +329,9 @@ def f(a):
 #@tab pytorch
 def f(a):
     b = a * 2
-    while b.norm().item() < 1000:
+    while b.norm() < 1000:
         b = b * 2
-    if b.sum().item() > 0:
+    if b.sum() > 0:
         c = b
     else:
         c = 100 * b
@@ -359,14 +363,14 @@ d.backward()
 
 ```{.python .input}
 #@tab pytorch
-a = torch.randn(size=(1,), requires_grad=True)
+a = torch.randn(size=(), requires_grad=True)
 d = f(a)
 d.backward()
 ```
 
 ```{.python .input}
 #@tab tensorflow
-a = tf.Variable(tf.random.normal((1, 1),dtype=tf.float32))
+a = tf.Variable(tf.random.normal(shape=()))
 with tf.GradientTape() as t:
     d = f(a)
 d_grad = t.gradient(d, a)
@@ -385,12 +389,12 @@ a.grad == d / a
 
 ```{.python .input}
 #@tab pytorch
-a.grad == (d / a)
+a.grad == d / a
 ```
 
 ```{.python .input}
 #@tab tensorflow
-d_grad == (d / a)
+d_grad == d / a
 ```
 
 ## Summary

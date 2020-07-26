@@ -406,9 +406,20 @@ Thus, `[-1]` selects the last element and `[1:3]` selects the second and the thi
 x[-1], x[1:3]
 ```
 
+:begin_tab:`mxnet, pytorch`
 Beyond reading, we can also write elements of a matrix by specifying indices.
-
 읽는 것 뿐만 아니라, 인덱스를 지정해서 행렬의 요소에 값을 쓸 수도 있습니다.
+:end_tab:
+
+:begin_tab:`tensorflow`
+`Tensors` in TensorFlow are immutable, and cannot be assigned to. `Variables` in TensorFlow are mutable containers of state that support assignments. Keep in mind that gradients in TensorFlow do not flow backwards through `Variable` assignments.
+TensorFlow의 `Tensors` 는 변경할 수 없으며 할당(assignment)할 수 없습니다. TensorFlow의 `Variables` 는 할당을 지원하는 변경 가능한 상태의 컨테이너입니다. TensorFlow의 그래디언트는 `Variables` 할당을 통해 역전파 되지 않습니다.
+
+Beyond assigning a value to the entire `Variable`, we can write elements of a `Variable` by specifying indices.
+전체 `Variables` 에 값을 할당하는 것뿐 아니라, 인덱스를 지정해 `Variables` 의 요소 값을 쓸 수 있습니다.
+:end_tab:
+
+
 
 ```{.python .input}
 #@tab mxnet, pytorch
@@ -418,8 +429,9 @@ x
 
 ```{.python .input}
 #@tab tensorflow
-x = tf.convert_to_tensor(tf.Variable(x)[1, 2].assign(9))
-x
+x_var = tf.Variable(x)
+x_var[1, 2].assign(9)
+x_var
 ```
 
 If we want to assign multiple elements the same value, we simply index all of them and then assign them the value. For instance, `[0:2, :]` accesses the first and second rows, where `:` takes all the elements along axis 1 (column). While we discussed indexing for matrices, this obviously also works for vectors and for tensors of more than 2 dimensions.
@@ -435,9 +447,8 @@ x
 ```{.python .input}
 #@tab tensorflow
 x_var = tf.Variable(x)
-x_var[1:2,:].assign(tf.ones(x_var[1:2,:].shape, dtype = tf.float32)*12)
-x = tf.convert_to_tensor(x_var)
-x
+x_var[0:2,:].assign(tf.ones(x_var[0:2,:].shape, dtype = tf.float32)*12)
+x_var
 ```
 
 
@@ -461,9 +472,21 @@ This might be undesirable for two reasons. First, we do not want to run around a
 
 이것은 두 가지 이유로 바람직하지 않을 수 있습니다. 첫째, 우리는 불필요하게 메모리를 항상 할당하고 싶지 않습니다. 머신러닝에서는 수백 메가바이트의 매개 변수 전체를 초당 여러 번 업데이트할 수도 있습니다. 일반적으로, 이러한 업데이트는 (새로운 메모리를 할당하지 않고) *같은 위치에서* 일어나길 원할 것입니다. 둘째, 여러 변수에서 동일한 매개 변수를 가리킬 수 있습니다. 같은 위치에서 업데이트하지 않으면, 여전히 이전 메모리 위치를 가리키는 참조들이 실수로 잘못된 매개 변수를 참조하게 할 수 있습니다.
 
-Fortunately, performing in-place operations in MXNet is easy. We can assign the result of an operation to a previously allocated array with slice notation, e.g., `y[:] = <expression>`. To illustrate this concept, we first create a new matrix `z` with the same shape as another `y`, using `zeros_like` to allocate a block of $0$ entries.
 
+
+:begin_tab:`mxnet, pytorch`
+Fortunately, performing in-place operations is easy. We can assign the result of an operation to a previously allocated array with slice notation, e.g., `y[:] = <expression>`. To illustrate this concept, we first create a new matrix `z` with the same shape as another `y`, using `zeros_like` to allocate a block of $0$ entries.
 다행히도 같은 위치에서 업데이트하는 연산을 하는 것은 쉽습니다. 예를 들면, `y[:] = <expression>` 과 같이 슬라이스 표기법을 사용해 이전에 할당된 배열에 연산 결과를 저장할 수 있습니다. 이 개념을 설명하기 위해, 먼저 행렬 `y` 와 같은 모양을 가진 새로운 행렬 `z` 를 만듭니다. 이 때 0 값으로 초기화된 블록을 할당하기 위해 `zeros_like` 을 사용했습니다.
+:end_tab:
+
+:begin_tab:`tensorflow`
+`Variables` are mutable containers of state in TensorFlow. They provide a way to store your model parameters.
+We can assign the result of an operation to a `Variable` with `assign`.
+To illustrate this concept, we create a `Variable` `z` with the same shape as another tensor `y`, using `zeros_like` to allocate a block of $0$ entries. 
+`Variables` 는 TensorFlow에서 상태를 변경할 수있는 컨테이너로, 모델 파라미터를 저장할 때 사용될 수 있습니다. 연산 결과를 `assign` 을 사용하여 `Variable` 에 저장할 수 있습니다. 이 개념을 설명하기 위해, 먼저 텐서 `y` 와 같은 모양을 가진 새로운 `Variable` `z` 를 만듭니다. 이 때 0 값으로 초기화된 블록을 할당하기 위해 `zeros_like` 을 사용했습니다.
+:end_tab:
+
+
 
 ```{.python .input}
 z = np.zeros_like(y)
@@ -484,13 +507,29 @@ print('id(z):', id(z))
 #@tab tensorflow
 z = tf.Variable(tf.zeros_like(y))
 print('id(z):', id(z))
-z[:].assign(x + y)
+z.assign(x + y)
 print('id(z):', id(z))
 ```
 
-If the value of `x` is not reused in subsequent computations, we can also use `x[:] = x + y` or `x += y` to reduce the memory overhead of the operation.
 
+
+:begin_tab:`mxnet, pytorch`
+If the value of `x` is not reused in subsequent computations, we can also use `x[:] = x + y` or `x += y` to reduce the memory overhead of the operation.
 `x` 값이 뒤의 계산에서 재사용되지 않는다면, `x[:] = x + y` 또는 `x += y` 를 사용해 연산의 메모리 오버 헤드를 줄일 수 있습니다.
+:end_tab:
+
+:begin_tab:`tensorflow`
+Even once you store state persistently in a `Variable`, you may want to reduce your memory usage further by avoiding excess allocations for tensors that are not your model parameters.
+`Variable` 에 상태를 영속적으로 저장하고 나서, 모델 매개 변수가 아닌 텐서에 대한 과도한 메모리 할당을 피해 메모리 사용량을 더 줄일 수 있습니다.
+
+Because TensorFlow `Tensors` are immutable and gradients do not flow through `Variable` assignments, TensorFlow does not provide an explicit way to run an individual operation in-place.
+TensorFlow의 `Tensors` 는 변경할 수 없고 그래디언트가 `Variable` 할당으로 전달되지 않기 때문에, TensorFlow는 개별 연산을 같은 위치에서 실행하는 명시적인 방법을 제공하지 않습니다.
+
+However, TensorFlow provides the `tf.function` decorator to wrap computation inside of a TensorFlow graph that gets compiled and optimized before running. This allows TensorFlow to prune unused values, and to re-use prior allocations that are no longer needed. This minimizes the memory overhead of TensorFlow computations.
+그러나 TensorFlow는 실행 전에 컴파일 및 최적화되는 TensorFlow 그래프의 내부에 계산을 집어넣는 `tf.function` 데코레이터를 제공합니다. 이를 통해 TensorFlow는 사용하지 않는 값을 제거하고 더 이상 필요없는 이전 할당을 재사용할 수 있습니다. 이는 TensorFlow 계산의 메모리 오버 헤드를 최소화합니다.
+:end_tab:
+
+
 
 ```{.python .input}
 #@tab mxnet, pytorch
@@ -501,9 +540,15 @@ id(x) == before
 
 ```{.python .input}
 #@tab tensorflow
-before = id(x)
-tf.Variable(x).assign(x + y)
-id(x) == before
+@tf.function
+def computation(x, y):
+  z = tf.zeros_like(y)  # This unused value will be pruned out.
+  a = x + y  # Allocations will be re-used when no longer needed.
+  b = a + y
+  c = b + y
+  return c + y
+
+computation(x, y)
 ```
 
 
@@ -556,49 +601,6 @@ a, a.item(), float(a), int(a)
 a = tf.constant([3.5]).numpy()
 a, a.item(), float(a), int(a)
 ```
-
-
-
-## The `d2l` Package
-
-## `d2l` 패키지
-
-Throughout the online version of this book, we will provide implementations of multiple frameworks. However, different frameworks may be different in their API names or usage. To better reuse the same code block across multiple frameworks, we unify a few commonly-used functions in the `d2l` package. The comment `#@save` is a special mark where the following function, class, or statements are saved in the `d2l` package. For instance, later we can directly invoke `d2l.numpy(a)` to convert a tensor `a`, which can be defined in any supported framework, into a NumPy tensor.
-
-이 책의 온라인 버전에서는 다양한 프레임워크의 구현을 제공할 것입니다. 하지만 개별 프레임워크마다 API 이름이나 사용법이 다를 수 있습니다. 여러 프레임 워크에서 동일한 코드 블록을 더 잘 재사용하기 위해, 몇 가지 일반적인 기능을 `d2l` 패키지에 통합했습니다. 주석 `#@save` 은 다음의 함수, 클래스, 명령문이 `d2l` 패키지에 포함된다는 특별한 표시입니다. 예를 들어, 나중에 (지원되는 모든 프레임 워크에서 정의된) `d2l.numpy(a)` 를 직접 호출하여 텐서 `a` 를 NumPy 텐서로 변환 할 수 있습니다.
-
-```{.python .input}
-#@save
-numpy = lambda a: a.asnumpy()
-size = lambda a: a.size
-reshape = lambda a, *args: a.reshape(*args)
-ones = np.ones
-zeros = np.zeros
-```
-
-```{.python .input}
-#@tab pytorch
-#@save
-numpy = lambda a: a.detach().numpy()
-size = lambda a: a.numel()
-reshape = lambda a, *args: a.reshape(*args)
-ones = torch.ones
-zeros = torch.zeros
-```
-
-```{.python .input}
-#@tab tensorflow
-#@save
-numpy = lambda a: a.numpy()
-size = lambda a: tf.size(a).numpy()
-reshape = tf.reshape
-ones = tf.ones
-zeros = tf.zeros
-```
-
-In the rest of the book, we often define more complicated functions or classes. For those that can be used later, we will also save them in the `d2l` package so later they can be directly invoked without being redefined.
-
-이 책의 나머지 부분에서는 종종 더 복잡한 함수나 클래스를 정의합니다. 그중 나중에 사용할 수 있는 것들은 `d2l` 패키지에 저장되므로, 다시 정의하지 않고 직접 호출할 수 있습니다.
 
 
 
