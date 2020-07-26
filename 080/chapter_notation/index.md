@@ -56,11 +56,12 @@ The notation used throughout this book is summarized below.
 * $\odot$: Hadamard (elementwise) product , 원소별 [아다마르 곱](https://ko.wikipedia.org/wiki/%EC%95%84%EB%8B%A4%EB%A7%88%EB%A5%B4_%EA%B3%B1)
 * $[\cdot, \cdot]$: Concatenation , 연결
 * $\lvert \mathcal{X} \rvert$: Cardinality of set $\mathcal{X}$ , 집합 $\mathcal{X}$ 의 [크기](https://ko.wikipedia.org/wiki/%EC%A7%91%ED%95%A9%EC%9D%98_%ED%81%AC%EA%B8%B0)
-* $\|\cdot\|_p$: $\ell_p$ norm , $\ell_p$ [노름](https://ko.wikipedia.org/wiki/%EB%85%B8%EB%A6%84_%EA%B3%B5%EA%B0%84)
-* $\|\cdot\|$: $\ell_2$ norm , $\ell_2$ [노름](https://ko.wikipedia.org/wiki/%EB%85%B8%EB%A6%84_%EA%B3%B5%EA%B0%84)
+* $\|\cdot\|_p$: $L_p$ norm , $L_p$ [노름](https://ko.wikipedia.org/wiki/%EB%85%B8%EB%A6%84_%EA%B3%B5%EA%B0%84)
+* $\|\cdot\|$: $L_2$ norm , $L_2$ [노름](https://ko.wikipedia.org/wiki/%EB%85%B8%EB%A6%84_%EA%B3%B5%EA%B0%84)
 * $\langle \mathbf{x}, \mathbf{y} \rangle$: Dot product of vectors $\mathbf{x}$ and $\mathbf{y}$ , 벡터 $\mathbf{x}$ 와 $\mathbf{y}$ 의 내적
 * $\sum$: Series addition , (수열의) 합
 * $\prod$: Series multiplication , (수열의) 곱
+* $\stackrel{\mathrm{def}}{=}$: Definition, 정의
 
 
 

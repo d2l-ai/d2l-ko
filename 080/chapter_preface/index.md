@@ -396,7 +396,7 @@ Here is how we import modules from MXNet.
 Most of the code in this book is based on PyTorch.
 PyTorch is an open-source framework for deep learning, which is extremely
 popular in the research community.
-All of the code in this book has passed tests under the the newest PyTorch.
+All of the code in this book has passed tests under the newest PyTorch.
 However, due to the rapid development of deep learning, some code
 *in the print edition* may not work properly in future versions of PyTorch.
 However, we plan to keep the online version up-to-date.
@@ -404,11 +404,7 @@ In case you encounter any such problems,
 please consult :ref:`chap_installation`
 to update your code and runtime environment.
 
-Here is how we import modules from PyTorch.
-
 이 책의 대부분의 코드는 PyTorch를 기반으로 합니다. PyTorch는 딥러닝을 위한 오픈소스 프레임워크이며 연구자들 사이에서 많은 인기를 끌고 있습니다. 이 책의 모든 코드는 최신 PyTorch 버전에서 테스트를 통과했습니다. 딥러닝 기술이 빠르게 발전함에 따라 *인쇄판*의 일부 코드가 PyTorch의 향후 버전에서 제대로 동작하지 않을 수도 있습니다만, 온라인 버전은 최신 상태로 유지할 계획입니다. 이러한 문제가 발생할 경우 :ref:`chap_installation`을 참조하여 코드와 런타임 환경을 업데이트하시기 바랍니다.
-
-다음은 PyTorch에서 모듈을 import하는 방법입니다.
 
 :end_tab:
 
@@ -417,7 +413,7 @@ Here is how we import modules from PyTorch.
 Most of the code in this book is based on TensorFlow.
 TensorFlow is an open-source framework for deep learning, which is extremely
 popular in both the research community and industrial.
-All of the code in this book has passed tests under the the newest TensorFlow.
+All of the code in this book has passed tests under the newest TensorFlow.
 However, due to the rapid development of deep learning, some code
 *in the print edition* may not work properly in future versions of TensorFlow.
 However, we plan to keep the online version up-to-date.
@@ -518,22 +514,20 @@ topecongiro, tpdi, vermicelli, Vishaal Kapoor, Vishwesh Ravi Shrimali, YaYaB, Yu
 Evgeniy Smirnov, lgov, Simon Corston-Oliver, Igor Dzreyev, Ha Nguyen, pmuens,
 Andrei Lukovenko, senorcinco, vfdev-5, dsweet, Mohammad Mahdi Rahimi, Abhishek Gupta,
 uwsd, DomKM, Lisa Oakley, Bowen Li, Aarush Ahuja, Prasanth Buddareddygari, brianhendee,
-mani2106, mtn, lkevinzc, caojilin, Lakshya, Fiete Lüer, Surbhi Vijayvargeeya,
 Muhyun Kim, dennismalmgren, adursun, Anirudh Dagar, liqingnz, Pedro Larroy,
 lgov, ati-ozgur, Jun Wu, Matthias Blume, Lin Yuan, geogunow, Josh Gardner,
 Maximilian Böther, Rakib Islam, Leonard Lausen, Abhinav Upadhyay, rongruosong,
-Steve Sedlmeyer, ruslo, Rafael Schlatter, liusy182, Giannis Pappas, ruslo,
+Steve Sedlmeyer, Ruslan Baratov, Rafael Schlatter, liusy182, Giannis Pappas,
 ati-ozgur, qbaza, dchoi77, Adam Gerson, Phuc Le, Mark Atwood, christabella, vn09,
 Haibin Lin, jjangga0214, RichyChen, noelo, hansent, Giel Dops, dvincent1337, WhiteD3vil,
 Peter Kulits, codypenta, joseppinilla, ahmaurya, karolszk, heytitle, Peter Goetz, rigtorp,
 tiepvupsu, sfilip, mlxd, Kale-ab Tessera, Sanjar Adilov, MatteoFerrara, hsneto,
 Katarzyna Biesialska, Gregory Bruss, duythanhvn, paulaurel, graytowne, minhduc0711,
-sl7423, Jaedong Hwang, Yida Wang, cys4, clhm, Jean Kaddour, austinmw, trebeljahr, tbaums,
-cuongvng, pavelkomarov, vzlamal, NotAnotherSystem, J-Arun-Mani, jancio, eldarkurtic,
+sl7423, tbaums, cuongvng, pavelkomarov, vzlamal, NotAnotherSystem, J-Arun-Mani, jancio, eldarkurtic,
 the-great-shazbot, doctorcolossus, gducharme, cclauss, Daniel-Mietchen, hoonose, biagiom,
 abhinavsp0730, jonathanhrandall, ysraell, Nodar Okroshiashvili, UgurKap.
 
-우리는 영어와 중국어 초안 작성에 수백 명의 도움을 받았습니다. 이 분들은 콘텐츠 개선에 도움을 주시고 귀중한 피드백을 제공하셨습니다. 특히, 모든 이를 위해 더 나은 영어 초안이 되도록 기여해주신 모든 분들에게 감사의 말씀 드립니다. 이 분들의 GitHub ID 또는 이름은 다음과 같습니다(무순). alxnorden, avinashingit, bowen0701, brettkoonce, Chaitanya Prakash Bapat, cryptonaut, Davide Fiocco, edgarroman, gkutiel, John Mitro, Liang Pu, Rahul Agarwal, Mohamed Ali Jamaoui, Michael (Stu) Stewart, Mike Müller, NRauschmayr, Prakhar Srivastav, sad-, sfermigier, Sheng Zha, sundeepteki, topecongiro, tpdi, vermicelli, Vishaal Kapoor, Vishwesh Ravi Shrimali, YaYaB, Yuhong Chen, Evgeniy Smirnov, lgov, Simon Corston-Oliver, Igor Dzreyev, Ha Nguyen, pmuens, Andrei Lukovenko, senorcinco, vfdev-5, dsweet, Mohammad Mahdi Rahimi, Abhishek Gupta, uwsd, DomKM, Lisa Oakley, Bowen Li, Aarush Ahuja, Prasanth Buddareddygari, brianhendee, mani2106, mtn, lkevinzc, caojilin, Lakshya, Fiete Lüer, Surbhi Vijayvargeeya, Muhyun Kim, dennismalmgren, adursun, Anirudh Dagar, liqingnz, Pedro Larroy, lgov, ati-ozgur, Jun Wu, Matthias Blume, Lin Yuan, geogunow, Josh Gardner, Maximilian Böther, Rakib Islam, Leonard Lausen, Abhinav Upadhyay, rongruosong, Steve Sedlmeyer, ruslo, Rafael Schlatter, liusy182, Giannis Pappas, ruslo, ati-ozgur, qbaza, dchoi77, Adam Gerson, Phuc Le, Mark Atwood, christabella, vn09, Haibin Lin, jjangga0214, RichyChen, noelo, hansent, Giel Dops, dvincent1337, WhiteD3vil, Peter Kulits, codypenta, joseppinilla, ahmaurya, karolszk, heytitle, Peter Goetz, rigtorp, tiepvupsu, sfilip, mlxd, Kale-ab Tessera, Sanjar Adilov, MatteoFerrara, hsneto, Katarzyna Biesialska, Gregory Bruss, duythanhvn, paulaurel, graytowne, minhduc0711, sl7423, Jaedong Hwang, Yida Wang, cys4, clhm, Jean Kaddour, austinmw, trebeljahr, tbaums, cuongvng, pavelkomarov, vzlamal, NotAnotherSystem, J-Arun-Mani, jancio, eldarkurtic, the-great-shazbot, doctorcolossus, gducharme, cclauss, Daniel-Mietchen, hoonose, biagiom, abhinavsp0730, jonathanhrandall, ysraell, Nodar Okroshiashvili, UgurKap.
+우리는 영어와 중국어 초안 작성에 수백 명의 도움을 받았습니다. 이 분들은 콘텐츠 개선에 도움을 주시고 귀중한 피드백을 제공하셨습니다. 특히, 모든 이를 위해 더 나은 영어 초안이 되도록 기여해주신 모든 분들에게 감사의 말씀 드립니다. 이 분들의 GitHub ID 또는 이름은 다음과 같습니다(무순). alxnorden, avinashingit, bowen0701, brettkoonce, Chaitanya Prakash Bapat, cryptonaut, Davide Fiocco, edgarroman, gkutiel, John Mitro, Liang Pu, Rahul Agarwal, Mohamed Ali Jamaoui, Michael (Stu) Stewart, Mike Müller, NRauschmayr, Prakhar Srivastav, sad-, sfermigier, Sheng Zha, sundeepteki, topecongiro, tpdi, vermicelli, Vishaal Kapoor, Vishwesh Ravi Shrimali, YaYaB, Yuhong Chen, Evgeniy Smirnov, lgov, Simon Corston-Oliver, Igor Dzreyev, Ha Nguyen, pmuens, Andrei Lukovenko, senorcinco, vfdev-5, dsweet, Mohammad Mahdi Rahimi, Abhishek Gupta, uwsd, DomKM, Lisa Oakley, Bowen Li, Aarush Ahuja, Prasanth Buddareddygari, brianhendee, Muhyun Kim, dennismalmgren, adursun, Anirudh Dagar, liqingnz, Pedro Larroy, lgov, ati-ozgur, Jun Wu, Matthias Blume, Lin Yuan, geogunow, Josh Gardner, Maximilian Böther, Rakib Islam, Leonard Lausen, Abhinav Upadhyay, rongruosong, Steve Sedlmeyer, Ruslan Baratov, Rafael Schlatter, liusy182, Giannis Pappas, ati-ozgur, qbaza, dchoi77, Adam Gerson, Phuc Le, Mark Atwood, christabella, vn09, Haibin Lin, jjangga0214, RichyChen, noelo, hansent, Giel Dops, dvincent1337, WhiteD3vil, Peter Kulits, codypenta, joseppinilla, ahmaurya, karolszk, heytitle, Peter Goetz, rigtorp, tiepvupsu, sfilip, mlxd, Kale-ab Tessera, Sanjar Adilov, MatteoFerrara, hsneto, Katarzyna Biesialska, Gregory Bruss, duythanhvn, paulaurel, graytowne, minhduc0711, sl7423, tbaums, cuongvng, pavelkomarov, vzlamal, NotAnotherSystem, J-Arun-Mani, jancio, eldarkurtic, the-great-shazbot, doctorcolossus, gducharme, cclauss, Daniel-Mietchen, hoonose, biagiom, abhinavsp0730, jonathanhrandall, ysraell, Nodar Okroshiashvili, UgurKap, Jiyang Kang, StevenJokes, Tomer Kaftan, liweiwp, netyster, ypandya, NishantTharani, heiligerl.
 
 
 
@@ -549,33 +543,29 @@ Amazon Web Services, 특히 Swami Sivasubramanian에게 감사드립니다. Raju
 
 ## 요약
 
-* Deep learning has revolutionized pattern recognition, introducing technology that now powers a wide range of  technologies, including computer vision, natural language processing, automatic speech recognition.
-
-* 패턴인식에 혁명을 일으킨 딥러닝은 컴퓨터 비전, 자연어 처리, 자동 음성 인식 등 다양한 기술에 적용되고 있습니다.
+* Deep learning has revolutionized pattern recognition, introducing technology that now powers a wide range of  technologies, including computer vision, natural language processing, automatic speech recognition. 
+  패턴인식에 혁명을 일으킨 딥러닝은 컴퓨터 비전, 자연어 처리, 자동 음성 인식 등 다양한 기술에 적용되고 있습니다.
 
   
 
 * To successfully apply deep learning, you must understand how to cast a problem, the mathematics of modeling, the algorithms for fitting your models to data, and the engineering techniques to implement it all.
-
-* 딥 러닝을 성공적으로 적용하려면, 문제를 제기하는 방법, 모델링 수학, 모델을 데이터에 맞추는 알고리즘, 모든 구현을 위한 엔지니어링 기술을 이해해야 합니다.
+  딥 러닝을 성공적으로 적용하려면, 문제를 제기하는 방법, 모델링 수학, 모델을 데이터에 맞추는 알고리즘, 모든 구현을 위한 엔지니어링 기술을 이해해야 합니다.
 
   
 
 * This book presents a comprehensive resource, including prose, figures, mathematics, and code, all in one place.
-
-* 이 책은 텍스트, 그림, 수학식과 코드를 동시에 제공하는 리소스입니다.
+  이 책은 텍스트, 그림, 수학식과 코드를 동시에 제공하는 리소스입니다.
 
   
 
 * To answer questions related to this book, visit our forum at https://discuss.d2l.ai/.
-
-* 이 책과 관련된 질문에 대답하려면 게시판(https://discuss.d2l.ai/)을 찾아보시기 바랍니다.
+  이 책과 관련된 질문에 대답하려면 게시판(https://discuss.d2l.ai/)을 찾아보시기 바랍니다.
 
   
 
 * All notebooks are available for download on GitHub.
+  모든 노트북은 GitHub에서 다운로드 할 수 있습니다.
 
-* 모든 노트북은 GitHub에서 다운로드 할 수 있습니다.
 
 
 
@@ -584,12 +574,15 @@ Amazon Web Services, 특히 Swami Sivasubramanian에게 감사드립니다. Raju
 
 ## 연습 문제
 
-1. Register an account on the discussion forum of this book [discuss.d2l.ai](https://discuss.d2l.ai/). 이 책의 토론 게시판에 계정을 등록하세요: [Discussions](https://discuss.d2l.ai/).
+1. Register an account on the discussion forum of this book [discuss.d2l.ai](https://discuss.d2l.ai/). 
+   이 책의 토론 게시판에 계정을 등록하세요: [Discussions](https://discuss.d2l.ai/).
 
-1. Install Python on your computer. 컴퓨터에 파이썬을 설치합니다.
+1. Install Python on your computer. 
+   컴퓨터에 파이썬을 설치합니다.
 
-1. Follow the links at the bottom of the section to the forum, where you will be able to seek out help and discuss the book and find answers to your questions by engaging the authors and broader community. 섹션 하단의 게시판 링크를 따라 가면 저자들과 커뮤니티를 통해 도움을 얻거나 책을 토론하고 질문에 대한 답변을 얻을 수 있습니다.
-
+1. Follow the links at the bottom of the section to the forum, where you will be able to seek out help and discuss the book and find answers to your questions by engaging the authors and broader community. 
+섹션 하단의 게시판 링크를 따라 가면 저자들과 커뮤니티를 통해 도움을 얻거나 책을 토론하고 질문에 대한 답변을 얻을 수 있습니다.
+  
    
 
 :begin_tab:

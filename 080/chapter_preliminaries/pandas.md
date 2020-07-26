@@ -1,17 +1,18 @@
 # Data Preprocessing
+
+# 데이터 전처리
+
 :label:`sec_pandas`
 
-So far we have introduced a variety of techniques for manipulating data that are already stored in tensors.
-To apply deep learning to solving real-world problems,
-we often begin with preprocessing raw data, rather than those nicely prepared data in the tensor format.
-Among popular data analytic tools in Python, the `pandas` package is commonly used.
-Like many other extension packages in the vast ecosystem of Python,
-`pandas` can work together with tensors.
-So, we will briefly walk through steps for preprocessing raw data with `pandas`
-and converting them into the tensor format.
-We will cover more data preprocessing techniques in later chapters.
+So far we have introduced a variety of techniques for manipulating data that are already stored in tensors. To apply deep learning to solving real-world problems, we often begin with preprocessing raw data, rather than those nicely prepared data in the tensor format. Among popular data analytic tools in Python, the `pandas` package is commonly used. Like many other extension packages in the vast ecosystem of Python, `pandas` can work together with tensors. So, we will briefly walk through steps for preprocessing raw data with `pandas` and converting them into the tensor format. We will cover more data preprocessing techniques in later chapters.
+
+지금까지, 이미 텐서에 저장된 데이터를 조작하는 다양한 기술을 소개했습니다. 실제 문제 해결에 딥러닝을 적용하기 위해, 우리는 종종 (텐서 형식으로 잘 준비된 데이터가 아닌) 원시 데이터를 사전 처리하는 것으로 시작합니다. 파이썬에서 널리 사용되는 데이터 분석 도구 중, `pandas` 패키지가 일반적으로 사용됩니다. 파이썬 생태계의 다른 여러 확장 패키지들과 마찬가지로 `pandas` 는 텐서와 함께 사용할 수 있습니다. 이제 `pandas` 로 원시 데이터를 전처리하고 텐서 형식으로 변환하는 단계를 간략하게 살펴보겠습니다. 이후 챕터에서 더 많은 데이터 전처리 기술을 다루겠습니다.
+
+
 
 ## Reading the Dataset
+
+## 데이터셋 읽기
 
 As an example, we begin by creating an artificial dataset that is stored in a
 csv (comma-separated values) file `../data/house_tiny.csv`. Data stored in other
