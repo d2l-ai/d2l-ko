@@ -1,7 +1,6 @@
 # Concise Implementation of Linear Regression
 # 선형 회귀의 간결한 구현
-:label:`sec_linear_gluon`
-
+:label:`sec_linear_concise`
 Broad and intense interest in deep learning for the past several years
 has inspired companies, academics, and hobbyists
 to develop a variety of mature open source frameworks
@@ -57,11 +56,13 @@ labels = labels.reshape(-1,1)
 from d2l import tensorflow as d2l
 import numpy as np
 import tensorflow as tf
+```
 
-true_w = tf.constant([2, -3.4], shape=(2, 1))
+```{.python .input}
+#@tab all
+true_w = d2l.tensor([2, -3.4])
 true_b = 4.2
 features, labels = d2l.synthetic_data(true_w, true_b, 1000)
-labels = tf.reshape(labels, (-1, 1))
 ```
 
 ## Reading the Dataset
@@ -108,7 +109,10 @@ def load_array(data_arrays, batch_size, is_train=True):  #@save
         dataset = dataset.shuffle(buffer_size=1000)
     dataset = dataset.batch(batch_size)
     return dataset
+```
 
+```{.python .input}
+#@tab all
 batch_size = 10
 data_iter = load_array((features, labels), batch_size)
 ```
@@ -167,12 +171,12 @@ with the most standard workflow.
 
 표준 연산들에 대해서는 프레임워크에서 제공하는 층을 사용할 수 있습니다. 이는 구현에 집중하는 것하기 보다는 모델을 구성하는데 사용될 층들에 특별히 집중할 수 있게 해줍니다. 우선  `Sequential` 클래스의 인스턴스인 모델 변수 `net`을 정의합니다.  `Sequential` 클래스는 함께 이어질 될 몇 개의 층들을 위한 컨테이너를 정의합니다. 입력이 주어지면,  `Sequential` 인스턴스는 이 값을 첫 번째 층으로 전달하고, 그 결과를 다시 두번 째층의 입력으로 전달하는 것을 반복합니다. 아래 예제에서 우리의 모델은 단 한 개의 층만 가지고 있기에,  `Sequential`이 실제로는 필요하지 않습니다. 하지만, 앞으로 살펴볼 모든 모델들을 여러 층을 가지고 있기 때문에, 가장 표준 워크플로우에 친숙해지기 위해서 이를 사용할 것입니다.  
 
-Recall the architecture of a single-layer network as shown in :numref:`fig_singleneuron`.
+Recall the architecture of a single-layer network as shown in :numref:`fig_single_neuron``.
 The layer is said to be *fully-connected*
 because each of its inputs is connected to each of its outputs
 by means of a matrix-vector multiplication.
 
-:numref:`fig_singleneuron`에서 소개한 단 층 네트워크의 아키텍처를 기억해 보겠습니다. 이 층은 입력의 각각이 출력의 각각과 행렬-벡터의 곱 형태로 연결되기 때문에 *완전 연결(fully-connected)*라고 합니다.
+:numref:`fig_single_neuron`에서 소개한 단 층 네트워크의 아키텍처를 기억해 보겠습니다. 이 층은 입력의 각각이 출력의 각각과 행렬-벡터의 곱 형태로 연결되기 때문에 *완전 연결(fully-connected)*라고 합니다.
 
 :begin_tab:`mxnet`
 In Gluon, the fully-connected layer is defined in the `Dense` class.
@@ -262,8 +266,8 @@ MXNet에서 `initializer` 모듈을 임포트합니다. 이 모듈은 모델 파
 :end_tab:
 
 :begin_tab:`pytorch`
-As we have specified the input and output dimensions when constructing `nn.Linear`. Now we access the parameters directly to specify there initial values. We first locate the layer by `net[0]`, which is the first layer in the network, and then use the `weight.data` and `bias.data` methods to access the parameters. Next we use the replace methods `uniform_` and `fill_` to overwrite parameter values.
-`nn.Linear`를 생성할 때 입력과 출력의 차원을 명시했고, 초기값을 설정하기 위해서 파라미터들을 접근할 수 있습니다. 우선 네트워크의 첫 번째 층인 `net[0]`을 통해서 첫 번째 층을 지정하고, `weight.data`와 `bias.data` 메소드를 사용해서 파라미터들을 접근합니다. 다음으로 우리는 파라미터 값들을 덮어쓰기 위해서 값을 바꾸는 메소드인 `uniform_` 과  `fill_` 를 호출합니다.
+As we have specified the input and output dimensions when constructing `nn.Linear`. Now we access the parameters directly to specify there initial values. We first locate the layer by `net[0]`, which is the first layer in the network, and then use the `weight.data` and `bias.data` methods to access the parameters. Next we use the replace methods `normal_` and `fill_` to overwrite parameter values.
+`nn.Linear`를 생성할 때 입력과 출력의 차원을 명시했고, 초기값을 설정하기 위해서 파라미터들을 접근할 수 있습니다. 우선 네트워크의 첫 번째 층인 `net[0]`을 통해서 첫 번째 층을 지정하고, `weight.data`와 `bias.data` 메소드를 사용해서 파라미터들을 접근합니다. 다음으로 우리는 파라미터 값들을 덮어쓰기 위해서 값을 바꾸는 메소드인 `normal_` 과  `fill_` 를 호출합니다.
 :end_tab:
 
 :begin_tab:`tensorflow`
@@ -278,7 +282,7 @@ net.initialize(init.Normal(sigma=0.01))
 
 ```{.python .input}
 #@tab pytorch
-net[0].weight.data.uniform_(0.0, 0.01)
+net[0].weight.data.normal_(0, 0.01)
 net[0].bias.data.fill_(0)
 ```
 
@@ -338,15 +342,15 @@ Gluon에서  `loss` 모듈은 여러 손실 함수를 정의합니다. 이 예�
 :end_tab:
 
 :begin_tab:`pytorch`
-The `MSELoss` class computes the mean squared error, also known as squared L2 norm.
+The `MSELoss` class computes the mean squared error, also known as squared $L_2$ norm.
 By default it returns the average loss over examples.
-`MSELoss` 클래스는 제곱 L2 놈이라고도 알려진 평균 제곱 오류를 계산합니다. 기본 설정으로는 예제들에 대한 평균 손실을 반환합니다.
+`MSELoss` 클래스는 제곱 $L_2$ 놈이라고도 알려진 평균 제곱 오류를 계산합니다. 기본 설정으로는 예제들에 대한 평균 손실을 반환합니다.
 :end_tab:
 
 :begin_tab:`tensorflow`
-The `MeanSquaredError` class computes the mean squared error, also known as squared L2 norm.
+The `MeanSquaredError` class computes the mean squared error, also known as squared $L_2$ norm.
 By default it returns the average loss over examples.
-`MeanSquaredError` 클래스는 제곱 L2 놈이라고도 알려진 평균 제곱 오류를 계산합니다. 기본 설정으로는 예제들에 대한 평균 손실을 반환합니다.
+`MeanSquaredError` 클래스는 제곱 $L_2$ 놈이라고도 알려진 평균 제곱 오류를 계산합니다. 기본 설정으로는 예제들에 대한 평균 손실을 반환합니다.
 :end_tab:
 
 ```{.python .input}
@@ -445,11 +449,11 @@ For each minibatch, we go through the following ritual:
 
 몇 에폭 동안 우리는 입력들의 미니배치를 임의로 추출하고, 그에 대응하는 그라운드-트루스(groud-truth) 레이블을 반복해서 사용하면서 데이터셋(`train_data`)의 전체를 학습에 사용합니다. 각 미니배치에 대해서 우리는 다음 절차들을 거칩니다.
 
-* Generate predictions by calling `net(X)` and calculate the loss `l` (the forward pass).
+* Generate predictions by calling `net(X)` and calculate the loss `l` (the forward propagation).
 * Calculate gradients by running the backpropagation.
 * Update the model parameters by invoking our optimizer.
 
-* `net(X)`를 호툴해서 예측을 생성하고, (포워드 패스로) 손실 `l` 을 계산한다
+* `net(X)`를 호툴해서 예측을 생성하고, (정방향 전파(forward propagation)) 손실 `l` 을 계산한다
 * 역전파(backpropagation)를 수행해서 경사값을 계산한다
 * 옵티마이저를 호출해서 모델 파라이터들을 업데이트한다
 
@@ -487,7 +491,7 @@ for epoch in range(num_epochs):
 num_epochs = 3
 for epoch in range(num_epochs):
     for X, y in data_iter:
-        with tf.GradientTape(persistent=True) as tape:
+        with tf.GradientTape() as tape:
             l = loss(net(X, training=True), y)
         grads = tape.gradient(l, net.trainable_variables)
         trainer.apply_gradients(zip(grads, net.trainable_variables))

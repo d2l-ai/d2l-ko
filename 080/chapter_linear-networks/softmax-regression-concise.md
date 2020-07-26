@@ -1,14 +1,15 @@
 # Concise Implementation of Softmax Regression
 # 소트트맥스의 간결한 구현
-:label:`sec_softmax_gluon`
+:label:`sec_softmax_concise`
 
 Just as high-level APIs of deep learning frameworks
 made it much easier
-to implement linear regression in :numref:`sec_linear_gluon`,
+to implement linear regression in :numref:`sec_linear_concise`,
 we will find it similarly (or possibly more)
-convenient for implementing classification models.
+convenient for implementing classification models. Let us stick with the Fashion-MNIST dataset
+and keep the batch size at 256 as in :numref:`sec_softmax_scratch`.
 
-:numref:`sec_linear_gluon`에서 선형 회귀의 구현을 딥러닝 프래임워크의 고차원 API를 사용하면 간단하게 구현할 수 있었듯이, 분류 모델 구현도 비슷하게(또는 더) 편리하다는 것을 보여 줄 것입니다.
+:numref:`sec_linear_concise`에서 선형 회귀의 구현을 딥러닝 프래임워크의 고차원 API를 사용하면 간단하게 구현할 수 있었듯이, 분류 모델 구현도 비슷하게(또는 더) 편리하다는 것을 보여 줄 것입니다. :numref:`sec_softmax_scratch`와 같이 Fashion-MNIST 데이테섯을 사용하고 배치 크기는 256을 사용하겠습니다.
 
 ```{.python .input}
 from d2l import mxnet as d2l
@@ -30,24 +31,8 @@ from d2l import tensorflow as d2l
 import tensorflow as tf
 ```
 
-Let us stick with the Fashion-MNIST dataset
-and keep the batch size at 256 as in :numref:`sec_softmax_scratch`.
-
-:numref:`sec_softmax_scratch`에서와 같이 Fashion-MNIST 데이터셋을 사용하고 배치 크기는 256으로 하겠습니다.
-
 ```{.python .input}
-batch_size = 256
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
-```
-
-```{.python .input}
-#@tab pytorch
-batch_size = 256
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
-```
-
-```{.python .input}
-#@tab tensorflow
+#@tab all
 batch_size = 256
 train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
 ```
@@ -77,8 +62,8 @@ net.initialize(init.Normal(sigma=0.01))
 
 ```{.python .input}
 #@tab pytorch
-# PyTorch doesn't implicitly reshape the inputs.
-# Thus we define a layer to reshape the inputs in our network.
+# PyTorch does not implicitly reshape the inputs. Thus we define a layer to
+# reshape the inputs in our network
 class Reshape(torch.nn.Module):
     def forward(self, x):
         return x.view(-1,784)
@@ -102,6 +87,7 @@ net.add(tf.keras.layers.Dense(10, kernel_initializer=weight_initializer))
 
 ## Softmax Implementation Revisited
 ## 소프트맥스 구현 다시 보기
+:label:`subsec_softmax-implementation-revisited`
 
 In the previous example of :numref:`sec_softmax_scratch`,
 we calculated our model's output
@@ -114,9 +100,9 @@ exponentiation can be a source of numerical stability issues.
 
 Recall that the softmax function calculates
 $\hat y_j = \frac{\exp(o_j)}{\sum_k \exp(o_k)}$,
-where $\hat y_j$ is the $j^\text{th}$ element of
+where $\hat y_j$ is the $j^\mathrm{th}$ element of
 the predicted probability distribution $\hat{\mathbf{y}}$
-and $o_j$ is the $j^\text{th}$ element of the logits
+and $o_j$ is the $j^\mathrm{th}$ element of the logits
 $\mathbf{o}$.
 If some of the $o_k$ are very large (i.e., very positive),
 then $\exp(o_k)$ might be larger than the largest number
@@ -126,7 +112,7 @@ and we wind up encountering either 0, `inf`, or `nan` (not a number) for $\hat y
 In these situations we do not get a well-defined
 return value for cross entropy.
 
-소프트맥스 함수는 $\hat y_j = \frac{\exp(o_j)}{\sum_k \exp(o_k)}$ 를 계산합니다. 여기서, $\hat y_j$는 예측된 확률 분포 $\hat{\mathbf{y}}$의 $$번째 원소이고, $o_j$는 로짓 $\mathbf{o}$의 $j$번째 원소입니다. $o_k$ 중에 어떤 것들이 아주 크면 (즉, 매우 긍적적), $\exp(o_k)$도 특정 데이터 타입이 갖을 수 있는 값도다 더 커실 수 있습니다 (즉, 오버플로우). 이는 분모 (그리고/혹은 분자)를 `inf`(무한)으로 만들어버릴 수 있고, $\hat y_j$이 0,  `inf` 또는 `nan`(Not A Number)가 되버립니다. 이런 경우 우리는 잘 정의된 크로스 엔트로피 값을 얻지 못합니다.
+소프트맥스 함수는 $\hat y_j = \frac{\exp(o_j)}{\sum_k \exp(o_k)}$ 를 계산합니다. 여기서, $\hat y_j$는 예측된 확률 분포 $\hat{\mathbf{y}}$의 $j^\mathrm{th}$번째 원소이고, $o_j$는 로짓 $\mathbf{o}$의 $j^\mathrm{th}$번째 원소입니다. $o_k$ 중에 어떤 것들이 아주 크면 (즉, 매우 긍적적), $\exp(o_k)$도 특정 데이터 타입이 갖을 수 있는 값도다 더 커실 수 있습니다 (즉, 오버플로우). 이는 분모 (그리고/혹은 분자)를 `inf`(무한)으로 만들어버릴 수 있고, $\hat y_j$이 0,  `inf` 또는 `nan`(Not A Number)가 되버립니다. 이런 경우 우리는 잘 정의된 크로스 엔트로피 값을 얻지 못합니다.
 
 One trick to get around this is to first subtract $\max(o_k)$
 from all $o_k$ before proceeding with the softmax calculation.
@@ -157,20 +143,12 @@ and can use instead $o_j$ directly due to the canceling in $\log(\exp(\cdot))$.
 $$
 \begin{aligned}
 \log{(\hat y_j)} & = \log\left( \frac{\exp(o_j)}{\sum_k \exp(o_k)}\right) \\
-& = \log{(\exp(o_j))}-\text{log}{\left( \sum_k \exp(o_k) \right)} \\
+& = \log{(\exp(o_j))}-\log{\left( \sum_k \exp(o_k) \right)} \\
 & = o_j -\log{\left( \sum_k \exp(o_k) \right)}.
 \end{aligned}
 $$
 
 운이 좋게도 지수 함수를 계산하지만, (크로스-엔트로피 손실을 계산할 때) 로그를 취하려는 의도를 가지고 있다는 사실이 우리를 구해줍니다. 소프트맥스와 크로스 엔트로피 연산을 함께 합하면 연전파에서 격었을 수치적 불안정 이슈를 피할 수 있습니다. 아래 공식에서 보이듯이, $\exp(o_j)$ 계산을 피하고 $\log(\exp(\cdot))$에서 항을 삭제한 덕분에 $o_j$를 그대로 사용할 수 있습니다.
-
-$$
-\begin{aligned}
-\log{(\hat y_j)} & = \log\left( \frac{\exp(o_j)}{\sum_k \exp(o_k)}\right) \\
-& = \log{(\exp(o_j))}-\text{log}{\left( \sum_k \exp(o_k) \right)} \\
-& = o_j -\log{\left( \sum_k \exp(o_k) \right)}.
-\end{aligned}
-$$
 
 We will want to keep the conventional softmax function handy
 in case we ever want to evaluate the output probabilities by our model.
@@ -235,12 +213,15 @@ d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)
 As before, this algorithm converges to a solution
 that achieves a decent accuracy,
 albeit this time with fewer lines of code than before.
-Note that in many cases, a deep learning framework takes additional precautions
-beyond these most well-known tricks to ensure numerical stability,
-saving us from even more pitfalls that we would encounter
-if we tried to code all of our models from scratch in practice.
 
-이전보다 적은 줄의 코드이지만 이 알고리즘은 이전과 같이 쓸만한 정확도를 달성하는 솔루션으로 수렴할 것입니다. 많은 경우에 딥러닝 프래임워크는 수치적 인정성을 보장하기 위한 잘 알려진 트릭들 이외의 추가적인 안전장치를 제공합니다. 이는 모델의 모든 코드를 직접 처음부터 구현할 경우 만날 수 있는 더 많은 오류를 피해갈 수 있도록  해줍니다.
+## Summary
+## 요약
+
+* Using high-level APIs, we can implement softmax regression much more concisely.
+* From a computational perspective, implementing softmax regression has intricacies. Note that in many cases, a deep learning framework takes additional precautions beyond these most well-known tricks to ensure numerical stability, saving us from even more pitfalls that we would encounter if we tried to code all of our models from scratch in practice.
+
+* 고차원 API를 사용하면 소프트맥스 회귀를 더 많이 간결하게 구현할 수 있습니다. 
+* 연산적인 측면해서 보면, 소프트맥스 회귀를 구현하는 것은 복잡합니다. 많은 경우에 딥러닝 프래임워크는 수치적 인정성을 보장하기 위한 잘 알려진 트릭들 이외의 추가적인 안전장치를 제공합니다. 이는 모델의 모든 코드를 직접 처음부터 구현할 경우 만날 수 있는 더 많은 오류를 피해갈 수 있도록 해줍니다.
 
 ## Exercises
 ## 연습문제

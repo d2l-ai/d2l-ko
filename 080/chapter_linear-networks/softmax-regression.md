@@ -4,10 +4,10 @@
 
 In :numref:`sec_linear_regression`, we introduced linear regression,
 working through implementations from scratch in :numref:`sec_linear_scratch`
-and again using high-level APIs of deep learning frameworks
-in :numref:`sec_linear_gluon` to do the heavy lifting.
+and again using high-level APIs of deep learning framework
+in :numref:`sec_linear_concise` to do the heavy lifting.
 
-:numref:`sec_linear_regression`에서 우리는 선형 회귀를 소개했고, :numref:`sec_linear_scratch`에서 이를 처음부터 구현해봤고, :numref:`sec_linear_gluon`에서는 반복되는 것들을 대신 해주는 딥러닝 프래임워크의 고차원 API를 사용해 봤습니다.
+:numref:`sec_linear_regression`에서 우리는 선형 회귀를 소개했고, :numref:`sec_linear_scratch`에서 이를 처음부터 구현해봤고, :numref:`sec_linear_concise`에서는 반복되는 것들을 대신 해주는 딥러닝 프래임워크의 고차원 API를 사용해 봤습니다.
 
 Regression is the hammer we reach for when
 we want to answer *how much?* or *how many?* questions.
@@ -49,6 +49,7 @@ we still use models that make soft assignments.
 
 ## Classification Problem
 ## 분류 문제
+:label:`subsec_classification-problem`
 
 To get our feet wet, let us start off with
 a simple image classification problem.
@@ -63,14 +64,14 @@ among the categories "cat", "chicken", and "dog".
 Next, we have to choose how to represent the labels.
 We have two obvious choices.
 Perhaps the most natural impulse would be to choose $y \in \{1, 2, 3\}$,
-where the integers represent {dog, cat, chicken} respectively.
+where the integers represent $\{\text{dog}, \text{cat}, \text{chicken}\}$ respectively.
 This is a great way of *storing* such information on a computer.
 If the categories had some natural ordering among them,
-say if we were trying to predict {baby, toddler, adolescent, young adult, adult, geriatric},
+say if we were trying to predict $\{\text{baby}, \text{toddler}, \text{adolescent}, \text{young adult}, \text{adult}, \text{geriatric}\}$,
 then it might even make sense to cast this problem as regression
 and keep the labels in this format.
 
-다음으로 우리는 레이블을 어떻게 표현할지를 선택해야 합니다. 두 가지 자명한 방법이 있습니다. 아마도 가장 자연스러운 방법은 $y \in \{1, 2, 3\}$ 로 선택하는 것인데, 각 정수는 {강아지, 고양이, 닭}을 각각 의미합니다. 이것은 컴퓨터에 정보를 *저장*하는 훌륭한 방법입니다. 만약 카테고리들이 그것들 사이에 자연스러운 순서가 있다면, 예를 들면 {아이, 유아, 청소년, 청년, 성인, 노인}을 예측하는 경우, 이 문제를 회귀의 문제로 정의하고, 이 형태로 레이블을 부여하는 것이 의미가 있을 것입니다.
+다음으로 우리는 레이블을 어떻게 표현할지를 선택해야 합니다. 두 가지 자명한 방법이 있습니다. 아마도 가장 자연스러운 방법은 $y \in \{1, 2, 3\}$ 로 선택하는 것인데, 각 정수는 $\{\text{강아지}, \text{고양이}, \text{닭}\}$을 각각 의미합니다. 이것은 컴퓨터에 정보를 *저장*하는 훌륭한 방법입니다. 만약 카테고리들이 그것들 사이에 자연스러운 순서가 있다면, 예를 들면 $\{\text{아이}, \text{유아}, \text{청소년}, \text{청년}, \text{성인}, \text{노인}\}$을 예측하는 경우, 이 문제를 회귀의 문제로 정의하고, 이 형태로 레이블을 부여하는 것이 의미가 있을 것입니다.
 
 But general classification problems do not come with natural orderings among the classes.
 Fortunately, statisticians long ago invented a simple way
@@ -92,8 +93,8 @@ $$y \in \{(1, 0, 0), (0, 1, 0), (0, 0, 1)\}.$$
 In order to estimate the conditional probabilities associated with all the possible classes,
 we need a model with multiple outputs, one per class.
 To address classification with linear models,
-we will need as many linear functions as we have outputs.
-Each output will correspond to its own linear function.
+we will need as many affine functions as we have outputs.
+Each output will correspond to its own affine function.
 In our case, since we have 4 features and 3 possible output categories,
 we will need 12 scalars to represent the weights ($w$ with subscripts),
 and 3 scalars to represent the biases ($b$ with subscripts).
@@ -107,7 +108,7 @@ o_3 &= x_1 w_{31} + x_2 w_{32} + x_3 w_{33} + x_4 w_{34} + b_3.
 \end{aligned}
 $$
 
-모든 가능한 클래스 부여되는 조건부 확률을 추정하기 위해서 우리는 각 클래스별로 한 개씩인 다중 출력을 갖는 모델이 필요합니다. 선형 모델로 분류 문제를 해결하기 위해 결과 개수만큼의 선형 함수가 필요합니다. 우리의 경우 4개 피처와 3개의 가능한 출력 카테고리가 있기 때문에, 가중치들  ($w$ with subscripts)을 표현할 12개 스칼라와 편향 ($b$ with subscripts)을 표현하는 3개의 스칼라가 필요합니다. 우리는 각 입력에 대해서 3개 *로짓(logit)*, $o_1, o_2$, 과 $o_3$을 계산합니다.
+모든 가능한 클래스 부여되는 조건부 확률을 추정하기 위해서 우리는 각 클래스별로 한 개씩인 다중 출력을 갖는 모델이 필요합니다. 선형 모델로 분류 문제를 해결하기 위해 결과 개수만큼의 아핀 함수가 필요합니다. 각 출력은 그것만의 아핀 함수에 대응할 것입니다. 우리의 경우 4개 피처와 3개의 가능한 출력 카테고리가 있기 때문에, 가중치들  ($w$ with subscripts)을 표현할 12개 스칼라와 편향 ($b$ with subscripts)을 표현하는 3개의 스칼라가 필요합니다. 우리는 각 입력에 대해서 3개 *로짓(logit)*, $o_1, o_2$, 과 $o_3$을 계산합니다.
 
 $$
 \begin{aligned}
@@ -136,11 +137,11 @@ In vector form, we arrive at
 $\mathbf{o} = \mathbf{W} \mathbf{x} + \mathbf{b}$,
 a form better suited both for mathematics, and for writing code.
 Note that we have gathered all of our weights into a $3 \times 4$ matrix
-and that for features of a given data instance $\mathbf{x}$,
+and that for features of a given data point $\mathbf{x}$,
 our outputs are given by a matrix-vector product of our weights by our input features
 plus our biases $\mathbf{b}$.
 
-모델을 보다 간결하게 표현하기 위해서 우리는 선형 대수 표기법을 사용할 수 있습니다. 벡터 형식으로 표현하면, $\mathbf{o} = \mathbf{W} \mathbf{x} + \mathbf{b}$ 이 되는데, 수학과 코드 작성 모두에 더 적합한 형태입니다. 모든 가중치를 $3 \times 4$ 행렬로 모았고, 주어진 데이터 인스턴스의 피처,$\mathbf{x}$에 대해서 결과는 가중치와 입력 피처의 행렬-벡터 곱에 편향 $\mathbf{b}$을 더하는 것으로 구해집니다.
+모델을 보다 간결하게 표현하기 위해서 우리는 선형 대수 표기법을 사용할 수 있습니다. 벡터 형식으로 표현하면, $\mathbf{o} = \mathbf{W} \mathbf{x} + \mathbf{b}$ 이 되는데, 수학과 코드 작성 모두에 더 적합한 형태입니다. 모든 가중치를 $3 \times 4$ 행렬로 모았고, 주어진 데이터 포인트의 피처,$\mathbf{x}$에 대해서 결과는 가중치와 입력 피처의 행렬-벡터 곱에 편향 $\mathbf{b}$을 더하는 것으로 구해집니다.
 
 ## Softmax Operation
 ## 소프트맥스 연산
@@ -219,12 +220,16 @@ $$
 
 모든 $j$에 대해서 $0 \leq \hat{y}_j \leq 1$일 때, $\hat{y}_1 + \hat{y}_2 + \hat{y}_3 = 1$이 됨을 확인하는 것은 쉽습니다. 즉, $\hat{\mathbf{y}}$는 적절한 확률 분포로 각 원소의 값이 적절히 해설될 수 있습니다. 각 클래스에 속할 확률을 결정하는 소프트맥스 적용 전의 값인 로짓 $\mathbf{o}$, 의 순서를 소프트맥스 연산에 의해서 바꾸지 않는 다는 것을 유념하세요. 따라서, 예측할 때 우리는 가장 가능성이 높은 클래스를 다음과 같이 뽑을 수 있습니다.
 
-$$
-\operatorname*{argmax}_j \hat y_j = \operatorname*{argmax}_j o_j.
-$$
+Although softmax is a nonlinear function,
+the outputs of softmax regression are still *determined* by
+an affine transformation of input features;
+thus, softmax regression is a linear model.
+
+소프트맥스가 비선형 함수일지라도, 소프트맥스 회귀의 결과는 여전히 입력 피처에 대한 아핀 변환으로 *결정*됩니다. 따라서, 소프트맥스 회귀는 선형 모델인 것입니다.
 
 ## Vectorization for Minibatches
 ## 미니배치의 벡터화
+:label:`subsec_softmax_vectorization`
 
 To improve computational efficiency and take advantage of GPUs,
 we typically carry out vector calculations for minibatches of data.
@@ -245,16 +250,16 @@ $$ \begin{aligned} \mathbf{O} &= \mathbf{X} \mathbf{W} + \mathbf{b}, \\ \hat{\ma
 
 This accelerates the dominant operation into
 a matrix-matrix product $\mathbf{X} \mathbf{W}$
-versus the matrix-vector products we would be executing
+vs. the matrix-vector products we would be executing
 if we processed one example at a time.
-The softmax operation itself can be computed
-by exponentiating all entries in $\mathbf{O}$
-and then normalizing them by the sum.
+Since each row in $\mathbf{X}$ represents a data point,
+the softmax operation itself can be computed *rowwise*:
+for each row of $\mathbf{O}$, exponentiate all entries and then normalize them by the sum.
 Triggering broadcasting during the summation $\mathbf{X} \mathbf{W} + \mathbf{b}$ in :eqref:`eq_minibatch_softmax_reg`,
 both the minibatch logits $\mathbf{O}$ and output probabilities $\hat{\mathbf{Y}}$
 are $n \times q$ matrices.
 
-이것은 대부분 연산을 행렬-행렬 곱 $\mathbf{X} \mathbf{W}$으로 가속화시킵니다. 만약 샘플을 한 번에 하나씩 처리하는 경우는 행렬-벡터 곱이 됩니다. 소프트맥스 연산 자체는 $\mathbf{O}$의 모든 원소에 지수를 적용하고, 합으로 정규화를 해서 구할 수 있습니다. :eqref:`eq_minibatch_softmax_reg`의 $\mathbf{X} \mathbf{W} + \mathbf{b}$ 합을 수행할 때는 브로드케스팅이 적용되면서, 미니배치 로짓 $\mathbf{O}$와 결과 확률들 $\hat{\mathbf{Y}}$은 $n \times q$ 크기의 행렬입니다.
+이것은 대부분 연산을 행렬-행렬 곱 $\mathbf{X} \mathbf{W}$으로 가속화시킵니다. 만약 샘플을 한 번에 하나씩 처리하는 경우는 행렬-벡터 곱이 됩니다. $\mathbf{X}$의 각 행은 데이터 포인트이기 때문에, 소프트맥스 연산 자체는 *행을 따라(rowwise)* 계산될 수 있습니다. 즉, $\mathbf{O}$의 각 행에 대해서, 모든 원소들의 지수승을 구한 후, 합으로 정규화를 합니다. :eqref:`eq_minibatch_softmax_reg`의 $\mathbf{X} \mathbf{W} + \mathbf{b}$ 합을 수행할 때는 브로드케스팅이 적용되면서, 미니배치 로짓 $\mathbf{O}$와 결과 확률들 $\hat{\mathbf{Y}}$은 $n \times q$ 크기의 행렬입니다.
 
 ## Loss Function
 ## 손실 함수
@@ -341,6 +346,7 @@ to classify every example perfectly.
 
 ### Softmax and Derivatives
 ### 소프트맥스와 미분
+:label:`subsec_softmax_and_derivatives`
 
 Since the softmax and the corresponding loss are so common,
 it is worth understanding a bit better how it is computed.
@@ -387,11 +393,13 @@ In this sense, it is very similar to what we saw in regression,
 where the gradient was the difference
 between the observation $y$ and estimate $\hat{y}$.
 This is not coincidence.
-In any [exponential family](https://en.wikipedia.org/wiki/Exponential_family) model,
+In any exponential family (see the
+[online appendix on distributions](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/distributions.html)) model,
 the gradients of the log-likelihood are given by precisely this term.
 This fact makes computing gradients easy in practice.
 
-다르게 설명하면, 미분은 소프트맥스 연산으로 표현된 모델이 할당한 확률과 원-핫 레이블 벡터의 원소로 표현된 실제로 일어난 것의 차입니다. 이런 의미에서 경사가 관찰 $y$와 추정 $\hat{y}$의 차였던 회귀에서 보았던 것과 비슷합니다. 이것은 우연이 아닙니다. 어떤 [지수 패밀리](https://en.wikipedia.org/wiki/Exponential_family) 모델에서든 로그-가능도의 경사는 정확이 이 항목으로 주어집니다. 이 사실은 현실에서 경사 게산을 쉽게 만듭니다.
+다르게 설명하면, 미분은 소프트맥스 연산으로 표현된 모델이 할당한 확률과 원-핫 레이블 벡터의 원소로 표현된 실제로 일어난 것의 차입니다. 이런 의미에서 경사가 관찰 $y$와 추정 $\hat{y}$의 차였던 회귀에서 보았던 것과 비슷합니다. 이것은 우연이 아닙니다. 어떤 지수 패밀리In any exponential family (
+[online appendix on distributions](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/distributions.html) 참고) 모델에서든 로그-가능도의 경사는 정확이 이 항목으로 주어집니다. 이 사실은 현실에서 경사 게산을 쉽게 만듭니다.
 
 ### Cross-Entropy Loss
 ### 크로스-엔트로피 손실
@@ -503,7 +511,7 @@ we can predict the probability of each output class.
 Normally, we use the class with the highest predicted probability as the output class.
 The prediction is correct if it is consistent with the actual class (label).
 In the next part of the experiment,
-we will use *accuracy* to evaluate the model’s performance.
+we will use *accuracy* to evaluate the model's performance.
 This is equal to the ratio between the number of correct predictions and the total number of predictions.
 
 소프트맥스 회귀 모델을 학습한 후,  예제 피처들이 주어지면  각 출력 클래스에 대한 확률을 예측할 수 있습니다. 보통은 가장 큰 예측 확률값을 갖는 클래스를 출력 클래스로 사용합니다. 실제 클래스 (레이블)과 일치하면 예측을 정확한 것입니다. 실험의 다음 파트에서 우리는 모델의 성능을 평가하기 위해서 *정확도*를 사용할 것입니다. 이것은 정확한 예측의 수와 전체 예측의 비율과 같습니다.

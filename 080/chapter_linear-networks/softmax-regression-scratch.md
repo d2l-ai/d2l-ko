@@ -6,9 +6,10 @@ Just as we implemented linear regression from scratch,
 we believe that softmax regression
 is similarly fundamental and you ought to know
 the gory details of how to implement it yourself.
+We will work with the Fashion-MNIST dataset, just introduced in :numref:`sec_fashion_mnist`,
+setting up a data iterator with batch size 256.
 
-선형 회귀를 처음부터 구현했던 것처럼 우리는 소프트맥스 회귀도 기본적으로 동일하다고 생각하며, 이를 직접 구현하는 방법에 대한 세부적인 내용을 알아야합니다.
-
+선형 회귀를 처음부터 구현했던 것처럼 우리는 소프트맥스 회귀도 기본적으로 동일하다고 생각하며, 이를 직접 구현하는 방법에 대한 세부적인 내용을 알아야합니다.우리는 :numref:`sec_fashion_mnist`에서 소개한 Fashion-MNIST 데이터셋을 사용할 것이며, 데이터 반복자는 배치 크기가 256으로 설정할 것입니다.
 ```{.python .input}
 from d2l import mxnet as d2l
 from mxnet import autograd, np, npx, gluon
@@ -29,11 +30,6 @@ from d2l import tensorflow as d2l
 import tensorflow as tf
 from IPython import display
 ```
-
-We will work with the Fashion-MNIST dataset, just introduced in :numref:`sec_fashion_mnist`,
-setting up a data iterator with batch size 256.
-
-우리는 :numref:`sec_fashion_mnist`에서 소개한 Fashion-MNIST 데이터셋을 사용할 것이며, 데이터 반복자는 배치 크기가 256으로 설정할 것입니다.
 
 ```{.python .input}
 #@tab all
@@ -116,20 +112,15 @@ This will result in a two-dimensional tensor with shape (1, 3).
 소프트맥스 회귀 모델을 구현하기에 앞서서 :numref:`subseq_lin-alg-reduction`와 :numref:`subseq_lin-alg-non-reduction`에서 알아봤던 텐서의 특정 차원에 따라서 합 연산이 어떻게 동작하는지를 간단하게 복습해 보겠습니다. 행렬 `X`이 주어졌을 때, 우리는 (기본 설정) 모든 원소를 더하거나 같은 축(예를 들면 축 0은 같은 열, 축 1은 같은 행)에 있는 원소들만 더할 수 있습니다. 만약 `X`가 모양이 (2,3)인 텐서이고, 컬럼을 따라서 합을 한다면, 결과는 모양이 (3,)인 벡터가 됩니다. 합 연산을 호출할 때, 합을 통해서 차원을 줄이는 것이 아니라, 원래 텐서의 축의 개수를 유지하도록 설정할 수도 있습니다. 이 경우에는 결과가 모양이 (1, 3)인 2-차원 텐서가 됩니다.
 
 ```{.python .input}
-X = np.array([[1, 2, 3], [4, 5, 6]])
-X.sum(axis=0, keepdims=True), '\n', X.sum(axis=1, keepdims=True)
-```
-
-```{.python .input}
 #@tab pytorch
-X = torch.tensor([[1., 2., 3.], [4., 5., 6.]])
-torch.sum(X, dim=0, keepdim=True), torch.sum(X, dim=1, keepdim=True)
+X = d2l.tensor([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]])
+d2l.reduce_sum(X, 0, keepdim=True), d2l.reduce_sum(X, 1, keepdim=True)
 ```
 
 ```{.python .input}
-#@tab tensorflow
-X = tf.constant([[1., 2., 3.], [4., 5., 6.]])
-[tf.reduce_sum(X, axis=i, keepdims=True) for i in range(0, 1)]
+#@tab mxnet, tensorflow
+X = d2l.tensor([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]])
+d2l.reduce_sum(X, 0, keepdims=True), d2l.reduce_sum(X, 1, keepdims=True)
 ```
 
 We are now ready to implement the softmax operation.
@@ -162,25 +153,18 @@ over an ensemble of particles.
 분모, 즉 정규화 상수는 때로 *파티션 함수*라고 합니다 (그리고 그것의 로그값은 로그-파티션 함수라고 합니다). 이 이름의 기원은 관련된 방정식이 입자 앙상블에 대한 분포를 모델링하는 [통계 물리학](https://en.wikipedia.org/wiki/Partition_function_(statistical_mechanics))입니다.
 
 ```{.python .input}
+#@tab mxnet, tensorflow
 def softmax(X):
-    X_exp = np.exp(X)
-    partition = X_exp.sum(axis=1, keepdims=True)
+    X_exp = d2l.exp(X)
+    partition = d2l.reduce_sum(X_exp, 1, keepdims=True)
     return X_exp / partition  # The broadcasting mechanism is applied here
 ```
 
 ```{.python .input}
 #@tab pytorch
 def softmax(X):
-    X_exp = torch.exp(X)
-    partition = torch.sum(X_exp, dim=1, keepdim=True)
-    return X_exp / partition  # The broadcasting mechanism is applied here
-```
-
-```{.python .input}
-#@tab tensorflow
-def softmax(X):
-    X_exp = tf.exp(X)
-    partition = tf.reduce_sum(X_exp, -1, keepdims=True)
+    X_exp = d2l.exp(X)
+    partition = d2l.reduce_sum(X_exp, 1, keepdim=True)
     return X_exp / partition  # The broadcasting mechanism is applied here
 ```
 
@@ -192,23 +176,17 @@ as is required for a probability.
 보시다시피, 임의의 입력에 대해서 각 원소는 음수가 아닌 수로 바뀝니다. 더군다나, 확률에 필요한 것처럼 각 행의 합은 1입니다. 
 
 ```{.python .input}
-X = np.random.normal(size=(2, 5))
+#@tab mxnet, pytorch
+X = d2l.normal(0, 1, (2, 5))
 X_prob = softmax(X)
-X_prob, X_prob.sum(axis=1)
-```
-
-```{.python .input}
-#@tab pytorch
-X = torch.normal(0, 1, size=(2, 5))
-X_prob = softmax(X)
-X_prob, torch.sum(X_prob, dim=1)
+X_prob, d2l.reduce_sum(X_prob, 1)
 ```
 
 ```{.python .input}
 #@tab tensorflow
-X = tf.random.normal(shape=(2, 5))
+X = tf.random.normal((2, 5), 0, 1)
 X_prob = softmax(X)
-X_prob, tf.reduce_sum(X_prob, axis=1)
+X_prob, tf.reduce_sum(X_prob, 1)
 ```
 
 Note that while this looks correct mathematically,
@@ -231,20 +209,9 @@ before passing the data through our model.
 소프트맥스 연살을 정의했으니 이제 소프트맥스 회귀 모델을 구현할 수 있습니다. 아래 코드는 입력이 어떻게 네트워크를 통해서 출력으로 매핑되는지를 정의합니다. 데이터를 모델에 전달하기 전에, 배치의 원본 이미지를 `reshape` 함수를 이용해서 평평하게 만들어 벡터로 만들었다는 것을 주의하세요.
 
 ```{.python .input}
+#@tab all
 def net(X):
-    return softmax(np.dot(X.reshape(-1, W.shape[0]), W) + b)
-```
-
-```{.python .input}
-#@tab pytorch
-def net(X):
-    return softmax(torch.matmul(X.reshape(-1, W.shape[0]), W) + b)
-```
-
-```{.python .input}
-#@tab tensorflow
-def net(X):
-    return softmax(tf.matmul(tf.reshape(X, shape=(-1, W.shape[0])), W) + b)
+    return softmax(d2l.matmul(d2l.reshape(X, (-1, W.shape[0])), W) + b)
 ```
 
 ## Defining the Loss Function
@@ -271,15 +238,9 @@ and the probability of the third class in the second example.
 크로스-엔트로피는 실제 레이블에 대한 예측된 확률의 음의 로그-가능도(negative log-likelihood)라는 것을 상기하세요. Python의 for-룹으로 예측값을 하나씩 반복하는 것이 아니라 (이 방법은 비효율적입니다), 단일 연산을 사용해서 모든 원소를 선택할 수 있습니다. 아래에서 우리는 3개 클래스들에 대한 예측된 확률을 갖는 2개 예제로 구성된 장난감 데이터 `y_hat`을 만듭니다. 그리고 첫 번째 예제에서는 첫 번째 클래스의 확률값을 두 번째 예제에서는 세 번째 클래스의 확률값을 선택합니다.
 
 ```{.python .input}
-y_hat = np.array([[0.1, 0.3, 0.6], [0.3, 0.2, 0.5]])
-y = np.array([0, 2])
-y_hat[[0, 1], y]
-```
-
-```{.python .input}
-#@tab pytorch
-y = torch.tensor([0, 2])
-y_hat = torch.tensor([[0.1, 0.3, 0.6], [0.3, 0.2, 0.5]])
+#@tab mxnet, pytorch
+y = d2l.tensor([0, 2])
+y_hat = d2l.tensor([[0.1, 0.3, 0.6], [0.3, 0.2, 0.5]])
 y_hat[[0, 1], y]
 ```
 
@@ -295,16 +256,9 @@ Now we can implement the cross-entropy loss function efficiently with just one l
 이제 우리는 단 한 줄의 코드로 크로스-엔트로피 손실 함수를 구현할 수 있습니다.
 
 ```{.python .input}
+#@tab mxnet, pytorch
 def cross_entropy(y_hat, y):
-    return - np.log(y_hat[range(len(y_hat)), y])
-
-cross_entropy(y_hat, y)
-```
-
-```{.python .input}
-#@tab pytorch
-def cross_entropy(y_hat, y):
-    return - torch.log(y_hat[range(len(y_hat)), y])
+    return - d2l.log(y_hat[range(len(y_hat)), y])
 
 cross_entropy(y_hat, y)
 ```
@@ -352,29 +306,13 @@ Taking the sum yields the number of correct predictions.
 정확도 계산은 다음과 같이 합니다. 우선, `y_hat`가 행렬이라면, 행렬의 2번째 차원은 각 클래스에 대한 예측 점수를 가지고 있다고 가정합니다. 예측된 클래스는 `argmax`를 사용해서 각 행에서 가장 큰 값에 대한 인덱스를 얻습니다. 그 다음 예측된 클래스와 실제 클래스 `y` 를 원소별로 비교합니다. 평등 연산자 `==`는 데이터 타입에 민감하기 때문에,  `y_hat` 데이터 타입을 `y`의 데이터 타입과 같아지도록 바꿔줍니다. 비교 결과는 (예측이 틀린 경우) 0과 (예측이 맞은 경우) 1로 이뤄진 텐서가 됩니다. 이 텐서의 합은 정확한 예측의 개수입니다.
 
 ```{.python .input}
+#@tab all
 def accuracy(y_hat, y):  #@save
     """Compute the number of correct predictions."""
     if len(y_hat.shape) > 1 and y_hat.shape[1] > 1:
-        y_hat = y_hat.argmax(axis=1)
-    return float((y_hat.astype(y.dtype) == y).sum())
-```
-
-```{.python .input}
-#@tab pytorch
-def accuracy(y_hat, y):  #@save
-    """Compute the number of correct predictions."""
-    if len(y_hat.shape) > 1 and y_hat.shape[1] > 1:
-        y_hat = y_hat.argmax(axis=1)
-    return float((y_hat.type(y.dtype) == y).sum())
-```
-
-```{.python .input}
-#@tab tensorflow
-def accuracy(y_hat, y):  #@save
-    """Compute the number of correct predictions."""
-    if len(y_hat.shape) > 1 and y_hat.shape[1] > 1:
-        y_hat = tf.argmax(y_hat, axis=1)
-    return float((tf.cast(y_hat, dtype=y.dtype) == y).numpy().sum())
+        y_hat = d2l.argmax(y_hat, axis=1)        
+    cmp = d2l.astype(y_hat, y.dtype) == y
+    return float(d2l.reduce_sum(d2l.astype(cmp, y.dtype)))
 ```
 
 We will continue to use the variables `y_hat` and `y`
@@ -401,12 +339,24 @@ that is accessed via the data iterator `data_iter`.
 비슷하게, 우리는 데이터 반복자 `data_iter`를 통해서 얻을 수 있는 데이터셋에 대해서 임의의 모델 `net`의 정확도를 평가할 수 있습니다. 
 
 ```{.python .input}
-#@tab all
+#@tab mxnet, tensorflow
 def evaluate_accuracy(net, data_iter):  #@save
     """Compute the accuracy for a model on a dataset."""
     metric = Accumulator(2)  # No. of correct predictions, no. of predictions
     for _, (X, y) in enumerate(data_iter):
-        metric.add(accuracy(net(X), y), sum(y.shape))
+        metric.add(accuracy(net(X), y), d2l.size(y))
+    return metric[0] / metric[1]
+```
+
+```{.python .input}
+#@tab pytorch
+def evaluate_accuracy(net, data_iter):  #@save
+    """Compute the accuracy for a model on a dataset."""
+    if isinstance(net, torch.nn.Module):
+        net.eval()  # Set the model to evaluation mode
+    metric = Accumulator(2)  # No. of correct predictions, no. of predictions
+    for _, (X, y) in enumerate(data_iter):
+        metric.add(accuracy(net(X), y), d2l.size(y))
     return metric[0] / metric[1]
 ```
 
@@ -484,6 +434,9 @@ def train_epoch_ch3(net, train_iter, loss, updater):  #@save
 #@tab pytorch
 def train_epoch_ch3(net, train_iter, loss, updater):  #@save
     """The training loop defined in Chapter 3."""
+    # Set the model to training mode
+    if isinstance(net, torch.nn.Module):
+        net.train()
     # Sum of training loss, sum of training accuracy, no. of examples
     metric = Accumulator(3)
     for X, y in train_iter:
@@ -494,11 +447,12 @@ def train_epoch_ch3(net, train_iter, loss, updater):  #@save
             updater.zero_grad()
             l.backward()
             updater.step()
-            metric.add(float(l)*len(y), accuracy(y_hat, y), y.size().numel())
+            metric.add(float(l) * len(y), accuracy(y_hat, y),
+                       y.size().numel())
         else:
             l.sum().backward()
             updater(X.shape[0])
-            metric.add(float(l.sum()), accuracy(y_hat, y), y.size().numel())
+            metric.add(float(l.sum()), accuracy(y_hat, y), y.numel())
     # Return training loss and training accuracy
     return metric[0] / metric[2], metric[1] / metric[2]
 ```
@@ -513,9 +467,9 @@ def train_epoch_ch3(net, train_iter, loss, updater):  #@save
         # Compute gradients and update parameters
         with tf.GradientTape() as tape:
             y_hat = net(X)
-            # tf.Keras' implementations for loss takes (labels, predictions)
+            # Keras implementations for loss takes (labels, predictions)
             # instead of (predictions, labels) that users might implement
-            # in this book, e.g. `cross_entropy()` that we implemented above
+            # in this book, e.g. `cross_entropy` that we implemented above
             if isinstance(loss, tf.keras.losses.Loss):
                 l = loss(y, y_hat)
             else:
@@ -526,7 +480,7 @@ def train_epoch_ch3(net, train_iter, loss, updater):  #@save
             updater.apply_gradients(zip(grads, params))
         else:
             updater(X.shape[0], tape.gradient(l, updater.params))
-        # Keras loss in default returns the average loss in a batch
+        # Keras loss by default returns the average loss in a batch
         l_sum = l * float(tf.size(y)) if isinstance(
             loss, tf.keras.losses.Loss) else tf.reduce_sum(l)
         metric.add(l_sum, accuracy(y_hat, y), tf.size(y))
@@ -626,6 +580,7 @@ def updater(batch_size):
 ```{.python .input}
 #@tab tensorflow
 class Updater():  #@save
+    """For updating parameters using minibatch stochastic gradient descent."""
     def __init__(self, params, lr):
         self.params = params
         self.lr = lr
@@ -664,27 +619,15 @@ and the predictions from the model
 학습이 완료되면, 모델이 몇 개의 이미지를 분류할 준비가 되었습니다. 이미지들이 주어졌을 때, 실제 레이블(텍스트 출력의 첫 번째 줄)과 모델 예측 결과(텍스트 출력의 두 번째 줄)을 비교합니다.
 
 ```{.python .input}
-#@tab mxnet, pytorch
+#@tab all
 def predict_ch3(net, test_iter, n=6):  #@save
+    """Predict labels (defined in Chapter 3)."""
     for X, y in test_iter:
         break
     trues = d2l.get_fashion_mnist_labels(y)
-    preds = d2l.get_fashion_mnist_labels(net(X).argmax(axis=1))
-    titles = [true + '\n' + pred for true, pred in zip(trues, preds)]
-    d2l.show_images(X[0:n].reshape(n, 28, 28), 1, n, titles=titles[0:n])
-
-predict_ch3(net, test_iter)
-```
-
-```{.python .input}
-#@tab tensorflow
-def predict_ch3(net, test_iter, n=6):  #@save
-    for X, y in test_iter:
-        break
-    trues = d2l.get_fashion_mnist_labels(y)
-    preds = d2l.get_fashion_mnist_labels(tf.argmax(net(X), axis=1))
-    titles = [true+'\n' + pred for true, pred in zip(trues, preds)]
-    d2l.show_images(tf.reshape(X[0:n], (n, 28, 28)), 1, n, titles=titles[0:n])
+    preds = d2l.get_fashion_mnist_labels(d2l.argmax(net(X), axis=1))
+    titles = [true +'\n' + pred for true, pred in zip(trues, preds)]
+    d2l.show_images(d2l.reshape(X[0:n], (n, 28, 28)), 1, n, titles=titles[0:n])
 
 predict_ch3(net, test_iter)
 ```

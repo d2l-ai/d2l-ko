@@ -58,7 +58,7 @@ The independent variables (age and area)
 upon which the predictions are based
 are called *features* (or *covariates*).
 
-실제 예제를 통해서 어떤 접근 방법을 취하는 것인지 알아보겠습니다. (제곱 피트 단위의) 집의 면적과 (년수로 표현된) 집의 년차가 주어졌을 때 (달러로 표현된) 집 가격을 예측하고자 합니다. 집 가격을 예측하는 모델을 만들기 위해서는 가격, 면적, 연차가 알려진 각 주택 판매에 대한 데이터셋을 확보해야합니다. 머신 러닝의 용어로는 이 데이터셋을 *학습 데이터(training data)* 또는 *학습 세트(training set)*라고 하고, 하나의 판매에 대한 데이터인 각 행은 *예제(example)* (또는 *데이터 인스턴스*, *데이터 포인트*, 또는 *샘플*)라고 합니다. 예측하고자 하는 것(가격)을 *레이블(label)* (또는 *타겟(target)*) 이라고 부릅니다. 예측에 사용되는 독립 변수들(년수와 면적) 은 *피처(feature)* 또는 *공변량(covariate)*라고 합니다.
+실제 예제를 통해서 어떤 접근 방법을 취하는 것인지 알아보겠습니다. (제곱 피트 단위의) 집의 면적과 (년수로 표현된) 집의 년차가 주어졌을 때 (달러로 표현된) 집 가격을 예측하고자 합니다. 집 가격을 예측하는 모델을 만들기 위해서는 가격, 면적, 연차가 알려진 각 주택 판매에 대한 데이터셋을 확보해야합니다. 머신 러닝의 용어로는 이 데이터셋을 *학습 데이터(training data)* 또는 *학습 세트(training set)*라고 하고, 하나의 판매에 대한 데이터인 각 행은 *예제(example)* (또는 *데이터 포인트*, *데이터 인스턴스*, 또는 *샘플*)라고 합니다. 예측하고자 하는 것(가격)을 *레이블(label)* (또는 *타겟(target)*) 이라고 부릅니다. 예측에 사용되는 독립 변수들(년수와 면적) 은 *피처(feature)* 또는 *공변량(covariate)*라고 합니다.
 
 Typically, we will use $n$ to denote
 the number of examples in our dataset.
@@ -66,10 +66,11 @@ We index the data instances by $i$, denoting each input
 as $\mathbf{x}^{(i)} = [x_1^{(i)}, x_2^{(i)}]^\top$
 and the corresponding label as $y^{(i)}$.
 
-일반적으로 데이터셋의 예제의 수는 $n$로 표현합니다. 각 샘플들은 $i$로 색인을 하는데, 즉 각 입력 데이터 포인트를  $x^{(i)} = [x_1^{(i)}, x_2^{(i)}]$로 이 입력에 대한 레이블은 $y^{(i)}$로 표기합니다.
+일반적으로 데이터셋의 예제의 수는 $n$로 표현합니다. 데이터 포인트들은 $i$로 색인을 하는데, 즉 각 입력 데이터 포인트를  $x^{(i)} = [x_1^{(i)}, x_2^{(i)}]$로 이 입력에 대한 레이블은 $y^{(i)}$로 표기합니다.
 
 ### Linear Model
 ### 선형 모델
+:label:`subsec_linear_model`
 
 The linearity assumption just says that the target (price)
 can be expressed as a weighted sum of the features (area and age):
@@ -90,17 +91,26 @@ what value the predicted price should take
 when all of the features take value 0.
 Even if we will never see any homes with zero area,
 or that are precisely zero years old,
-we still need the intercept or else we will
-limit the expressivity of our linear model.
+we still need the bias or else we will
+limit the expressivity of our model.
+Strictly speaking, :eqref:`eq_price-area` is an *affine transformation*
+of input features,
+which is characterized by
+a *linear transformation* of features via weighted sum, combined with 
+a *translation* via the added bias.
 
-:eqref:`eq_price-area`에서 , $w_{\mathrm{area}}$와 $w_{\mathrm{age}}$는 *가중치(weight)*, $b$는 *편향(bais)*라고 합니다. (편향은 *오프셋(offset)* 또는 *절편(intercept)* 라고도 합니다.) 가중치들은 각 피처(feature)가 예측에 미치는 영향 정도를 결정하고, 편향은 모든 피처가 $0$일 경우 예측된 가격이 얼마가 되어야 하는지를 말해줍니다. 사실 집의 면적이 $0$이거나 연수가 $0$인 경우는 없지만, 절편(intercept)은 여전히 필요합니다. 그렇지 않다면, 선형 모델이 표현할 수 있는 것들에 제약이 생기기 때문입니다.
+:eqref:`eq_price-area`에서 , $w_{\mathrm{area}}$와 $w_{\mathrm{age}}$는 *가중치(weight)*, $b$는 *편향(bais)*라고 합니다. (편향은 *오프셋(offset)* 또는 *절편(intercept)* 라고도 합니다.) 가중치들은 각 피처(feature)가 예측에 미치는 영향 정도를 결정하고, 편향은 모든 피처가 $0$일 경우 예측된 가격이 얼마가 되어야 하는지를 말해줍니다. 사실 집의 면적이 $0$이거나 연수가 $0$인 경우는 없지만, 편향은 여전히 필요합니다. 그렇지 않다면, 선형 모델이 표현할 수 있는 것들에 제약이 생기기 때문입니다. 정확하게 말하자만, :eqref:`eq_price-area`는 입력 피처들의 *아핀 변환(affine transformation)*이고, 이 변환은 가중합을 통한 피처들의 *선형 변환*과 추가적인 편향을 통한 *이동(translation)*으로 정의됩니다.
 
 Given a dataset, our goal is to choose
 the weights $\mathbf{w}$ and the bias $b$ such that on average,
 the predictions made according to our model
 best fit the true prices observed in the data.
+Models whose output prediction
+is determined by the affine transformation of input features
+are *linear models*,
+where the affine transformation is specified by the chosen weights and bias.
 
-우리의 목표는 모델이 주어진 데이터셋에 있는 관찰된 실제 가격을 평균적으로 가장 잘 예측할 수 있는 가중치 $\mathbf{w}$와 편향 $b$를 선택하는 것입니다.
+우리의 목표는 모델이 주어진 데이터셋에 있는 관찰된 실제 가격을 평균적으로 가장 잘 예측할 수 있는 가중치 $\mathbf{w}$와 편향 $b$를 선택하는 것입니다. 출력 예측이 입력 피처의 아핀 변환으로 결정되는 모델들은 선택된 가중치와 편향으로 정의되는 *선형 모델*입니다. 
 
 In disciplines where it is common to focus
 on datasets with just a few features,
@@ -125,14 +135,14 @@ $$\hat{y} = \mathbf{w}^\top \mathbf{x} + b.$$
 
 모든 피처들을 벡터 $\mathbf{x} \in \mathbb{R}^d$로 합치고, 모든 가중치들을 벡터 $\mathbf{w} \in \mathbb{R}^d$로 합치면, 닷 곱(dot product)로 모델을 간결하게 표현할 수 있습니다.
 
-In :eqref:`eq_linreg-y`, the vector $\mathbf{x}$ corresponds to features of a single data instance.
+In :eqref:`eq_linreg-y`, the vector $\mathbf{x}$ corresponds to features of a single data point.
 We will often find it convenient
 to refer to features of our entire dataset of $n$ examples
 via the *design matrix* $\mathbf{X} \in \mathbb{R}^{n \times d}$.
 Here, $\mathbf{X}$ contains one row for every example
 and one column for every feature.
 
-:eqref:`eq_linreg-y`에서 벡터 $\mathbf{x}$는 한 개의 데이터 인스턴스의 피처에 해당합니다. $n$ 개 예제들로 구성된 전체 데이터셋에 대한 피처를 *계획 행렬(design matrix)*  $\mathbf{X} \in \mathbb{R}^{n \times d}$ 형태로 표현하는 것이 편리하다는 것을 알게될 것입니다. 즉, $X$의 각 행은 각 샘플을 각 열은 각 피처(feature)를 나타냅니다.
+:eqref:`eq_linreg-y`에서 벡터 $\mathbf{x}$는 한 개의 데이터 포인트의 피처에 해당합니다. $n$ 개 예제들로 구성된 전체 데이터셋에 대한 피처를 *계획 행렬(design matrix)*  $\mathbf{X} \in \mathbb{R}^{n \times d}$ 형태로 표현하는 것이 편리하다는 것을 알게될 것입니다. 즉, $X$의 각 행은 각 샘플을 각 열은 각 피처(feature)를 나타냅니다.
 
 For a collection of features $\mathbf{X}$,
 the predictions $\hat{\mathbf{y}} \in \mathbb{R}^n$
@@ -145,15 +155,15 @@ Given features of a training dataset $\mathbf{X}$
 and corresponding (known) labels $\mathbf{y}$,
 the goal of linear regression is to find
 the weight vector $\mathbf{w}$ and the bias term $b$
-that given features of a new data instance
+that given features of a new data point
 sampled from the same distribution as $\mathbf{X}$,
-the new data instance's label will (in expectation) be predicted with the lowest error.
+the new data point's label will (in expectation) be predicted with the lowest error.
 
 예를 들여, 데이터 포인들의 집합이 $\mathbf{X}$이며, 예측들 $\hat{\mathbf{y}} \in \mathbb{R}^n$은 행렬-벡터의 곱으로 다음과 같이 표현됩니다.
 
 $${\hat{\mathbf{y}}} = \mathbf{X} \mathbf{w} + b$$
 
-여기서 합을 할 때는 브로드케스팅( :numref:`subsec_broadcasting` 참조)이 적용됩니다. 학습 데이터셋 $\mathbf{X}$의 피처들과 그에 대응하는 (알려진) 레이블 $\mathbf{y}$가 주어졌을 때, $\mathbf{X}$ 와 같은 분포에서 뽑아진 새로운 데이터 인스턴스의 피처들에 대해서 낮은 오류로 레이블들을 예측할 수 있는 가중치 벡터 $\mathbf{w}$와 편향항 $b$를 찾는 것이 선형 회귀의 목표입니다.
+여기서 합을 할 때는 브로드케스팅( :numref:`subsec_broadcasting` 참조)이 적용됩니다. 학습 데이터셋 $\mathbf{X}$의 피처들과 그에 대응하는 (알려진) 레이블 $\mathbf{y}$가 주어졌을 때, $\mathbf{X}$ 와 같은 분포에서 뽑아진 새로운 데이터 포인트의 피처들에 대해서 낮은 오류로 레이블들을 예측할 수 있는 가중치 벡터 $\mathbf{w}$와 편향항 $b$를 찾는 것이 선형 회귀의 목표입니다.
 
 Even if we believe that the best model for
 predicting $y$ given $\mathbf{x}$ is linear,
@@ -586,7 +596,7 @@ x = np.arange(-7, 7, 0.01)
 params = [(0, 1), (0, 2), (3, 1)]
 d2l.plot(x, [normal(x, mu, sigma) for mu, sigma in params], xlabel='x',
          ylabel='p(x)', figsize=(4.5, 2.5),
-         legend=['mean %d, std %d' % (mu, sigma) for mu, sigma in params])
+         legend=[f'mean {mu}, std {sigma}' for mu, sigma in params])
 ```
 
 As we can see, changing the mean corresponds to a shift along the $x$-axis,
@@ -656,13 +666,13 @@ $\sigma$가 고정된 상수라는 가정이 하나 더 필요합니다. 즉,  $
 ## From Linear Regression to Deep Networks
 ## 선형 회귀에서 딥 네트워크로
 
-So far we only talked about linear functions.
+So far we only talked about linear models.
 While neural networks cover a much richer family of models,
 we can begin thinking of the linear model
 as a neural network by expressing it in the language of neural networks.
 To begin, let us start by rewriting things in a "layer" notation.
 
-지금까지 우리는 선형 함수에 대해서만 이야기했습니다. 뉴럴 네트워크는 아주 다양한 모델의 종류들을 포함하고 있지만, 우리는 선형 모델을 뉴럴 네트워크 용어를 사용해서 뉴럴 네트워크로 여기는 것으로 시작하겠습니다. 모든 것들을 "층(layer)" 표기로 다시 적는 것부터 시작합니다.
+지금까지 우리는 선형 모델에 대해서만 이야기했습니다. 뉴럴 네트워크는 아주 다양한 모델의 종류들을 포함하고 있지만, 우리는 선형 모델을 뉴럴 네트워크 용어를 사용해서 뉴럴 네트워크로 여기는 것으로 시작하겠습니다. 모든 것들을 "층(layer)" 표기로 다시 적는 것부터 시작합니다.
 
 ### Neural Network Diagram
 ### 뉴럴 네트워크 다이어그램
