@@ -350,17 +350,7 @@ tf.reduce_sum(x)
 
 :label:`subsec_broadcasting`
 
-In the above section, we saw how to perform elementwise operations
-on two tensors of the same shape. Under certain conditions,
-even when shapes differ, we can still perform elementwise operations
-by invoking the *broadcasting mechanism*.
-This mechanism works in the following way:
-First, expand one or both arrays
-by copying elements appropriately
-so that after this transformation,
-the two tensors have the same shape.
-Second, carry out the elementwise operations
-on the resulting arrays.
+In the above section, we saw how to perform elementwise operations on two tensors of the same shape. Under certain conditions, even when shapes differ, we can still perform elementwise operations by invoking the *broadcasting mechanism*. This mechanism works in the following way: First, expand one or both arrays by copying elements appropriately so that after this transformation, the two tensors have the same shape. Second, carry out the elementwise operations on the resulting arrays.
 
 위 섹션에서, 같은 shape의 두 텐서에서 요소별 연산을 수행하는 방법을 보았습니다. 특정 조건에서 shape이 다른 경우에도 *브로드캐스팅 메커니즘*을 사용해 요소별 연산을 수행할 수 있습니다. 이 메커니즘은 다음과 같은 방식으로 작동합니다. 먼저, 두 텐서의 모양이 동일해지도록 요소를 적절히 복사하여 (한 개 또는 두 개의) 배열을 확장합니다. 둘째, 결과 배열에서 요소별 연산을 수행합니다.
 
@@ -450,6 +440,8 @@ x = tf.convert_to_tensor(x_var)
 x
 ```
 
+
+
 ## Saving Memory
 
 ## 메모리 절약
@@ -514,15 +506,15 @@ tf.Variable(x).assign(x + y)
 id(x) == before
 ```
 
+
+
 ## Conversion to Other Python Objects
 
-Converting to a NumPy tensor, or vice versa, is easy.
-The converted result does not share memory.
-This minor inconvenience is actually quite important:
-when you perform operations on the CPU or on GPUs,
-you do not want to halt computation, waiting to see
-whether the NumPy package of Python might want to be doing something else
-with the same chunk of memory.
+## 다른 파이썬 객체로 변환
+
+Converting to a NumPy tensor, or vice versa, is easy. The converted result does not share memory. This minor inconvenience is actually quite important: when you perform operations on the CPU or on GPUs, you do not want to halt computation, waiting to see whether the NumPy package of Python might want to be doing something else with the same chunk of memory.
+
+NumPy 텐서로 또는 그 반대로 쉽게 변환할 수 있습니다. 변환된 결과는 메모리를 공유하지 않습니다. 이 사소한 불편함은 실제로 매우 중요합니다. CPU나 GPU에서 작업을 수행할 때, 파이썬의 NumPy 패키지가 같은 메모리 블럭에 다른 작업을 수행할지 확인하느라 계산을 중단하고 싶지 않기 때문입니다.
 
 ```{.python .input}
 a = x.asnumpy()
@@ -544,8 +536,9 @@ b = tf.constant(a)
 type(a), type(b)
 ```
 
-To convert a size-1 tensor to a Python scalar,
-we can invoke the `item` function or Python's built-in functions.
+To convert a size-1 tensor to a Python scalar, we can invoke the `item` function or Python's built-in functions.
+
+크기가 1인 텐서를 파이썬 스칼라로 변환하기 위해, `item` 함수 또는 파이썬의 내장 함수를 호출할 수 있습니다.
 
 ```{.python .input}
 a = np.array([3.5])
@@ -564,19 +557,15 @@ a = tf.constant([3.5]).numpy()
 a, a.item(), float(a), int(a)
 ```
 
+
+
 ## The `d2l` Package
 
-Throughout the online version of this book,
-we will provide implementations of multiple frameworks.
-However, different frameworks may be different in their API names or usage.
-To better reuse the same code block across multiple frameworks,
-we unify a few commonly-used functions in the `d2l` package.
-The comment `#@save` is a special mark where the following function,
-class, or statements are saved in the `d2l` package.
-For instance, later we can directly invoke
-`d2l.numpy(a)` to convert a tensor `a`,
-which can be defined in any supported framework,
-into a NumPy tensor.
+## `d2l` 패키지
+
+Throughout the online version of this book, we will provide implementations of multiple frameworks. However, different frameworks may be different in their API names or usage. To better reuse the same code block across multiple frameworks, we unify a few commonly-used functions in the `d2l` package. The comment `#@save` is a special mark where the following function, class, or statements are saved in the `d2l` package. For instance, later we can directly invoke `d2l.numpy(a)` to convert a tensor `a`, which can be defined in any supported framework, into a NumPy tensor.
+
+이 책의 온라인 버전에서는 다양한 프레임워크의 구현을 제공할 것입니다. 하지만 개별 프레임워크마다 API 이름이나 사용법이 다를 수 있습니다. 여러 프레임 워크에서 동일한 코드 블록을 더 잘 재사용하기 위해, 몇 가지 일반적인 기능을 `d2l` 패키지에 통합했습니다. 주석 `#@save` 은 다음의 함수, 클래스, 명령문이 `d2l` 패키지에 포함된다는 특별한 표시입니다. 예를 들어, 나중에 (지원되는 모든 프레임 워크에서 정의된) `d2l.numpy(a)` 를 직접 호출하여 텐서 `a` 를 NumPy 텐서로 변환 할 수 있습니다.
 
 ```{.python .input}
 #@save
@@ -607,22 +596,33 @@ ones = tf.ones
 zeros = tf.zeros
 ```
 
-In the rest of the book,
-we often define more complicated functions or classes.
-For those that can be used later,
-we will also save them in the `d2l` package
-so later they can be directly invoked without being redefined.
+In the rest of the book, we often define more complicated functions or classes. For those that can be used later, we will also save them in the `d2l` package so later they can be directly invoked without being redefined.
+
+이 책의 나머지 부분에서는 종종 더 복잡한 함수나 클래스를 정의합니다. 그중 나중에 사용할 수 있는 것들은 `d2l` 패키지에 저장되므로, 다시 정의하지 않고 직접 호출할 수 있습니다.
+
 
 
 ## Summary
 
+
+## 요약
+
 * The main interface to store and manipulate data for deep learning is the tensor ($n$-dimensional array). It provides a variety of functionalities including basic mathematics operations, broadcasting, indexing, slicing, memory saving, and conversion to other Python objects.
+  딥러닝에서 데이터를 저장하고 조작하는 기본 인터페이스는 텐서($n$ 차원 배열)입니다. 텐서는 기본 수학 연산, 브로드캐스트, 인덱싱, 슬라이싱, 메모리 절약 및 다른 Python 객체로의 변환을 포함한 다양한 기능을 제공합니다.
+
 
 
 ## Exercises
 
-1. Run the code in this section. Change the conditional statement `x == y` in this section to `x < y` or `x > y`, and then see what kind of tensor you can get.
-1. Replace the two tensors that operate by element in the broadcasting mechanism with other shapes, e.g., 3-dimensional tensors. Is the result the same as expected?
+
+## 연습 문제
+
+1. Run the code in this section. Change the conditional statement `x == y` in this section to `x < y` or `x > y`, and then see what kind of tensor you can get. 이 섹션의 코드를 실행합니다. 
+   이 섹션의 조건문 `x == y` 를 `x < y` 또는 `x > y` 로 변경한 다음, 어떤 종류의 텐서를 얻을 수 있는지 확인하십시오.
+1. Replace the two tensors that operate by element in the broadcasting mechanism with other shapes, e.g., 3-dimensional tensors. Is the result the same as expected? 
+   브로드캐스트 메커니즘의 요소별 연산에서, 두 개의 텐서를 다른 모양(예: 3차원 텐서)으로 바꿔보십시오. 결과가 예상했던 것과 같습니까?
+
+
 
 :begin_tab:`mxnet`
 [Discussions](https://discuss.d2l.ai/t/26)
