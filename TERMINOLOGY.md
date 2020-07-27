@@ -103,7 +103,7 @@
 | neural network                                   | 뉴럴 네트워크                 |
 | neuron                                           | 뉴런                          |
 | non-convex optimization                          |                               |
-| normalization                                    |                               |
+| normalization                                    | 정규화                        |
 | numerical method                                 |                               |
 | object detection                                 |                               |
 | objective function                               | 목적 함수                     |
@@ -123,15 +123,16 @@
 | property                                         |                               |
 | pseudo                                           | 의사                          |
 | random variable                                  | 확률 변수                     |
+| regulariization                                  | 정칙화                        |
 | receptive field                                  |                               |
 | recurrent neural network                         |                               |
 | regression                                       | 회귀                          |
-| saddle point                                     |                               |
+| saddle point                                     | 안장점                        |
 | scalar                                           | 스칼라                        |
 | sentiment analysis                               |                               |
 | shape                                            | 모양                          |
 | skip-gram model                                  |                               |
-| softmax regression                               |                               |
+| softmax regression                               | 소프트맥스 회귀               |
 | softmax，hierarchical softmax                    |                               |
 | stochastic gradient descent                      | 확률적 경사 하강법            |
 | stride                                           |                               |
@@ -148,12 +149,12 @@
 | uniform sampling                                 |                               |
 | unknown token                                    |                               |
 | update model parameter(s)                        |                               |
-| upsample                                         |                               |
+| upsample                                         | 업샘플                        |
 | validation dataset                               | 검증 데이터셋                 |
 | vanishing gradient                               | 그래디언트 소실               |
-| variance                                         |                               |
+| variance                                         | 분산                          |
 | vector                                           | 벡터                          |
-| weight                                           |                               |
+| weight                                           | 가중치                        |
 | word embedding                                   |                               |
 | word vector                                      |                               |
 | zero tensor                                      |                               |
