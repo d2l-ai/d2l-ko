@@ -157,16 +157,24 @@ pip install mxnet-cu101==1.6.0
 
 :begin_tab:`pytorch`
 
+```bash
+pip install torch==1.5.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html
 ```
-pip install torch==1.5.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html
+
+
 :end_tab:
 
+:begin_tab:`mxnet,pytorch`
 You may change the last digits according to your CUDA version, e.g., `cu100` for
 CUDA 10.0 and `cu90` for CUDA 9.0.
+
+여러분의 CUDA 버전에 따라서 마지막 숫자를 바꿔할 수도 있습니다. 예를 들어, CUDA 10.0은  `cu100`으로 CUDA 9.0은 `cu90`.
+:end_tab:
 
 ## Exercises
 
 1. Download the code for the book and install the runtime environment.
+2. 이 책의 코드들을 다운로드하고 실행 환경을 설치하세요.
 
 :begin_tab:`mxnet`
 [Discussions](https://discuss.d2l.ai/t/23)
@@ -177,3 +185,5 @@ CUDA 10.0 and `cu90` for CUDA 9.0.
 :end_tab
 ```
 
+
+```

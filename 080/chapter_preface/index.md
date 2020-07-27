@@ -36,7 +36,7 @@ Already, these tools exert ever-wider impacts on industry and society,
 changing the way movies are made, diseases are diagnosed,
 and playing a growing role in basic sciences---from astrophysics to biology.
 
-지난 5년간 딥러닝은 컴퓨터 비전, 자연어 처리, 음성 인식, 강화 학습, 통계적 모델링 등, 다양한 분야에서 빠르게 발전하며 세상을 놀라게 했습니다. 이러한 진보를 통해 우리는 이제 그 어느 때보다 더 자율적으로 운전하는 자동차 (어떤 회사들이 주장하는 것 만큼은 아니지만), 뻔한 이메일을 자동으로 답장해서 산처럼 쌓인 메일함에서 사람들을 구해내는 스마트 응답 시스템, 인간을 이기려면 수십년이 걸릴거라고 믿었던 바둑 같은 게임을 지배하는 소프트웨어 에이전트를 만들 수 있습니다. 이미 딥러닝은 영화 제작이나 질병 진단의 방식을 바꾸고 천체물리학에서 생물학에 이르는 기초 과학 분야에서도 점점 더 많은 역할을 하는 등, 우리 사회와 산업계에 넓은 영향을 미치고 있습니다.
+지난 5년간 딥러닝은 컴퓨터 비전, 자연어 처리, 음성 인식, 강화 학습, 통계적 모델링 등, 다양한 분야에서 빠르게 발전하며 세상을 놀라게 했습니다. 이러한 진보를 통해 우리는 이제 그 어느 때보다 더 자율적으로 운전하는 자동차 (어떤 회사들이 주장하는 것 만큼은 아니지만), 뻔한 이메일을 자동으로 답장해서 산처럼 쌓인 메일함에서 사람들을 구해내는 스마트 응답 시스템, 인간을 이기려면 수십 년이 걸릴거라고 믿었던 바둑 같은 게임을 지배하는 소프트웨어 에이전트를 만들 수 있습니다. 이미 딥러닝은 영화 제작이나 질병 진단의 방식을 바꾸고 천체물리학에서 생물학에 이르는 기초과학 분야에서도 점점 더 많은 역할을 하는 등, 우리 사회와 산업계에 넓은 영향을 미치고 있습니다.
 
 
 
@@ -123,7 +123,7 @@ sometimes leaving readers clueless as to how to implement them.
 Moreover, too many resources are hidden behind the paywalls
 of commercial course providers.
 
-우리가 이 책 프로젝트를 시작했을 때에는 (1) 최신 내용이고 (2) 현대 머신러닝의 전체 범위를 상당한 기술적 깊이로 다루면서 (3) 동시에, 매력적인 교과서와 핸즈온 튜토리얼과 같은 실행가능한 깨끗한 코드가 섞여 있는 교재가 존재하지 않았습니다. 우리는 딥러닝과 관련된 프레임워크를 사용하는 방법(예: TensorFlow에서 행렬을 사용한 기본 수치 계산) 또는 특정 기술(예: LeNet, AlexNet, ResNet 등의 코드 일부들)을 구현하는 방법에 대한 많은 예제 코드들을 여러 블로그와 GitHub 저장소에서 발견했습니다. 그러나 이 예제들은 대부분, 주어진 접근 방식을 구현하는 *방법*에 초점을 맞추느라 *왜* 그런 특정 알고리즘이 선택되었는지에 대한 설명은 생략하고 있었습니다. 특정 주제에 대한 리소스가 산발적으로 (예를 들면 웹 사이트 [Distill](http://distill.pub/) 또는 개인 블로그들에서) 나타나기도 했지만, 딥러닝의 몇몇 주제만 다루거나 코드가 없는 경우가 종종 있었습니다. 한편, 딥 러닝의 개념을 포괄적으로 다루는 여러 교과서(특히 :cite:`Goodfellow.Bengio.Courville.2016`)가 등장했지만, 이런 책들은 설명과 (이론을 구현한) 코드를 결합하지 못해서 독자들이 직접 구현하기 어려운 경우가 있었습니다. 또한 유료 교육기관에 등록해야만 볼 수 있는 자료들도 많습니다.
+우리가 이 책 프로젝트를 시작했을 때에는 (i) 최신 내용이고 (ii) 현대 머신러닝의 전체 범위를 상당한 기술적 깊이로 다루면서 (iii) 동시에, 매력적인 교과서와 핸즈온 튜토리얼과 같은 실행 가능한 깨끗한 코드가 섞여 있는 교재가 존재하지 않았습니다. 우리는 딥러닝과 관련된 프레임워크를 사용하는 방법(예: TensorFlow에서 행렬을 사용한 기본 수치 계산) 또는 특정 기술(예: LeNet, AlexNet, ResNet 등의 코드 일부들)을 구현하는 방법에 대한 많은 예제 코드들을 여러 블로그와 GitHub 저장소에서 발견했습니다. 그러나 이 예제들은 대부분, 주어진 접근 방식을 구현하는 *방법*에 초점을 맞추느라 *왜* 그런 특정 알고리즘이 선택되었는지에 대한 설명은 생략하고 있었습니다. 특정 주제에 대한 리소스가 산발적으로 (예를 들면 웹 사이트 [Distill](http://distill.pub/) 또는 개인 블로그들에서) 나타나기도 했지만, 딥러닝의 몇몇 주제만 다루거나 코드가 없는 경우가 종종 있었습니다. 한편, 딥러닝의 개념을 포괄적으로 다루는 여러 교과서(특히 :cite:`Goodfellow.Bengio.Courville.2016`)가 등장했지만, 이런 책들은 설명과 (이론을 구현한) 코드를 결합하지 못해서 독자들이 직접 구현하기 어려운 경우가 있었습니다. 또한 유료 교육기관에 등록해야만 볼 수 있는 자료들도 많습니다.
 
 
 
@@ -160,7 +160,7 @@ these choices provide a good compromise among the competing concerns.
 We believe that this might be the first book published
 using such an integrated workflow.
 
-이러한 목표는 종종 충돌했습니다. 수학식, 정리와 인용은 LaTeX에서 가장 잘 관리되고 레이아웃 될 수 있습니다. 코드는 파이썬으로 가장 잘 설명됩니다. 웹 페이지는 HTML과 자바 스크립트에서 기본입니다. 우리는 실행 가능한 코드, 실제 책, 다운로드 가능한 PDF, 인터넷 웹 사이트 모두에서 액세스 가능한 콘텐츠를 원했습니다. 현재는 이러한 요구조건을 완벽하게 지원하는 도구나 워크 플로우가 존재하지 않기 때문에, 이 책에서는 독자적인 방법을 만들어 사용했습니다. 이에 대해서는 :numref:`sec_how_to_contribute` 에서 자세히 설명하겠습니다. 소스를 공유하고 편집하기 위해서 Github를 사용했고, 코드, 수학식, 텍스트를 동시에 사용하기 위해 Jupyter 노트북을, 다양한 출력물을 생성하는 렌더링 엔진으로 Sphinx를, 게시판을 위해 Discourse를 사용했습니다. 우리의 시스템이 아직 완벽하지는 않지만, 이와 같은 선택의 결과로 적절한 타협점을 찾을 수 있었습니다. 아마도 이 책은 이와 같은 통합 워크플로를 사용해서 출판된 첫번째 책일지도 모릅니다.
+이러한 목표는 종종 충돌했습니다. 수학식, 정리와 인용은 LaTeX에서 가장 잘 관리되고 레이아웃 될 수 있습니다. 코드는 파이썬으로 가장 잘 설명됩니다. 웹 페이지는 HTML과 자바 스크립트에서 기본입니다. 우리는 실행 가능한 코드, 실제 책, 다운로드 가능한 PDF, 인터넷 웹 사이트 모두에서 액세스 가능한 콘텐츠를 원했습니다. 현재는 이러한 요구조건을 완벽하게 지원하는 도구나 워크플로가 존재하지 않기 때문에, 이 책에서는 독자적인 방법을 만들어 사용했습니다. 이에 대해서는 :numref:`sec_how_to_contribute` 에서 자세히 설명하겠습니다. 소스를 공유하고 편집하기 위해서 Github를 사용했고, 코드, 수학식, 텍스트를 동시에 사용하기 위해 Jupyter 노트북을, 다양한 출력물을 생성하는 렌더링 엔진으로 Sphinx를, 게시판을 위해 Discourse를 사용했습니다. 우리의 시스템이 아직 완벽하지는 않지만, 이와 같은 선택의 결과로 적절한 타협점을 찾을 수 있었습니다. 아마도 이 책은 이와 같은 통합 워크플로를 사용해서 출판된 첫 번째 책일지도 모릅니다.
 
 
 
@@ -175,7 +175,7 @@ on linear regression requires a non-trivial amount of work.
 While experts love this book precisely for its thoroughness,
 for beginners, this property limits its usefulness as an introductory text.
 
-교과서들은 대개 일련의 주제들을 차례로 상세하게 가르치는 방식으로 만들어져 있습니다. 예를 들어 Chris Bishop의 유명한 교과서 [Pattern Recognition and Machine Learning](https://www.amazon.com/Pattern-Recognition-Learning-Information-Statistics/dp/0387310738)는 각 주제를 철저히 가르쳐 주는 반면, 선형 회귀 분석 챕터까지 가기 위해 꽤 많은 분량을 소화해야만 합니다. 이 책의 방대한 설명을 좋아하는 전문가들도 있지만, 초보자에게 입문서로 사용하기에는 다소 적절하지 않습니다.
+교과서들은 대개 일련의 주제들을 차례로 상세하게 가르치는 방식으로 만들어져 있습니다. 예를 들어 Chris Bishop의 유명한 교과서 [Pattern Recognition and Machine Learning](https://www.amazon.com/Pattern-Recognition-Learning-Information-Statistics/dp/0387310738)는 각 주제를 철저히 가르쳐 주는 반면, 선형 회귀 분석 장까지 가기 위해 꽤 많은 분량을 소화해야만 합니다. 이 책의 방대한 설명을 좋아하는 전문가들도 있지만, 초보자에게 입문서로 사용하기에는 다소 적절하지 않습니다.
 
 
 
@@ -187,7 +187,7 @@ fundamental preliminaries, like linear algebra and probability,
 we want you to taste the satisfaction of training your first model
 before worrying about more esoteric probability distributions.
 
-이 책에서는 대부분의 개념을 *필요한 시점(just in time)*에 가르칠 것입니다. 즉, 실제 목표를 달성하는데 필요한 바로 그 순간에 해당 개념을 배우게됩니다. 선형대수학이나 확률과 같은 기본적인 내용을 배우기 위해 처음에 약간의 시간이 걸리겠지만, 난해한 확률 분포를 걱정하기 전에 첫 번째 모델을 훈련시키는 만족감을 느끼기를 바랍니다.
+이 책에서는 대부분의 개념을 *필요한 시점(just in time)*에 가르칠 것입니다. 즉, 실제 목표를 달성하는데 필요한 바로 그 순간에 해당 개념을 배우게 됩니다. 선형대수학이나 확률과 같은 기본적인 내용을 배우기 위해 처음에 약간의 시간이 걸리겠지만, 난해한 확률 분포를 걱정하기 전에 첫 번째 모델을 훈련시키는 만족감을 느끼기를 바랍니다.
 
 
 
@@ -204,7 +204,7 @@ This makes it as easy as possible for you to
 start your own research projects by leveraging our code.
 Just copy a notebook and start modifying it.
 
-기본적인 수학적 배경에 대한 특별 과정을 제공하는 몇 가지 노트북을 제외하면, 이후의 각 챕터에서는 적절한 수의 새로운 개념을 소개하고 실제 데이터셋을 사용하는 1개의 작업 예제를 제공합니다. 이와 같은 접근 방법 때문에 책 구성이 쉽지 않았습니다. 어떤 모델은 논리적으로 하나의 노트북으로 그룹화될 수 있습니다. 한편 어떤 아이디어들은 여러 모델을 연속적으로 실행해서 가장 잘 배울 수 있습니다. 반면에, *작업 예제 1개, 노트북 1개*의 원칙을 지키면 큰 이점이 있습니다. 이렇게 하면 이 책의 코드를 활용해 자신만의 연구 프로젝트를 쉽게 시작할 수 있습니다. 노트북 하나를 복사하고 수정하기만 하면 됩니다.
+기본적인 수학적 배경에 대한 특별 과정을 제공하는 몇 가지 노트북을 제외하면, 이후의 각 장에서는 적절한 수의 새로운 개념을 소개하고 실제 데이터셋을 사용하는 1개의 작업 예제를 제공합니다. 이와 같은 접근 방법 때문에 책 구성이 쉽지 않았습니다. 어떤 모델은 논리적으로 하나의 노트북으로 그룹화될 수 있습니다. 한편 어떤 아이디어들은 여러 모델을 연속적으로 실행해서 가장 잘 배울 수 있습니다. 반면에, *작업 예제 1개, 노트북 1개*의 원칙을 지키면 큰 이점이 있습니다. 이렇게 하면 이 책의 코드를 활용해 자신만의 연구 프로젝트를 쉽게 시작할 수 있습니다. 노트북 하나를 복사하고 수정하기만 하면 됩니다.
 
 
 
@@ -238,7 +238,7 @@ where we write succinct code using Gluon.
 Once we have taught you how some component works,
 we can just use the Gluon version in subsequent tutorials.
 
-이 책은 딥러닝의 개념을 처음부터 가르칩니다. 때로는 딥러닝 프레임워크의 고급 추상화를 통해 일반적으로 사용자로부터 숨겨진 모델의 세부적인 부분까지 탐구하기도 합니다. 특히 특정 레이어나 옵티마이저에서 일어나는 모든 것을 이해해야 하는 기본 튜토리얼에서 접근하는 방식입니다. 이런 경우, 우리는 대개 두 가지 버전의 예제를 제시합니다. 하나는 NumPy 인터페이스와 자동 미분에만 의존해 모든 것을 처음부터 구현하는 예제이고, 다른 하나는 Gluon을 사용해 간결한 코드를 작성하는 현실적인 예제입니다. 일단 몇 가지 구성요소의 동작을 배운 다음에는, 이후의 튜토리얼에서는 Gluon 버전만을 사용하기도 합니다.
+이 책은 딥러닝의 개념을 처음부터 가르칩니다. 때로는 딥러닝 프레임워크의 고급 추상화를 통해 일반적으로 사용자로부터 숨겨진 모델의 세부적인 부분까지 탐구하기도 합니다. 특히 특정 레이어나 옵티마이저에서 일어나는 모든 것을 이해시키고자 하는 기본 튜토리얼들의 접근하는 방식입니다. 이런 경우, 우리는 대개 두 가지 버전의 예제를 제시합니다. 하나는 NumPy 인터페이스와 자동 미분에만 의존해 모든 것을 처음부터 구현하는 예제이고, 다른 하나는 Gluon을 사용해 간결한 코드를 작성하는 현실적인 예제입니다. 일단 몇 가지 구성요소의 동작을 배운 다음에는, 이후의 튜토리얼에서는 Gluon 버전만을 사용하기도 합니다.
 
 
 
@@ -385,7 +385,7 @@ to update your code and runtime environment.
 
 Here is how we import modules from MXNet.
 
-이 책의 대부분의 코드는 아파치 MXNet을 기반으로 합니다. MXNet은 딥러닝을 위한 오픈소스 프레임워크이며 많은 대학, 회사들과 AWS(Amazon Web Services, 아마존웹서비스)에서 선호되고 있습니다. 이 책의 모든 코드는 최신 MXNet 버전에서 테스트를 통과했습니다. 딥러닝 기술이 빠르게 발전함에 따라 *인쇄판*의 일부 코드가 MXNet의 향후 버전에서 제대로 동작하지 않을 수도 있습니다만, 온라인 버전은 최신 상태로 유지할 계획입니다. 이러한 문제가 발생할 경우 :ref:`chap_installation`을 참조하여 코드와 런타임 환경을 업데이트하시기 바랍니다.
+이 책의 대부분의 코드는 Apache MXNet을 기반으로 합니다. MXNet은 딥러닝을 위한 오픈소스 프레임워크이며 많은 대학, 회사들과 AWS(Amazon Web Services, 아마존웹서비스)에서 선호되고 있습니다. 이 책의 모든 코드는 최신 MXNet 버전에서 테스트를 통과했습니다. 딥러닝 기술이 빠르게 발전함에 따라 *인쇄판*의 일부 코드가 MXNet의 향후 버전에서 제대로 동작하지 않을 수도 있습니다만, 온라인 버전은 최신 상태로 유지할 계획입니다. 이러한 문제가 발생할 경우 :ref:`chap_installation`을 참조하여 코드와 런타임 환경을 업데이트하시기 바랍니다.
 
 다음은 MXNet에서 모듈을 import하는 방법입니다.
 
@@ -492,7 +492,7 @@ located at [discuss.d2l.ai](https://discuss.d2l.ai/).
 When you have questions on any section of the book,
 you can find the associated discussion page link at the end of each chapter.
 
-이 책과 관련해 [discuss.d2l.ai] (https://discuss.d2l.ai/)에 게시판을 열었습니다. 이 책의 어디에서든 궁금한 점이 있다면, 각 챕터의 끝 부분에 있는 관련 게시판의 링크를 찾아보시기 바랍니다.
+이 책과 관련해 [discuss.d2l.ai] (https://discuss.d2l.ai/)에 게시판을 열었습니다. 이 책의 어디에서든 궁금한 점이 있다면, 각 장의 끝 부분에 있는 관련 게시판의 링크를 찾아보시기 바랍니다.
 
 
 
@@ -581,7 +581,7 @@ Amazon Web Services, 특히 Swami Sivasubramanian에게 감사드립니다. Raju
    컴퓨터에 파이썬을 설치합니다.
 
 1. Follow the links at the bottom of the section to the forum, where you will be able to seek out help and discuss the book and find answers to your questions by engaging the authors and broader community. 
-섹션 하단의 게시판 링크를 따라 가면 저자들과 커뮤니티를 통해 도움을 얻거나 책을 토론하고 질문에 대한 답변을 얻을 수 있습니다.
+각 절 하단의 게시판 링크를 따라 가면 저자들과 커뮤니티를 통해 도움을 얻거나 책을 토론하고 질문에 대한 답변을 얻을 수 있습니다.
   
    
 
