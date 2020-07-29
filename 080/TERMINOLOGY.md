@@ -46,16 +46,17 @@
 | design matrix                                    | 설계 행렬                     |
 | dimension                                        | 차원                          |
 | diverge                                          |                               |
+| dot product                              | 닷 곱 |
 | dropout                                          | 드롭아웃                      |
 | eigenvalue                                       |                               |
 | empirical risk minimization                      |                               |
 | encoder                                          |                               |
 | end-to-end                                       |                               |
-| epoch                                            | 에포크                        |
+| epoch                                            | ~~에포크~~에폭                     |
 | error                                            | 오류                          |
 | example                                          | ??                            |
 | exploding gradient                               | 그래디언트 폭발               |
-| feature                                          | 특성                          |
+| feature                                          | ~~특성~~ 피처                    |
 | feature map                                      |                               |
 | filter                                           |                               |
 | fitness                                          | 적합성, 적합함                |
@@ -102,7 +103,7 @@
 | momentum (method)                                |                               |
 | multilayer perceptron                            | 다층 퍼셉트론                 |
 | negative sampling                                |                               |
-| neural network                                   | 뉴럴 네트워크                 |
+| neural network                                   | 신경망 |
 | neuron                                           | 뉴런                          |
 | non-convex optimization                          |                               |
 | normalization                                    |                               |
@@ -113,7 +114,7 @@
 | one hot encoding                                 | 원-핫-인코딩                  |
 | operator                                         |                               |
 | optimization algorithm                           | 최적화 알고리즘               |
-| optimizer                                        |                               |
+| optimizer                                        | 옵티마이져 |
 | outlier                                          | 이상치                        |
 | overfitting                                      | 오버피팅                      |
 | padding                                          |                               |
@@ -128,6 +129,7 @@
 | receptive field                                  |                               |
 | recurrent neural network                         |                               |
 | regression                                       | 회귀                          |
+| regularization                         | 정칙화                       |
 | saddle point                                     |                               |
 | scalar                                           | 스칼라                        |
 | sentiment analysis                               |                               |
