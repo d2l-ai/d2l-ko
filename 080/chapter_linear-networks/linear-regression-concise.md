@@ -171,7 +171,7 @@ with the most standard workflow.
 
 표준 연산들에 대해서는 프레임워크에서 제공하는 층을 사용할 수 있습니다. 이는 구현에 집중하는 것하기 보다는 모델을 구성하는데 사용될 층들에 특별히 집중할 수 있게 해줍니다. 우선  `Sequential` 클래스의 인스턴스인 모델 변수 `net`을 정의합니다.  `Sequential` 클래스는 함께 이어질 될 몇 개의 층들을 위한 컨테이너를 정의합니다. 입력이 주어지면,  `Sequential` 인스턴스는 이 값을 첫 번째 층으로 전달하고, 그 결과를 다시 두번 째층의 입력으로 전달하는 것을 반복합니다. 아래 예제에서 우리의 모델은 단 한 개의 층만 가지고 있기에,  `Sequential`이 실제로는 필요하지 않습니다. 하지만, 앞으로 살펴볼 모든 모델들을 여러 층을 가지고 있기 때문에, 가장 표준 워크플로우에 친숙해지기 위해서 이를 사용할 것입니다.  
 
-Recall the architecture of a single-layer network as shown in :numref:`fig_single_neuron``.
+Recall the architecture of a single-layer network as shown in :numref:`fig_single_neuron`.
 The layer is said to be *fully-connected*
 because each of its inputs is connected to each of its outputs
 by means of a matrix-vector multiplication.

@@ -4,7 +4,7 @@
 
 In :numref:`sec_linear_regression`, we introduced linear regression,
 working through implementations from scratch in :numref:`sec_linear_scratch`
-and again using high-level APIs of deep learning framework
+and again using high-level APIs of a deep learning framework
 in :numref:`sec_linear_concise` to do the heavy lifting.
 
 :numref:`sec_linear_regression`에서 우리는 선형 회귀를 소개했고, :numref:`sec_linear_scratch`에서 이를 처음부터 구현해봤고, :numref:`sec_linear_concise`에서는 반복되는 것들을 대신 해주는 딥러닝 프래임워크의 고차원 API를 사용해 봤습니다.

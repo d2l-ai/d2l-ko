@@ -51,7 +51,7 @@ the sale price, area, and age for each home.
 In the terminology of machine learning,
 the dataset is called a *training dataset* or *training set*,
 and each row (here the data corresponding to one sale)
-is called an *example* (or *data instance*, *data point*, *sample*).
+is called an *example* (or *data point*, *data instance*, *sample*).
 The thing we are trying to predict (price)
 is called a *label* (or *target*).
 The independent variables (age and area)
@@ -62,7 +62,7 @@ are called *features* (or *covariates*).
 
 Typically, we will use $n$ to denote
 the number of examples in our dataset.
-We index the data instances by $i$, denoting each input
+We index the data points by $i$, denoting each input
 as $\mathbf{x}^{(i)} = [x_1^{(i)}, x_2^{(i)}]^\top$
 and the corresponding label as $y^{(i)}$.
 
@@ -331,7 +331,7 @@ To summarize, steps of the algorithm are the following:
 (i) we initialize the values of the model parameters, typically at random;
 (ii) we iteratively sample random minibatches from the data,
 updating the parameters in the direction of the negative gradient.
-For quadratic losses and linear functions,
+For quadratic losses and affine transformations,
 we can write this out explicitly as follows:
 
 $$\begin{aligned} \mathbf{w} &\leftarrow \mathbf{w} -   \frac{\eta}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \partial_{\mathbf{w}} l^{(i)}(\mathbf{w}, b) = \mathbf{w} - \frac{\eta}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \mathbf{x}^{(i)} \left(\mathbf{w}^\top \mathbf{x}^{(i)} + b - y^{(i)}\right),\\ b &\leftarrow b -  \frac{\eta}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \partial_b l^{(i)}(\mathbf{w}, b)  = b - \frac{\eta}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \left(\mathbf{w}^\top \mathbf{x}^{(i)} + b - y^{(i)}\right). \end{aligned}$$

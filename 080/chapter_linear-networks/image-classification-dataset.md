@@ -46,9 +46,9 @@ d2l.use_svg_display()
 ## Reading the Dataset
 ## 데이터셋 읽기
 
-We can download and read the FashionMNIST dataset into memory via the the build-in functions in the framework.
+We can download and read the Fashion-MNIST dataset into memory via the the build-in functions in the framework.
 
-프래임워크가 제공하는 함수들을 이용해서 FashionMNIST 데이터셋을 다운로드해서 메모리로 읽을 수 있습니다.
+프래임워크가 제공하는 함수들을 이용해서 Fashion-MNIST 데이터셋을 다운로드해서 메모리로 읽을 수 있습니다.
 
 ```{.python .input}
 mnist_train = gluon.data.vision.FashionMNIST(train=True)
@@ -72,12 +72,13 @@ mnist_test = torchvision.datasets.FashionMNIST(
 mnist_train, mnist_test = tf.keras.datasets.fashion_mnist.load_data()
 ```
 
-FashionMNIST consists of images from 10 categories, each represented
-by 6000 images in the training set and by 1000 in the test set.
+Fashion-MNIST consists of images from 10 categories, each represented
+by 6000 images in the training dataset and by 1000 in the test dataset.
+A *test dataset* (or *test set*) is used for evaluating  model performance and not for training.
 Consequently the training set and the test set
 contain 60000 and 10000 images, respectively.
 
-FashionMNIST는 10개 카테고리들에 속하는 이미지들로 구성되어 있고, 각 카테고리당 학습 데이터셋은 6000개 이미지, 테스트 데이터셋은 1000개 이미지가 있습니다. *테스트 데이터셋* (또는 *테스트 셋*)은 모델 성능을 평가하는데 사용되며, 학습에는 사용되지 않습니다. 결과적으로 학습 셋은 60000개, 테스트 셋은 10000개 이미지으로 구성되어 있습니다.
+Fashion-MNIST는 10개 카테고리들에 속하는 이미지들로 구성되어 있고, 각 카테고리당 학습 데이터셋은 6000개 이미지, 테스트 데이터셋은 1000개 이미지가 있습니다. *테스트 데이터셋* (또는 *테스트 셋*)은 모델 성능을 평가하는데 사용되며, 학습에는 사용되지 않습니다. 결과적으로 학습 셋은 60000개, 테스트 셋은 10000개 이미지으로 구성되어 있습니다.
 
 ```{.python .input}
 #@tab mxnet, pytorch
@@ -115,6 +116,7 @@ Fashion-MNIST의 이미지들은 다음 카테고리들에 속해있습니다: �
 ```{.python .input}
 #@tab all
 def get_fashion_mnist_labels(labels):  #@save
+    """Return text labels for the Fashion-MNIST dataset."""
     text_labels = ['t-shirt', 'trouser', 'pullover', 'dress', 'coat',
                    'sandal', 'shirt', 'sneaker', 'bag', 'ankle boot']
     return [text_labels[int(i)] for i in labels]
@@ -178,7 +180,7 @@ We also randomly shuffle the examples for the training data iterator.
 batch_size = 256
 
 def get_dataloader_workers():  #@save
-    """Use 4 processes to read the data expect for Windows."""
+    """Use 4 processes to read the data except for Windows."""
     return 0 if sys.platform.startswith('win') else 4
 
 # `ToTensor` converts the image data from uint8 to 32-bit floating point. It
