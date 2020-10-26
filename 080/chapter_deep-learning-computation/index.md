@@ -4,6 +4,8 @@
 :label:`chap_computation`
 :label:`chap_computation`
 
+0.15.0
+
 Alongside giant datasets and powerful hardware,
 great software tools have played an indispensable role
 in the rapid progress of deep learning.

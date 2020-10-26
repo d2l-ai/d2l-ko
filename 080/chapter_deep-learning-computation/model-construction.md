@@ -3,6 +3,8 @@
 :label:`sec_model_construction`
 :label:`sec_model_construction`
 
+0.15.0
+
 When we first introduced neural networks,
 we focused on linear models with a single output.
 Here, the entire model consists of just a single neuron.
