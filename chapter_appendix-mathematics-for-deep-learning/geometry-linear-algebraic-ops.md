@@ -3,7 +3,9 @@
 
 :numref:`sec_linear-algebra`에서 우리는 선형 대수의 기본 사항을 접하고 데이터 변환을 위한 일반적인 연산을 표현하는 데 어떻게 사용될 수 있는지 확인했습니다.선형 대수는 딥 러닝과 기계 학습에서 더 광범위하게 수행하는 많은 작업의 기초가되는 핵심 수학적 기둥 중 하나입니다.:numref:`sec_linear-algebra`에는 최신 딥 러닝 모델의 메커니즘을 전달하기에 충분한 기계가 포함되어 있지만 주제에는 훨씬 더 많은 것이 있습니다.이 섹션에서는 선형 대수 연산에 대한 몇 가지 기하학적 해석을 강조하고 고유값과 고유벡터를 포함한 몇 가지 기본 개념을 소개하면서 더 자세히 살펴볼 것입니다. 
 
-## 벡터의 기하학 먼저, 공간의 점이나 방향으로 벡터의 두 가지 일반적인 기하학적 해석에 대해 논의해야 합니다.기본적으로 벡터는 아래 Python 목록과 같은 숫자 목록입니다.
+## 벡터의 기하학 
+
+먼저, 공간의 점이나 방향으로 벡터의 두 가지 일반적인 기하학적 해석에 대해 논의해야 합니다.기본적으로 벡터는 아래 Python 목록과 같은 숫자 목록입니다.
 
 ```{.python .input}
 #@tab all
@@ -43,7 +45,9 @@ $$
 
 벡터 뺄셈도 비슷한 해석이 있습니다.$\mathbf{u} = \mathbf{v} + (\mathbf{u}-\mathbf{v})$라는 정체성을 고려하면 벡터 $\mathbf{u}-\mathbf{v}$이 점 $\mathbf{v}$에서 점 $\mathbf{u}$로 이동하는 방향이라는 것을 알 수 있습니다. 
 
-## 도트 곱과 각도 :numref:`sec_linear-algebra`에서 보았 듯이 두 개의 열 벡터 $\mathbf{u}$와 $\mathbf{v}$을 취하면 다음을 계산하여 내적을 형성 할 수 있습니다. 
+## 도트 곱과 
+
+각도 :numref:`sec_linear-algebra`에서 보았 듯이 두 개의 열 벡터 $\mathbf{u}$와 $\mathbf{v}$을 취하면 다음을 계산하여 내적을 형성 할 수 있습니다. 
 
 $$\mathbf{u}^\top\mathbf{v} = \sum_i u_i\cdot v_i.$$
 :eqlabel:`eq_dot_def`
@@ -131,11 +135,19 @@ angle(tf.constant([0, 1, 2], dtype=tf.float32), tf.constant([2.0, 3, 4]))
 
 지금은 사용하지 않겠지 만 각도가 $\pi/2$ (또는 이에 상응하는 $90^{\circ}$) 인 벡터를*직교*로 언급한다는 것을 아는 것이 유용합니다.위의 방정식을 살펴보면 $\theta = \pi/2$가 $\cos(\theta) = 0$와 같은 경우에 이런 일이 발생한다는 것을 알 수 있습니다.이런 일이 발생할 수 있는 유일한 방법은 내적 자체가 0이고 두 벡터가 $\mathbf{v}\cdot\mathbf{w} = 0$인 경우에만 직교하는 경우입니다.이것은 물체를 기하학적으로 이해할 때 유용한 공식이 될 것입니다. 
 
-다음과 같이 질문하는 것이 합리적입니다. 각도 계산이 유용한 이유는 무엇입니까?답은 데이터가 가질 것으로 예상되는 일종의 불변성에 있습니다.이미지와 모든 픽셀 값이 동일하지만 밝기는 $10\ %$인 중복 이미지를 생각해 보십시오.개별 픽셀의 값은 일반적으로 원래 값과는 거리가 멀다.따라서 원본 이미지와 어두운 이미지 사이의 거리를 계산하면 거리가 커질 수 있습니다.그러나 대부분의 ML 응용 프로그램에서*콘텐츠*는 동일합니다. 고양이/개 분류기에 관한 한 여전히 고양이의 이미지입니다.그러나 각도를 고려하면 모든 벡터 $\mathbf{v}$에서 $\mathbf{v}$와 $0.1\cdot\mathbf{v}$ 사이의 각도가 0이라는 것을 알기가 어렵지 않습니다.이는 스케일링 벡터가 동일한 방향을 유지하고 길이만 변경한다는 사실에 해당합니다.각도는 어두운 이미지를 동일하게 간주합니다. 
+다음과 같이 질문하는 것이 합리적입니다. 각도 계산이 유용한 이유는 무엇입니까?답은 데이터가 가질 것으로 예상되는 일종의 불변성에 있습니다.이미지와 모든 픽셀 값이 동일하지만 밝기는 $10\%$인 중복 이미지를 생각해 보십시오.개별 픽셀의 값은 일반적으로 원래 값과는 거리가 멀다.따라서 원본 이미지와 어두운 이미지 사이의 거리를 계산하면 거리가 커질 수 있습니다.그러나 대부분의 ML 응용 프로그램에서*콘텐츠*는 동일합니다. 고양이/개 분류기에 관한 한 여전히 고양이의 이미지입니다.그러나 각도를 고려하면 모든 벡터 
+$\mathbf{v}$ 에서 $\mathbf{v}$ 와 $0.1\cdot\mathbf{v}$ 
+사이의 각도가 0이라는 것을 알기가 어렵지 않습니다.이는 스케일링 벡터가 동일한 방향을 유지하고 길이만 변경한다는 사실에 해당합니다.각도는 어두운 이미지를 동일하게 간주합니다. 
 
 이런 예는 어디에나 있습니다.텍스트에서 동일한 내용을 말하는 문서를 두 배 더 길게 작성하면 논의 중인 주제가 변경되지 않도록 할 수 있습니다.일부 인코딩 (예: 일부 어휘에서 단어 발생 횟수 계산) 의 경우 이는 문서를 인코딩하는 벡터의 두 배에 해당하므로 각도를 다시 사용할 수 있습니다. 
 
-### 코사인 유사성 두 벡터의 근접성을 측정하기 위해 각도가 사용되는 ML 맥락에서 실무자는*코사인 유사성*이라는 용어를 채택하여 $$\ cos (\ theta) =\ frac {\ mathbf {v}\ cdot\ mathbf {w}} {\ |\ mathbf {v}\ |\ |\ mathbf {w}\ |\ |\ mathbf {w}\ |}.$$ 
+### 코사인 유사성 
+
+두 벡터의 근접성을 측정하기 위해 각도가 사용되는 ML 맥락에서 실무자는*코사인 유사성*이라는 용어를 채택하여 
+
+$$
+\cos(\theta) = \frac{\mathbf{v}\cdot\mathbf{w}}{\|\mathbf{v}\|\|\mathbf{w}\|}.
+$$
 
 코사인은 두 벡터가 같은 방향을 가리킬 때 최대값 $1$, 반대 방향을 가리킬 때 최소값 $-1$, 두 벡터가 직교인 경우 $0$ 값을 취합니다.고차원 벡터의 성분이 평균 $0$으로 랜덤하게 샘플링되는 경우 코사인은 거의 항상 $0$에 가깝습니다. 
 
@@ -143,7 +155,11 @@ angle(tf.constant([0, 1, 2], dtype=tf.float32), tf.constant([2.0, 3, 4]))
 
 벡터로 작업하는 것 외에도 선형 대수에서 멀리 가기 위해 이해해야 할 또 다른 주요 객체는*하이퍼 평면*입니다. 이 객체는 선 (2 차원) 또는 평면 (3 차원) 의 더 높은 차원으로 일반화됩니다.$d$차원 벡터 공간에서 초평면은 $d-1$ 차원을 가지며 공간을 두 개의 절반 공간으로 나눕니다. 
 
-예를 들어 시작하겠습니다.열 벡터 $\mathbf{w}=[2,1]^\top$가 있다고 가정합니다.우리는 “$\mathbf{w}\cdot\mathbf{v} = 1$과 함께 $\mathbf{v}$의 요점은 무엇입니까?”내적과 :eqref:`eq_angle_forumla` 이상의 각도 사이의 연결을 회상하면 이것이 $$\ |\ mathbf {v}\ |\ |\ mathbf {w}\ |\ cos (\ 세타) = 1\;\ iff\;\ |\ mathbf {v}\ |\ cos (\ 세타) =\ frac {1} {\ |\ mathbf {w}\ |} =\ frac {1} {\ sqrt {5}}.$$ 
+예를 들어 시작하겠습니다.열 벡터 $\mathbf{w}=[2,1]^\top$가 있다고 가정합니다.우리는 “$\mathbf{w}\cdot\mathbf{v} = 1$과 함께 $\mathbf{v}$의 요점은 무엇입니까?”내적과 :eqref:`eq_angle_forumla` 이상의 각도 사이의 연결을 회상하면 이것이
+
+$$
+\|\mathbf{v}\|\|\mathbf{w}\|\cos(\theta) = 1 \; \iff \; \|\mathbf{v}\|\cos(\theta) = \frac{1}{\|\mathbf{w}\|} = \frac{1}{\sqrt{5}}.
+$$
 
 ![Recalling trigonometry, we see the formula $\|\mathbf{v}\|\cos(\theta)$ is the length of the projection of the vector $\mathbf{v}$ onto the direction of $\mathbf{w}$](../img/proj-vec.svg)
 :label:`fig_vector-project`
@@ -579,7 +595,9 @@ $$
 
 이런 식으로 무수히 많은 특수 표기법을 짧은 텐서 표현식으로 대체 할 수 있습니다. 
 
-### 코드 텐서의 표현은 코드에서도 유연하게 작동할 수 있습니다.:numref:`sec_linear-algebra`에서 볼 수 있듯이 아래와 같이 텐서를 만들 수 있습니다.
+### 코드 텐서의 표현은 
+
+코드에서도 유연하게 작동할 수 있습니다.:numref:`sec_linear-algebra`에서 볼 수 있듯이 아래와 같이 텐서를 만들 수 있습니다.
 
 ```{.python .input}
 # Define tensors
@@ -672,9 +690,41 @@ np.einsum(B, [0, 1, 2], A, [0, 3], v, [1], [2, 3])
 
 어느 표기법이든 코드에서 텐서 수축을 간결하고 효율적으로 표현할 수 있습니다. 
 
-## 요약* 벡터는 기하학적으로 공간에서 점 또는 방향으로 해석될 수 있습니다.* 내적은 임의의 고차원 공간에 대한 각도의 개념을 정의합니다.* 초평면은 선과 평면의 고차원 일반화입니다.분류 작업의 마지막 단계로 자주 사용되는 결정 평면을 정의하는 데 사용할 수 있습니다.* 행렬 곱셈은 기하학적으로 기본 좌표의 균일한 왜곡으로 해석될 수 있습니다.벡터 변환은 매우 제한적이지만 수학적으로 깨끗한 벡터 변환 방법을 나타냅니다.* 선형 종속성은 벡터 집합이 예상보다 낮은 차원 공간에 있을 때를 알 수 있는 방법입니다 (예: $2$차원 공간에 $3$개의 벡터가 있음).행렬의 랭크는 선형 독립된 열 중 가장 큰 부분 집합의 크기입니다. * 행렬의 역행렬이 정의되면 행렬 반전을 통해 첫 번째 행렬의 동작을 취소하는 다른 행렬을 찾을 수 있습니다.행렬 반전은 이론적으로 유용하지만 수치적 불안정성으로 인해 실제로 주의가 필요합니다.* 행렬식을 사용하면 행렬이 공간을 얼마나 확장하거나 축소하는지 측정할 수 있습니다.0이 아닌 행렬식은 반전 가능한 (비특이적) 행렬을 의미하고, 값이 0인 행렬식은 행렬이 반전할 수 없는 (단수) 임을 의미합니다.* 텐서 수축과 아인슈타인 합계는 머신러닝에서 볼 수 있는 많은 계산을 표현하기 위한 깔끔하고 깔끔한 표기법을 제공합니다. 
+## 요약
 
-## 연습 문제 1.$\ vec v_1 =\ 시작 {bmatrix} 1\\ 0\ -1\\ 2\ 끝 {매트릭스},\ 쿼드\ vec v_2 =\ 시작 {b 매트릭스} 3\\ 1\ 0\\ 1\ 1\ 끝 {bmatrix} 사이의 각도는 얼마입니까?2달러.참 또는 거짓: $\ 시작 {bmatrix} 1 & 2\\ 0&1\ 끝 {bmatrix} $ and $\ 시작 {bmatrix} 1 & -2\\ 0&1\ 끝 {bmatrix} $는 서로의 역입니까?3.면적이 $100\mathrm{m}^2$인 평면에 모양을 그리는다고 가정합니다.행렬 $$\ begin {bmatrix} 2 & 3\\ 1 & 2\ end {bmatrix} 로 그림을 변환 한 후의 면적은 얼마입니까? $4.다음 벡터 집합 중 선형으로 독립된 벡터는 무엇입니까?* $\left\{\begin{pmatrix}1\\0\\-1\end{pmatrix}, \begin{pmatrix}2\\1\\-1\end{pmatrix}, \begin{pmatrix}3\\1\\1\end{pmatrix}\right\}$* $\left\{\begin{pmatrix}3\\1\\1\end{pmatrix}, \begin{pmatrix}1\\1\\1\end{pmatrix}, \begin{pmatrix}0\\0\\0\end{pmatrix}\right\}$* $\left\{\begin{pmatrix}1\\1\\0\end{pmatrix}, \begin{pmatrix}0\\1\\-1\end{pmatrix}, \begin{pmatrix}1\\0\\1\end{pmatrix}\right\}$ 5.$A =\ 시작 {b행렬} c\\ d\ 끝 {b행렬}\ cdot\ 시작 {b행렬} a & b\ 끝 {b행렬} $ for some choice of values $a, b, c$, and $d$.  True or false: the determinant of such a matrix is always $0$로 작성된 행렬이 있다고 가정합니다.6.벡터 $e_1 = \begin{bmatrix}1\\0\end{bmatrix}$ 및 $e_2 = \begin{bmatrix}0\\1\end{bmatrix}$는 직교입니다.$Ae_1$와 $Ae_2$가 직교가 되도록 행렬 $A$의 조건은 무엇입니까?7.임의 행렬 $A$에 대해 아인슈타인 표기법으로 $\mathrm{tr}(\mathbf{A}^4)$을 어떻게 쓸 수 있습니까?
+* 벡터는 기하학적으로 공간에서 점 또는 방향으로 해석될 수 있습니다.* 내적은 임의의 고차원 공간에 대한 각도의 개념을 정의합니다.
+* 초평면은 선과 평면의 고차원 일반화입니다.분류 작업의 마지막 단계로 자주 사용되는 결정 평면을 정의하는 데 사용할 수 있습니다.
+* 행렬 곱셈은 기하학적으로 기본 좌표의 균일한 왜곡으로 해석될 수 있습니다.벡터 변환은 매우 제한적이지만 수학적으로 깨끗한 벡터 변환 방법을 나타냅니다.
+* 선형 종속성은 벡터 집합이 예상보다 낮은 차원 공간에 있을 때를 알 수 있는 방법입니다 (예: $2$차원 공간에 $3$개의 벡터가 있음).행렬의 랭크는 선형 독립된 열 중 가장 큰 부분 집합의 크기입니다. 
+* 행렬의 역행렬이 정의되면 행렬 반전을 통해 첫 번째 행렬의 동작을 취소하는 다른 행렬을 찾을 수 있습니다.행렬 반전은 이론적으로 유용하지만 수치적 불안정성으로 인해 실제로 주의가 필요합니다.
+* 행렬식을 사용하면 행렬이 공간을 얼마나 확장하거나 축소하는지 측정할 수 있습니다.0이 아닌 행렬식은 반전 가능한 (비특이적) 행렬을 의미하고, 값이 0인 행렬식은 행렬이 반전할 수 없는 (단수) 임을 의미합니다.
+* 텐서 수축과 아인슈타인 합계는 머신러닝에서 볼 수 있는 많은 계산을 표현하기 위한 깔끔하고 깔끔한 표기법을 제공합니다. 
+
+## 연습 문제 
+
+1. What is the angle between
+$$
+\vec v_1 = \begin{bmatrix}
+1 \\ 0 \\ -1 \\ 2
+\end{bmatrix}, \qquad \vec v_2 = \begin{bmatrix}
+3 \\ 1 \\ 0 \\ 1
+\end{bmatrix}?
+$$
+2. True or false: $\begin{bmatrix}1 & 2\\0&1\end{bmatrix}$ and $\begin{bmatrix}1 & -2\\0&1\end{bmatrix}$ are inverses of one another?
+3. Suppose that we draw a shape in the plane with area $100\mathrm{m}^2$.  What is the area after transforming the figure by the matrix
+$$
+\begin{bmatrix}
+2 & 3\\
+1 & 2
+\end{bmatrix}.
+$$
+4. Which of the following sets of vectors are linearly independent?
+ * $\left\{\begin{pmatrix}1\\0\\-1\end{pmatrix}, \begin{pmatrix}2\\1\\-1\end{pmatrix}, \begin{pmatrix}3\\1\\1\end{pmatrix}\right\}$
+ * $\left\{\begin{pmatrix}3\\1\\1\end{pmatrix}, \begin{pmatrix}1\\1\\1\end{pmatrix}, \begin{pmatrix}0\\0\\0\end{pmatrix}\right\}$
+ * $\left\{\begin{pmatrix}1\\1\\0\end{pmatrix}, \begin{pmatrix}0\\1\\-1\end{pmatrix}, \begin{pmatrix}1\\0\\1\end{pmatrix}\right\}$
+5. Suppose that you have a matrix written as $A = \begin{bmatrix}c\\d\end{bmatrix}\cdot\begin{bmatrix}a & b\end{bmatrix}$ for some choice of values $a, b, c$, and $d$.  True or false: the determinant of such a matrix is always $0$?
+6. The vectors $e_1 = \begin{bmatrix}1\\0\end{bmatrix}$ and $e_2 = \begin{bmatrix}0\\1\end{bmatrix}$ are orthogonal.  What is the condition on a matrix $A$ so that $Ae_1$ and $Ae_2$ are orthogonal?
+7. How can you write $\mathrm{tr}(\mathbf{A}^4)$ in Einstein notation for an arbitrary matrix $A$?
 
 :begin_tab:`mxnet`
 [Discussions](https://discuss.d2l.ai/t/410)

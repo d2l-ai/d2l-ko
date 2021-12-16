@@ -467,7 +467,31 @@ d2l.plot(tf.range(1, 100), norm_ratio_list, 'Iteration', 'Ratio')
 
 ## 요약 * 고유 벡터는 방향을 변경하지 않고 행렬에 의해 늘어나는 벡터입니다. * 고유값은 행렬을 적용하여 고유 벡터가 늘어나는 양입니다.* 행렬의 고유 구성을 사용하면 많은 연산을 고유값에 대한 연산으로 줄일 수 있습니다.*Gershgorin 원 정리는 행렬의 고유값에 대한 근사 값을 제공할 수 있습니다.* 반복된 행렬 거듭제곱의 동작은 주로 가장 큰 고유값의 크기에 따라 달라집니다.이러한 이해는 신경망 초기화 이론에서 많은 응용 분야가 있습니다. 
 
-## 연습 문제 1.$$\ mathbf {A} =\ 시작 {b 행렬} 2 & 1\\ 1 & 2\ 끝 {b 행렬} 의 고유값과 고유 벡터는 무엇입니까?1달러.다음 행렬의 고유값과 고유 벡터는 무엇이며, 이 예제가 이전 행렬과 비교했을 때 이상한 점은 무엇입니까?$$\ mathbf {A} =\ 시작 {매트릭스} 2 & 1\ 0 & 2\ 끝 {b매트릭스}. $1.고유값을 계산하지 않으면 다음 행렬의 가장 작은 고유값이 $0.5$보다 작을 수 있습니까?*참고*: 이 문제는 머릿속에서 할 수 있습니다. $$\ mathbf {A} =\ 시작 {b매트릭스} 3.0 & 0.1 & 0.1 & 0.3 & 1.0\\ 0.1 & 1.0 & 0.1 & 0.2\\ 0.3 & 0.1 & 5.0 & 0.0\\ 1.0 & 0.2 & 0.0 & 1.8\ 끝 {b매트릭스}.$$
+## 연습 문제 
+
+1. What are the eigenvalues and eigenvectors of
+$$
+\mathbf{A} = \begin{bmatrix}
+2 & 1 \\
+1 & 2
+\end{bmatrix}?
+$$
+1.  What are the eigenvalues and eigenvectors of the following matrix, and what is strange about this example compared to the previous one?
+$$
+\mathbf{A} = \begin{bmatrix}
+2 & 1 \\
+0 & 2
+\end{bmatrix}.
+$$
+1. Without computing the eigenvalues, is it possible that the smallest eigenvalue of the following matrix is less that $0.5$? *Note*: this problem can be done in your head.
+$$
+\mathbf{A} = \begin{bmatrix}
+3.0 & 0.1 & 0.3 & 1.0 \\
+0.1 & 1.0 & 0.1 & 0.2 \\
+0.3 & 0.1 & 5.0 & 0.0 \\
+1.0 & 0.2 & 0.0 & 1.8
+\end{bmatrix}.
+$$
 
 :begin_tab:`mxnet`
 [Discussions](https://discuss.d2l.ai/t/411)

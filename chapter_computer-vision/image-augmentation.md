@@ -87,7 +87,7 @@ apply(img, torchvision.transforms.RandomVerticalFlip())
 
 사용한 예제 이미지에서 고양이는 이미지 중간에 있지만 일반적으로 그렇지 않을 수 있습니다.:numref:`sec_pooling`에서는 풀링 계층이 대상 위치에 대한 컨벌루션 계층의 민감도를 줄일 수 있다고 설명했습니다.또한 이미지를 무작위로 자르면 물체가 이미지의 다른 위치에 다른 배율로 나타나게하여 대상 위치에 대한 모델의 민감도를 줄일 수도 있습니다. 
 
-아래 코드에서는 면적이 $10\%\ sim 100\ %$ of the original area each time, and the ratio of width to height of this area is randomly selected from $0.5\ sim 2$인 영역을 [**무작위로 자르기**] 합니다.그런 다음 영역의 너비와 높이가 모두 200픽셀로 조정됩니다.달리 명시되지 않는 한, 이 섹션에서 $a$과 $b$ 사이의 난수는 구간 $[a, b]$에서 랜덤하고 균일한 샘플링으로 얻은 연속형 값을 나타냅니다.
+아래 코드에서는 면적이 $10 \sim 100$ of the original area each time, and the ratio of width to height of this area is randomly selected from $0.5 \sim 2$인 영역을 [**무작위로 자르기**] 합니다.그런 다음 영역의 너비와 높이가 모두 200픽셀로 조정됩니다.달리 명시되지 않는 한, 이 섹션에서 $a$과 $b$ 사이의 난수는 구간 $[a, b]$에서 랜덤하고 균일한 샘플링으로 얻은 연속형 값을 나타냅니다.
 
 ```{.python .input}
 shape_aug = gluon.data.vision.transforms.RandomResizedCrop(

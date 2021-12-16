@@ -11,7 +11,7 @@
 
 연속 랜덤 변수로 작업 할 때 발생하는 추가 기술적 문제를 이해하기 위해 사고 실험을 수행해 보겠습니다.다트 보드에 다트를 던지고 보드 중앙에서 정확히 $2 \text{cm}$에 닿을 확률을 알고 싶다고 가정합니다. 
 
-우선, 한 자릿수의 정확도, 즉 $0 \text{cm}$, $1 \text{cm}$, $2 \text{cm}$ 등에 대한 빈을 측정하는 것을 상상합니다.우리는 다트 보드에 $100$ 개의 다트를 던지고, 그 중 $20$ 개가 $2\text{cm}$의 빈에 떨어지면 중앙에서 20\% $ of the darts we throw hit the board $2\ 텍스트 {cm} $ 떨어져 있다고 결론을 내립니다. 
+우선, 한 자릿수의 정확도, 즉 $0 \text{cm}$, $1 \text{cm}$, $2 \text{cm}$ 등에 대한 빈을 측정하는 것을 상상합니다.우리는 다트 보드에 $100$ 개의 다트를 던지고, 그 중 $20$ 개가 $2\text{cm}$의 빈에 떨어지면 중앙에서 $20\%$ of the darts we throw hit the board $2\ 텍스트 {cm} $ 떨어져 있다고 결론을 내립니다. 
 
 그러나 자세히 살펴보면 이것이 우리의 질문과 일치하지 않습니다!우리는 정확한 평등을 원했지만, 이 쓰레기통은 $1.5\text{cm}$와 $2.5\text{cm}$ 사이에 있는 모든 것을 담고 있습니다. 
 
@@ -837,7 +837,12 @@ $$
 
 ## 요약* 연속형 랜덤 변수는 값의 연속체를 취할 수 있는 랜덤 변수입니다.이산 확률 변수에 비해 작업하기가 더 어려워지는 몇 가지 기술적 어려움이 있습니다.* 확률 밀도 함수를 사용하면 곡선 아래 영역이 특정 구간에서해당 구간의 샘플 점. * 누적 분포 함수는 랜덤 변수가 주어진 분계점보다 작다는 것을 관측할 확률입니다.이산 변수와 계량형 변수를 통합하는 유용한 대체 관점을 제공할 수 있습니다.* 평균은 랜덤 변수의 평균값입니다. * 분산은 랜덤 변수와 그 평균 간의 차이에 대한 예상 제곱입니다.* 표준 편차는 분산의 제곱근입니다.랜덤 변수가 취할 수 있는 값의 범위를 측정하는 것으로 생각할 수 있습니다.* 체비쇼프의 부등식은 대부분의 경우 랜덤 변수를 포함하는 명시적인 구간을 제공함으로써 이러한 직관을 엄격하게 만들 수 있습니다.* 관절 밀도를 사용하면 상관 관계가 있는 확률 변수로 작업할 수 있습니다.원하는 랜덤 변수의 분포를 얻기 위해 원치 않는 랜덤 변수를 적분하여 관절 밀도를 소외 할 수 있습니다.* 공분산 및 상관 계수는 상관 관계가 있는 두 확률 변수 간의 선형 관계를 측정하는 방법을 제공합니다. 
 
-## 연습 문제 1.밀도가 $x \ge 1$에 대해 $p(x) = \frac{1}{x^2}$으로 주어지고 그렇지 않으면 $p(x) = 0$에 의해 주어진 랜덤 변수가 있다고 가정합니다.$P(X > 2)$란 무엇입니까?2.라플라스 분포는 밀도가 $p(x = \frac{1}{2}e^{-|x|}$로 지정된 확률 변수입니다.이 함수의 평균과 표준 편차는 무엇입니까?힌트로, $\int_0^\infty xe^{-x} \; dx = 1$과 $\int_0^\infty x^2e^{-x} \; dx = 2$입니다.저는 길거리에서 여러분에게 다가가서 “평균 $1$, 표준 편차 $2$을 가진 확률 변수가 있고, 25달러\ %$ of my samples taking a value larger than $9$를 관찰했습니다.” 라고 말합니다.날 믿어?왜, 왜 안되니?4.두 개의 랜덤 변수 $X, Y$가 있다고 가정합니다. 이때 접합 밀도는 $x, y \in [0,1]$에 대해 $p_{XY}(x, y) = 4xy$로 지정되고 그렇지 않은 경우에는 $p_{XY}(x, y) = 0$으로 지정됩니다.$X$과 $Y$의 공분산은 무엇입니까?
+## 연습 문제 
+
+1. Suppose that we have the random variable with density given by $p(x) = \frac{1}{x^2}$ for $x \ge 1$ and $p(x) = 0$ otherwise.  What is $P(X > 2)$?
+2. The Laplace distribution is a random variable whose density is given by $p(x = \frac{1}{2}e^{-|x|}$.  What is the mean and the standard deviation of this function?  As a hint, $\int_0^\infty xe^{-x} \; dx = 1$ and $\int_0^\infty x^2e^{-x} \; dx = 2$.
+3. I walk up to you on the street and say "I have a random variable with mean $1$, standard deviation $2$, and I observed $25\%$ of my samples taking a value larger than $9$."  Do you believe me?  Why or why not?
+4. Suppose that you have two random variables $X, Y$, with joint density given by $p_{XY}(x, y) = 4xy$ for $x, y \in [0,1]$ and $p_{XY}(x, y) = 0$ otherwise.  What is the covariance of $X$ and $Y$?
 
 :begin_tab:`mxnet`
 [Discussions](https://discuss.d2l.ai/t/415)
