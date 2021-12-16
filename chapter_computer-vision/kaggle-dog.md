@@ -1,6 +1,6 @@
 # Kaggle의 개 품종 식별 (이미지넷독)
 
-이 섹션에서는 Kaggle에서 개 품종 식별 문제를 연습합니다.(**이 대회의 웹 주소는 https://www.kaggle.com/c/dog-breed-identification **입니다) 
+이 섹션에서는 Kaggle에서 개 품종 식별 문제를 연습합니다.(**이 대회의 웹 주소는 https://www.kaggle.com/c/dog-breed-identification **)입니다 
 
 이 대회에서는 120 종의 개가 인정됩니다.실제로 이 경쟁업체의 데이터셋은 ImageNet 데이터세트의 하위 집합입니다.:numref:`sec_kaggle_cifar10`의 CIFAR-10 데이터 세트에 있는 이미지와 달리 ImageNet 데이터 세트의 이미지는 다양한 차원에서 더 높고 넓습니다. :numref:`fig_kaggle_dog`는 경쟁 웹 페이지의 정보를 보여줍니다.결과를 제출하려면 Kaggle 계정이 필요합니다. 
 
