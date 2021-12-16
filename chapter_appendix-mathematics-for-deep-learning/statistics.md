@@ -273,9 +273,9 @@ tf.square(tf.math.reduce_std(samples)) + tf.square(bias)
 
 $$ \text{statistical significance }= 1 - \alpha = 1 - P(\text{reject } H_0 \mid H_0 \text{ is true} ).$$
 
-*유형 I 오류* 또는*가양성 (false positive) *이라고도 합니다.$\alpha$는*중요도 수준*으로 불리며 일반적으로 사용되는 값은 $5\ %$, i.e., $1-\ 알파 = 95\ %$입니다.유의 수준은 실제 귀무 가설을 기각할 때 기꺼이 감수할 위험 수준으로 설명할 수 있습니다. 
+*유형 I 오류* 또는*가양성 (false positive) *이라고도 합니다.$\alpha$는*중요도 수준*으로 불리며 일반적으로 사용되는 값은 $5\%$, i.e., $1-\ 알파 = 95\%$입니다.유의 수준은 실제 귀무 가설을 기각할 때 기꺼이 감수할 위험 수준으로 설명할 수 있습니다. 
 
-:numref:`fig_statistical_significance`는 2-표본 가설 검정에서 주어진 정규 분포의 관측치 값과 확률을 보여줍니다.관측치 데이터 예제가 $95\ %$ 임계값을 벗어나는 경우 귀무 가설 가정 하에서는 관측치가 될 가능성이 매우 낮습니다.따라서 귀무 가설에 문제가 있을 수 있으며 이를 기각할 것입니다. 
+:numref:`fig_statistical_significance`는 2-표본 가설 검정에서 주어진 정규 분포의 관측치 값과 확률을 보여줍니다.관측치 데이터 예제가 $95\%$ 임계값을 벗어나는 경우 귀무 가설 가정 하에서는 관측치가 될 가능성이 매우 낮습니다.따라서 귀무 가설에 문제가 있을 수 있으며 이를 기각할 것입니다. 
 
 ![Statistical significance.](../img/statistical-significance.svg)
 :label:`fig_statistical_significance`
@@ -288,7 +288,7 @@ $$ \text{statistical power }= 1 - \beta = 1 - P(\text{ fail to reject } H_0  \mi
 
 *유형 I 오류*는 귀무 가설이 참일 때 귀무 가설을 기각하여 발생하는 오류인 반면, *유형 II 오류*는 귀무 가설이 거짓일 때 귀무 가설을 기각하지 못한 경우에 발생합니다.유형 II 오류는 일반적으로 $\beta$로 표시되므로 해당 통계적 검정력은 $1-\beta$입니다. 
 
-직관적으로 통계적 검정력은 테스트가 원하는 통계적 유의성 수준에서 최소 크기의 실제 불일치를 감지 할 가능성으로 해석 할 수 있습니다. $80\ %$는 일반적으로 사용되는 통계적 검정력 임계 값입니다.통계적 검정력이 높을수록 실제 차이를 탐지할 가능성이 높아집니다. 
+직관적으로 통계적 검정력은 테스트가 원하는 통계적 유의성 수준에서 최소 크기의 실제 불일치를 감지 할 가능성으로 해석 할 수 있습니다. $80\%$는 일반적으로 사용되는 통계적 검정력 임계 값입니다.통계적 검정력이 높을수록 실제 차이를 탐지할 가능성이 높아집니다. 
 
 통계적 검정력의 가장 일반적인 용도 중 하나는 필요한 표본 수를 결정하는 것입니다.귀무 가설이 거짓일 때 귀무 가설을 기각할 확률은 귀무 가설이 거짓인 정도 (*효과 크기*라고 함) 와 보유한 표본 수에 따라 다릅니다.예상대로 효과 크기가 작으면 높은 확률로 탐지할 수 있는 매우 많은 수의 표본이 필요합니다.예를 들어, 이 간단한 부록의 범위를 벗어나 샘플이 평균 0 분산 1 가우스에서 나왔다는 귀무 가설을 기각하고 샘플의 평균이 실제로 1에 가깝다고 생각하지만 표본 크기가 다음과 같은 허용 가능한 오류율로 그렇게 할 수 있습니다.$8$에 불과합니다.그러나 표본 모집단 실제 평균이 $0.01$에 가깝다고 생각하면 차이를 탐지하기 위해 거의 $80000$의 표본 크기가 필요합니다. 
 
@@ -345,13 +345,13 @@ $$P_{\theta} (C_n \ni \theta) \geq 1 - \alpha, \forall \theta.$$
 
 ### 통역
 
-생성된 간격의 95 달러\ %$ confidence interval as an interval where you can be $95\ %$ sure the true parameter lies, however this is sadly not true.  The true parameter is fixed, and it is the interval that is random.  Thus a better interpretation would be to say that if you generated a large number of confidence intervals by this procedure, $95\ %$에 실제 매개 변수가 포함된다고 해석하는 것은 매우 유혹적입니다. 
+생성된 간격의  달러$95\%$ confidence interval as an interval where you can be $95\%$ sure the true parameter lies, however this is sadly not true.  The true parameter is fixed, and it is the interval that is random.  Thus a better interpretation would be to say that if you generated a large number of confidence intervals by this procedure, $95\%$에 실제 매개 변수가 포함된다고 해석하는 것은 매우 유혹적입니다. 
 
 이것은 현학적 인 것처럼 보일 수 있지만 결과 해석에 실질적인 영향을 미칠 수 있습니다.특히, 거의 확실한* 실제 값을 포함하지 않는 구간을 구성하여 :eqref:`eq_confidence`를 만족시킬 수 있습니다.유혹적이지만 잘못된 세 가지 진술을 제공하여 이 섹션을 마무리합니다.이러한 점에 대한 심층적 인 논의는 :cite:`Morey.Hoekstra.Rouder.ea.2016`에서 찾을 수 있습니다. 
 
 * **오류 1**.신뢰 구간이 좁으면 모수를 정확하게 추정할 수 있습니다.
 * **오류 2**.신뢰 구간 내의 값은 구간을 벗어난 값보다 실제 값일 가능성이 높습니다.
-* **오류 3**.특정 사람이 95달러\ %$ confidence interval contains the true value is $95\ %$를 관찰했을 확률입니다.
+* **오류 3**.특정 사람이 $95\%$ confidence interval contains the true value is $95\%$를 관찰했을 확률입니다.
 
 신뢰 구간은 미묘한 객체라고 말할 수 있습니다.그러나 해석을 명확하게 유지하면 강력한 도구가 될 수 있습니다. 
 
@@ -369,7 +369,7 @@ $$
 
 * $n-1$*자유도*에서*학생의 t 분포라고 불리는 잘 알려진 분포를 따라 랜덤 변수를 얻습니다. 
 
-이 분포는 매우 잘 연구되어 있으며, 예를 들어 $n\rightarrow \infty$으로 대략 표준 가우스이므로 표에서 가우스 c.d.f. 의 값을 조회하면 $T$의 값이 $[-1.96, 1.96]$ 최소 $95\ %$ of the time.  For finite values of $n$에 있다는 결론을 내릴 수 있습니다.다소 크지만 테이블에서 잘 알려져 있고 미리 계산되어 있습니다. 
+이 분포는 매우 잘 연구되어 있으며, 예를 들어 $n\rightarrow \infty$으로 대략 표준 가우스이므로 표에서 가우스 c.d.f. 의 값을 조회하면 $T$의 값이 $[-1.96, 1.96]$ 최소 $95\%$ of the time.  For finite values of $n$에 있다는 결론을 내릴 수 있습니다.다소 크지만 테이블에서 잘 알려져 있고 미리 계산되어 있습니다. 
 
 따라서 우리는 $n$에 대해 다음과 같은 결론을 내릴 수 있습니다. 
 
@@ -383,7 +383,8 @@ $$
 P\left(\mu \in \left[\hat\mu_n - 1.96\frac{\hat\sigma_n}{\sqrt{n}}, \hat\mu_n + 1.96\frac{\hat\sigma_n}{\sqrt{n}}\right]\right) \ge 0.95.
 $$
 
-따라서 우리는 95달러\ %$ 신뢰 구간 ($\left[\hat\mu_n - 1.96\frac{\hat\sigma_n}{\sqrt{n}}, \hat\mu_n + 1.96\frac{\hat\sigma_n}{\sqrt{n}}\right].$$ :eqlabel:`eq_gauss_confidence`달러) 을 찾았다는 것을 알고 있습니다. 
+따라서 우리는 달러 $95\%$ 신뢰 구간 ($\left[\hat\mu_n - 1.96\frac{\hat\sigma_n}{\sqrt{n}}, \hat\mu_n + 1.96\frac{\hat\sigma_n}{\sqrt{n}}\right].$
+:eqlabel:`eq_gauss_confidence`달러) 을 찾았다는 것을 알고 있습니다. 
 
 :eqref:`eq_gauss_confidence`는 통계에서 가장 많이 사용되는 공식 중 하나라고 말할 수 있습니다.통계를 구현하여 통계에 대한 논의를 마무리하겠습니다.단순화를 위해 우리는 점근 체제에 있다고 가정합니다.$N$의 작은 값에는 프로그래밍 방식으로 또는 $t$-테이블에서 얻은 올바른 값 `t_star`가 포함되어야 합니다.
 
