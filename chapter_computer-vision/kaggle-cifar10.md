@@ -1,11 +1,11 @@
 # 카글의 이미지 분류 (CIFAR-10)
 :label:`sec_kaggle_cifar10`
 
-지금까지 딥 러닝 프레임워크의 상위 수준 API를 사용하여 텐서 형식의 이미지 데이터 세트를 직접 얻었습니다.그러나 사용자 지정 이미지 데이터셋은 이미지 파일 형태로 제공되는 경우가 많습니다.이 섹션에서는 원시 이미지 파일부터 시작하여 단계별로 구성, 읽기 및 텐서 형식으로 변환합니다. 
+지금까지 딥 러닝 프레임워크의 상위 수준 API를 사용하여 텐서 형식의 이미지 데이터 세트를 직접 얻었습니다.그러나 사용자 지정 이미지 데이터셋은 이미지 파일 형태로 제공되는 경우가 많습니다.이 섹션에서는 원시 이미지 파일부터 시작하여 단계별로 구성, 읽기 및 텐서 형식으로 변환합니다.
 
-우리는 컴퓨터 비전에서 중요한 데이터셋인 :numref:`sec_image_augmentation`의 CIFAR-10 데이터세트를 실험했습니다.이 섹션에서는 이전 섹션에서 배운 지식을 적용하여 CIFAR-10 이미지 분류의 Kaggle 경쟁을 연습합니다.(**대회의 웹 주소는 https://www.kaggle.com/c/cifar-10 **입니다) 
+우리는 컴퓨터 비전에서 중요한 데이터셋인 :numref:`sec_image_augmentation`의 CIFAR-10 데이터세트를 실험했습니다.이 섹션에서는 이전 섹션에서 배운 지식을 적용하여 CIFAR-10 이미지 분류의 Kaggle 경쟁을 연습합니다.(**대회의 웹 주소는 https://www.kaggle.com/c/cifar-10 입니다**)
 
-:numref:`fig_kaggle_cifar10`는 대회 웹 페이지의 정보를 보여줍니다.결과를 제출하려면 Kaggle 계정을 등록해야 합니다. 
+:numref:`fig_kaggle_cifar10`는 대회 웹 페이지의 정보를 보여줍니다.결과를 제출하려면 Kaggle 계정을 등록해야 합니다.
 
 ![CIFAR-10 image classification competition webpage information. The competition dataset can be obtained by clicking the "Data" tab.](../img/kaggle-cifar10.png)
 :width:`600px`
@@ -41,18 +41,18 @@ import shutil
 
 경쟁 데이터셋은 훈련 세트와 테스트 세트로 나뉘며, 여기에는 각각 50000개 및 300,000개의 이미지가 포함되어 있습니다.테스트 세트에서는 10000개의 이미지가 평가에 사용되고 나머지 290000 개의 이미지는 평가되지 않습니다. 속임수를 쓰기 어렵게 만들기 위해 포함됩니다.
 *테스트 세트의 결과가 수동으로* 표시됩니다.
-이 데이터셋의 이미지는 모두 png 색상 (RGB 채널) 이미지 파일이며 높이와 너비는 모두 32픽셀입니다.이미지는 비행기, 자동차, 새, 고양이, 사슴, 개, 개구리, 말, 보트 및 트럭과 같은 총 10 개의 범주를 포함합니다.:numref:`fig_kaggle_cifar10`의 왼쪽 상단 모서리에는 데이터셋에 있는 비행기, 자동차 및 새의 일부 이미지가 표시됩니다. 
+이 데이터셋의 이미지는 모두 png 색상 (RGB 채널) 이미지 파일이며 높이와 너비는 모두 32픽셀입니다.이미지는 비행기, 자동차, 새, 고양이, 사슴, 개, 개구리, 말, 보트 및 트럭과 같은 총 10 개의 범주를 포함합니다.:numref:`fig_kaggle_cifar10`의 왼쪽 상단 모서리에는 데이터셋에 있는 비행기, 자동차 및 새의 일부 이미지가 표시됩니다.
 
 ### 데이터세트 다운로드
 
-Kaggle에 로그인 한 후 :numref:`fig_kaggle_cifar10`에 표시된 CIFAR-10 이미지 분류 경쟁 웹 페이지에서 “데이터”탭을 클릭하고 “모두 다운로드”버튼을 클릭하여 데이터 세트를 다운로드 할 수 있습니다.`../data`에서 다운로드한 파일의 압축을 풀고 그 안에 `train.7z` 및 `test.7z`의 압축을 풀면 다음 경로에서 전체 데이터 세트를 찾을 수 있습니다. 
+Kaggle에 로그인 한 후 :numref:`fig_kaggle_cifar10`에 표시된 CIFAR-10 이미지 분류 경쟁 웹 페이지에서 “데이터”탭을 클릭하고 “모두 다운로드”버튼을 클릭하여 데이터 세트를 다운로드 할 수 있습니다.`../data`에서 다운로드한 파일의 압축을 풀고 그 안에 `train.7z` 및 `test.7z`의 압축을 풀면 다음 경로에서 전체 데이터 세트를 찾을 수 있습니다.
 
 * `../data/cifar-10/train/[1-50000].png`
 * `../data/cifar-10/test/[1-300000].png`
 * `../data/cifar-10/trainLabels.csv`
 * `../data/cifar-10/sampleSubmission.csv`
 
-여기서 `train` 및 `test` 디렉토리에는 각각 교육 및 테스트 이미지가 포함되어 있습니다. `trainLabels.csv`은 교육 이미지에 대한 레이블을 제공하고 `sample_submission.csv`은 샘플 제출 파일입니다. 
+여기서 `train` 및 `test` 디렉토리에는 각각 교육 및 테스트 이미지가 포함되어 있습니다. `trainLabels.csv`은 교육 이미지에 대한 레이블을 제공하고 `sample_submission.csv`은 샘플 제출 파일입니다.
 
 더 쉽게 시작할 수 있도록 [**처음 1000개의 훈련 이미지와 5개의 무작위 테스트 이미지가 포함된 데이터세트의 소규모 샘플을 제공합니다.**] Kaggle 경쟁의 전체 데이터세트를 사용하려면 다음 `demo` 변수를 `False`로 설정해야 합니다.
 
@@ -486,7 +486,7 @@ df['label'] = df['label'].apply(lambda x: train_valid_ds.classes[x])
 df.to_csv('submission.csv', index=False)
 ```
 
-위의 코드는 `submission.csv` 파일을 생성하며, 이 파일의 형식은 Kaggle 경쟁사의 요구 사항을 충족합니다.결과를 Kaggle에 제출하는 방법은 :numref:`sec_kaggle_house`의 방법과 유사합니다. 
+위의 코드는 `submission.csv` 파일을 생성하며, 이 파일의 형식은 Kaggle 경쟁사의 요구 사항을 충족합니다.결과를 Kaggle에 제출하는 방법은 :numref:`sec_kaggle_house`의 방법과 유사합니다.
 
 ## 요약
 
