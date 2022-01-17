@@ -176,7 +176,7 @@ def train(lambd):
             # The L2 norm penalty term has been added, and broadcasting
             # makes `l2_penalty(w)` a vector whose length is `batch_size`
             l = loss(net(X), y) + lambd * l2_penalty(w)
-            l.sum().backward()
+            l.mean().backward()
             d2l.sgd([w, b], lr, batch_size)
         if (epoch + 1) % 5 == 0:
             animator.add(epoch + 1, (d2l.evaluate_loss(net, train_iter, loss),
