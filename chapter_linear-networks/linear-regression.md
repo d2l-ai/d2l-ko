@@ -119,7 +119,7 @@ $\mathbf{w}$와 $\mathbf{x}$은 :eqref:`eq_linreg_batch_update`의 벡터입니�
 %matplotlib inline
 from d2l import mxnet as d2l
 import math
-from mxnet import np
+import numpy as np
 import time
 ```
 
