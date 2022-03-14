@@ -7,7 +7,6 @@
 ```eval_rst
 .. automodule:: d2l.mxnet
    :members:
-   :imported-members:
 ```
 :end_tab:
 
@@ -15,7 +14,6 @@
 ```eval_rst
 .. automodule:: d2l.torch
    :members:
-   :imported-members:
 ```
 :end_tab:
 
@@ -23,6 +21,5 @@
 ```eval_rst
 .. automodule:: d2l.tensorflow
    :members:
-   :imported-members:
 ```
 :end_tab:
